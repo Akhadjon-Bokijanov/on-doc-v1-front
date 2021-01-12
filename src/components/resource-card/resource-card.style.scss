@@ -1,0 +1,71 @@
+.resource-card-main-container{
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    transition: all ease .4s;
+    border-radius: 5px;
+    position: relative;
+    &:hover{
+        box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    .resource-card-sub-container{
+        padding: 10px;
+        
+        p{
+            margin: 0;
+        }
+
+        .resouce-card-title{
+            min-height: 39px;
+            font-family: 'Rowdies', cursive;
+            font-size: 15px;
+            color: black;
+            line-height: 1.3em;
+            
+        }
+
+        .resource-type{
+            display: inline;
+            background-color: rgb(199, 72, 72);
+            color: white;
+            border-radius: 3px;
+            
+            .resource-name{
+                padding: 5px;
+            }
+        }
+
+        .rate-view{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 5px;
+            color: #696666;
+
+            &.price-and-card{
+                font-size: 20px;
+
+                .resource-card-footer-icon{
+                    &:hover{
+                        color: #1890ff;
+                    }
+                }
+
+                .add-wish-list{
+                    &:hover{
+                        color: rgb(241, 55, 55);
+                    }
+                }
+
+                .resource-price{
+                    .resource-cost{
+                        font-weight: bold;
+                        font-family: 'Poppins';
+                        letter-spacing: 1px;
+                    }
+                }
+
+            }
+        }
+        
+    }
+}

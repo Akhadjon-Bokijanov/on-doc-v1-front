@@ -1,0 +1,28 @@
+.dyna-form-form-item-container{
+    position: relative;
+    overflow: hidden;
+}
+.dyna-form-input-content, 
+.dyna-form-input-content:focus, 
+.dyna-form-input-content:hover{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid rgb(114, 114, 114);
+}
+
+.dyna-form-form-item-container:focus-within::after{
+    transform: translateX(0);
+    height: 3px;
+}
+
+.dyna-form-form-item-container::after{
+    content: '';
+    position: absolute;
+    height: 1px;
+    bottom: 0;
+    width: 100%;
+    background-color: #1890ff;
+    transform: translateX(-100%);
+    transition: all ease-in-out 0.3s;
+}

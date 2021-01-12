@@ -1,0 +1,26 @@
+.side-bar-icons-main-container {
+    &.active {
+        transform: translateX(100%);
+    }
+    &.inactive {
+        transform: translateX(0);
+    }
+    transition: all 0.3s ease-in-out 0.1s;
+    position: fixed;
+    right: 0;
+    top: 78px;
+    bottom: 0;
+    overflow-y: hidden;
+    .sidebar-iconsconyainer {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        height: 100%;
+        width: 10vw;
+        div {
+            margin: auto;
+            font-size: 25px;
+            color: #605E5E;
+        }
+    }
+}
