@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import './components/font-awesome-icons/font-awesome-icons';
 import Home from './frontend/home/home.component';
+import CabinetIndex from './cabinet/index.component';
 
 const App = () => {
     return (
@@ -15,6 +16,8 @@ const App = () => {
                     }/>
                 <Route path="/home"
                     component={Home}/>
+
+                <Route path="/cabinet" component={CabinetIndex} />
             </Switch>
         </div>
     )

@@ -7,15 +7,15 @@ import {
      MinusCircleOutlined, 
      DeleteOutlined } from '@ant-design/icons'
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from '../../redux/user/user.selector';
+//import { selectCurrentUser } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
-import { modules, formats, checkExerciseScore, getFileExtension } from '../../utils/main';
+import { modules, formats, getFileExtension } from '../../utils/main';
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill, {Quill} from 'react-quill';
 import { ImageDrop } from 'quill-image-drop-module';
 import axios from 'axios';
 import './dyna-form.style.css';
-import { triggerFetchStart, triggerActionWithPayload, sendNotification } from '../../redux/admin/admin.actions';
+//import { triggerFetchStart, triggerActionWithPayload, sendNotification } from '../../redux/admin/admin.actions';
 import QuestionInput from '../question-input/question-input.component';
 import Ripples from 'react-ripples';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +36,7 @@ import {
     Rate} from 'antd';
 import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 import CustomCard from '../custom-card/custom-card.component';
-import { setExerciseScore, setExerciseAnswers } from '../../redux/user/user.actions';
+//import { setExerciseScore, setExerciseAnswers } from '../../redux/user/user.actions';
 
 const { Option } = Select;
 
@@ -152,42 +152,42 @@ const DynaForm = ({
             ? triggerActionWithRes(triggerActionWIthFormVal, {...values, attchedTitle: `${currentUser.firstName} ${currentUser.lastName} - ${title}`})
             : triggerActionWithRes(triggerActionWIthFormVal, values)
 
-            if(checkScore){
-                const score = checkExerciseScore(inputFields, values);
-                const totalQues = inputFields.length;
+            // if(checkScore){
+            //     const score = checkExerciseScore(inputFields, values);
+            //     const totalQues = inputFields.length;
 
-                //Redux actions
-                setScore(score.total);
-                setAnswers(values)
-                //end actions
+            //     //Redux actions
+            //     setScore(score.total);
+            //     setAnswers(values)
+            //     //end actions
 
-                try {
-                    axios({
-                        method: "post",
-                        url: `ES/api/exercises/answer/${currentUser._id}`,
-                        data: {
-                            title: `${currentUser.firstName} ${currentUser.lastName} - ${title}. Score: ${score.total} / ${totalQues}`,
-                            score: score.total,
-                            _id: initialValues._id
-                        }
-                    });
+            //     try {
+            //         axios({
+            //             method: "post",
+            //             url: `ES/api/exercises/answer/${currentUser._id}`,
+            //             data: {
+            //                 title: `${currentUser.firstName} ${currentUser.lastName} - ${title}. Score: ${score.total} / ${totalQues}`,
+            //                 score: score.total,
+            //                 _id: initialValues._id
+            //             }
+            //         });
     
-                    sendNotif({
-                        receiver: creator._id,
-                        sender: {
-                            _id: currentUser._id,
-                            fullName: `${currentUser.firstName} ${currentUser.lastName}`,
-                            avatar: currentUser.avatar,
-                        },
-                        message: `${currentUser.firstName} ${currentUser.lastName} - ${title}. Score: ${score.total} / ${totalQues}`
-                    })
+            //         sendNotif({
+            //             receiver: creator._id,
+            //             sender: {
+            //                 _id: currentUser._id,
+            //                 fullName: `${currentUser.firstName} ${currentUser.lastName}`,
+            //                 avatar: currentUser.avatar,
+            //             },
+            //             message: `${currentUser.firstName} ${currentUser.lastName} - ${title}. Score: ${score.total} / ${totalQues}`
+            //         })
 
 
-                } catch (error) {
-                    console.log(error)
-                }
+            //     } catch (error) {
+            //         console.log(error)
+            //     }
                 
-            }
+            // }
 
             if(redirectUrl) history.push(redirectUrl);
         }
@@ -922,15 +922,15 @@ const DynaForm = ({
 
 
 const mapDispatchToProps = dispatch=>({
-    triggerActionOnly: (action)=>dispatch(triggerFetchStart(action)),
-    triggerActionWithRes: (action, payload)=>dispatch(triggerActionWithPayload(action, payload)),
-    sendNotif: obj => dispatch(sendNotification(obj)),
-    setScore: score => dispatch(setExerciseScore(score)),
-    setAnswers: answers => dispatch(setExerciseAnswers(answers))
+    //triggerActionOnly: (action)=>dispatch(triggerFetchStart(action)),
+    //triggerActionWithRes: (action, payload)=>dispatch(triggerActionWithPayload(action, payload)),
+    //sendNotif: obj => dispatch(sendNotification(obj)),
+    //setScore: score => dispatch(setExerciseScore(score)),
+    //setAnswers: answers => dispatch(setExerciseAnswers(answers))
 })
 
 const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser
+    //currentUser: selectCurrentUser
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DynaForm));
