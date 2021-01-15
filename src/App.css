@@ -1,0 +1,28 @@
+body {
+    background-color: #f3f7f8!important;
+}
+
+
+/* Ant design customization */
+
+.ant-input-lg {
+    border: 1px solid #dadce0 !important;
+    border-radius: 11px !important;
+    height: 55px;
+}
+
+.ant-btn-lg {
+    height: 45px !important;
+    border-radius: 11px !important;
+}
+
+span.custom-input-label-1 {
+    font-size: 12px;
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    z-index: 99 !important;
+    position: absolute;
+    bottom: 45px;
+    left: 15px;
+}

@@ -11,6 +11,17 @@ body {
     background-color: #F2F3F8;
 }
 
+table {
+    width: 100%;
+    margin: 10px;
+}
+
+.data-grid-container .data-grid .cell>input {
+    width: 100% !important;
+    height: 100% !important;
+    padding-right: 3px;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

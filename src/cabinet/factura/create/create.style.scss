@@ -1,0 +1,29 @@
+.factura-data-sheet-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 11px;
+    margin-bottom: 30px;
+}
+
+.factra-action-btns {
+    width: 200px;
+    height: 60px !important;
+    font-weight: bold;
+    &.sing-btn {
+        border-color: #47bf33 !important;
+        color: #47bf33;
+         :hover {
+            border-color: lighten($color: #47bf33, $amount: 0);
+            color: lighten($color: #47bf33, $amount: 0);
+        }
+    }
+    &.save-btn {
+        border-color: #096dd9;
+        color: #1890ff;
+    }
+}
+
+.factura-action-btn-icons {
+    margin-right: 10px;
+    font-size: 20px;
+}

@@ -7,14 +7,21 @@ import {
     faHome,
     faInfoCircle,
     faQuestionCircle,
-    faUserCog
+    faUserCog,
+    faBan,
+    faSignature,
+    faSave
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
-    faNewspaper
+    faClone,
+    faNewspaper,
+    faPlusSquare,
+    faTrashAlt
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
+    faBan,
     faHome,
     faNewspaper,
     fab,
@@ -23,5 +30,10 @@ library.add(
     faCertificate,
     faCheckSquare,
     faQuestionCircle,
-    faAddressCard
+    faAddressCard,
+    faPlusSquare,
+    faClone,
+    faTrashAlt,
+    faSignature,
+    faSave
 )
