@@ -6,7 +6,8 @@ body {
 /* Ant design customization */
 
 .ant-input-lg,
-.ant-picker-large {
+.ant-picker-large,
+.ant-select-lg {
     border: 1px solid #dadce0 !important;
     border-radius: 11px !important;
     height: 55px;
@@ -25,6 +26,6 @@ span.custom-input-label-1 {
     background-color: #fff;
     z-index: 99 !important;
     position: absolute;
-    bottom: 45px;
+    bottom: 69px;
     left: 15px;
 }

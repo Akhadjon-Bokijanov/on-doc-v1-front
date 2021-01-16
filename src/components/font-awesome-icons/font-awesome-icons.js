@@ -10,11 +10,14 @@ import {
     faUserCog,
     faBan,
     faSignature,
-    faSave
+    faSave,
+    faFileContract,
+    faFileInvoice
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
     faClone,
+    faFileAlt,
     faNewspaper,
     faPlusSquare,
     faTrashAlt
@@ -35,5 +38,9 @@ library.add(
     faClone,
     faTrashAlt,
     faSignature,
-    faSave
+    faSave,
+    faFileAlt,
+    faFileContract,
+    faFileInvoice,
+
 )

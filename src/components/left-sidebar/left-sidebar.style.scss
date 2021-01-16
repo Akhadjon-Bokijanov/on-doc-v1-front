@@ -1,4 +1,6 @@
 .side-bar-icons-main-container {
+    z-index: 999;
+    background-color: white;
     &.active {
         transform: translateX(100%);
     }
@@ -8,7 +10,8 @@
     transition: all 0.3s ease-in-out 0.1s;
     position: fixed;
     right: 0;
-    top: 78px;
+    top: 0px;
+    margin-top: 78px;
     bottom: 0;
     overflow-y: hidden;
     .sidebar-iconsconyainer {

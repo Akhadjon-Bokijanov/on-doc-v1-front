@@ -1,0 +1,12 @@
+.cabiner-right-sidebar-cmain-container {
+    height: 100vh !important;
+    position: sticky;
+    background: inherit;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    .cabiner-right-sidebar-sub-container {
+        padding: 60px 40px;
+        .cabinet-documents-action-containers-bloks {}
+    }
+}
