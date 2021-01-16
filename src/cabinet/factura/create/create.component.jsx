@@ -3,7 +3,7 @@ import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 
@@ -30,7 +30,6 @@ const FacturaCreateForm = ()=> {
       { value: "ққс, %", readOnly: true, width: 120 },
       { value: "ққс, Миқдор*", readOnly: true, width: 120 },
       { value: "Total*", readOnly: true, width: 220 },
-      { value: " ", readOnly: true, disableEvents:true, width: 120  }
 
     ],
     [
@@ -47,7 +46,6 @@ const FacturaCreateForm = ()=> {
       { value: "" },                                          //10 VAT rate
       { value: '', readOnly: true },                          //11 VAT amount
       { value: '', readOnly: true,},                          //12 total
-      { value: "", readOnly: true,  valueViewer:  actionsButton}, //13 actions 
     ], 
   ])
   
@@ -106,7 +104,6 @@ const FacturaCreateForm = ()=> {
       { value: "" }, //10 VAT rate
       { value: '', readOnly: true }, //11 VAT amount
       { value: '', readOnly: true }, //12 total
-      { value: '', readOnly: true, valueViewer:  actionsButton, }, //13 actions
     ]
 
     let newgrid = [...grid, sampleRow];
@@ -131,46 +128,50 @@ const FacturaCreateForm = ()=> {
       <Form
         name="factura"
         onFinish = {handleSubmit}
+        scrollToFirstError
       >
 
       <div className="factura-data-sheet-container">
       <h3>Ҳужжат тури</h3>
       <Row justify="space-between">
-            <Col md={10}>
+            <Col md={11}>
             <Form.Item 
-                key="dyna-form-item-inn"
-                name="sellerTin">
-                  <span className="custom-input-label-1">INN</span>
+                key="dyna-form-facutura-no"
+                name="facturaNo">
+                  <span className="custom-input-label-1">Faktura raqami</span>
                   <Input
                     size="large"
-                    placeholder="Sotuvchi INN" />
+                    placeholder="Faktura raqami" />
               </Form.Item>
             </Col>
-            <Col md={10}>
+            <Col md={11}>
             <Form.Item 
-                key="dyna-form-item-inn"
-                name="sellerTin">
-                  <Input
+                key="dyna-form-item-inn-date"
+                name="facturaDate">
+                  <span className="custom-input-label-1">Faktura sanasi</span>
+                  <DatePicker
                     size="large"
-                    placeholder="Oluvchi INN" />
+                    placeholder="Faktura sanasi" />
               </Form.Item>
             </Col>
-            <Col md={10}>
+            <Col md={11}>
             <Form.Item 
-                key="dyna-form-item-inn"
-                name="sellerTin">
+                key="dyna-form-item-contract-n0"
+                name="contractNo">
+                  <span className="custom-input-label-1">Shartnoma raqami</span>
                   <Input
                     size="large"
-                    placeholder="Sotuvchi INN" />
+                    placeholder="Shartnoma raqami" />
               </Form.Item>
             </Col>
-            <Col md={10}>
+            <Col md={11}>
             <Form.Item 
-                key="dyna-form-item-inn"
-                name="sellerTin">
-                  <Input
+                key="dyna-form-item-contract-date"
+                name="contractDate">
+                  <span className="custom-input-label-1">Shartnoma sanasi</span>
+                  <DatePicker
                     size="large"
-                    placeholder="Oluvchi INN" />
+                    placeholder="Shartnoma sanasi" />
               </Form.Item>
             </Col>
           </Row>
@@ -178,21 +179,23 @@ const FacturaCreateForm = ()=> {
 
       <div className="factura-data-sheet-container">
         <Row justify="space-between" wrap>
-            <Col md={10}>
+            <Col md={11}>
               <h3>Сизнинг маълумотларингиз</h3>
-            <Form.Item 
-                key="dyna-form-item-inn"
+              <Form.Item 
+                key="dyna-form-item-inn-seller"
                 name="sellerTin">
+                  <span className="custom-input-label-1">INN</span>
                   <Input
                     size="large"
                     placeholder="Sotuvchi INN" />
               </Form.Item>
             </Col>
-            <Col md={10}>
-              <h3>Контрагент маълумотлари</h3>
+            <Col md={11}>
+            <h3>Контрагент маълумотлари</h3>
             <Form.Item 
-                key="dyna-form-item-inn"
-                name="sellerTin">
+                key="dyna-form-item-inn-buyer"
+                name="buyerTin">
+                  <span className="custom-input-label-1">INN</span>
                   <Input
                     size="large"
                     placeholder="Oluvchi INN" />
@@ -201,27 +204,30 @@ const FacturaCreateForm = ()=> {
           </Row>
         
         <Row justify="space-between">
-        <Col md={10}>
+        <Col md={11}>
           <h3>Ташкилот</h3>
           <Form.Item 
-            key="seller-name-1"
+            key="seller-name-1-sellerName"
             name="sellerName">
+              <span className="custom-input-label-1">Сотувчи номи</span>
               <Input
                 size="large"
                 placeholder="Сотувчи номи" />
           </Form.Item>
           <Form.Item 
-              key="seler-account"
-              name="sellerAccount">
+              key="seler-account-vatreg"
+              name="sellerVatRegCode">
+                <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="ҚҚС тўловчисининг регистрация рақами" />
               </Form.Item>
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item 
               key="seler-account"
               name="sellerAccount">
+                <span className="custom-input-label-1">Ҳисоб рақами</span>
                 <Input
                   size="large"
                   placeholder="Ҳисоб рақами" />
@@ -230,70 +236,78 @@ const FacturaCreateForm = ()=> {
             <Col md={11}>
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="sellerMfo">
+                <span className="custom-input-label-1">МФО</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="МФО" />
               </Form.Item>
             </Col>
           </Row>
           <Form.Item 
             key="seler-account"
-            name="sellerAccount">
+            name="sellerAddress">
+              <span className="custom-input-label-1">Манзил</span>
               <Input
                 size="large"
-                placeholder="Ҳисоб рақами" />
+                placeholder="Манзил" />
           </Form.Item>
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="sellerDirector">
+                <span className="custom-input-label-1">Директор</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Директор" />
               </Form.Item>
             </Col>
             <Col md={11}>
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="sellerAccountant">
+                <span className="custom-input-label-1">Бош хисобчи</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Бош хисобчи" />
               </Form.Item>
             </Col>
           </Row>
           <Form.Item 
             key="seler-account"
-            name="sellerAccount">
+            name="sellerAgent">
+              <span className="custom-input-label-1">Масъул шахс</span>
               <Input
                 size="large"
-                placeholder="Ҳисоб рақами" />
+                placeholder="Масъул шахс" />
           </Form.Item>
         </Col>
 
-        <Col md={10}>
+        <Col md={11}>
           <h3>Ҳамкорингизнинг Корхонаси</h3>
           <Form.Item 
-            key="dyna-form-item-inn"
-            name="sellerName">
+            key="buyer-name-1-buyerName"
+            name="buyerName">
+              <span className="custom-input-label-1">Hоми</span>
               <Input
                 size="large"
-                placeholder="" />
+                placeholder="Hоми" />
           </Form.Item>
           <Form.Item 
-            key="dyna-form-item-inn"
-            name="sellerName">
-              <Input
-                size="large"
-                placeholder="" />
-          </Form.Item>
+              key="seler-account-vatreg"
+              name="buyerVatRegCode">
+                <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
+                <Input
+                  size="large"
+                  placeholder="ҚҚС тўловчисининг регистрация рақами" />
+              </Form.Item>
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="buyerAccount">
+                <span className="custom-input-label-1">Ҳисоб рақами</span>
                 <Input
                   size="large"
                   placeholder="Ҳисоб рақами" />
@@ -302,37 +316,41 @@ const FacturaCreateForm = ()=> {
             <Col md={11}>
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="buyerMfo">
+                <span className="custom-input-label-1">МФО</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="МФО" />
               </Form.Item>
             </Col>
           </Row>
           <Form.Item 
-            key="dyna-form-item-inn"
-            name="sellerName">
+            key="seler-account"
+            name="buyerAddress">
+              <span className="custom-input-label-1">Манзил</span>
               <Input
                 size="large"
-                placeholder="" />
+                placeholder="Манзил" />
           </Form.Item>
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="buyerDirector">
+                <span className="custom-input-label-1">Директор</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Директор" />
               </Form.Item>
             </Col>
             <Col md={11}>
               <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="buyerAccountant">
+                <span className="custom-input-label-1">Бош хисобчи</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Бош хисобчи" />
               </Form.Item>
             </Col>
           </Row>
@@ -352,13 +370,22 @@ const FacturaCreateForm = ()=> {
       </div>
       <Button 
         size="large" 
-        style={{marginTop: 20}} 
+        style={{marginTop: 20, marginRight: 7, width: 220}} 
         type="primary" 
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
           icon={["far", "plus-square"]} />} 
         onClick={  handleAddRow }>Qo'shish</Button>
       
+      <Button 
+        size="large" 
+        style={{marginTop: 20, width: 220 }} 
+        danger
+        type="primary" 
+        icon={<FontAwesomeIcon 
+          style={{marginRight: 7}} 
+          icon={["far", "trash-alt"]} />} 
+        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
       </div>
           
         <div className="factura-data-sheet-container">
@@ -366,38 +393,42 @@ const FacturaCreateForm = ()=> {
           <Row justify="space-between">
             <Col md={5} >
               <Form.Item 
-              key="seler-account"
-              name="sellerAccount">
+              key="empowerment-no"
+              name="empowermentNo">
+                <span className="custom-input-label-1">Ишончнома рақами</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Ишончнома рақами" />
               </Form.Item>
             </Col>
             <Col md={5}>
               <Form.Item 
-              key="seler-account"
-              name="sellerAccount">
+              key="seler-account-empowerment-dateof-issue"
+              name="empowermentDateOfIssue">
+                <span className="custom-input-label-1">Ишончнома санаси</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Ишончнома санаси" />
               </Form.Item>
             </Col>
             <Col md={5}>
               <Form.Item 
-              key="seler-account"
-              name="sellerAccount">
+              key="seler-account-tyin-inn"
+              name="agentTin">
+                <span className="custom-input-label-1">СТИР</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="СТИР" />
               </Form.Item>
             </Col>
             <Col md={5}>
               <Form.Item 
-              key="seler-account"
-              name="sellerAccount">
+              key="seler-account-agent-fioe"
+              name="agentFio">
+                <span className="custom-input-label-1">Масъул шахснинг Ф.И.Ш.и</span>
                 <Input
                   size="large"
-                  placeholder="Ҳисоб рақами" />
+                  placeholder="Масъул шахснинг Ф.И.Ш.и" />
               </Form.Item>
             </Col>
           </Row>
@@ -407,11 +438,12 @@ const FacturaCreateForm = ()=> {
 <Row justify="space-between">
   <Col md={24} >
     <Form.Item 
-    key="seler-account"
-    name="sellerAccount">
+    key="selenote-field"
+    name="note">
+      <span className="custom-input-label-1">Қўшимча майдон</span>
       <Input
         size="large"
-        placeholder="Ҳисоб рақами" />
+        placeholder="Қўшимча майдон" />
     </Form.Item>
   </Col>
   
@@ -422,6 +454,7 @@ const FacturaCreateForm = ()=> {
               <Col >
                 <Button 
                   primary
+                  htmlType="submit"
                   className="factra-action-btns save-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons"  />}>
