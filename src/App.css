@@ -3,6 +3,11 @@ body {
 }
 
 
+/* a {
+    color: #3a3939;
+} */
+
+
 /* Ant design customization */
 
 .ant-input-lg,
@@ -12,6 +17,10 @@ body {
     border-radius: 11px !important;
     height: 55px;
     min-width: 250px;
+}
+
+.ant-form-item {
+    margin-bottom: 12px !important;
 }
 
 .ant-btn-lg {
@@ -26,6 +35,6 @@ span.custom-input-label-1 {
     background-color: #fff;
     z-index: 99 !important;
     position: absolute;
-    bottom: 69px;
+    bottom: 57px;
     left: 15px;
 }

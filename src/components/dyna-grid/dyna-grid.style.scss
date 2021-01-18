@@ -1,6 +1,42 @@
-.dyna-grid-actions{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+.dyna-grid-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 14px;
+}
+
+.dyna-grid-main-container {
+    th.ant-table-cell {
+        //min-width: 250px !important;
+        font-size: 10px;
+        div.ant-table-filter-column {
+            //min-width: 250px !important;
+            span.ant-table-filter-column-title {
+                //min-width: 250px !important;
+            }
+            //min-width: 250px !important;
+        }
+    }
+    td.ant-table-cell {
+        font-size: 10px;
+    }
+    &.akhadjon-dyna-grid-full-view {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        z-index: 999;
+        background-color: #ffffff;
+        overflow: auto !important;
+    }
+}
+
+table {
+    margin: 0 !important;
+}
+
+.ant-table-tbody>tr>td,
+.ant-table tfoot>tr>td {
+    padding: 5px 10px !important;
 }

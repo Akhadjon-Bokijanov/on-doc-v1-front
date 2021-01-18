@@ -6,19 +6,20 @@ import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './dyna-grid.style.scss';
 import axios from 'axios';
-import { setItemToBeEdited, triggerFetchStart, triggerActionWithPayload } from '../../redux/admin/admin.actions';
+import moment from 'moment';
+//import { setItemToBeEdited, triggerFetchStart, triggerActionWithPayload } from '../../redux/admin/admin.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from '../../redux/user/user.selector';
+//import { selectCurrentUser } from '../../redux/user/user.selector';
 import { 
   EditOutlined, 
   DeleteOutlined, 
   EyeOutlined, 
   SearchOutlined, 
-  ReloadOutlined, 
-  PlusCircleOutlined, 
-  FileExcelOutlined } from '@ant-design/icons';
-import { RESOURCES_PATH } from '../../env';
+  FullscreenOutlined, 
+  FullscreenExitOutlined, 
+  } from '@ant-design/icons';
+//import { RESOURCES_PATH } from '../../env';
 import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 
 const DynaGrid = ({
@@ -38,6 +39,7 @@ const DynaGrid = ({
     triggerReload,        //action to triggere when delete, approve is done
     triggerWithPayload,   //Trigger action with payload
     payload,              //Payload to trigger action
+    deleteConfirmText,    //Delete confirm text
     actions,              //Object of actions to allow
                           //  {
                           //    add: true,
@@ -66,7 +68,7 @@ const DynaGrid = ({
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const [filteredInfo, setFilteredInfo] = useState(null);
-
+  const [isFulliew, toggleFullView] = useState(false);
 
   let searchInput = null;
 
@@ -77,7 +79,7 @@ const DynaGrid = ({
     //setVisible(false);
     
     axios({
-      url: `/${deleteRequestPath}/${record._id}`, 
+      url: `/${deleteRequestPath}/${record.id}`, 
       method: 'delete',
       data: {creator: record.creator}
       })
@@ -91,7 +93,7 @@ const DynaGrid = ({
           triggerActionWithPayload(triggerActionWithPayload, payload)
         }
         //setAction(Math.random())
-        message.success(`${record._id} is deleted!`);
+        message.success(`${record.id} is deleted!`);
       }).catch(error=>{
         message.error('Failed to delete!');
         console.error(error);
@@ -102,8 +104,8 @@ const DynaGrid = ({
   const confirmApprove = (record) => {
 
     //setVisible(false);
-    axios.patch(`/${approveRequestPath}/${record._id}`, 
-      {userId: currentUser._id},)
+    axios.patch(`/${approveRequestPath}/${record.id}`, 
+      {userId: currentUser.id},)
     .then(res=>{
       if(triggerReload){
         triggerAction(triggerReload)
@@ -113,7 +115,7 @@ const DynaGrid = ({
         triggerActionWithPayload(triggerActionWithPayload, payload)
       }
       //setAction(Math.random())
-      message.success(`${record._id} is approved!`);
+      message.success(`${record.id} is approved!`);
     }).catch(error=>{
       message.error('Failed to approve!');
       console.error(error);
@@ -139,7 +141,7 @@ const DynaGrid = ({
           ref={node => {
             searchInput = node;
           }}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`${dataIndex} qidirish`}
           value={selectedKeys[0]}
           onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -163,7 +165,7 @@ const DynaGrid = ({
     ),
     filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
     onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+      record[dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),
       onFilterDropdownVisibleChange: visible => {
       if (visible) {
         setTimeout(() => searchInput.select());
@@ -217,9 +219,9 @@ const DynaGrid = ({
     columns.push(
       {
         dataIndex: element.dataIndex,
-        title: element.dataIndex.toUpperCase(),
+        title: element.title,
         key: element.dataIndex,
-        width: 200,
+        width: element.width ? element.width : 90,
         ellipsis: element.dataIndex==='detail' || element.dataIndex ==='description' ? true : false,     
       });
 
@@ -232,41 +234,38 @@ const DynaGrid = ({
     {
       columns[index] = {...columns[index], 
         filters: element.filters.map(univer=>({text: univer, value: univer})), 
-        onFilter: (value, record) => record[element.dataIndex].toLowerCase().includes(value.toLowerCase()),}
+        onFilter: (value, record) => record[element.dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),}
     }
 
     if(element.isBoolean){
       columns[index] = {...columns[index], 
       dataIndex: null,
-      width: 200, 
       render: (record)=><div>{record[element.dataIndex] ? 1 : 0}</div>}
     }
 
     if(element.isBoolean && element.isFilterable){
       columns[index] = {...columns[index], 
       dataIndex: null,
-      width: 200,
       filters: [{text: 1, value: true}, {text: 0, value: false}], 
       onFilter: (value, record) =>!!record[element.dataIndex] === !!value,
       render: (record)=><div>{record[element.dataIndex] ? 1 : 0}</div>}
     }
     
-    if(element.dataType === 'image'){
-      columns[index] = { 
-        ...columns[index],
-        dataIndex: null,
-        width: 170,
-        render: (record)=><div style={{textAlign: "center"}}>
-          <img style={{width: 80, height: 80 }} src={`${RESOURCES_PATH}/${record[element.dataIndex]}`} alt={`${record[element.dataIndex]}`} />
-        </div>
-      }
-    }
+    // if(element.dataType === 'image'){
+    //   columns[index] = { 
+    //     ...columns[index],
+    //     dataIndex: null,
+    //     width: 170,
+    //     render: (record)=><div style={{textAlign: "center"}}>
+    //       <img style={{width: 80, height: 80 }} src={`${RESOURCES_PATH}/${record[element.dataIndex]}`} alt={`${record[element.dataIndex]}`} />
+    //     </div>
+    //   }
+    // }
 
     if(element.dataType === 'rich-text'){
       columns[index] = { 
         ...columns[index],
         dataIndex: null,
-        width: 400,
         render: (record)=><RichTextParser text={record[element.dataIndex]} />
       }
     }
@@ -275,7 +274,6 @@ const DynaGrid = ({
       columns[index]={
         ...columns[index],
         dataIndex: null,
-        width: 200,
         render: record=><div style={{display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap'}}>
           {
             record[element.dataIndex] 
@@ -299,6 +297,15 @@ const DynaGrid = ({
       }
     }
 
+    if (element.dataType === "date") {
+      columns[index]={
+        ...columns[index],
+        width: 150,
+        dataIndex: null,
+        render: record=><span>{ moment(record[element.dataIndex]).format('MMMM Do YYYY, h:mm:ss a') }</span>
+      }
+    }
+
     if(element.dataType === 'array-count'){
       columns[index]={
         ...columns[index],
@@ -317,14 +324,14 @@ const DynaGrid = ({
     
     //Actions
     columns.push({
-      title: "Actions",
+      title: " ",
       key: 'actions',
       width: 90,
       fixed: 'right',
       render: (record) => 
         <div className="dyna-grid-actions">
           {actions.edit 
-          ? <Tooltip placement="left" title="Edit">
+          ? <Tooltip placement="left" title="O'zgartirish">
               <Link 
                 onClick={()=>{onEditClicked(record)}} 
                 to={`${match.path}/actions/update`}>
@@ -335,13 +342,13 @@ const DynaGrid = ({
           }
 
           {actions.delete 
-          ? <Tooltip placement="bottom" title="Delete">
+          ? <Tooltip placement="bottom" title="O'chirish">
               <Popconfirm
-                title="Are you sure delete this news?"
+                title={ deleteConfirmText ? deleteConfirmText : "O'chirilsin?" }
                 onConfirm={()=>{confirmDelete(record)}}
                 onCancel={cancel}
-                okText="Yes"
-                cancelText="No"
+                okText="Ha"
+                cancelText="Yo'q"
               >
               <DeleteOutlined style={{color: 'red'}} />
             </Popconfirm>
@@ -350,7 +357,7 @@ const DynaGrid = ({
           }
           
           {actions.approve 
-            ? <Tooltip placement="bottom" title="Approve">
+            ? <Tooltip placement="bottom" title="Tasdiqlash">
                 <Popconfirm
                   title="Approve this news?"
                   onConfirm={()=>{confirmApprove(record)}}
@@ -365,16 +372,16 @@ const DynaGrid = ({
           }
 
           {actions.view 
-          ? <Tooltip placement="bottom" title="View" >
-                <Link to={`${viewActionPath}/${record._id}`}><EyeOutlined /></Link>
+          ? <Tooltip placement="bottom" title="Ko'rish" >
+                <Link to={`${viewActionPath}/${record.id}`}><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }
 
           {actions.chart
           ?
-            <Tooltip placement="bottomLeft" title="Results">
-              <Link to={`${resultsViewPath}/${record._id}`}>
+            <Tooltip placement="bottomLeft" title="Natijalar">
+              <Link to={`${resultsViewPath}/${record.id}`}>
                 <FontAwesomeIcon icon="chart-line" style={{color: '#fb8c00'}} />
               </Link>
             </Tooltip>
@@ -384,8 +391,8 @@ const DynaGrid = ({
           {
             actions.addElement
             ?
-              <Tooltip placement="bottomLeft" title="Add element">
-                <Link to={`${match.path}/${addElementViewPath}/${record._id}`}>
+              <Tooltip placement="bottomLeft" title="Qoshimcha  qoshish">
+                <Link to={`${match.path}/${addElementViewPath}/${record.id}`}>
                   <FontAwesomeIcon style={{color: "#e91e63"}} icon="plus-circle" />
                 </Link>
               </Tooltip>
@@ -395,35 +402,28 @@ const DynaGrid = ({
     })
 
     return (
-    <div>
-      <div style={{marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
+    <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
+      <div onDoubleClick={()=>toggleFullView(!isFulliew)} 
+        
+        style={{marginTop: 40, marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
         <Button 
-          onClick={()=>{setFilteredInfo(null); setSearchText('')}} 
-          type={(searchText || filteredInfo) ? "danger" : null} 
-          icon={<ReloadOutlined />}>
-            Reset filters
+          
+          onClick={()=>{toggleFullView(!isFulliew)}} 
+          type="primary" 
+          icon={isFulliew ? <FullscreenExitOutlined /> : <FullscreenOutlined />}>
+            { isFulliew ? "Kichraytirish" : "Kengaytirish" }
           </Button>
         <div>
-          <Button 
-            type="primary" 
-            style={{marginRight: 5}} 
-            icon={<FileExcelOutlined />}>
-              Export table
-          </Button>
-          {actions.add 
-          ? <Link to={`${match.path}/${addActionPath}`}>
-              <Button type="primary" icon={<PlusCircleOutlined />}>Add Item</Button>
-            </Link>
-          : null}
+          
         </div>
       </div>
       <Table
-        rowKey="_id"
+        rowKey="id"
         onChange={handleChange} 
         bordered 
         columns={columns} 
         dataSource={dataSource} 
-        scroll={{ x: allColumns.length * 400, y: window.innerHeight - window.innerHeight / 13 }} 
+        scroll={{ x: allColumns.length * 120, }}//y: window.innerHeight - window.innerHeight / 13 }} 
         pagination={{position: ['bottomCenter']}}
       />
     </div>);
@@ -431,13 +431,13 @@ const DynaGrid = ({
 
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
+  //currentUser: selectCurrentUser,
 })
 
 const dispatchMapStateToPros = (dispatch)=>({
-  setItemToBeEdited: (item)=>dispatch(setItemToBeEdited(item)),
-  triggerAction: (action)=>dispatch(triggerFetchStart(action)),
-  triggerActionWithPayload: (action, payload)=>dispatch(triggerActionWithPayload(action, payload))
+  //setItemToBeEdited: (item)=>dispatch(setItemToBeEdited(item)),
+  //triggerAction: (action)=>dispatch(triggerFetchStart(action)),
+  //triggerActionWithPayload: (action, payload)=>dispatch(triggerActionWithPayload(action, payload))
 })
 
 export default connect(mapStateToProps, dispatchMapStateToPros)(withRouter(DynaGrid));

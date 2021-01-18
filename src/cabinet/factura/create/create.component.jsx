@@ -18,21 +18,23 @@ const FacturaCreateForm = ()=> {
       </div>
   }
 
+  const [fullView, toglleFullView] = useState(false)
+
   const [grid, setGrid] = useState([
     [
-      { readOnly: true, value: '', width: 80 },
-      { value: 'Товар (хизмат)лар номи*', readOnly: true, width: 300 },
-      { value: 'Товар (хизмат) лар Ягона электрон миллий каталоги бўйича идентификация коди ва номи*', readOnly: true, width: 200 },
-      { value: 'Товар/хизмат штрих коди', readOnly: true, width: 120 },
-      { value: 'ўлчов бирлиги.*', readOnly: true, width: 120  },
-      { value: "миқдори", readOnly: true, width: 120 },
-      { value: "Нарҳ*", readOnly: true, width: 120 },
-      { value: "Акциз солиғи ставкаси (%)", readOnly: true, width: 120 },
-      { value: "Акциз, Миқдор", readOnly: true, width: 120 },
-      { value: "етказиб бериш нарҳи*", readOnly: true, width: 120 },
-      { value: "ққс, %", readOnly: true, width: 120 },
-      { value: "ққс, Миқдор*", readOnly: true, width: 120 },
-      { value: "Total*", readOnly: true, width: 220 },
+      { readOnly: true, value: '', width: 50 },
+      { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
+      { value: 'Товар/хизмат лар Ягона электрон миллий каталоги бўйича идентификация коди*', readOnly: true, width: 150 },
+      { value: 'Товар/хизмат штрих коди', readOnly: true, width: 100 },
+      { value: 'ўлчов бирлиги.*', readOnly: true, width: 100  },
+      { value: "миқдори", readOnly: true, width: 100 },
+      { value: "Нарҳ*", readOnly: true, width: 100 },
+      { value: "Акциз солиғи ставкаси (%)", readOnly: true, width: 100 },
+      { value: "Акциз, Миқдор", readOnly: true, width: 100 },
+      { value: "етказиб бериш нарҳи*", readOnly: true, width: 100 },
+      { value: "ққс, %", readOnly: true, width: 100 },
+      { value: "ққс, Миқдор*", readOnly: true, width: 100 },
+      { value: "Total*", readOnly: true, width: 150 },
 
     ],
     [
@@ -50,8 +52,53 @@ const FacturaCreateForm = ()=> {
       { value: '', readOnly: true },                          //11 VAT amount
       { value: '', readOnly: true,},                          //12 total
     ], 
+    [
+      { readOnly: true, value: 2 },                           //0 ordNo
+      { value: "" },                                          //1 product name
+      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
+      { value: "" },                                          //3 shrix code
+      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
+      { value: '' },                                          //5 amount
+      { value: "", },                                         //6 price
+      { value: '' },                                          //7 aksiz rate
+      { value: '', readOnly: true },                          //8 aksiz amount
+      { value: '' },                                          //9 delivery cost
+      { value: "" },                                          //10 VAT rate
+      { value: '', readOnly: true },                          //11 VAT amount
+      { value: '', readOnly: true,},                          //12 total
+    ], 
+    [
+      { readOnly: true, value: 3 },                           //0 ordNo
+      { value: "" },                                          //1 product name
+      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
+      { value: "" },                                          //3 shrix code
+      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
+      { value: '' },                                          //5 amount
+      { value: "", },                                         //6 price
+      { value: '' },                                          //7 aksiz rate
+      { value: '', readOnly: true },                          //8 aksiz amount
+      { value: '' },                                          //9 delivery cost
+      { value: "" },                                          //10 VAT rate
+      { value: '', readOnly: true },                          //11 VAT amount
+      { value: '', readOnly: true,},                          //12 total
+    ], 
+    [
+      { readOnly: true, value: 4 },                           //0 ordNo
+      { value: "" },                                          //1 product name
+      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
+      { value: "" },                                          //3 shrix code
+      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
+      { value: '' },                                          //5 amount
+      { value: "", },                                         //6 price
+      { value: '' },                                          //7 aksiz rate
+      { value: '', readOnly: true },                          //8 aksiz amount
+      { value: '' },                                          //9 delivery cost
+      { value: "" },                                          //10 VAT rate
+      { value: '', readOnly: true },                          //11 VAT amount
+      { value: '', readOnly: true,},                          //12 total
+    ], 
   ])
-  
+
 
 
   //#region data-sheet methods
@@ -423,9 +470,9 @@ const FacturaCreateForm = ()=> {
         </Col>
       </Row>
       </div>
-      <div className="factura-data-sheet-container">
+      <div onDoubleClick={()=>toglleFullView(!fullView)} className={`factura-data-sheet-container ${fullView ? 'grid-full-view' : null}`}>
       <div style={{overflowX: 'auto'}} >
-        <div style={{width: '130%'}}>
+        <div style={{width: '100%'}}>
           <Datasheet
             data={ grid}
             valueRenderer={ valueRenderer}

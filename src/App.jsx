@@ -5,8 +5,14 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import './components/font-awesome-icons/font-awesome-icons';
 import Home from './frontend/home/home.component';
 import CabinetIndex from './cabinet/index.component';
+import moment from 'moment';
+import "moment/locale/uz-latn";
+import 'moment/locale/ru';
 
 const App = () => {
+
+    moment.locale('uz-latn');
+
     return (
         <div className="App">
             <Switch>

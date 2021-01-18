@@ -10,10 +10,10 @@ const CabinetIndex = ({ match }) => {
         <div>
             <Header position="cabinet" />
             <Row justify="space-around">
-               <Col md={4}>
+               <Col md={5} lg={4}>
                     <RightSidebar />
                </Col>
-               <Col md={20}>
+               <Col md={19} lg={20}>
                     <Route path={`${match.path}/factura`} component={FacturaIndex} />
                </Col>
             </Row>

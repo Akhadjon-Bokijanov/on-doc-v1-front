@@ -3,6 +3,16 @@
     padding: 20px;
     border-radius: 11px;
     margin-bottom: 30px;
+    &.grid-full-view {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        right: 0;
+        left: 0;
+        z-index: 999;
+        overflow-y: auto;
+        height: 100vh;
+    }
 }
 
 .factra-action-btns {
