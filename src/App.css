@@ -16,7 +16,20 @@ body {
     border: 1px solid #dadce0 !important;
     border-radius: 11px !important;
     height: 55px;
-    min-width: 250px;
+    min-width: 200px;
+}
+
+.ant-form-item-explain {
+    /* position: absolute;/ */
+    transition: none !important;
+}
+
+.ant-form-item-explain.ant-form-item-explain-error {
+    font-size: 12px;
+    position: absolute !important;
+    top: 53px;
+    left: 10px;
+    transition: none !important;
 }
 
 .ant-form-item {
@@ -26,6 +39,10 @@ body {
 .ant-btn-lg {
     height: 45px !important;
     border-radius: 11px !important;
+}
+
+.ant-select-selection-item {
+    margin-top: 5px;
 }
 
 span.custom-input-label-1 {

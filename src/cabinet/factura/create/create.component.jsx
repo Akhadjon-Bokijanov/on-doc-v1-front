@@ -3,22 +3,38 @@ import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, InputNumber } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import MaximizeMinimizeCard from '../../../components/maximize-minimize-card/max-min-card.component'
 import './create.style.scss';
+import axios from 'axios';
 
 const { Option } = Select;
 
 const FacturaCreateForm = ()=> {
-  
-  const actionsButton = ({ row })=>{
-    return <div style={{textAlign: 'center'}}>
-        <Button danger onClick={()=> handleRemoveRow(row)} icon={<FontAwesomeIcon icon={["far", "trash-alt"]}/>} ></Button>
-      </div>
+
+  const validateMessages = {
+    required: 'Bu maydon majburiy!',
+    types: {
+      email: '${label} is not a valid email!',
+      number: '${label} is not a valid number!',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    },
+    
+  };
+
+  const FACTURA_TYPES = {
+    "STANDARD": 1,
+    "QOSHIMCHA": 2,
+    "HARAJATLARNI QOPLASH": 3,
+    "TOLOVSIZ": 4,
+    "TUZATUVCHI": 5
   }
 
   const [fullView, toglleFullView] = useState(false)
+
+  const [facturaType, setFacturaType] = useState(1);
 
   const [grid, setGrid] = useState([
     [
@@ -169,6 +185,17 @@ const FacturaCreateForm = ()=> {
 
   const handleSubmit = (values)=>{
     console.log(values)
+    
+    axios({
+      url:'/api/v1/facturas',
+      method: 'post',
+      data: {factura: values, products: grid}
+    }).then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
+
   }
 
   //#endregion
@@ -179,30 +206,45 @@ const FacturaCreateForm = ()=> {
         name="factura"
         onFinish = {handleSubmit}
         scrollToFirstError
+        validateMessages={validateMessages}
       >
 
       <div className="factura-data-sheet-container">
       <h3>Ҳужжат тури</h3>
-      <Row>
-      <Col md={11}>
+      <Row justify="space-between">
+          <Col md={11}>
             <Form.Item>
               <Form.Item 
                 key="dyna-form-facutura-no"
-                name="facturaNo">
+                name="facturaType"
+                initialValue={facturaType}>
                   <Select
+                    onChange={setFacturaType}
                     bordered={false}
                     size="large"
                     placeholder="Faktura turi">
-                      <Option value={1}>Standard</Option>
-                      <Option value={2}>Qo'shimcha</Option>
-                      <Option value={3}>Harajatni qoplash</Option>
-                      <Option value={4}>To'lovsiz</Option>
-                      <Option value={5}>Tuzatuvchi</Option>
+                      <Option value={FACTURA_TYPES["STANDARD"]}>Standard</Option>
+                      <Option value={FACTURA_TYPES["QOSHIMCHA"]}>Qo'shimcha</Option>
+                      <Option value={FACTURA_TYPES["HARAJATLARNI QOPLASH"]}>Harajatni qoplash</Option>
+                      <Option value={FACTURA_TYPES["TOLOVSIZ"]}>To'lovsiz</Option>
+                      <Option value={FACTURA_TYPES["TUZATUVCHI"]}>Tuzatuvchi</Option>
                     </Select>
               </Form.Item>
                   <span className="custom-input-label-1">Faktura turi</span>
+            </Form.Item>
+          </Col>
+          <Col md={facturaType===FACTURA_TYPES["QOSHIMCHA"] || facturaType===FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
+            <Form.Item>
+              <Form.Item 
+                key="dyna-form-facutura-no-old"
+                name="oldFacturaId">
+                  <Input
+                    size="large"
+                    placeholder="Eski faktura ID" />
               </Form.Item>
-            </Col>
+                  <span className="custom-input-label-1">Eski faktura ID</span>
+              </Form.Item>
+          </Col>
       </Row>  
       <Row justify="space-between">
             <Col md={11}>
@@ -265,6 +307,8 @@ const FacturaCreateForm = ()=> {
                 key="dyna-form-item-inn-seller"
                 name="sellerTin">
                   <Input
+                    defaultValue="999111333"
+                    disabled
                     size="large"
                     placeholder="Sotuvchi INN" />
               </Form.Item>
@@ -276,7 +320,9 @@ const FacturaCreateForm = ()=> {
             <Form.Item>
               <Form.Item 
                 key="dyna-form-item-inn-buyer"
-                name="buyerTin">
+                name="buyerTin"
+                rules={[{required: true}]}
+                >
                   <Input
                     size="large"
                     placeholder="Oluvchi INN" />
@@ -371,16 +417,7 @@ const FacturaCreateForm = ()=> {
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item>
-            <Form.Item 
-            key="seler-account"
-            name="sellerAgent">
-              <Input
-                size="large"
-                placeholder="Масъул шахс" />
-          </Form.Item>
-              <span className="custom-input-label-1">Масъул шахс</span>
-          </Form.Item>
+          
         </Col>
 
         <Col md={11}>
@@ -521,7 +558,7 @@ const FacturaCreateForm = ()=> {
                 <Form.Item 
               key="seler-account-empowerment-dateof-issue"
               name="empowermentDateOfIssue">
-                <Input
+                <DatePicker
                   size="large"
                   placeholder="Ишончнома санаси" />
               </Form.Item>
@@ -563,7 +600,7 @@ const FacturaCreateForm = ()=> {
     <Form.Item>
       <Form.Item 
     key="selenote-field"
-    name="note">
+    name="notes">
       <Input
         size="large"
         placeholder="Қўшимча майдон" />

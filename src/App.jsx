@@ -8,10 +8,12 @@ import CabinetIndex from './cabinet/index.component';
 import moment from 'moment';
 import "moment/locale/uz-latn";
 import 'moment/locale/ru';
+import axios from 'axios';
 
 const App = () => {
 
     moment.locale('uz-latn');
+    axios.defaults.baseURL="http://127.0.0.1:8000";
 
     return (
         <div className="App">
