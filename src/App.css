@@ -19,17 +19,21 @@ body {
     min-width: 200px;
 }
 
-.ant-form-item-explain {
-    /* position: absolute;/ */
-    transition: none !important;
+.ant-form-item-explain-success {
+    display: none !important;
 }
 
 .ant-form-item-explain.ant-form-item-explain-error {
-    font-size: 12px;
+    font-size: 11px;
     position: absolute !important;
     top: 53px;
     left: 10px;
     transition: none !important;
+}
+
+.show-help-leave,
+.show-help-leave-active {
+    display: none;
 }
 
 .ant-form-item {

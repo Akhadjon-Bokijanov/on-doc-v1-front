@@ -3,10 +3,12 @@ import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, InputNumber } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, InputNumber, Upload } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';
+import BuyerForm from './buyer-form.component';
+import SellerForm from './seller-form.component';
 
 const { Option } = Select;
 
@@ -147,8 +149,7 @@ const FacturaCreateForm = ()=> {
         grid[row][11] = { value: vatamout/100, readOnly: true }
 
         grid[row][12] = { value: priceamount ? priceamount + aksizamount + vatamout + grid[row][9].value : 0, readOnly: true}
-        //let vatamount = priceamount * grid[row][]
-        //grid[row][12]= priceamount + grid[row][]
+       
      
     });
      setGrid([...grid]);
@@ -198,6 +199,25 @@ const FacturaCreateForm = ()=> {
 
   }
 
+  const handleImportExecl =(value)=>{
+    console.log("me fired")
+
+    if(value.file.status=="done"){
+      
+      const { response } = value.file
+
+      response.excel.forEach((element, index)=>{
+        element[0].value = index + 1;
+        element[0].readOnly = true;
+        element[2].dataEditor = SelectEditor;
+        element[4].dataEditor = SelectMeasureEditor;
+      })
+
+      setGrid([grid[0], ...response.excel])
+      console.log(response)
+    }
+  }
+
   //#endregion
   
   return (
@@ -239,6 +259,7 @@ const FacturaCreateForm = ()=> {
                 key="dyna-form-facutura-no-old"
                 name="oldFacturaId">
                   <Input
+                    rules={[{required: true}]}
                     size="large"
                     placeholder="Eski faktura ID" />
               </Form.Item>
@@ -250,6 +271,7 @@ const FacturaCreateForm = ()=> {
             <Col md={11}>
             <Form.Item>
               <Form.Item 
+                rules={[{required: true}]}
                 key="dyna-form-facutura-no"
                 name="facturaNo">
                   <Input
@@ -263,8 +285,9 @@ const FacturaCreateForm = ()=> {
             <Form.Item>
               <Form.Item 
                 key="dyna-form-item-inn-date"
-                name="facturaDate">
-                  <DatePicker
+                name="facturaDate"
+                rules={[{required: true}]}>
+                  <DatePicker                
                     size="large"
                     placeholder="Faktura sanasi" />
               </Form.Item>
@@ -274,6 +297,7 @@ const FacturaCreateForm = ()=> {
             <Col md={11}>
             <Form.Item>
               <Form.Item 
+                rules={[{required: true}]}
                 key="dyna-form-item-contract-n0"
                 name="contractNo">
                   <Input
@@ -286,6 +310,7 @@ const FacturaCreateForm = ()=> {
             <Col md={11}>
             <Form.Item>
               <Form.Item 
+                rules={[{required: true}]}
                 key="dyna-form-item-contract-date"
                 name="contractDate">
                   <DatePicker
@@ -299,215 +324,29 @@ const FacturaCreateForm = ()=> {
       </div>
 
       <div className="factura-data-sheet-container">
-        <Row justify="space-between" wrap>
-            <Col md={11}>
-              <h3>Сизнинг маълумотларингиз</h3>
-              <Form.Item>
-                <Form.Item 
-                key="dyna-form-item-inn-seller"
-                name="sellerTin">
-                  <Input
-                    defaultValue="999111333"
-                    disabled
-                    size="large"
-                    placeholder="Sotuvchi INN" />
-              </Form.Item>
-                  <span className="custom-input-label-1">INN</span>
-              </Form.Item>
-            </Col>
-            <Col md={11}>
-            <h3>Контрагент маълумотлари</h3>
-            <Form.Item>
-              <Form.Item 
-                key="dyna-form-item-inn-buyer"
-                name="buyerTin"
-                rules={[{required: true}]}
-                >
-                  <Input
-                    size="large"
-                    placeholder="Oluvchi INN" />
-              </Form.Item>
-                  <span className="custom-input-label-1">INN</span>
-              </Form.Item>
-            </Col>
-          </Row>
         
         <Row justify="space-between">
-        <Col md={11}>
-          <h3>Ташкилот</h3>
-          <Form.Item>
-            <Form.Item 
-            key="seller-name-1-sellerName"
-            name="sellerName">
-              <Input
-                size="large"
-                placeholder="Сотувчи номи" />
-          </Form.Item>
-              <span className="custom-input-label-1">Сотувчи номи</span>
-          </Form.Item>
-          <Form.Item>
-            <Form.Item 
-              key="seler-account-vatreg"
-              name="sellerVatRegCode">
-                <Input
-                  size="large"
-                  placeholder="ҚҚС тўловчисининг регистрация рақами" />
-              </Form.Item>
-                <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
-              </Form.Item>
-          <Row justify="space-between">
-            <Col md={11} >
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="sellerAccount">
-                <Input
-                  size="large"
-                  placeholder="Ҳисоб рақами" />
-              </Form.Item>
-                <span className="custom-input-label-1">Ҳисоб рақами</span>
-              </Form.Item>
-            </Col>
-            <Col md={11}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="sellerMfo">
-                <Input
-                  size="large"
-                  placeholder="МФО" />
-              </Form.Item>
-                <span className="custom-input-label-1">МФО</span>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Form.Item>
-            <Form.Item 
-            key="seler-account"
-            name="sellerAddress">
-              <Input
-                size="large"
-                placeholder="Манзил" />
-          </Form.Item>
-              <span className="custom-input-label-1">Манзил</span>
-          </Form.Item>
-          <Row justify="space-between">
-            <Col md={11} >
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="sellerDirector">
-                <Input
-                  size="large"
-                  placeholder="Директор" />
-              </Form.Item>
-                <span className="custom-input-label-1">Директор</span>
-              </Form.Item>
-            </Col>
-            <Col md={11}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="sellerAccountant">
-                <Input
-                  size="large"
-                  placeholder="Бош хисобчи" />
-              </Form.Item>
-                <span className="custom-input-label-1">Бош хисобчи</span>
-              </Form.Item>
-            </Col>
-          </Row>
-          
+        <Col md={11}>  
+          <SellerForm />
         </Col>
 
         <Col md={11}>
-          <h3>Ҳамкорингизнинг Корхонаси</h3>
-          <Form.Item>
-            <Form.Item 
-            key="buyer-name-1-buyerName"
-            name="buyerName">
-              <Input
-                size="large"
-                placeholder="Hоми" />
-          </Form.Item>
-              <span className="custom-input-label-1">Hоми</span>
-          </Form.Item>
-          <Form.Item>
-            <Form.Item 
-              key="seler-account-vatreg"
-              name="buyerVatRegCode">
-                <Input
-                  size="large"
-                  placeholder="ҚҚС тўловчисининг регистрация рақами" />
-              </Form.Item>
-                <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
-              </Form.Item>
-          <Row justify="space-between">
-            <Col md={11} >
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="buyerAccount">
-                <Input
-                  size="large"
-                  placeholder="Ҳисоб рақами" />
-              </Form.Item>
-                <span className="custom-input-label-1">Ҳисоб рақами</span>
-              </Form.Item>
-            </Col>
-            <Col md={11}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="buyerMfo">
-                <Input
-                  size="large"
-                  placeholder="МФО" />
-              </Form.Item>
-                <span className="custom-input-label-1">МФО</span>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Form.Item>
-            <Form.Item 
-            key="seler-account"
-            name="buyerAddress">
-              <Input
-                size="large"
-                placeholder="Манзил" />
-          </Form.Item>
-              <span className="custom-input-label-1">Манзил</span>
-          </Form.Item>
-          <Row justify="space-between">
-            <Col md={11} >
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="buyerDirector">
-                <Input
-                  size="large"
-                  placeholder="Директор" />
-              </Form.Item>
-                <span className="custom-input-label-1">Директор</span>
-              </Form.Item>
-            </Col>
-            <Col md={11}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account"
-              name="buyerAccountant">
-                <Input
-                  size="large"
-                  placeholder="Бош хисобчи" />
-              </Form.Item>
-                <span className="custom-input-label-1">Бош хисобчи</span>
-              </Form.Item>
-            </Col>
-          </Row>
+          <BuyerForm />
         </Col>
       </Row>
       </div>
       <div onDoubleClick={()=>toglleFullView(!fullView)} className={`factura-data-sheet-container ${fullView ? 'grid-full-view' : null}`}>
+        <div style={{marginBottom: 10}}>
+          <Upload 
+            multiple={false}
+            action="http://127.0.0.1:8000/api/v1/factura-products/read-excel"
+            accept=".xlsx, .xls" 
+            onChange={handleImportExecl}>
+            <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
+            <Button>Shablon yuklab olish</Button>
+          </Upload>
+        </div>
+        
       <div style={{overflowX: 'auto'}} >
         <div style={{width: '100%'}}>
           <Datasheet
