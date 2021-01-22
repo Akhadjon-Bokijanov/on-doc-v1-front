@@ -9,9 +9,9 @@ const SellerForm = () => {
                 <Form.Item 
                 key="dyna-form-item-inn-seller"
                 name="sellerTin"
-                rules={[{required: true}]}>
+                rules={[{required: true}]}
+                initialValue="999111333">
                   <Input    
-                    defaultValue="999111333"
                     disabled
                     size="large"
                     placeholder="Sotuvchi INN" />

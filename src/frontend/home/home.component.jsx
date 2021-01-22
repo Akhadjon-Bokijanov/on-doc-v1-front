@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/header.component';
 
-const Home = ()=>{
+const Home = ({})=>{
 
     
 
     return<div>
         <div>
-            <Header />
+            {/* <Header /> */}
         </div>
     </div>
 }

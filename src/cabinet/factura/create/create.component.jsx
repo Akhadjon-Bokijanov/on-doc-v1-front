@@ -3,7 +3,7 @@ import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, InputNumber, Upload } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, Upload } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';

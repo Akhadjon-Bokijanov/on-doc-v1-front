@@ -9,6 +9,10 @@ import moment from 'moment';
 import "moment/locale/uz-latn";
 import 'moment/locale/ru';
 import axios from 'axios';
+import FrontIndexRouter from './frontend/index.router';
+import Header from './components/header/header.component';
+//import './e-imzo/e-imzo';
+//import EIMZOClient from './e-imzo/e-imzo-client';
 
 const App = () => {
 
@@ -17,13 +21,14 @@ const App = () => {
 
     return (
         <div className="App">
+            <Header />
             <Switch>
                 <Route exact path="/"
                     render={
                         () =>< Redirect to = "/home" />
                     }/>
                 <Route path="/home"
-                    component={Home}/>
+                    component={ FrontIndexRouter }/>
 
                 <Route path="/cabinet" component={CabinetIndex} />
             </Switch>

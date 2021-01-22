@@ -1,0 +1,6 @@
+const USER_ACTIONS = {
+    SUCCESS_LOGIN: "SUCCESS_LOGIN",
+    LOG_OUT: "LOG_OUT",
+}
+
+export default USER_ACTIONS;

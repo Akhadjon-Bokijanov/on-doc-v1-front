@@ -14,10 +14,14 @@ import {
     faFileContract,
     faFileInvoice,
     faFileSignature,
-    faFileInvoiceDollar
+    faFileInvoiceDollar,
+    faSignInAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
+    faBookmark,
+    faCheckCircle,
+    faClock,
     faClone,
     faFileAlt,
     faFileArchive,
@@ -47,5 +51,9 @@ library.add(
     faFileInvoice,
     faFileSignature,
     faFileArchive,
-    faFileInvoiceDollar
+    faFileInvoiceDollar,
+    faClock,
+    faCheckCircle,
+    faBookmark,
+    faSignInAlt,
 )

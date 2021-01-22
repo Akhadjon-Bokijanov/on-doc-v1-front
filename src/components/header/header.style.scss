@@ -18,6 +18,16 @@
             .burger-main {
                 color: #439CF3;
             }
+            .heasder-actions-con {
+                display: flex;
+                justify-content: space-between;
+                width: 100px;
+                align-items: center;
+                .header-action-icon {
+                    font-size: 25px;
+                    color: #999999;
+                }
+            }
         }
     }
 }

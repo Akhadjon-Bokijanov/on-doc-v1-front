@@ -155,10 +155,10 @@ const DynaGrid = ({
             size="small"
             style={{ width: 90 }}
           >
-            Search
+            Qidirish
           </Button>
           <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
+            Qaytarish
           </Button>
         </Space>
       </div>
