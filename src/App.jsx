@@ -11,10 +11,13 @@ import 'moment/locale/ru';
 import axios from 'axios';
 import FrontIndexRouter from './frontend/index.router';
 import Header from './components/header/header.component';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/user.selector';
 //import './e-imzo/e-imzo';
 //import EIMZOClient from './e-imzo/e-imzo-client';
 
-const App = () => {
+const App = ({ user }) => {
 
     moment.locale('uz-latn');
     axios.defaults.baseURL="http://127.0.0.1:8000";
@@ -30,10 +33,15 @@ const App = () => {
                 <Route path="/home"
                     component={ FrontIndexRouter }/>
 
-                <Route path="/cabinet" component={CabinetIndex} />
+                <Route path="/cabinet" 
+                    render={()=>user ? <CabinetIndex /> : <Redirect to="/home/login" />} />
             </Switch>
         </div>
     )
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+    user: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(App);

@@ -41,7 +41,7 @@ body {
     min-width: 200px;
 }
 
-.ant-input-password-large #factura_password {
+.ant-input-password-large input[type="password"] {
     border: none !important;
     height: auto;
 }

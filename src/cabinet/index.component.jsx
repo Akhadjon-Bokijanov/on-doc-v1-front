@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Header from '../components/header/header.component';
 import FacturaIndex from './factura/index.component';
 import RightSidebar from './right-sidebar/right-sidebar.component';
@@ -23,4 +23,4 @@ const CabinetIndex = ({ match }) => {
     );
 };
 
-export default CabinetIndex;
+export default withRouter(CabinetIndex);

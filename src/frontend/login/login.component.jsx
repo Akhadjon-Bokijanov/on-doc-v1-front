@@ -38,6 +38,7 @@ const Login = ({ setCurrentUser }) => {
 
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isKeyLoading, setKeyIsLoading] = useState(false);
 
     const validateMessages = {
         required: 'Bu maydon majburiy!',
@@ -47,7 +48,24 @@ const Login = ({ setCurrentUser }) => {
         setIsLoading(true)
         console.log(value)
         axios({
-            url: '/api/v1/user-login', //URL for company: '/api/v1/company-login'
+            url: '/api/v1/company-login', //URL for company: '/api/v1/company-login'
+            data: value,
+            method: 'POST',
+        }).then(res=>{
+            setCurrentUser(res.data)
+            setIsLoading(false)
+        }).catch(err=>{
+            console.log(err)
+            setIsLoading(false)
+            message.error("Kabinetga kirishda xatolik!");
+        })
+    }
+
+    const handleKeySubmit = value =>{
+        setIsLoading(true)
+        console.log(value)
+        axios({
+            url: '/api/v1/key-login', //URL for company: '/api/v1/company-login'
             data: value,
             method: 'POST',
         }).then(res=>{
@@ -67,7 +85,7 @@ const Login = ({ setCurrentUser }) => {
                     <div className="login-form-containrer">
                     <Form
                         name="e-key"
-                        onFinish = {handleSubmit}
+                        onFinish = {handleKeySubmit}
                         scrollToFirstError
                         validateMessages={validateMessages}
                     >
@@ -88,7 +106,7 @@ const Login = ({ setCurrentUser }) => {
                         </Form.Item>
                         <Form.Item>
                         <Button
-                            loading={isLoading}
+                            loading={isKeyLoading}
                             style={{display: 'block', width: '100%'}}
                             className="factra-action-btns sing-btn" 
                             size="large"
