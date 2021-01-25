@@ -28,6 +28,7 @@ const DynaGrid = ({
   setItemToBeEdited,      //Provided by the comonent
   triggerAction,          //Provided by the comonent, redux action consumer
   triggerActionWithPayload, //Provided by comonent, redux action and payload consumer
+  title,                  //title of DynaGrid
   dataSource,             //data source for the component
   config:{                //Config object
     addElementViewPath,     //add element to the core
@@ -233,7 +234,7 @@ const DynaGrid = ({
     if(element.isFilterable)
     {
       columns[index] = {...columns[index], 
-        filters: element.filters.map(univer=>({text: univer, value: univer})), 
+        filters: element.filters.map(univer=>({text: univer.text ?? univer, value: univer.value ?? univer})), 
         onFilter: (value, record) => record[element.dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),}
     }
 
@@ -302,7 +303,7 @@ const DynaGrid = ({
         ...columns[index],
         width: 150,
         dataIndex: null,
-        render: record=><span>{ moment(record[element.dataIndex]).format('MMMM Do YYYY, h:mm:ss a') }</span>
+        render: record=><span>{ moment(record[element.dataIndex]).format('MMMM Do YYYY, H:mm:ss') }</span>
       }
     }
 
@@ -414,7 +415,7 @@ const DynaGrid = ({
             { isFulliew ? "Kichraytirish" : "Kengaytirish" }
           </Button>
         <div>
-          
+          <h3>{title}</h3>
         </div>
       </div>
       <Table

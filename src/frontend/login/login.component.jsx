@@ -48,7 +48,7 @@ const Login = ({ setCurrentUser }) => {
         setIsLoading(true)
         console.log(value)
         axios({
-            url: '/api/v1/company-login', //URL for company: '/api/v1/company-login'
+            url: '/api/v1/login-with-password', 
             data: value,
             method: 'POST',
         }).then(res=>{

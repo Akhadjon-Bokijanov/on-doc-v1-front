@@ -1,12 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge } from 'antd';
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom';
 import './right-sidebar.style.scss';
 
 const RightSidebar = ({ match }) => {
 
-    console.log(match)
+    const [awaitings, setAwaitings] = useState({
+        factura: 0,
+        contract: 0,
+        empowerment: 0,
+        act: 0,
+        tty: 0,
+        freeDoc: 0,
+    })
 
     return (
         <div className="cabiner-right-sidebar-cmain-container">

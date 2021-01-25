@@ -15,7 +15,9 @@ import {
     faFileInvoice,
     faFileSignature,
     faFileInvoiceDollar,
-    faSignInAlt
+    faSignInAlt,
+    faCloudDownloadAlt,
+    faCloudUploadAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -27,7 +29,8 @@ import {
     faFileArchive,
     faNewspaper,
     faPlusSquare,
-    faTrashAlt
+    faTrashAlt,
+
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
@@ -56,4 +59,6 @@ library.add(
     faCheckCircle,
     faBookmark,
     faSignInAlt,
+    faCloudDownloadAlt,
+    faCloudUploadAlt
 )

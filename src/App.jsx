@@ -13,14 +13,19 @@ import FrontIndexRouter from './frontend/index.router';
 import Header from './components/header/header.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from './redux/user/user.selector';
+import { selectCurrentUser, selectToken } from './redux/user/user.selector';
+import { useEffect } from 'react';
 //import './e-imzo/e-imzo';
 //import EIMZOClient from './e-imzo/e-imzo-client';
 
-const App = ({ user }) => {
+const App = ({ user, token }) => {
 
     moment.locale('uz-latn');
     axios.defaults.baseURL="http://127.0.0.1:8000";
+    
+    axios.defaults.headers.common['Authorization'] = "Bearer " + token;
+    // useEffect(()=>{
+    // }, [token])
 
     return (
         <div className="App">
@@ -41,7 +46,8 @@ const App = ({ user }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser
+    user: selectCurrentUser,
+    token: selectToken
 })
 
 export default connect(mapStateToProps)(App);
