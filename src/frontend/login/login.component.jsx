@@ -62,20 +62,40 @@ const Login = ({ setCurrentUser }) => {
     }
 
     const handleKeySubmit = value =>{
-        setIsLoading(true)
+        //setKeyIsLoading(true)
         console.log(value)
-        axios({
-            url: '/api/v1/key-login', //URL for company: '/api/v1/company-login'
-            data: value,
-            method: 'POST',
-        }).then(res=>{
-            setCurrentUser(res.data)
-            setIsLoading(false)
-        }).catch(err=>{
-            console.log(err)
-            setIsLoading(false)
-            message.error("Kabinetga kirishda xatolik!");
-        })
+
+        EIMZOClient.loadKey(
+            value.key.text, 
+            id=>{
+                console.log(id);
+                EIMZOClient.createPkcs7(id, "some_auth_text", 
+                pkcs7Text=>{
+                    console.log(pkcs7Text);
+                },
+                (e, r)=>{
+                    console.log("e:", e);
+                    console.log("r:", r);
+                })
+            },
+            function(e, r){
+                console.log("Load key e:", e);
+                console.log("Load key r:", r);
+            },)
+
+        EIMZOClient.createPkcs7(
+            value.key, 
+            "random_key_to_authorize", 
+            null,
+            pkcs7Text=>{
+                console.log(pkcs7Text);
+            },
+            (e, r)=>{
+                console.log(e);
+                console.log(r)
+            } 
+        )
+
     }
     
     return (
@@ -89,12 +109,12 @@ const Login = ({ setCurrentUser }) => {
                         scrollToFirstError
                         validateMessages={validateMessages}
                     >
-                      <Form.Item valuePropName="checked">
+                      <Form.Item 
+                      name="key">
                         <Radio.Group 
-                        name="key"
                         size="large">
                         {   
-                            eKeys.map(data=><Radio key={data.value} value={data.value}>
+                            eKeys.map(data=><Radio key={data.value} value={data}>
                                 <div className="client-availbale-key">
                                     <div>FIO: {data.text.CN} </div>
                                     <div>STIR: {data.text.TIN}</div> 

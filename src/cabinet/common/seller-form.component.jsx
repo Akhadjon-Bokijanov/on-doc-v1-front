@@ -1,7 +1,13 @@
 import React from 'react';
 import { Input, Form, Row, Col } from 'antd';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { connect } from 'react-redux';
 
-const SellerForm = () => {
+const SellerForm = ({ user }) => {
+
+  const { tin, name, fullName, regCode, mfo, account, address, directorName, accountant } = user;
+
     return (
         <div>
             <h3>Сизнинг маълумотларингиз</h3>
@@ -10,7 +16,7 @@ const SellerForm = () => {
                 key="dyna-form-item-inn-seller"
                 name="sellerTin"
                 rules={[{required: true}]}
-                initialValue="999111333">
+                initialValue={tin}>
                   <Input    
                     disabled
                     size="large"
@@ -23,7 +29,8 @@ const SellerForm = () => {
             <Form.Item 
             key="seller-name-1-sellerName"
             rules={[{required: true}]}
-            name="sellerName">
+            name="sellerName"
+            initialValue={name ?? fullName}>
               <Input
                 
                 size="large"
@@ -34,7 +41,8 @@ const SellerForm = () => {
           <Form.Item>
             <Form.Item 
               key="seler-account-vatreg"
-              name="sellerVatRegCode">
+              name="sellerVatRegCode"
+              initialValue={regCode}>
                 <Input
                   size="large"
                   placeholder="ҚҚС тўловчисининг регистрация рақами" />
@@ -46,7 +54,8 @@ const SellerForm = () => {
               <Form.Item>
                 <Form.Item 
               key="seler-account"
-              name="sellerAccount">
+              name="sellerAccount"
+              initialValue={account}>
                 <Input
                   size="large"
                   placeholder="Ҳисоб рақами" />
@@ -58,7 +67,8 @@ const SellerForm = () => {
               <Form.Item>
                 <Form.Item 
               key="seler-account"
-              name="sellerMfo">
+              name="sellerMfo"
+              initialValue={mfo}>
                 <Input
                   size="large"
                   placeholder="МФО" />
@@ -70,7 +80,8 @@ const SellerForm = () => {
           <Form.Item>
             <Form.Item 
             key="seler-account"
-            name="sellerAddress">
+            name="sellerAddress"
+            initialValue={address}>
               <Input
                 rules={[{required: true}]}
                 size="large"
@@ -83,7 +94,8 @@ const SellerForm = () => {
               <Form.Item>
                 <Form.Item 
               key="seler-account"
-              name="sellerDirector">
+              name="sellerDirector"
+              initialValue={directorName}>
                 <Input
                   size="large"
                   placeholder="Директор" />
@@ -95,7 +107,8 @@ const SellerForm = () => {
               <Form.Item>
                 <Form.Item 
               key="seler-account"
-              name="sellerAccountant">
+              name="sellerAccountant"
+              initialValue={accountant}>
                 <Input
                   size="large"
                   placeholder="Бош хисобчи" />
@@ -108,4 +121,8 @@ const SellerForm = () => {
     )
 }
 
-export default SellerForm;
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(SellerForm);

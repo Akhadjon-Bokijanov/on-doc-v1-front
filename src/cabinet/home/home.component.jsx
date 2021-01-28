@@ -72,8 +72,8 @@ const CabinetHome = () => {
         viewActionPath: '/cabinet/factura/view',
         deleteConfirmText: "Shu faktura ochirilsinmi?",
         actions: {
-            edit: true,
-            delete: true,
+            edit: activeTab===3 ? true : false,
+            delete: activeTab===3 ? true : false,
             view: true
         },
         allColumns: [
@@ -91,6 +91,17 @@ const CabinetHome = () => {
             {
                 title: "Kontrakt №",
                 dataIndex: 'contractNo',
+                isSearchable: true,
+            },
+            {
+                title: "Sotuvchi",
+                dataIndex: 'sellerName',
+                isSearchable: true,
+                width: 150
+            },
+            {
+                title: "Sotuvchi STIR",
+                dataIndex: "sellerTin",
                 isSearchable: true,
             },
             {

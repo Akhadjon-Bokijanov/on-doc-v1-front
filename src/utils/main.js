@@ -1,161 +1,126 @@
 import moment from 'moment';
+import SelectMeasureEditor from '../components/data-sheet-custom-measure-selector/custom-selector.component';
+import SelectEditor from '../components/data-sheet-custom-selector/custom-selector.component';
 
 export const getFileExtension = filename => {
-  return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2);
+    return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2);
 }
 
-export const checkExerciseScore = (exerciseInputFields, userChoice)=>{
+export const FIRST_FACTURA_GRID_ROW = [
+    { readOnly: true, value: '', width: 50 },
+    { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
+    { value: 'Товар/хизмат лар Ягона электрон миллий каталоги бўйича идентификация коди*', readOnly: true, width: 150 },
+    { value: 'Товар/хизмат штрих коди', readOnly: true, width: 100 },
+    { value: 'ўлчов бирлиги.*', readOnly: true, width: 100 },
+    { value: "миқдори", readOnly: true, width: 100 },
+    { value: "Нарҳ*", readOnly: true, width: 100 },
+    { value: "Акциз солиғи ставкаси (%)", readOnly: true, width: 100 },
+    { value: "Акциз, Миқдор", readOnly: true, width: 100 },
+    { value: "етказиб бериш нарҳи*", readOnly: true, width: 100 },
+    { value: "ққс, %", readOnly: true, width: 100 },
+    { value: "ққс, Миқдор*", readOnly: true, width: 100 },
+    { value: "Total*", readOnly: true, width: 150 },
+];
 
-  let totalScore = 0;
-  let wrongAnswers = [];
+export const FIRST_CONTRACT_GRID_ROW = [
+    { readOnly: true, value: '', width: 50 },
+    { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
+    { value: 'Товар/хизмат лар Ягона электрон миллий каталоги бўйича идентификация коди*', readOnly: true, width: 150 },
+    { value: 'Товар/хизмат штрих коди', readOnly: true, width: 100 },
+    { value: 'ўлчов бирлиги.*', readOnly: true, width: 100 },
+    { value: "миқдори", readOnly: true, width: 100 },
+    { value: "Нарҳ*", readOnly: true, width: 100 },
+    { value: "етказиб бериш нарҳи*", readOnly: true, width: 100 },
+    { value: "Total*", readOnly: true, width: 150 },
+];
 
-  exerciseInputFields.forEach(field => {
-    
-    switch(field.type){
-      case 'radio-group':
-        {
-          let trueAnswer = field.options.filter(option => option.isTrue);
-          if(trueAnswer.find(element => element.option ===userChoice[field.name]))
-          {
-            totalScore++
-          }
-          else{
-            wrongAnswers.push(field.name)
-            console.log(`${field.name} is wrong`)
-          }
-        }
-        break;
-      case 'checkbox-group':
-        {
-          let trueAnswers = field.options.filter(option => option.isTrue).map(el => el.option);
-          let isAllTrue = true;
+export const FIRST_EMPOWERMENT_GRID_ROW = [
+    { readOnly: true, value: '', width: 50 },
+    { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
+    { value: 'ўлчов бирлиги.*', readOnly: true, width: 100 },
+    { value: "миқдори", readOnly: true, width: 100 },
+]
 
-          console.log(trueAnswers)
-          console.log(userChoice[field.name])
+export const SAMPLE_FACTURA_GRID_ROW = [
+    { readOnly: true, value: 1 }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 aksiz rate
+    { value: '', readOnly: true }, //8 aksiz amount
+    { value: '' }, //9 delivery cost
+    { value: "" }, //10 VAT rate
+    { value: '', readOnly: true }, //11 VAT amount
+    { value: '', readOnly: true, }, //12 total
+]
 
-          if(trueAnswers.length === userChoice[field.name].length)
-          {
-            userChoice[field.name].forEach(answer => {
-              if(!(trueAnswers.includes(answer))) {
-                isAllTrue=false;
-              }
-            })
-          }
-          else {
-            isAllTrue = false;
-          }
+export const SAMPLE_CONTRACT_GRID_ROW = [
+    { readOnly: true, value: 1 }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 delivery cost
+    { value: '', readOnly: true, }, //8 total
+]
 
-          if(isAllTrue)
-          totalScore++
-          else{
-            wrongAnswers.push(field.name)
-            console.log(`${field.name} is wrong`)
-          }
+export const convertProductsToGrid = (products) => {
+    let gridProducts = products.map(product => {
+        return [
+            { readOnly: true, value: product["ordNo"] }, //0 ordNo
+            { value: product["name"] }, //1 product name
+            { value: product["catalogCode"], dataEditor: SelectEditor }, //2 catalogCode
+            { value: product["barCode"] }, //3 shrix code
+            { value: product["measureId"], dataEditor: SelectMeasureEditor }, //4 measure
+            { value: product["count"] }, //5 amount
+            { value: product["baseSumma"], }, //6 price
+            { value: product["exciseRate"] }, //7 aksiz rate
+            { value: product["exciseSum"], readOnly: true }, //8 aksiz amount
+            { value: product["deliverySum"] }, //9 delivery cost
+            { value: product["vatRate"] }, //10 VAT rate
+            { value: product["vatRate"] * product["baseSumma"], readOnly: true }, //11 VAT amount
+            { value: product["summa"], readOnly: true, }, //12 total
+        ]
+    })
 
-        }
-        break
-      case 'date':
-        if(moment(userChoice[field.name]).fromNow() === moment(field.trueAnswer).fromNow())
-        totalScore++
-        else{
-          wrongAnswers.push(field.name)
-          console.log(`${field.name} is wrong`)
-        }
-        break;
-      case 'rate':
-      case 'slider':       
-        if(userChoice[field.name] === field.trueAnswer)
-        totalScore++   
-        else{
-          wrongAnswers.push(field.name)
-          console.log(`${field.name} is wrong`)
-        }    
-        break;
-      case 'text-area':
-      case 'input':
-
-        const answer = userChoice[field.name].replace(/\s/g, "");
-        const answersArray =  field.trueAnswer.split(";");
-
-
-        if(answersArray.find(element => element.replace(/\s/g, "").toLowerCase() === answer.toLowerCase()))
-        totalScore++
-        else{
-          wrongAnswers.push(field.name)
-          console.log(`${field.name} is wrong`)
-        }
-
-        break;
-
-      default: break;
-    }
-
-  });
-
-  return {total: totalScore, errors: wrongAnswers};
+    gridProducts.unshift(FIRST_FACTURA_GRID_ROW);
+    return gridProducts;
 }
 
-//Pagination paging function
+const FACTURA_PRODUCT_FIELDS = {
+    0: "ordNo",
 
-export const currentPageData = (collection, paginationPage_Size)=>{
-    const subCollection = []
-
-    //collection is the whole collection of items
-    //paginationPage_Size is array(page, size) of pagination
-
-    for(
-        let i = (paginationPage_Size[0]-1) * paginationPage_Size[1]; 
-        i < paginationPage_Size[1] * paginationPage_Size[0]; 
-        i++)
-    {
-        if(collection[i]) 
-        {
-            subCollection.push(collection[i])
-        }
-        else break;
-    }
-
-    return subCollection;
-}
-
-export const  scrollFunction = ()=> {
-    const mybutton = document.querySelector('.back-to-top-botton');
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      mybutton.style.display = "block";
-    } else {
-      mybutton.style.display = "none";
-    }
-}
-
-export const topFunction = ()=> {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
 }
 
 //#region Rich text editr configs
 export const modules = {
     toolbar: [
-    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-    ['blockquote', 'code-block'],
-    ['image', 'link'],
-  
-    //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-    //[{ 'direction': 'rtl' }],                         // text direction
-  
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
-    ['clean']                                         // remove formatting button
-  ],
-  imageDrop: true,
+        ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+        ['blockquote', 'code-block'],
+        ['image', 'link'],
+
+        //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }], // superscript/subscript
+        [{ 'indent': '-1' }, { 'indent': '+1' }], // outdent/indent
+        //[{ 'direction': 'rtl' }],                         // text direction
+
+        [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+        [{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean'] // remove formatting button
+    ],
+    imageDrop: true,
 }
-  
+
 export const formats = [
     'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
@@ -165,39 +130,27 @@ export const formats = [
 ];
 
 export const modulesForQuestion = {
-  toolbar: [
-    ['bold', 'italic', 'underline',],        // toggled buttons
-    ['code-block'],
-    ['image'],
-  
-    //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    
-    ['clean']                                         // remove formatting button
-  ],
-  imageDrop: true,
+    toolbar: [
+        ['bold', 'italic', 'underline', ], // toggled buttons
+        ['code-block'],
+        ['image'],
+
+        //[{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+
+        ['clean'] // remove formatting button
+    ],
+    imageDrop: true,
 }
 
-export const formatsForQuestion =[
-    'bold', 'italic', 'underline',
-    'list', 'bullet', 
-    'image', 'code-block',
-]
-//#endregion 
+export const formatsForQuestion = [
+        'bold', 'italic', 'underline',
+        'list', 'bullet',
+        'image', 'code-block',
+    ]
+    //#endregion 
 
-export const addResourceToCard = (cartItems, cartItemToAdd)=>{
 
-  const existingCartItem = cartItems.find(cartItem => cartItem._id === cartItemToAdd._id)
-    
-    if(existingCartItem)
-    {
-        return [ ...cartItems ]
-    }
-
-    return [...cartItems, cartItemToAdd ]  
-
-}
-
-export const getValidFileName = (fileName)=>{
-  return fileName.replace(/[\/|\\\s:*!?"<>]/g, "_")
+export const getValidFileName = (fileName) => {
+    return fileName.replace(/[\/|\\\s:*!?"<>]/g, "_")
 }

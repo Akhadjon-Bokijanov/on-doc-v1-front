@@ -29,6 +29,7 @@ import {
     faFileArchive,
     faNewspaper,
     faPlusSquare,
+    faTimesCircle,
     faTrashAlt,
 
 } from '@fortawesome/free-regular-svg-icons'
@@ -60,5 +61,6 @@ library.add(
     faBookmark,
     faSignInAlt,
     faCloudDownloadAlt,
-    faCloudUploadAlt
+    faCloudUploadAlt,
+    faTimesCircle
 )

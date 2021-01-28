@@ -1,12 +1,18 @@
 import React from 'react';
-import { Input, Form, Row, Col, message } from 'antd';
+import { Input, Form, Row, Col, message, Switch, Select } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import axios from 'axios';
 
-const BuyerForm = ()=>{
+const { Option } = Select;
 
-    const [buyerData, setBuyerData] = useState();
+const BuyerForm = ({ form })=>{
 
+    const [isFacturaSingleSided, setIsFacturaSingleSided] = useState(false); 
+
+    const handleSingleSided = (value)=>{
+      setIsFacturaSingleSided(value)
+    }
 
     const handleFetchBuyer = e =>{
         console.log(e.target.value)
@@ -16,10 +22,32 @@ const BuyerForm = ()=>{
                     url: `/api/v1/companies/tin/${e.target.value}`,
                     method: "GET",
                 }).then(res=>{
-                    setBuyerData(res.data)
+                    //setBuyerData(res.data)
+                    const { tin, accountant, account, address, phone, name, fullName, mfo, directorName } = res.data;
+                    let data = {
+                      buyerTin: tin,
+                      buyerAccountant: accountant,
+                      buyerAccount: account,
+                      buyerAddress: address,
+                      buyerPhone: phone,
+                      buyerName: name ?? fullName,
+                      buyerMfo: mfo,
+                      buyerDirector: directorName
+                    }
+                    form.setFieldsValue(data)
                 }).catch(err=>{
                     console.log(err)
                 })
+            } else{
+              form.setFieldsValue({
+                buyerAccountant: null,
+                buyerAccount: null,
+                buyerAddress: null,
+                buyerPhone: null,
+                buyerName: null,
+                buyerMfo: null,
+                buyerDirector: null
+              })
             }
         }else{
             message.warning("STIR notog'ri kiritildi!")
@@ -30,6 +58,8 @@ const BuyerForm = ()=>{
     return (
     <div>
         <h3>Контрагент маълумотлари</h3>
+        <Row justify="space-between">
+            <Col md={11}>
             <Form.Item>
               <Form.Item 
                 key="dyna-form-item-inn-buyer"
@@ -43,8 +73,42 @@ const BuyerForm = ()=>{
               </Form.Item>
                   <span className="custom-input-label-1">INN</span>
               </Form.Item>
+              </Col>
+              <Col md={11}>
+                <h4>Bir tomolaman fakturami?</h4>
+                <Switch
+                  onChange={handleSingleSided}
+                  checkedChildren={<CheckOutlined />}
+                  unCheckedChildren={<CloseOutlined />}
+                />
+              </Col>
+        </Row>
+
         {
-            buyerData ? 
+          isFacturaSingleSided ? 
+          <div>
+            <h3>Turi</h3>
+          <Form.Item 
+          key="sigle-sided-factura-type-1"
+          name="singleSidedType">
+            <Form.Item>
+            <Select bordered={false} size="large">
+              <Option value={1}>На физ. лицо</Option>
+              <Option value={2}> На экспорт</Option>
+              <Option value={3}>На импорт</Option>
+              <Option value={4}>Реализация, связанная с гос. секретом</Option>
+              <Option value={5}>Финансовые услуги</Option>
+            </Select>
+
+            </Form.Item>
+            <span className="custom-input-label-1">Kontragent turi</span>
+          </Form.Item>
+          </div>
+          :null
+        }
+
+        {
+            !isFacturaSingleSided ? 
             <div>
                 <h3>Ҳамкорингизнинг Корхонаси</h3>
           <Form.Item>
@@ -52,11 +116,10 @@ const BuyerForm = ()=>{
             rules={[{required: true}]}
             key="buyer-name-1-buyerName"
             name="buyerName"
-            initialValue={buyerData.companyName}
             >
               <Input      
                 size="large"
-                placeholder={buyerData.companyName ?? "Hоми"} />
+                placeholder="Hоми" />
           </Form.Item>
               <span className="custom-input-label-1">Hоми</span>
           </Form.Item>
@@ -65,7 +128,7 @@ const BuyerForm = ()=>{
             <Form.Item 
               key="seler-account-vatreg"
               name="buyerVatRegCode"
-              initialValue={buyerData.regCode}>
+              >
                 <Input
                   size="large"
                   placeholder="ҚҚС тўловчисининг регистрация рақами"
@@ -78,7 +141,7 @@ const BuyerForm = ()=>{
               <Form.Item>
                 <Form.Item 
                     key="seler-account"
-                    initialValue={buyerData.buyer}
+                    
                     name="buyerAccount">
                 <Input
                   size="large"
@@ -92,7 +155,7 @@ const BuyerForm = ()=>{
                 <Form.Item 
                 key="seler-account"
                 name="buyerMfo"
-                initialValue={buyerData.mfo}>
+                >
                 <Input
                   size="large"
                   placeholder="МФО" 
@@ -107,7 +170,7 @@ const BuyerForm = ()=>{
             rules={[{required: true}]}
             key="seler-account"
             name="buyerAddress"
-            initialValue={buyerData.address}>
+            >
               <Input
                 size="large"
                 placeholder="Манзил" />
@@ -120,7 +183,7 @@ const BuyerForm = ()=>{
                 <Form.Item 
               key="seler-account"
               name="buyerDirector"
-              initialValue={buyerData.directorName}>
+              >
                 <Input
                   size="large"
                   placeholder="Директор" />
@@ -133,7 +196,7 @@ const BuyerForm = ()=>{
                 <Form.Item 
               key="seler-account"
               name="buyerAccountant"
-              initialValue={buyerData.accountant}>
+              >
                 <Input
                   size="large"
                   placeholder="Бош хисобчи" />

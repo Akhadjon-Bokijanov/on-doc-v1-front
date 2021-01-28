@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
-import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, Upload } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, Space, Divider } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';
@@ -16,24 +15,28 @@ import moment from 'moment';
 import { 
   FullscreenOutlined, 
   FullscreenExitOutlined, 
+  MinusCircleOutlined, 
+  PlusOutlined
   } from '@ant-design/icons';
-import { convertProductsToGrid, FIRST_FACTURA_GRID_ROW } from '../../../utils/main';
+import { convertProductsToGrid, FIRST_CONTRACT_GRID_ROW } from '../../../utils/main';
+import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
+import TextArea from 'antd/lib/input/TextArea';
 
 const { Option } = Select;
 
-const FacturaCreateForm = ({ token, match })=> {
+const ConractCreateForm = ({ token, match })=> {
 
   const [form] = Form.useForm();
-  const { facturaId } = match.params;
+  const { empowermentId } = match.params;
   const [initialData, setInitialData] = useState({facturaType: 0})
   const [facturaType, setFacturaType] = useState();
 
   useEffect(()=>{
-    if(facturaId){
+    if(empowermentId){
 
       //fetch fatura data
       axios({
-        url: `/api/v1/facturas/${facturaId}`,
+        url: `/api/v1/contracts/${empowermentId}`,
         method: "GET",
       }).then(res=>{
         let data = res.data;
@@ -80,66 +83,50 @@ const FacturaCreateForm = ({ token, match })=> {
 
 
   const [grid, setGrid] = useState([
-    FIRST_FACTURA_GRID_ROW,
+    FIRST_CONTRACT_GRID_ROW,
     [
-      { readOnly: true, value: 1 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { readOnly: true, value: 1 }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 delivery cost
+    { value: '', readOnly: true, }, //8 total
     ], 
     [
-      { readOnly: true, value: 2 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { readOnly: true, value: 2 }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 delivery cost
+    { value: '', readOnly: true, }, //8 total
     ], 
     [
-      { readOnly: true, value: 3 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { readOnly: true, value: 3 }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 delivery cost
+    { value: '', readOnly: true, }, //8 total
     ], 
     [
-      { readOnly: true, value: 4 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { readOnly: true, value: 4 }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 delivery cost
+    { value: '', readOnly: true, }, //8 total
     ], 
   ])
 
@@ -182,19 +169,15 @@ const FacturaCreateForm = ({ token, match })=> {
   const handleAddRow = ()=>{
     
     const sampleRow = [
-      { readOnly: true, value:    grid.length }, //0 ordNo
-      { value: "" }, //1 product name
-      { value: "", dataEditor:  SelectEditor}, //2 catalogCode
-      { value: "" }, //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor }, //4 measure
-      { value: '' }, //5 amount
-      { value: "", }, //6 price
-      { value: '' }, //7 aksiz rate
-      { value: '', readOnly: true }, //8 aksiz amount
-      { value: '' }, //9 delivery cost
-      { value: "" }, //10 VAT rate
-      { value: '', readOnly: true }, //11 VAT amount
-      { value: '', readOnly: true }, //12 total
+      { readOnly: true, value: grid.length }, //0 ordNo
+    { value: "" }, //1 product name
+    { value: "", dataEditor: SelectEditor }, //2 catalogCode
+    { value: "" }, //3 shrix code
+    { value: "", dataEditor: SelectMeasureEditor }, //4 measure
+    { value: '' }, //5 amount
+    { value: "", }, //6 price
+    { value: '' }, //7 delivery cost
+    { value: '', readOnly: true, }, //8 total
     ]
 
     let newgrid = [...grid, sampleRow];
@@ -210,9 +193,9 @@ const FacturaCreateForm = ({ token, match })=> {
 
   const handleSubmit = (values)=>{
     console.log(values)
-    if(facturaId){
+    if(empowermentId){
       axios({
-        url:`/api/v1/facturas/${facturaId}`,
+        url:`/api/v1/empowerments/${empowermentId}`,
         method: 'PATCH',
         data: {factura: values, products: grid}
       }).then(res=>{
@@ -222,7 +205,7 @@ const FacturaCreateForm = ({ token, match })=> {
       })
     } else{
       axios({
-        url:'/api/v1/facturas',
+        url:'/api/v1/empowerments',
         method: 'post',
         data: {factura: values, products: grid}
       }).then(res=>{
@@ -245,7 +228,6 @@ const FacturaCreateForm = ({ token, match })=> {
       response.excel.forEach((element, index)=>{
         element[0].value = index + 1;
         element[0].readOnly = true;
-        element[2].dataEditor = SelectEditor;
         element[4].dataEditor = SelectMeasureEditor;
       })
 
@@ -268,69 +250,49 @@ const FacturaCreateForm = ({ token, match })=> {
       >
 
       <div className="factura-data-sheet-container">
-      <h3>Ҳужжат тури</h3>
-      <Row justify="space-between">
-          <Col md={11}>
-            <Form.Item>
-              <Form.Item 
-                key="dyna-form-facutura-no"
-                name="facturaType"
-                >
-                  <Select
-                    onChange={setFacturaType}
-                    bordered={false}
-                    size="large"
-                    placeholder="Faktura turi">
-                      <Option value={FACTURA_TYPES["STANDARD"]}>Standard</Option>
-                      <Option value={FACTURA_TYPES["QOSHIMCHA"]}>Qo'shimcha</Option>
-                      <Option value={FACTURA_TYPES["HARAJATLARNI QOPLASH"]}>Harajatni qoplash</Option>
-                      <Option value={FACTURA_TYPES["TOLOVSIZ"]}>To'lovsiz</Option>
-                      <Option value={FACTURA_TYPES["TUZATUVCHI"]}>Tuzatuvchi</Option>
-                    </Select>
-              </Form.Item>
-                  <span className="custom-input-label-1">Faktura turi</span>
-            </Form.Item>
-          </Col>
-          <Col md={facturaType===FACTURA_TYPES["QOSHIMCHA"] || facturaType===FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
-            <Form.Item>
-              <Form.Item 
-                key="dyna-form-facutura-no-old"
-                name="oldFacturaId">
-                  <Input
-                    rules={[{required: true}]}
-                    size="large"
-                    placeholder="Eski faktura ID" />
-              </Form.Item>
-                  <span className="custom-input-label-1">Eski faktura ID</span>
-              </Form.Item>
-          </Col>
-      </Row>  
+      <h3>Shartnoma</h3>
+      
       <Row justify="space-between">
             <Col md={11}>
             <Form.Item>
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-facutura-no"
-                name="facturaNo">
+                name="contractName">
                   <Input
                     size="large"
-                    placeholder="Faktura raqami" />
+                    placeholder="Nomi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura raqami</span>
+                  <span className="custom-input-label-1">Nomi</span>
               </Form.Item>
             </Col>
+            
             <Col md={11}>
+              <div style={{display: 'flex', justifyContent: "space-between"}}>
             <Form.Item>
               <Form.Item 
                 key="dyna-form-item-inn-date"
-                name="facturaDate"
+                name="contractDate"
                 rules={[{required: true}]}>
                   <DatePicker                
                     size="large"
-                    placeholder="Faktura sanasi" />
+                    placeholder="Tuzilgan sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura sanasi</span>
+                  <span className="custom-input-label-1">Tuzilgan sanasi</span>
               </Form.Item>
+          
+            <Form.Item>
+              <Form.Item 
+                key="dyna-form-item-inn-date-expire"
+                name="contractExpireDate"
+                rules={[{required: true}]}>
+                  <DatePicker                
+                    size="large"
+                    placeholder="Amal qilish sanasi" />
+              </Form.Item>
+                  <span className="custom-input-label-1">Amal qilish sanasi</span>
+              </Form.Item>
+              </div>
             </Col>
             <Col md={11}>
             <Form.Item>
@@ -350,12 +312,12 @@ const FacturaCreateForm = ({ token, match })=> {
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-item-contract-date"
-                name="contractDate">
-                  <DatePicker
+                name="contractPlace">
+                  <Input
                     size="large"
-                    placeholder="Shartnoma sanasi" />
+                    placeholder="Shartnoma joyi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma sanasi</span>
+                  <span className="custom-input-label-1">Shartnoma joyi</span>
               </Form.Item>
             </Col>
           </Row>
@@ -365,7 +327,7 @@ const FacturaCreateForm = ({ token, match })=> {
         
         <Row justify="space-between">
         <Col md={11}>  
-          <SellerForm form={form} />
+          <SellerForm />
         </Col>
 
         <Col md={11}>
@@ -432,79 +394,56 @@ const FacturaCreateForm = ({ token, match })=> {
         onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
       </div>
           
-        <div className="factura-data-sheet-container">
-
-          <Row justify="space-between">
-            <Col md={5} >
-              <Form.Item>
-                <Form.Item 
-              key="empowerment-no"
-              name="empowermentNo">
-                <Input
-                  size="large"
-                  placeholder="Ишончнома рақами" />
-              </Form.Item>
-                <span className="custom-input-label-1">Ишончнома рақами</span>
-              </Form.Item>
-            </Col>
-            <Col md={5}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account-empowerment-dateof-issue"
-              name="empowermentDateOfIssue">
-                <DatePicker
-                  size="large"
-                  placeholder="Ишончнома санаси" />
-              </Form.Item>
-                <span className="custom-input-label-1">Ишончнома санаси</span>
-              </Form.Item>
-            </Col>
-            <Col md={5}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account-tyin-inn"
-              name="agentTin">
-                <Input
-                  size="large"
-                  placeholder="СТИР" />
-              </Form.Item>
-                <span className="custom-input-label-1">СТИР</span>
-              </Form.Item>
-            </Col>
-            <Col md={5}>
-          
-                <Form.Item>
-                  <Form.Item 
-                key="seler-account-agent-fioe"
-                name="agentFio">
-                  <Input
-                    size="large"
-                    placeholder="Масъул шахснинг Ф.И.Ш.и" />
-                </Form.Item>
-                  <span className="custom-input-label-1">Масъул шахснинг Ф.И.Ш.и</span>
-                </Form.Item>
-            
-            </Col>
-          </Row>
-
-         
-
-<Row justify="space-between">
-  <Col md={24} >
-    <Form.Item>
-      <Form.Item 
-    key="selenote-field"
-    name="notes">
-      <Input
-        size="large"
-        placeholder="Қўшимча майдон" />
-    </Form.Item>
-      <span className="custom-input-label-1">Қўшимча майдон</span>
-    </Form.Item>
-  </Col>
-  
-</Row>
-</div>
+      <div className="factura-data-sheet-container">
+          <h3>Shartnoma shartlari</h3>
+          <Form.List name="parts">
+          {(fields, { add, remove }) => (
+          <>
+            {fields.map(field => (
+              <Row key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                <Col sm={24}>
+                  <Form.Item>
+                    <Form.Item
+                      {...field}
+                      name={[field.name, 'title']}
+                      fieldKey={[field.fieldKey, 'title']}
+                      rules={[{ required: true}]}
+                    >
+                      <Input 
+                        className="border-right-square"
+                        size="large" 
+                        placeholder="Shart sarlavhasi" 
+                        addonAfter={ 
+                          <FontAwesomeIcon 
+                            icon={["far", "times-circle"]}
+                          onClick={() => remove(field.name)} />} />
+                    </Form.Item>
+                    <span className="custom-input-label-1">Shart sarlavhasi</span>
+                  </Form.Item>
+                </Col>
+                <Col sm={24}>
+                  <Form.Item
+                    {...field}
+                    name={[field.name, 'body']}
+                    fieldKey={[field.fieldKey, 'body']}
+                    rules={[{ required: true }]}
+                  >
+                    <TextArea rows={4} placeholder="Sharnoma matni" size="large" />
+                  </Form.Item>
+                </Col>
+              
+                <Divider />
+              </Row>
+            ))}
+            <Form.Item>
+              <Button size="large" type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Maydon qoshish
+              </Button>
+            </Form.Item>
+          </>
+        )}
+          </Form.List>
+      </div>
           <div className="factura-data-sheet-container">
             <Row justify="space-around">
               <Col >
@@ -545,4 +484,4 @@ const mapStateToProps = createStructuredSelector({
   token: selectToken
 })
 
-export default connect(mapStateToProps)(FacturaCreateForm);
+export default connect(mapStateToProps)(ConractCreateForm);

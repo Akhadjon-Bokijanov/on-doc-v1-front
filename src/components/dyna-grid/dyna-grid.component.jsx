@@ -34,8 +34,8 @@ const DynaGrid = ({
     addElementViewPath,     //add element to the core
     deleteRequestPath,    //delete request path for API server 
     approveRequestPath,   //approve request path for API server 
-    addActionPath,        //UI route for the form 
     viewActionPath,       //UI route to view the element
+    editActionPath,
     resultsViewPath,      //view path to see the results
     triggerReload,        //action to triggere when delete, approve is done
     triggerWithPayload,   //Trigger action with payload
@@ -129,9 +129,6 @@ const DynaGrid = ({
     message.error('Action cancelled!');
   };
 
-  const onEditClicked = (record)=>{
-    setItemToBeEdited(record);
-  }
   //#endregion
 
   //#region getColumnSearchProps
@@ -334,8 +331,7 @@ const DynaGrid = ({
           {actions.edit 
           ? <Tooltip placement="left" title="O'zgartirish">
               <Link 
-                onClick={()=>{onEditClicked(record)}} 
-                to={`${match.path}/actions/update`}>
+                to={`${editActionPath}/${record.id}`}>
                   <EditOutlined style={{color: 'blue'}}/>
               </Link>
             </Tooltip>

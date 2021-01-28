@@ -21,7 +21,7 @@ import { convertProductsToGrid, FIRST_FACTURA_GRID_ROW } from '../../../utils/ma
 
 const { Option } = Select;
 
-const FacturaCreateForm = ({ token, match })=> {
+const ActForm = ({ token, match })=> {
 
   const [form] = Form.useForm();
   const { facturaId } = match.params;
@@ -545,4 +545,4 @@ const mapStateToProps = createStructuredSelector({
   token: selectToken
 })
 
-export default connect(mapStateToProps)(FacturaCreateForm);
+export default connect(mapStateToProps)(ActForm);

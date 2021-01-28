@@ -25,12 +25,22 @@ const Header = ({ user, logOut})=>{
                 </span>
                 <div className="heasder-actions-con">
                     {
+                        user ?
+                        <div className="header-action">
+                            <strong>STIR:</strong>  {user.tin}
+                        </div>
+                        : null
+                    }
+                    {
                         user ? 
-                        <Tooltip title="Tizimdan chiqish">
-                            <div style={{cursor: 'pointer'}} onClick={logOut}>
-                                <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />
-                            </div>
-                        </Tooltip>
+                        <div className="header-action">
+                            
+                            <Tooltip title="Tizimdan chiqish">
+                                <div style={{cursor: 'pointer'}} onClick={logOut}>
+                                    <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />
+                                </div>
+                            </Tooltip>
+                        </div>
                         : <Tooltip title="Tizimga kirish">
                         <Link to="/home/login">
                             <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />

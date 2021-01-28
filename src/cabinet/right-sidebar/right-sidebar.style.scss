@@ -17,13 +17,25 @@
                 color: #3a3939;
                 padding: 10px;
                 font-weight: 500;
+                transition: all ease-in-out 0.1s 0.1s;
                 &.active {
                     background-color: #ffffff;
                     border-top-right-radius: 6px;
                     border-bottom-right-radius: 6px;
-                    margin-bottom: 5px;
+                    // margin-bottom: 5px;
+                    position: relative;
                     color: #1890ff;
-                    border-left: #1890ff 3px solid;
+                    //border-left: #1890ff 3px solid;
+                    &::after {
+                        content: '';
+                        background-color: #1890ff;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        width: 3px;
+                        height: 100%;
+                        transition: all ease-in-out 0.1s 0.1s;
+                    }
                 }
                 .action-icon {
                     margin-right: 7px;

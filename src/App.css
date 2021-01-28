@@ -31,6 +31,15 @@ body {
 
 /* Ant design customization */
 
+.ant-input-group-addon {
+    font-size: 30px !important;
+}
+
+.border-right-square input {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
 .ant-input-lg,
 .ant-picker-large,
 .ant-input-password-large,

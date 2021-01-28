@@ -12,7 +12,7 @@
             transition: all .1s ease 100ms;
             span {
                 padding: 8px 15px;
-                background-color: #edecf4;
+                background-color: #f3f7f8;
                 color: #0075ff;
                 border-top-left-radius: 11px;
                 border-bottom-left-radius: 11px;
@@ -20,7 +20,7 @@
                 font-size: 13px;
                 letter-spacing: .8px;
                 &:hover {
-                    color: #ffffff !important;
+                    color: #ffffff;
                     background-color: #0075ff;
                 }
             }
