@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, Space, Divider } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, Space, Divider, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';
@@ -15,41 +15,37 @@ import moment from 'moment';
 import { 
   FullscreenOutlined, 
   FullscreenExitOutlined, 
-  MinusCircleOutlined, 
   PlusOutlined
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_CONTRACT_GRID_ROW } from '../../../utils/main';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import TextArea from 'antd/lib/input/TextArea';
 
-const { Option } = Select;
-
 const ConractCreateForm = ({ token, match })=> {
 
   const [form] = Form.useForm();
-  const { empowermentId } = match.params;
-  const [initialData, setInitialData] = useState({facturaType: 0})
-  const [facturaType, setFacturaType] = useState();
+  const { contractId } = match.params;
+  const [initialData, setInitialData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(()=>{
-    if(empowermentId){
+    if(contractId){
 
       //fetch fatura data
       axios({
-        url: `/api/v1/contracts/${empowermentId}`,
+        url: `/api/v1/contracts/${contractId}`,
         method: "GET",
       }).then(res=>{
         let data = res.data;
         data.contractDate=moment(data.contractDate);
         data.created_at=moment(data.created_at);
-        data.facturaDate=moment(data.facturaDate);
-        data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
-        data.oldFacturaDate=moment(data.oldFacturaDate);
+        data.contractExpireDate=moment(data.contractExpireDate);
         data.updated_at=moment(data.updated_at);
+        data.parts = data.contract_parts
         console.log(data);
   
         setInitialData(res.data);
-        setGrid(convertProductsToGrid(res.data.factura_products));
+        setGrid(convertProductsToGrid(res.data.contract_products, "contract"));
         form.resetFields();
       }).catch(err=>{
         console.log(err);
@@ -150,16 +146,11 @@ const ConractCreateForm = ({ token, match })=> {
         
 
         //Lets calculate
-        let priceamount = parseFloat(grid[row][5].value) * parseFloat(grid[row][6].value);
-        let aksizamount = parseFloat(priceamount * grid[row][7].value / 100);
-        
-        grid[row][8]={ value: parseFloat(aksizamount), readOnly: true };
-        
-        let vatamout = parseFloat(priceamount * parseFloat(grid[row][10].value) / 100);
-        
-        grid[row][11] = { value: vatamout, readOnly: true }
-
-        grid[row][12] = { value: priceamount ? parseFloat(priceamount + aksizamount + vatamout + parseFloat(grid[row][9].value, 2), 2) : 0, readOnly: true}
+        grid[row][8].value = grid[row][5].value && grid[row][6].value
+                      ? parseFloat(grid[row][5].value) * parseFloat(grid[row][6].value) 
+                        + parseFloat(grid[row][7].value ? grid[row][7].value : 0)
+                      : 0
+          
        
      
     });
@@ -193,25 +184,44 @@ const ConractCreateForm = ({ token, match })=> {
 
   const handleSubmit = (values)=>{
     console.log(values)
-    if(empowermentId){
+    setIsLoading(true);
+    let parts = values.parts.map((part, index)=>({...part, ordNo: index+1}));
+    delete values.parts;
+    if(contractId){
       axios({
-        url:`/api/v1/empowerments/${empowermentId}`,
+        url:`/api/v1/contracts/${contractId}`,
         method: 'PATCH',
-        data: {factura: values, products: grid}
+        data: {contract: values, products: grid, parts: parts}
       }).then(res=>{
         console.log(res)
+        if(res.data.ok){
+          message.success("Shartnoma yangilandi!");
+        } else{
+          message.error("Shartnoma yangilashda xatolik!");
+        }
+        setIsLoading(false);
       }).catch(err=>{
+        message.error("Shartnoma yangilashda xatolik!");
         console.log(err)
+        setIsLoading(false);
       })
     } else{
       axios({
-        url:'/api/v1/empowerments',
+        url:'/api/v1/contracts',
         method: 'post',
-        data: {factura: values, products: grid}
+        data: {contract: values, products: grid, parts: parts}
       }).then(res=>{
         console.log(res)
+        if(res.data.ok){
+          message.success("Yangi shartnoma yaratildi!")
+        } else{
+          message.error("Shartnoma yaratish xatolik!");
+        }
+        setIsLoading(false);
       }).catch(err=>{
         console.log(err)
+        message.error("Shartnoma yaratish xatolik!");
+        setIsLoading(false);
       })
     }
     
@@ -327,11 +337,11 @@ const ConractCreateForm = ({ token, match })=> {
         
         <Row justify="space-between">
         <Col md={11}>  
-          <SellerForm />
+          <SellerForm docType="contract" />
         </Col>
 
         <Col md={11}>
-          <BuyerForm form={ form } />
+          <BuyerForm form={ form } docType="contract" />
         </Col>
       </Row>
       </div>
@@ -350,7 +360,7 @@ const ConractCreateForm = ({ token, match })=> {
                   <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
                
               </Upload>
-              <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
+              <a target="_blank" href="../../../excels/on_doc_contract_products.xlsx" download>
                 <Button >
                   Shablon yuklash
                 </Button>
@@ -437,7 +447,7 @@ const ConractCreateForm = ({ token, match })=> {
             ))}
             <Form.Item>
               <Button size="large" type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                Maydon qoshish
+                Maydon qo'shish
               </Button>
             </Form.Item>
           </>
@@ -450,6 +460,7 @@ const ConractCreateForm = ({ token, match })=> {
                 <Button 
                   primary
                   htmlType="submit"
+                  loading={isLoading}
                   className="factra-action-btns save-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons"  />}>
@@ -475,6 +486,12 @@ const ConractCreateForm = ({ token, match })=> {
               </Col>
             </Row>
           </div>
+          <Form.Item
+          name="contractId"
+          key="contractId-1"
+          >
+            <Input />
+          </Form.Item>
       </Form>
     </div>
   );

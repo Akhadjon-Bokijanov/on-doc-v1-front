@@ -15,13 +15,28 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, selectToken } from './redux/user/user.selector';
 import { useEffect } from 'react';
+import { logOut } from './redux/user/user.action';
 //import './e-imzo/e-imzo';
 //import EIMZOClient from './e-imzo/e-imzo-client';
 
-const App = ({ user, token }) => {
+const App = ({ user, token, signOut }) => {
 
     moment.locale('uz-latn');
     axios.defaults.baseURL="http://127.0.0.1:8000";
+
+    axios.interceptors.response.use(res=>{
+
+        console.log(res)
+
+        if(res.status===401){
+            signOut();
+        }
+
+        return res;
+    }, e=>{
+
+        return Promise.reject(e)
+    })
     
     axios.defaults.headers.common['Authorization'] = "Bearer " + token;
     // useEffect(()=>{
@@ -50,4 +65,8 @@ const mapStateToProps = createStructuredSelector({
     token: selectToken
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch =>({
+    signOut: ()=>dispatch(logOut())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

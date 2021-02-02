@@ -8,6 +8,7 @@ const ContractIndexRouter = ({ match }) => {
         <div>
             <Route exact path={`${match.path}`} render={()=><HomePage doc="contract" />} />
             <Route exact path={`${match.path}/create`} component={ConractCreateForm} />
+            <Route exact path={`${match.path}/edit/:contractId`} component={ConractCreateForm} />
         </div>
     )
 }

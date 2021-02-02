@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
 
-const SellerForm = ({ user }) => {
+const SellerForm = ({ user, docType }) => {
 
   const { tin, name, fullName, regCode, mfo, account, address, directorName, accountant } = user;
 
@@ -38,7 +38,10 @@ const SellerForm = ({ user }) => {
           </Form.Item>
               <span className="custom-input-label-1">Сотувчи номи</span>
           </Form.Item>
-          <Form.Item>
+          {
+            docType ==="contract"
+            ? null
+            : <Form.Item>
             <Form.Item 
               key="seler-account-vatreg"
               name="sellerVatRegCode"
@@ -49,6 +52,8 @@ const SellerForm = ({ user }) => {
               </Form.Item>
                 <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
               </Form.Item>
+          }
+          
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item>
@@ -64,7 +69,10 @@ const SellerForm = ({ user }) => {
               </Form.Item>
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {
+                docType ==="contract"
+                ? null
+                : <Form.Item>
                 <Form.Item 
               key="seler-account"
               name="sellerMfo"
@@ -75,6 +83,8 @@ const SellerForm = ({ user }) => {
               </Form.Item>
                 <span className="custom-input-label-1">МФО</span>
               </Form.Item>
+              }
+              
             </Col>
           </Row>
           <Form.Item>
@@ -104,7 +114,10 @@ const SellerForm = ({ user }) => {
               </Form.Item>
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {
+                docType ==="contract"
+                ? null
+                : <Form.Item>
                 <Form.Item 
               key="seler-account"
               name="sellerAccountant"
@@ -115,6 +128,7 @@ const SellerForm = ({ user }) => {
               </Form.Item>
                 <span className="custom-input-label-1">Бош хисобчи</span>
               </Form.Item>
+              }
             </Col>
           </Row>
         </div>

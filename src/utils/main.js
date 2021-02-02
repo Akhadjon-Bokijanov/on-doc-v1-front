@@ -22,6 +22,16 @@ export const FIRST_FACTURA_GRID_ROW = [
     { value: "Total*", readOnly: true, width: 150 },
 ];
 
+export const FIRST_ACT_GRID_ROW = [
+    { readOnly: true, value: '', width: 50 },
+    { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
+    { value: 'ўлчов бирлиги.*', readOnly: true, width: 100 },
+    { value: "миқдори", readOnly: true, width: 100 },
+    { value: "Нарҳ*", readOnly: true, width: 100 },
+    { value: "етказиб бериш нарҳи*", readOnly: true, width: 100 },
+    { value: "Total*", readOnly: true, width: 150 },
+];
+
 export const FIRST_CONTRACT_GRID_ROW = [
     { readOnly: true, value: '', width: 50 },
     { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
@@ -69,26 +79,63 @@ export const SAMPLE_CONTRACT_GRID_ROW = [
     { value: '', readOnly: true, }, //8 total
 ]
 
-export const convertProductsToGrid = (products) => {
-    let gridProducts = products.map(product => {
-        return [
-            { readOnly: true, value: product["ordNo"] }, //0 ordNo
-            { value: product["name"] }, //1 product name
-            { value: product["catalogCode"], dataEditor: SelectEditor }, //2 catalogCode
-            { value: product["barCode"] }, //3 shrix code
-            { value: product["measureId"], dataEditor: SelectMeasureEditor }, //4 measure
-            { value: product["count"] }, //5 amount
-            { value: product["baseSumma"], }, //6 price
-            { value: product["exciseRate"] }, //7 aksiz rate
-            { value: product["exciseSum"], readOnly: true }, //8 aksiz amount
-            { value: product["deliverySum"] }, //9 delivery cost
-            { value: product["vatRate"] }, //10 VAT rate
-            { value: product["vatRate"] * product["baseSumma"], readOnly: true }, //11 VAT amount
-            { value: product["summa"], readOnly: true, }, //12 total
-        ]
-    })
+export const convertProductsToGrid = (products, doc = "factura") => {
 
-    gridProducts.unshift(FIRST_FACTURA_GRID_ROW);
+    let gridProducts;
+
+    switch (doc) {
+        case "contract":
+            {
+
+                gridProducts = products.map(product => {
+                    return [
+                        { readOnly: true, value: product["ordNo"] }, //0 ordNo
+                        { value: product["name"] }, //1 product name
+                        { value: product["catalogCode"], dataEditor: SelectEditor }, //2 catalogCode
+                        { value: product["barCode"] }, //3 shrix code
+                        { value: product["measureId"], dataEditor: SelectMeasureEditor },
+                        { value: product["count"] }, //5 amount
+                        { value: product["price"], }, //6 price
+                        { value: product["deliverySum"] }, //9 delivery cost
+                        {
+                            value: product["count"] * product["price"] + parseFloat(product["deliverySum"]),
+                            readOnly: true
+                        }
+                    ]
+                })
+                gridProducts.unshift(FIRST_CONTRACT_GRID_ROW);
+            }
+            break;
+
+
+
+        default:
+            {
+                gridProducts = products.map(product => {
+                    return [
+                        { readOnly: true, value: product["ordNo"] }, //0 ordNo
+                        { value: product["name"] }, //1 product name
+                        { value: product["catalogCode"], dataEditor: SelectEditor }, //2 catalogCode
+                        { value: product["barCode"] }, //3 shrix code
+                        { value: product["measureId"], dataEditor: SelectMeasureEditor }, //4 measure
+                        { value: product["count"] }, //5 amount
+                        { value: product["baseSumma"], }, //6 price
+                        { value: product["exciseRate"] }, //7 aksiz rate
+                        { value: product["exciseSum"], readOnly: true }, //8 aksiz amount
+                        { value: product["deliverySum"] }, //9 delivery cost
+                        { value: product["vatRate"] }, //10 VAT rate
+                        { value: product["vatRate"] * product["baseSumma"], readOnly: true }, //11 VAT amount
+                        { value: product["summa"], readOnly: true, }, //12 total
+                    ]
+                })
+                gridProducts.unshift(FIRST_FACTURA_GRID_ROW);
+            }
+
+    }
+
+
+
+
     return gridProducts;
 }
 

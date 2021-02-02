@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const { Option } = Select;
 
-const BuyerForm = ({ form })=>{
+const BuyerForm = ({ form, docType })=>{
 
     const [isFacturaSingleSided, setIsFacturaSingleSided] = useState(false); 
 
@@ -23,7 +23,7 @@ const BuyerForm = ({ form })=>{
                     method: "GET",
                 }).then(res=>{
                     //setBuyerData(res.data)
-                    const { tin, accountant, account, address, phone, name, fullName, mfo, directorName } = res.data;
+                    const { tin, accountant, account, address, phone, name, fullName, mfo, directorName, regCode } = res.data;
                     let data = {
                       buyerTin: tin,
                       buyerAccountant: accountant,
@@ -32,7 +32,8 @@ const BuyerForm = ({ form })=>{
                       buyerPhone: phone,
                       buyerName: name ?? fullName,
                       buyerMfo: mfo,
-                      buyerDirector: directorName
+                      buyerDirector: directorName,
+                      buyerVatRegCode: regCode
                     }
                     form.setFieldsValue(data)
                 }).catch(err=>{
@@ -46,7 +47,8 @@ const BuyerForm = ({ form })=>{
                 buyerPhone: null,
                 buyerName: null,
                 buyerMfo: null,
-                buyerDirector: null
+                buyerDirector: null,
+                buyerVatRegCode: null
               })
             }
         }else{
@@ -59,7 +61,7 @@ const BuyerForm = ({ form })=>{
     <div>
         <h3>Контрагент маълумотлари</h3>
         <Row justify="space-between">
-            <Col md={11}>
+            <Col md={docType!=="factura" ? 24 : 11}>
             <Form.Item>
               <Form.Item 
                 key="dyna-form-item-inn-buyer"
@@ -74,7 +76,7 @@ const BuyerForm = ({ form })=>{
                   <span className="custom-input-label-1">INN</span>
               </Form.Item>
               </Col>
-              <Col md={11}>
+              <Col md={docType!=="factura" ? 0 : 11}>
                 <h4>Bir tomolaman fakturami?</h4>
                 <Switch
                   onChange={handleSingleSided}
@@ -123,19 +125,23 @@ const BuyerForm = ({ form })=>{
           </Form.Item>
               <span className="custom-input-label-1">Hоми</span>
           </Form.Item>
-         
-          <Form.Item>
-            <Form.Item 
-              key="seler-account-vatreg"
-              name="buyerVatRegCode"
-              >
-                <Input
-                  size="large"
-                  placeholder="ҚҚС тўловчисининг регистрация рақами"
-                   />
-              </Form.Item>
-                <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
-              </Form.Item>
+         {
+           docType==="contract" 
+           ? null
+           : <Form.Item>
+           <Form.Item 
+             key="seler-account-vatreg"
+             name="buyerVatRegCode"
+             >
+               <Input
+                 size="large"
+                 placeholder="ҚҚС тўловчисининг регистрация рақами"
+                  />
+             </Form.Item>
+               <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
+             </Form.Item>
+         }
+          
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item>
@@ -151,7 +157,10 @@ const BuyerForm = ({ form })=>{
               </Form.Item>
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {
+                docType === "contract"
+                ? null
+                : <Form.Item>
                 <Form.Item 
                 key="seler-account"
                 name="buyerMfo"
@@ -163,6 +172,7 @@ const BuyerForm = ({ form })=>{
               </Form.Item>
                 <span className="custom-input-label-1">МФО</span>
               </Form.Item>
+              }
             </Col>
           </Row>
           <Form.Item>
@@ -192,7 +202,10 @@ const BuyerForm = ({ form })=>{
               </Form.Item>
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {
+                docType ==="contract"
+                ? null
+                : <Form.Item>
                 <Form.Item 
               key="seler-account"
               name="buyerAccountant"
@@ -203,6 +216,8 @@ const BuyerForm = ({ form })=>{
               </Form.Item>
                 <span className="custom-input-label-1">Бош хисобчи</span>
               </Form.Item>
+              }
+              
             </Col>
         </Row>
             </div>

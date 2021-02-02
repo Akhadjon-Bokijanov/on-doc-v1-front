@@ -17,7 +17,7 @@ import {
   FullscreenOutlined, 
   FullscreenExitOutlined, 
   } from '@ant-design/icons';
-import { convertProductsToGrid, FIRST_FACTURA_GRID_ROW } from '../../../utils/main';
+import { convertProductsToGrid, FIRST_ACT_GRID_ROW } from '../../../utils/main';
 
 const { Option } = Select;
 
@@ -25,7 +25,7 @@ const ActForm = ({ token, match })=> {
 
   const [form] = Form.useForm();
   const { facturaId } = match.params;
-  const [initialData, setInitialData] = useState({facturaType: 0})
+  const [initialData, setInitialData] = useState()
   const [facturaType, setFacturaType] = useState();
 
   useEffect(()=>{
@@ -33,7 +33,7 @@ const ActForm = ({ token, match })=> {
 
       //fetch fatura data
       axios({
-        url: `/api/v1/facturas/${facturaId}`,
+        url: `/api/v1/acts/${facturaId}`,
         method: "GET",
       }).then(res=>{
         let data = res.data;
@@ -80,66 +80,42 @@ const ActForm = ({ token, match })=> {
 
 
   const [grid, setGrid] = useState([
-    FIRST_FACTURA_GRID_ROW,
+    FIRST_ACT_GRID_ROW,
     [
       { readOnly: true, value: 1 },                           //0 ordNo
       { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: '' },                                          //3 amount
+      { value: "", },                                         //4 price
+      { value: '' },                                          //5 delivery cost
+      { value: '', readOnly: true,}                           //6 total
     ], 
     [
       { readOnly: true, value: 2 },                           //0 ordNo
       { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
-    ], 
+      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: '' },                                          //3 amount
+      { value: "", },                                         //4 price
+      { value: '' },                                          //5 delivery cost
+      { value: '', readOnly: true,}                           //6 total
+    ],  
     [
       { readOnly: true, value: 3 },                           //0 ordNo
       { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: '' },                                          //3 amount
+      { value: "", },                                         //4 price
+      { value: '' },                                          //5 delivery cost
+      { value: '', readOnly: true,}                           //6 total
     ], 
     [
       { readOnly: true, value: 4 },                           //0 ordNo
       { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectEditor},                //2 catalogCode
-      { value: "" },                                          //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-      { value: "", },                                         //6 price
-      { value: '' },                                          //7 aksiz rate
-      { value: '', readOnly: true },                          //8 aksiz amount
-      { value: '' },                                          //9 delivery cost
-      { value: "" },                                          //10 VAT rate
-      { value: '', readOnly: true },                          //11 VAT amount
-      { value: '', readOnly: true,},                          //12 total
+      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: '' },                                          //3 amount
+      { value: "", },                                         //4 price
+      { value: '' },                                          //5 delivery cost
+      { value: '', readOnly: true,}                           //6 total
     ], 
   ])
 
@@ -182,19 +158,15 @@ const ActForm = ({ token, match })=> {
   const handleAddRow = ()=>{
     
     const sampleRow = [
-      { readOnly: true, value:    grid.length }, //0 ordNo
-      { value: "" }, //1 product name
-      { value: "", dataEditor:  SelectEditor}, //2 catalogCode
-      { value: "" }, //3 shrix code
-      { value: "", dataEditor:  SelectMeasureEditor }, //4 measure
-      { value: '' }, //5 amount
-      { value: "", }, //6 price
-      { value: '' }, //7 aksiz rate
-      { value: '', readOnly: true }, //8 aksiz amount
-      { value: '' }, //9 delivery cost
-      { value: "" }, //10 VAT rate
-      { value: '', readOnly: true }, //11 VAT amount
-      { value: '', readOnly: true }, //12 total
+      [
+        { readOnly: true, value: grid.length },                 //0 ordNo
+        { value: "" },                                          //1 product name
+        { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+        { value: '' },                                          //3 amount
+        { value: "", },                                         //4 price
+        { value: '' },                                          //5 delivery cost
+        { value: '', readOnly: true,}                           //6 total
+      ], 
     ]
 
     let newgrid = [...grid, sampleRow];
@@ -268,68 +240,33 @@ const ActForm = ({ token, match })=> {
       >
 
       <div className="factura-data-sheet-container">
-      <h3>Ҳужжат тури</h3>
-      <Row justify="space-between">
-          <Col md={11}>
-            <Form.Item>
-              <Form.Item 
-                key="dyna-form-facutura-no"
-                name="facturaType"
-                >
-                  <Select
-                    onChange={setFacturaType}
-                    bordered={false}
-                    size="large"
-                    placeholder="Faktura turi">
-                      <Option value={FACTURA_TYPES["STANDARD"]}>Standard</Option>
-                      <Option value={FACTURA_TYPES["QOSHIMCHA"]}>Qo'shimcha</Option>
-                      <Option value={FACTURA_TYPES["HARAJATLARNI QOPLASH"]}>Harajatni qoplash</Option>
-                      <Option value={FACTURA_TYPES["TOLOVSIZ"]}>To'lovsiz</Option>
-                      <Option value={FACTURA_TYPES["TUZATUVCHI"]}>Tuzatuvchi</Option>
-                    </Select>
-              </Form.Item>
-                  <span className="custom-input-label-1">Faktura turi</span>
-            </Form.Item>
-          </Col>
-          <Col md={facturaType===FACTURA_TYPES["QOSHIMCHA"] || facturaType===FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
-            <Form.Item>
-              <Form.Item 
-                key="dyna-form-facutura-no-old"
-                name="oldFacturaId">
-                  <Input
-                    rules={[{required: true}]}
-                    size="large"
-                    placeholder="Eski faktura ID" />
-              </Form.Item>
-                  <span className="custom-input-label-1">Eski faktura ID</span>
-              </Form.Item>
-          </Col>
-      </Row>  
+      <h3>Akt yaratish</h3>
+       
       <Row justify="space-between">
             <Col md={11}>
             <Form.Item>
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-facutura-no"
-                name="facturaNo">
+                name="actNo">
                   <Input
                     size="large"
-                    placeholder="Faktura raqami" />
+                    placeholder="Akt raqami" />
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura raqami</span>
+                  <span className="custom-input-label-1">Akt raqami</span>
               </Form.Item>
             </Col>
             <Col md={11}>
             <Form.Item>
               <Form.Item 
                 key="dyna-form-item-inn-date"
-                name="facturaDate"
+                name="actDate"
                 rules={[{required: true}]}>
                   <DatePicker                
                     size="large"
-                    placeholder="Faktura sanasi" />
+                    placeholder="Akt sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura sanasi</span>
+                  <span className="custom-input-label-1">Akt sanasi</span>
               </Form.Item>
             </Col>
             <Col md={11}>
@@ -433,61 +370,6 @@ const ActForm = ({ token, match })=> {
       </div>
           
         <div className="factura-data-sheet-container">
-
-          <Row justify="space-between">
-            <Col md={5} >
-              <Form.Item>
-                <Form.Item 
-              key="empowerment-no"
-              name="empowermentNo">
-                <Input
-                  size="large"
-                  placeholder="Ишончнома рақами" />
-              </Form.Item>
-                <span className="custom-input-label-1">Ишончнома рақами</span>
-              </Form.Item>
-            </Col>
-            <Col md={5}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account-empowerment-dateof-issue"
-              name="empowermentDateOfIssue">
-                <DatePicker
-                  size="large"
-                  placeholder="Ишончнома санаси" />
-              </Form.Item>
-                <span className="custom-input-label-1">Ишончнома санаси</span>
-              </Form.Item>
-            </Col>
-            <Col md={5}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account-tyin-inn"
-              name="agentTin">
-                <Input
-                  size="large"
-                  placeholder="СТИР" />
-              </Form.Item>
-                <span className="custom-input-label-1">СТИР</span>
-              </Form.Item>
-            </Col>
-            <Col md={5}>
-          
-                <Form.Item>
-                  <Form.Item 
-                key="seler-account-agent-fioe"
-                name="agentFio">
-                  <Input
-                    size="large"
-                    placeholder="Масъул шахснинг Ф.И.Ш.и" />
-                </Form.Item>
-                  <span className="custom-input-label-1">Масъул шахснинг Ф.И.Ш.и</span>
-                </Form.Item>
-            
-            </Col>
-          </Row>
-
-         
 
 <Row justify="space-between">
   <Col md={24} >

@@ -3,7 +3,7 @@ import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, Upload } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';
@@ -27,6 +27,7 @@ const FacturaCreateForm = ({ token, match })=> {
   const { facturaId } = match.params;
   const [initialData, setInitialData] = useState({facturaType: 0})
   const [facturaType, setFacturaType] = useState();
+  const [saveLoading, setSaveLoading] = useState(false);
 
   useEffect(()=>{
     if(facturaId){
@@ -209,6 +210,7 @@ const FacturaCreateForm = ({ token, match })=> {
   //#region form methods
 
   const handleSubmit = (values)=>{
+    setSaveLoading(true);
     console.log(values)
     if(facturaId){
       axios({
@@ -216,9 +218,13 @@ const FacturaCreateForm = ({ token, match })=> {
         method: 'PATCH',
         data: {factura: values, products: grid}
       }).then(res=>{
+        message.success("Faktura o'zgartirildi!")
         console.log(res)
+        setSaveLoading(false);
       }).catch(err=>{
+        message.error("Faktura o'zgartirishda xatolik!");
         console.log(err)
+        setSaveLoading(false);
       })
     } else{
       axios({
@@ -226,9 +232,13 @@ const FacturaCreateForm = ({ token, match })=> {
         method: 'post',
         data: {factura: values, products: grid}
       }).then(res=>{
+        message.success("Faktura yaratili!")
         console.log(res)
+        setSaveLoading(false);
       }).catch(err=>{
         console.log(err)
+        message.error("Faktura yaratishda xatolik!");
+        setSaveLoading(false);
       })
     }
     
@@ -509,6 +519,7 @@ const FacturaCreateForm = ({ token, match })=> {
             <Row justify="space-around">
               <Col >
                 <Button 
+                  loading={saveLoading}
                   primary
                   htmlType="submit"
                   className="factra-action-btns save-btn" 
@@ -536,6 +547,25 @@ const FacturaCreateForm = ({ token, match })=> {
               </Col>
             </Row>
           </div>
+          <Form.Item
+      key="hidden-factura-id"
+      name="facturaId"
+      >
+        <Input 
+        //type="hidden"
+        />
+
+      </Form.Item>
+      <Form.Item
+      key="hidden-factura-product-id"
+      name="facturaProductId"
+      >
+        <Input 
+        //type="hidden"
+        />
+
+      </Form.Item>
+
       </Form>
     </div>
   );

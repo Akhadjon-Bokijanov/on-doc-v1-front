@@ -52,7 +52,7 @@ export const get_home_config = doc => {
                         },
                         {
                             title: "Holati",
-                            dataIndex: 'currentStateid',
+                            dataIndex: 'status',
                             isFilterable: true,
                             filters: [1, 2, 3, 4, 5]
                         },
@@ -111,7 +111,7 @@ export const get_home_config = doc => {
                         },
                         {
                             title: "Holati",
-                            dataIndex: 'currentStateid',
+                            dataIndex: 'status',
                             isFilterable: true,
                             filters: [1, 2, 3, 4, 5]
                         },
@@ -175,7 +175,7 @@ export const get_home_config = doc => {
                         },
                         {
                             title: "Holati",
-                            dataIndex: 'currentStateid',
+                            dataIndex: 'status',
                             isFilterable: true,
                             filters: [1, 2, 3, 4, 5]
                         },
@@ -238,7 +238,7 @@ export const get_home_config = doc => {
                         },
                         {
                             title: "Holati",
-                            dataIndex: 'currentStateid',
+                            dataIndex: 'status',
                             isFilterable: true,
                             filters: [1, 2, 3, 4, 5]
                         },
