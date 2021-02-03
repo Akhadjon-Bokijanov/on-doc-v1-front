@@ -3,14 +3,14 @@ import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, Upload } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
-import { selectToken } from '../../../redux/user/user.selector';
+import { selectCurrentUser, selectToken } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import { 
@@ -18,36 +18,44 @@ import {
   FullscreenExitOutlined, 
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_ACT_GRID_ROW } from '../../../utils/main';
+import TextArea from 'antd/lib/input/TextArea';
 
-const { Option } = Select;
 
-const ActForm = ({ token, match })=> {
+const setActClient = (seller, client) => {
+
+
+  return `Биз қуйида имзо чекувчилар, "${seller ?? "___________"}" бир томондан,бундан кейин Пудратчи деб номланади ва "${client ?? '__________'}" бошқа томондан, бундан кейин Буюртмачи деб номланади, иш Буюртмачининг талабларига мувофиқ тўлиқ бажарилганлиги тўғрисида акт туздик.`;
+
+  
+}
+
+const ActForm = ({ token, match, user })=> {
 
   const [form] = Form.useForm();
-  const { facturaId } = match.params;
-  const [initialData, setInitialData] = useState()
-  const [facturaType, setFacturaType] = useState();
+  const { actId } = match.params;
+  const [initialData, setInitialData] = useState({actText: setActClient(user.name)})
+  const [isLoading, setIsloading] = useState(false);
+
+  
 
   useEffect(()=>{
-    if(facturaId){
+    if(actId){
 
       //fetch fatura data
       axios({
-        url: `/api/v1/acts/${facturaId}`,
+        url: `/api/v1/acts/${actId}`,
         method: "GET",
       }).then(res=>{
         let data = res.data;
         data.contractDate=moment(data.contractDate);
         data.created_at=moment(data.created_at);
-        data.facturaDate=moment(data.facturaDate);
-        data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
-        data.oldFacturaDate=moment(data.oldFacturaDate);
+        data.actDate=moment(data.actDate);
         data.updated_at=moment(data.updated_at);
         console.log(data);
   
         setInitialData(res.data);
-        setGrid(convertProductsToGrid(res.data.factura_products));
         form.resetFields();
+        setGrid(convertProductsToGrid(res.data.act_products, 'act'));
       }).catch(err=>{
         console.log(err);
       })
@@ -68,14 +76,6 @@ const ActForm = ({ token, match })=> {
     
   };
 
-  const FACTURA_TYPES = {
-    "STANDARD": 0,
-    "QOSHIMCHA": 1,
-    "HARAJATLARNI QOPLASH": 2,
-    "TOLOVSIZ": 3,
-    "TUZATUVCHI": 4
-  }
-
   const [fullView, toglleFullView] = useState(false)
 
 
@@ -87,7 +87,6 @@ const ActForm = ({ token, match })=> {
       { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
       { value: '' },                                          //3 amount
       { value: "", },                                         //4 price
-      { value: '' },                                          //5 delivery cost
       { value: '', readOnly: true,}                           //6 total
     ], 
     [
@@ -96,7 +95,6 @@ const ActForm = ({ token, match })=> {
       { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
       { value: '' },                                          //3 amount
       { value: "", },                                         //4 price
-      { value: '' },                                          //5 delivery cost
       { value: '', readOnly: true,}                           //6 total
     ],  
     [
@@ -105,7 +103,6 @@ const ActForm = ({ token, match })=> {
       { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
       { value: '' },                                          //3 amount
       { value: "", },                                         //4 price
-      { value: '' },                                          //5 delivery cost
       { value: '', readOnly: true,}                           //6 total
     ], 
     [
@@ -114,7 +111,6 @@ const ActForm = ({ token, match })=> {
       { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
       { value: '' },                                          //3 amount
       { value: "", },                                         //4 price
-      { value: '' },                                          //5 delivery cost
       { value: '', readOnly: true,}                           //6 total
     ], 
   ])
@@ -124,14 +120,12 @@ const ActForm = ({ token, match })=> {
   //#region data-sheet methods
   const handleRemoveRow = (rowId)=>{
     console.log(rowId)
-
-    console.log(grid)
     grid.splice(rowId, 1)
-    console.log(grid)
     setGrid([...grid])
   }
 
   const valueRenderer = cell => cell.value;
+  
   const onCellsChanged = changes => {
     changes.forEach(({ cell, row, col, value }, index) => {
         //this sets changed values
@@ -139,17 +133,7 @@ const ActForm = ({ token, match })=> {
         
 
         //Lets calculate
-        let priceamount = parseFloat(grid[row][5].value) * parseFloat(grid[row][6].value);
-        let aksizamount = parseFloat(priceamount * grid[row][7].value / 100);
-        
-        grid[row][8]={ value: parseFloat(aksizamount), readOnly: true };
-        
-        let vatamout = parseFloat(priceamount * parseFloat(grid[row][10].value) / 100);
-        
-        grid[row][11] = { value: vatamout, readOnly: true }
-
-        grid[row][12] = { value: priceamount ? parseFloat(priceamount + aksizamount + vatamout + parseFloat(grid[row][9].value, 2), 2) : 0, readOnly: true}
-       
+        grid[row][5] = { ...grid[row][5], value: grid[row][3].value && grid[row][4].value ? grid[row][3].value * grid[row][4].value : 0};
      
     });
      setGrid([...grid]);
@@ -158,16 +142,14 @@ const ActForm = ({ token, match })=> {
   const handleAddRow = ()=>{
     
     const sampleRow = [
-      [
         { readOnly: true, value: grid.length },                 //0 ordNo
         { value: "" },                                          //1 product name
         { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
         { value: '' },                                          //3 amount
         { value: "", },                                         //4 price
-        { value: '' },                                          //5 delivery cost
-        { value: '', readOnly: true,}                           //6 total
-      ], 
-    ]
+        { value: '', readOnly: true,}                           //5 total
+      ];
+    
 
     let newgrid = [...grid, sampleRow];
 
@@ -181,25 +163,34 @@ const ActForm = ({ token, match })=> {
   //#region form methods
 
   const handleSubmit = (values)=>{
+    setIsloading(true);
     console.log(values)
-    if(facturaId){
+    if(actId){
       axios({
-        url:`/api/v1/facturas/${facturaId}`,
+        url:`/api/v1/acts/${actId}`,
         method: 'PATCH',
-        data: {factura: values, products: grid}
+        data: {act: values, products: grid}
       }).then(res=>{
+        setIsloading(false);
+        message.success("Akt yangilandi!");
         console.log(res)
       }).catch(err=>{
+        setIsloading(false)
+        message.error("Akt yangilashda xatolik!");
         console.log(err)
       })
     } else{
       axios({
-        url:'/api/v1/facturas',
+        url:'/api/v1/acts',
         method: 'post',
-        data: {factura: values, products: grid}
+        data: {act: values, products: grid}
       }).then(res=>{
+        setIsloading(false)
+        message.success("Akt yaratildi!");
         console.log(res)
       }).catch(err=>{
+        setIsloading(false)
+        message.error("Akt yaratishda xatolik!");
         console.log(err)
       })
     }
@@ -302,14 +293,22 @@ const ActForm = ({ token, match })=> {
         
         <Row justify="space-between">
         <Col md={11}>  
-          <SellerForm form={form} />
+          <SellerForm form={form} docType="act" />
         </Col>
 
         <Col md={11}>
-          <BuyerForm form={ form } />
+          <BuyerForm form={ form } docType="act" />
         </Col>
       </Row>
       </div>
+      
+      <div className="factura-data-sheet-container">
+            <h3>Akt mazmuni</h3>
+              <Form.Item name="actText">
+                <TextArea size="large" rows={4} />
+              </Form.Item>
+          </div>
+
       <div className={`factura-data-sheet-container ${fullView ? 'grid-full-view' : null}`}>
         <div style={{marginBottom: 10, display: 'flex', justifyContent:'space-between'}}>
           <div style={{display: 'flex'}}>
@@ -369,6 +368,8 @@ const ActForm = ({ token, match })=> {
         onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
       </div>
           
+          
+
         <div className="factura-data-sheet-container">
 
 <Row justify="space-between">
@@ -418,13 +419,22 @@ const ActForm = ({ token, match })=> {
               </Col>
             </Row>
           </div>
+
+          <Form.Item
+          name="actId"
+          key="act-id"
+          >
+            <Input />
+          </Form.Item>
+
       </Form>
     </div>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
-  token: selectToken
+  token: selectToken,
+  user: selectCurrentUser
 })
 
 export default connect(mapStateToProps)(ActForm);

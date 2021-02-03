@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Input, Form, Row, Col, message, Switch, Select } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
@@ -25,7 +25,6 @@ const BuyerForm = ({ form, docType })=>{
                     //setBuyerData(res.data)
                     const { tin, accountant, account, address, phone, name, fullName, mfo, directorName, regCode } = res.data;
                     let data = {
-                      buyerTin: tin,
                       buyerAccountant: accountant,
                       buyerAccount: account,
                       buyerAddress: address,
@@ -125,8 +124,11 @@ const BuyerForm = ({ form, docType })=>{
           </Form.Item>
               <span className="custom-input-label-1">Hоми</span>
           </Form.Item>
+          {
+            docType !=="act" ?
+            <Fragment>
          {
-           docType==="contract" 
+           docType==="contract" || docType ==="empowerment"
            ? null
            : <Form.Item>
            <Form.Item 
@@ -187,6 +189,8 @@ const BuyerForm = ({ form, docType })=>{
           </Form.Item>
               <span className="custom-input-label-1">Манзил</span>
           </Form.Item>
+          
+          
           <Row justify="space-between">
             <Col md={11} >
               <Form.Item>
@@ -220,6 +224,9 @@ const BuyerForm = ({ form, docType })=>{
               
             </Col>
         </Row>
+        </Fragment>
+          :null
+          }
             </div>
             :null
         }

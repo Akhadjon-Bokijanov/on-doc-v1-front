@@ -379,7 +379,7 @@ const FacturaCreateForm = ({ token, match })=> {
         </Col>
 
         <Col md={11}>
-          <BuyerForm form={ form } />
+          <BuyerForm form={ form } docType="factura" />
         </Col>
       </Row>
       </div>

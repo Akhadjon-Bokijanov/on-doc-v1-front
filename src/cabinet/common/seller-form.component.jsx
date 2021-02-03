@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Input, Form, Row, Col } from 'antd';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
@@ -39,7 +39,10 @@ const SellerForm = ({ user, docType }) => {
               <span className="custom-input-label-1">Сотувчи номи</span>
           </Form.Item>
           {
-            docType ==="contract"
+            docType !== "act" ?
+            <Fragment>
+          {
+            docType ==="contract" || docType ==="empowerment" 
             ? null
             : <Form.Item>
             <Form.Item 
@@ -131,6 +134,9 @@ const SellerForm = ({ user, docType }) => {
               }
             </Col>
           </Row>
+          </Fragment>
+          :null
+          }
         </div>
     )
 }

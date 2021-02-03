@@ -54,7 +54,15 @@ export const get_home_config = doc => {
                             title: "Holati",
                             dataIndex: 'status',
                             isFilterable: true,
-                            filters: [1, 2, 3, 4, 5]
+                            filters: [
+                                { value: 1, text: "1-Saqlangan" },
+                                { value: 2, text: "2-Imzo kutilmoqda" },
+                                { value: 3, text: "3-Jo'natilgan" },
+                                { value: 4, text: "4-Xatolik yuzbergan" },
+                                { value: 5, text: "5-Qaytarib yuborilgan" },
+                                { value: 6, text: "6-Qabul qilingan" },
+                                { value: 7, text: "7-Muaffaqiyatli" }
+                            ]
                         },
                         {
                             title: 'Yaratilgan sanasi',
@@ -113,7 +121,15 @@ export const get_home_config = doc => {
                             title: "Holati",
                             dataIndex: 'status',
                             isFilterable: true,
-                            filters: [1, 2, 3, 4, 5]
+                            filters: [
+                                { value: 1, text: "1-Saqlangan" },
+                                { value: 2, text: "2-Imzo kutilmoqda" },
+                                { value: 3, text: "3-Jo'natilgan" },
+                                { value: 4, text: "4-Xatolik yuzbergan" },
+                                { value: 5, text: "5-Qaytarib yuborilgan" },
+                                { value: 6, text: "6-Qabul qilingan" },
+                                { value: 7, text: "7-Muaffaqiyatli" }
+                            ]
                         },
                         {
                             title: 'Yaratilgan sanasi',
@@ -142,7 +158,7 @@ export const get_home_config = doc => {
                     },
                     allColumns: [{
                             title: "Ishonchnoma №",
-                            dataIndex: 'empoermentNo',
+                            dataIndex: 'empowermentNo',
                             isSearchable: true,
                             width: 100
                         },
@@ -177,7 +193,15 @@ export const get_home_config = doc => {
                             title: "Holati",
                             dataIndex: 'status',
                             isFilterable: true,
-                            filters: [1, 2, 3, 4, 5]
+                            filters: [
+                                { value: 1, text: "1-Saqlangan" },
+                                { value: 2, text: "2-Imzo kutilmoqda" },
+                                { value: 3, text: "3-Jo'natilgan" },
+                                { value: 4, text: "4-Xatolik yuzbergan" },
+                                { value: 5, text: "5-Qaytarib yuborilgan" },
+                                { value: 6, text: "6-Qabul qilingan" },
+                                { value: 7, text: "7-Muaffaqiyatli" }
+                            ]
                         },
                         {
                             title: 'Yaratilgan sanasi',
@@ -240,7 +264,15 @@ export const get_home_config = doc => {
                             title: "Holati",
                             dataIndex: 'status',
                             isFilterable: true,
-                            filters: [1, 2, 3, 4, 5]
+                            filters: [
+                                { value: 1, text: "1-Saqlangan" },
+                                { value: 2, text: "2-Imzo kutilmoqda" },
+                                { value: 3, text: "3-Jo'natilgan" },
+                                { value: 4, text: "4-Xatolik yuzbergan" },
+                                { value: 5, text: "5-Qaytarib yuborilgan" },
+                                { value: 6, text: "6-Qabul qilingan" },
+                                { value: 7, text: "7-Muaffaqiyatli" }
+                            ]
                         },
                         {
                             title: 'Yaratilgan sanasi',

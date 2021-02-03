@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'react-datasheet/lib/react-datasheet.css';
 import Datasheet from 'react-datasheet';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
-import { Button, Input, Form, Row, Col, DatePicker, Select, Upload } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './create.style.scss';
 import axios from 'axios';
@@ -18,14 +18,13 @@ import {
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_EMPOWERMENT_GRID_ROW } from '../../../utils/main';
 
-const { Option } = Select;
-
 const EmpowermentForm = ({ token, match })=> {
 
   const [form] = Form.useForm();
   const { empowermentId } = match.params;
-  const [initialData, setInitialData] = useState({facturaType: 0})
-  const [facturaType, setFacturaType] = useState();
+  const [initialData, setInitialData] = useState()
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(()=>{
     if(empowermentId){
@@ -38,15 +37,14 @@ const EmpowermentForm = ({ token, match })=> {
         let data = res.data;
         data.contractDate=moment(data.contractDate);
         data.created_at=moment(data.created_at);
-        data.facturaDate=moment(data.facturaDate);
+        data.empowermentDateOfExpire=moment(data.empowermentDateOfExpire);
         data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
-        data.oldFacturaDate=moment(data.oldFacturaDate);
+        data.agentPassportDateOfIssue=moment(data.agentPassportDateOfIssue);
         data.updated_at=moment(data.updated_at);
-        console.log(data);
   
-        setInitialData(res.data);
-        setGrid(convertProductsToGrid(res.data.factura_products));
+        setInitialData(data);
         form.resetFields();
+        setGrid(convertProductsToGrid(res.data.products, "empowerment"));
       }).catch(err=>{
         console.log(err);
       })
@@ -67,13 +65,6 @@ const EmpowermentForm = ({ token, match })=> {
     
   };
 
-  const FACTURA_TYPES = {
-    "STANDARD": 0,
-    "QOSHIMCHA": 1,
-    "HARAJATLARNI QOPLASH": 2,
-    "TOLOVSIZ": 3,
-    "TUZATUVCHI": 4
-  }
 
   const [fullView, toglleFullView] = useState(false)
 
@@ -122,22 +113,8 @@ const EmpowermentForm = ({ token, match })=> {
   const onCellsChanged = changes => {
     changes.forEach(({ cell, row, col, value }, index) => {
         //this sets changed values
-        grid[row][col] = { ...grid[row][col], value };
-        
+        grid[row][col] = { ...grid[row][col], value };        
 
-        //Lets calculate
-        let priceamount = parseFloat(grid[row][5].value) * parseFloat(grid[row][6].value);
-        let aksizamount = parseFloat(priceamount * grid[row][7].value / 100);
-        
-        grid[row][8]={ value: parseFloat(aksizamount), readOnly: true };
-        
-        let vatamout = parseFloat(priceamount * parseFloat(grid[row][10].value) / 100);
-        
-        grid[row][11] = { value: vatamout, readOnly: true }
-
-        grid[row][12] = { value: priceamount ? parseFloat(priceamount + aksizamount + vatamout + parseFloat(grid[row][9].value, 2), 2) : 0, readOnly: true}
-       
-     
     });
      setGrid([...grid]);
   };
@@ -163,30 +140,38 @@ const EmpowermentForm = ({ token, match })=> {
   //#region form methods
 
   const handleSubmit = (values)=>{
+    setIsLoading(true)
     console.log(values)
     if(empowermentId){
       axios({
         url:`/api/v1/empowerments/${empowermentId}`,
         method: 'PATCH',
-        data: {factura: values, products: grid}
+        data: {emp: values, products: grid}
       }).then(res=>{
         console.log(res)
+        setIsLoading(false);
+        message.success("Ishonchnoma ozgartirildi!")
       }).catch(err=>{
+        setIsLoading(false);
+        message.error("Ishonchnoma o'zgartirishda xatolik!");
         console.log(err)
       })
     } else{
       axios({
         url:'/api/v1/empowerments',
         method: 'post',
-        data: {factura: values, products: grid}
+        data: {emp: values, products: grid}
       }).then(res=>{
+        setIsLoading(false)
+        message.success("Ishonchnma yaratildi!");
         console.log(res)
       }).catch(err=>{
+        setIsLoading(false);
+        message.error("Ishonchnoma yaratishda xatolik");
         console.log(err)
       })
     }
     
-
   }
 
   const handleImportExecl =(value)=>{
@@ -298,11 +283,11 @@ const EmpowermentForm = ({ token, match })=> {
         
         <Row justify="space-between">
         <Col md={11}>  
-          <SellerForm />
+          <SellerForm docType="empowerment"/>
         </Col>
 
         <Col md={11}>
-          <BuyerForm form={ form } />
+          <BuyerForm form={ form } docType="empowerment"/>
         </Col>
       </Row>
       </div>
@@ -450,6 +435,7 @@ const EmpowermentForm = ({ token, match })=> {
             <Row justify="space-around">
               <Col >
                 <Button 
+                  loading={isLoading}
                   primary
                   htmlType="submit"
                   className="factra-action-btns save-btn" 
@@ -477,6 +463,18 @@ const EmpowermentForm = ({ token, match })=> {
               </Col>
             </Row>
           </div>
+          <Form.Item
+            name="empowermentId"
+            key="empowermemt-id"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="empowermentProductId"
+            key="empowermemt-product-id"
+          >
+            <Input />
+          </Form.Item>
       </Form>
     </div>
   );

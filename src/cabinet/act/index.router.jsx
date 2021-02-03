@@ -8,6 +8,7 @@ const ActIndexRouter = ({ match }) => {
         <div>
             <Route exact path={`${match.path}`} render={()=><HomePage doc="act" />} />
             <Route exact path={`${match.path}/create`} component={ ActForm } />
+            <Route exact path={`${match.path}/edit/:actId`} component={ ActForm } />
         </div>
     )
 }

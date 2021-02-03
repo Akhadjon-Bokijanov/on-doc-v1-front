@@ -28,7 +28,6 @@ export const FIRST_ACT_GRID_ROW = [
     { value: 'ўлчов бирлиги.*', readOnly: true, width: 100 },
     { value: "миқдори", readOnly: true, width: 100 },
     { value: "Нарҳ*", readOnly: true, width: 100 },
-    { value: "етказиб бериш нарҳи*", readOnly: true, width: 100 },
     { value: "Total*", readOnly: true, width: 150 },
 ];
 
@@ -84,6 +83,36 @@ export const convertProductsToGrid = (products, doc = "factura") => {
     let gridProducts;
 
     switch (doc) {
+
+        case "empowerment":
+            {
+                gridProducts = products.map(product => {
+                    return [
+                        { readOnly: true, value: product["ordNo"], width: 50 },
+                        { value: product["name"] },
+                        { value: product["measureId"], dataEditor: SelectMeasureEditor },
+                        { value: product["count"] },
+                    ]
+                })
+                gridProducts.unshift(FIRST_EMPOWERMENT_GRID_ROW);
+            }
+            break;
+
+        case "act":
+            {
+                gridProducts = products.map(product => {
+                    return [
+                        { readOnly: true, value: product["ordNo"], width: 50 },
+                        { value: product["name"] },
+                        { value: product["measureId"], dataEditor: SelectMeasureEditor },
+                        { value: product["count"] },
+                        { value: product["price"] },
+                        { value: parseFloat(product["count"]) * parseFloat(product["price"]), readOnly: true, width: 150 },
+                    ]
+                })
+                gridProducts.unshift(FIRST_ACT_GRID_ROW);
+            }
+            break;
         case "contract":
             {
 
@@ -106,8 +135,6 @@ export const convertProductsToGrid = (products, doc = "factura") => {
                 gridProducts.unshift(FIRST_CONTRACT_GRID_ROW);
             }
             break;
-
-
 
         default:
             {
