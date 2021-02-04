@@ -50,6 +50,13 @@ body {
     min-width: 200px;
 }
 
+.ant-radio-button-wrapper {
+    height: 55px !important;
+    padding: 10px !important;
+    width: 50%;
+    text-align: center;
+}
+
 .ant-input-password-large input[type="password"] {
     border: none !important;
     height: auto;

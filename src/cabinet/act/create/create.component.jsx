@@ -392,6 +392,7 @@ const ActForm = ({ token, match, user })=> {
             <Row justify="space-around">
               <Col >
                 <Button 
+                  loading={isLoading}
                   primary
                   htmlType="submit"
                   className="factra-action-btns save-btn" 

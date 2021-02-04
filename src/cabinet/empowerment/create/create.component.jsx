@@ -4,7 +4,7 @@ import Datasheet from 'react-datasheet';
 import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
 import { Button, Input, Form, Row, Col, DatePicker, Select, Upload, message } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './create.style.scss';
+//import './create.style.scss';
 import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';

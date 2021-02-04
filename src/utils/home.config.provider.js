@@ -212,6 +212,74 @@ export const get_home_config = doc => {
                 }
             }
 
+        case 'tty':
+            return {
+                title: "Tovar transport yo'lxati",
+                createTitle: "TTY yaratish",
+                createUrl: "/cabinet/tty/create",
+                gridSourceUrl: "/api/v1/ttys",
+                gridConfig: {
+                    deleteRequestPath: 'api/v1/ttys',
+                    viewActionPath: '/cabinet/tty/view',
+                    editActionPath: '/cabinet/tty/edit',
+                    deleteConfirmText: "Shu TTY ochirilsinmi?",
+                    actions: {
+                        edit: true,
+                        delete: true,
+                        view: true
+                    },
+                    allColumns: [{
+                            title: "TTY №",
+                            dataIndex: 'wayBillNo',
+                            isSearchable: true,
+                            width: 100
+                        },
+                        {
+                            title: "Oluvchi",
+                            dataIndex: 'buyerName',
+                            isSearchable: true,
+                            width: 150
+                        },
+                        {
+                            title: "Oluvchi STIR",
+                            dataIndex: "buyerTin",
+                            isSearchable: true,
+                        },
+                        {
+                            title: "Sotuvchi",
+                            dataIndex: 'sellerName',
+                            isSearchable: true,
+                            width: 150
+                        },
+                        {
+                            title: "Sotuvchi STIR",
+                            dataIndex: "sellerTin",
+                            isSearchable: true,
+                        },
+                        {
+                            title: "Holati",
+                            dataIndex: 'state',
+                            isFilterable: true,
+                            filters: [
+                                { value: 1, text: "1-Saqlangan" },
+                                { value: 2, text: "2-Imzo kutilmoqda" },
+                                { value: 3, text: "3-Jo'natilgan" },
+                                { value: 4, text: "4-Xatolik yuzbergan" },
+                                { value: 5, text: "5-Qaytarib yuborilgan" },
+                                { value: 6, text: "6-Qabul qilingan" },
+                                { value: 7, text: "7-Muaffaqiyatli" }
+                            ]
+                        },
+                        {
+                            title: 'Yaratilgan sanasi',
+                            dataIndex: "created_at",
+                            dataType: 'date',
+                        },
+                    ]
+                }
+            }
+
+
         default:
             return {
                 title: "Hisob fakturalar",
