@@ -58,7 +58,7 @@ const SellerForm = ({ user, docType }) => {
           }
           
           <Row justify="space-between">
-            <Col md={11} >
+            <Col md={docType ==="contract"?24:11} >
               <Form.Item>
                 <Form.Item 
               key="seler-account"

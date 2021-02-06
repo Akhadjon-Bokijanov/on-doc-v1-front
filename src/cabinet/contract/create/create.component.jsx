@@ -344,6 +344,25 @@ const ConractCreateForm = ({ token, match })=> {
           <BuyerForm form={ form } docType="contract" />
         </Col>
       </Row>
+      <Form.List name="contract_partners">
+      {(fields, { add, remove }) => (
+        <>
+        <Row key="contract-partners-row" style={{ display: 'flex', marginBottom: 8 }} justify="space-between">
+              {fields.map(field => (
+                <Col sm={11}>
+                  <BuyerForm key={field.key} data={field} remove={remove} docType="contract" form={form} />
+                </Col>    
+                ))}
+                </Row>
+            <Form.Item>
+              <Button size="large" type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Kontragent qo'shish
+              </Button>
+            </Form.Item>
+          </>
+        )}
+        
+      </Form.List>
       </div>
       <div className={`factura-data-sheet-container ${fullView ? 'grid-full-view' : null}`}>
         <div style={{marginBottom: 10, display: 'flex', justifyContent:'space-between'}}>

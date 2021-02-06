@@ -2,7 +2,7 @@ import { Form, Input, Row, Col, message } from 'antd'
 import axios from 'axios';
 import React from 'react'
 
-const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form }) => {
+const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form, tinCol, nameCol }) => {
 
     const handleChange = e => {
         console.log(e.target.value)
@@ -32,7 +32,7 @@ const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form }) => {
     return (
         <div>
             <Row justify="space-between">
-                <Col md={24}>
+                <Col md={tinCol ?? 24}>
                     <Form.Item>
                         <Form.Item
 
@@ -44,7 +44,7 @@ const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form }) => {
                         <span className="custom-input-label-1">{tinLabel}</span>
                     </Form.Item>
                 </Col>
-                <Col md={24}>
+                <Col md={nameCol ?? 24}>
                     <Form.Item>
                         <Form.Item
                             name={pName}

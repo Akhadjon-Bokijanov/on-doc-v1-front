@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
-import { Input, Form, Row, Col, message, Switch, Select } from 'antd';
+import { Input, Form, Row, Col, message, Switch, Select, Button } from 'antd';
 import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import axios from 'axios';
+import PersonFetch from './person-fetch/person-fetch.component';
 
 const { Option } = Select;
 
-const BuyerForm = ({ form, docType }) => {
+const BuyerForm = ({ form, docType, remove, fieldList }) => {
 
   const [isFacturaSingleSided, setIsFacturaSingleSided] = useState(false);
 
@@ -58,12 +59,15 @@ const BuyerForm = ({ form, docType }) => {
 
   return (
     <div>
-      <h3>Контрагент маълумотлари</h3>
+      <PersonFetch form={form} pTin="physicalTin" pName="PhysicalName" tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
+      
+
+      {docType=="contract" ? null :<h3>Контрагент маълумотлари</h3>}
       <Row justify="space-between">
         <Col md={docType !== "factura" ? 24 : 11}>
           <Form.Item>
             <Form.Item
-              key="dyna-form-item-inn-buyer"
+              key={fieldList ? `dyna-form-item-inn-buyer-${fieldList.key}` : "dyna-form-item-inn-buyer"}
               name="buyerTin"
               rules={[{ required: true }]}
             >
@@ -111,7 +115,7 @@ const BuyerForm = ({ form, docType }) => {
       {
         !isFacturaSingleSided ?
           <div>
-            <h3>Ҳамкорингизнинг Корхонаси</h3>
+            { docType=="contract" ? null : <h3>Ҳамкорингизнинг Корхонаси</h3> }
             <Form.Item>
               <Form.Item
                 rules={[{ required: true }]}
@@ -158,10 +162,22 @@ const BuyerForm = ({ form, docType }) => {
                         <span className="custom-input-label-1">Ҳисоб рақами</span>
                       </Form.Item>
                     </Col>
+
                     <Col md={11}>
                       {
                         docType === "contract"
-                          ? null
+                          ? <Form.Item>
+                          <Form.Item
+                            key="seler-account"
+                            name="buyerMobilePhone"
+                          >
+                            <Input
+                              size="large"
+                              placeholder="Mobile phone"
+                            />
+                          </Form.Item>
+                          <span className="custom-input-label-1">Mobile phone</span>
+                        </Form.Item>
                           : <Form.Item>
                             <Form.Item
                               key="seler-account"
@@ -177,6 +193,7 @@ const BuyerForm = ({ form, docType }) => {
                       }
                     </Col>
                   </Row>
+
                   <Form.Item>
                     <Form.Item
                       rules={[{ required: true }]}
@@ -191,7 +208,7 @@ const BuyerForm = ({ form, docType }) => {
                   </Form.Item>
 
 
-                  <Row justify="space-between">
+                  <Row justify="space-between" align="stretch">
                     <Col md={11} >
                       <Form.Item>
                         <Form.Item
@@ -205,10 +222,10 @@ const BuyerForm = ({ form, docType }) => {
                         <span className="custom-input-label-1">Директор</span>
                       </Form.Item>
                     </Col>
-                    <Col md={11}>
+                    <Col md={11} >
                       {
                         docType === "contract"
-                          ? null
+                          ? (remove ? <Button className="factra-action-btns" style={{width: '100%'}} danger size="large" onClick={()=>remove(fieldList.name)} >Olib tashlash</Button> : null ) 
                           : <Form.Item>
                             <Form.Item
                               key="seler-account"
