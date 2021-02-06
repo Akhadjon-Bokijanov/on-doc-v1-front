@@ -59,7 +59,12 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
 
   return (
     <div>
-      <PersonFetch form={form} pTin="physicalTin" pName="PhysicalName" tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
+      {
+        docType ==="contract"
+        ? <PersonFetch form={form} pTin="physicalTin" pName="PhysicalName" tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
+        : null
+      }
+      
       
 
       {docType=="contract" ? null :<h3>Контрагент маълумотлари</h3>}
