@@ -61,7 +61,10 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
     <div>
       {
         docType ==="contract"
-        ? <PersonFetch form={form} pTin="physicalTin" pName="PhysicalName" tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
+        ? <PersonFetch 
+          form={form} 
+          pTin={fieldList ? [fieldList.name,"physicalTin"] : "physicalTin"} 
+          pName={fieldList ? [fieldList.name, "physicalName"] : "physicalName"} tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
         : null
       }
       
@@ -73,7 +76,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
           <Form.Item>
             <Form.Item
               key={fieldList ? `dyna-form-item-inn-buyer-${fieldList.key}` : "dyna-form-item-inn-buyer"}
-              name="buyerTin"
+              name={fieldList ? [fieldList.name,"buyerTin"] : "buyerTin"}
               rules={[{ required: true }]}
             >
               <Input
@@ -100,7 +103,8 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
             <h3>Turi</h3>
             <Form.Item
               key="sigle-sided-factura-type-1"
-              name="singleSidedType">
+              name={fieldList ? [fieldList.name,"singleSidedType"] : "singleSidedType"}
+              >
               <Form.Item>
                 <Select bordered={false} size="large">
                   <Option value={1}>На физ. лицо</Option>
@@ -125,7 +129,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
               <Form.Item
                 rules={[{ required: true }]}
                 key="buyer-name-1-buyerName"
-                name="buyerName"
+                name={fieldList ? [fieldList.name,"buyerName"] : "buyerName"}
               >
                 <Input
                   size="large"
@@ -142,7 +146,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                       : <Form.Item>
                         <Form.Item
                           key="seler-account-vatreg"
-                          name="buyerVatRegCode"
+                          name={fieldList ? [fieldList.name, "buyerVatRegCode"] : "buyerVatRegCode"}
                         >
                           <Input
                             size="large"
@@ -159,7 +163,8 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                         <Form.Item
                           key="seler-account"
 
-                          name="buyerAccount">
+                          name={fieldList ? [fieldList.name,"buyerAccount"] : "buyerAccount"}
+                          >
                           <Input
                             size="large"
                             placeholder="Ҳисоб рақами" />
@@ -174,7 +179,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                           ? <Form.Item>
                           <Form.Item
                             key="seler-account"
-                            name="buyerMobilePhone"
+                            name={fieldList ? [fieldList.name,"buyerMobilePhone"] : "buyerMobilePhone"}
                           >
                             <Input
                               size="large"
@@ -186,7 +191,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                           : <Form.Item>
                             <Form.Item
                               key="seler-account"
-                              name="buyerMfo"
+                              name={fieldList ? [fieldList.name,"buyerMfo"] : "buyerMfo"}
                             >
                               <Input
                                 size="large"
@@ -203,7 +208,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                     <Form.Item
                       rules={[{ required: true }]}
                       key="seler-account"
-                      name="buyerAddress"
+                      name={fieldList ? [fieldList.name,"buyerAddress"] : "buyerAddress"}
                     >
                       <Input
                         size="large"
@@ -218,7 +223,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                       <Form.Item>
                         <Form.Item
                           key="seler-account"
-                          name="buyerDirector"
+                          name={fieldList ? [fieldList.name,"buyerDirector"] : "buyerDirector"}
                         >
                           <Input
                             size="large"
@@ -230,11 +235,19 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                     <Col md={11} >
                       {
                         docType === "contract"
-                          ? (remove ? <Button className="factra-action-btns" style={{width: '100%'}} danger size="large" onClick={()=>remove(fieldList.name)} >Olib tashlash</Button> : null ) 
+                          ? (remove && fieldList ? <Button 
+                              className="factra-action-btns" 
+                              style={{width: '100%'}} 
+                              danger 
+                              size="large" 
+                              onClick={()=>remove(fieldList.name)} >
+                                Olib tashlash
+                                </Button> 
+                                : null ) 
                           : <Form.Item>
                             <Form.Item
                               key="seler-account"
-                              name="buyerAccountant"
+                              name={fieldList ? [fieldList.name,"buyerAccountant"] : "buyerAccountant"}
                             >
                               <Input
                                 size="large"

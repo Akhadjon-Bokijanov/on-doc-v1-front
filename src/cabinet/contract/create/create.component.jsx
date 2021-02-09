@@ -44,7 +44,7 @@ const ConractCreateForm = ({ token, match })=> {
         data.parts = data.contract_parts
         console.log(data);
   
-        setInitialData(res.data);
+        setInitialData(data);
         setGrid(convertProductsToGrid(res.data.contract_products, "contract"));
         form.resetFields();
       }).catch(err=>{
@@ -350,7 +350,12 @@ const ConractCreateForm = ({ token, match })=> {
         <Row key="contract-partners-row" style={{ display: 'flex', marginBottom: 8 }} justify="space-between">
               {fields.map(field => (
                 <Col sm={11}>
-                  <BuyerForm key={field.key} data={field} remove={remove} docType="contract" form={form} />
+                  <BuyerForm 
+                    key={field.key} 
+                    fieldList={field} 
+                    remove={remove} 
+                    docType="contract" 
+                    form={form} />
                 </Col>    
                 ))}
                 </Row>

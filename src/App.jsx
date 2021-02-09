@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -14,15 +13,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, selectToken } from './redux/user/user.selector';
 import { logOut } from './redux/user/user.action';
-//import './e-imzo/e-imzo';
-//import EIMZOClient from './e-imzo/e-imzo-client';
+import { API_HOST } from './env';
 
 const App = ({ user, token, signOut }) => {
 
     moment.locale('uz-latn');
-    axios.defaults.baseURL = process.env.NODE_ENV === "development" 
-    ? "http://127.0.0.1:8000" 
-    : "https://murmuring-inlet-47691.herokuapp.com";
+    axios.defaults.baseURL = API_HOST
 
     axios.interceptors.response.use(res => {
 
