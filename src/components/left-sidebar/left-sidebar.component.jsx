@@ -17,15 +17,15 @@ const LeftSidebar = ({ active })=>{
                         </Tooltip>
                     </div>
                     <div>
-                        <Tooltip placement="left" color="#0075ff" title="Ma'lumotlar">
-                            <Link to="/home/info">
-                                <FontAwesomeIcon icon="info-circle" />
+                        <Tooltip placement="left" color="#0075ff" title="Notifications">
+                            <Link to="/cabinet/notifications">
+                                <FontAwesomeIcon icon={["far", "bell"]} />
                             </Link>
                         </Tooltip>
                     </div>
                     <div>
                         <Tooltip title="Kabinet" color="#0075ff" placement="left">
-                            <Link to="/cabinet"><FontAwesomeIcon icon="user-cog" /></Link>
+                            <Link to="/cabinet/profile"><FontAwesomeIcon icon="user-cog" /></Link>
                         </Tooltip>
                     </div>
                     <div>

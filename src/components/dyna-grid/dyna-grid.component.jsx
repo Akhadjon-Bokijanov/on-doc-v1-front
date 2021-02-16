@@ -33,6 +33,7 @@ const DynaGrid = ({
   config:{                //Config object
     addElementViewPath,     //add element to the core
     deleteRequestPath,    //delete request path for API server 
+    replaceInViewPath,
     approveRequestPath,   //approve request path for API server 
     viewActionPath,       //UI route to view the element
     editActionPath,
@@ -163,7 +164,9 @@ const DynaGrid = ({
     ),
     filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
     onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),
+    record[dataIndex] 
+      ? record[dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()) 
+      : false,
       onFilterDropdownVisibleChange: visible => {
       if (visible) {
         setTimeout(() => searchInput.select());
@@ -175,7 +178,7 @@ const DynaGrid = ({
           highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
           searchWords={[searchText]}
           autoEscape
-          textToHighlight={text.toString()}
+          textToHighlight={ text ? text.toString() : null}
         />
       ) : (
         text
@@ -370,7 +373,9 @@ const DynaGrid = ({
 
           {actions.view 
           ? <Tooltip placement="bottom" title="Ko'rish" >
-                <Link to={`${viewActionPath}/${record.id}`}><EyeOutlined /></Link>
+                <Link to={`${ replaceInViewPath 
+                  ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
+                  : viewActionPath}/${record.id}`}><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }

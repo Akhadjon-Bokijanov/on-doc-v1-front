@@ -9,3 +9,8 @@ export const succesLogIn = data => ({
 export const logOut = () => ({
     type: USER_ACTIONS.LOG_OUT
 })
+
+export const setUser = user=>({
+    type: USER_ACTIONS.SET_USER_ONLY,
+    payload: user
+})

@@ -21,6 +21,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
+    faBell,
     faBookmark,
     faCheckCircle,
     faClock,
@@ -62,5 +63,6 @@ library.add(
     faSignInAlt,
     faCloudDownloadAlt,
     faCloudUploadAlt,
-    faTimesCircle
+    faTimesCircle,
+    faBell
 )

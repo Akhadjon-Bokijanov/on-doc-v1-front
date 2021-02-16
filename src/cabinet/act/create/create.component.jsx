@@ -20,13 +20,9 @@ import {
 import { convertProductsToGrid, FIRST_ACT_GRID_ROW } from '../../../utils/main';
 import TextArea from 'antd/lib/input/TextArea';
 
-
-const setActClient = (seller, client) => {
-
-
+export const setActClient = (seller, client) => {
   return `Биз қуйида имзо чекувчилар, "${seller ?? "___________"}" бир томондан,бундан кейин Пудратчи деб номланади ва "${client ?? '__________'}" бошқа томондан, бундан кейин Буюртмачи деб номланади, иш Буюртмачининг талабларига мувофиқ тўлиқ бажарилганлиги тўғрисида акт туздик.`;
 
-  
 }
 
 const ActForm = ({ token, match, user })=> {
@@ -36,7 +32,7 @@ const ActForm = ({ token, match, user })=> {
   const [initialData, setInitialData] = useState({actText: setActClient(user.name)})
   const [isLoading, setIsloading] = useState(false);
 
-  
+ 
 
   useEffect(()=>{
     if(actId){
@@ -172,7 +168,12 @@ const ActForm = ({ token, match, user })=> {
         data: {act: values, products: grid}
       }).then(res=>{
         setIsloading(false);
-        message.success("Akt yangilandi!");
+        if(res.data.ok){
+          message.success("Akt yangilandi!");
+        }
+        else{
+          message.error("Akt yangilashda xatolik!");
+        }
         console.log(res)
       }).catch(err=>{
         setIsloading(false)
@@ -186,7 +187,12 @@ const ActForm = ({ token, match, user })=> {
         data: {act: values, products: grid}
       }).then(res=>{
         setIsloading(false)
-        message.success("Akt yaratildi!");
+        if(res.data.ok){
+          message.success("Akt yaratildi!");
+        }
+        else{
+          message.error("Akt yaratishda xatolik!");
+        }
         console.log(res)
       }).catch(err=>{
         setIsloading(false)
@@ -425,7 +431,7 @@ const ActForm = ({ token, match, user })=> {
           name="actId"
           key="act-id"
           >
-            <Input />
+            <Input type="hidden" />
           </Form.Item>
 
       </Form>

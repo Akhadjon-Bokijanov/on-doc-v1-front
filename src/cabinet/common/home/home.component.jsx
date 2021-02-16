@@ -9,7 +9,7 @@ import { get_home_config } from '../../../utils/home.config.provider';
 
 const { TabPane } = Tabs;
 
-const HomePage = ({ doc })=> {
+const HomePage = ({ doc, hideTabs })=> {
 
     const { title, createTitle, createUrl, gridSourceUrl, gridConfig } = get_home_config(doc);
 
@@ -35,7 +35,10 @@ const HomePage = ({ doc })=> {
                     <h2>{ title }</h2>
                     <Link to={ createUrl }><span>{ createTitle }</span></Link>
                 </div>
-                <div className="factura-home-list-tabs">
+                {
+                    hideTabs
+                    ? null
+                    : <div className="factura-home-list-tabs">
                     <div className="factura-home-list-tab-con">
                         <div onClick={()=>setActiveTab(1)} className={`status-tab-bar ${activeTab===1 ? 'active-tab' : ''}`}>
                             Kiruvchi hujjatlar    
@@ -51,6 +54,9 @@ const HomePage = ({ doc })=> {
                         </div>
                     </div>
                 </div>
+                }
+                
+                
                 <div>
                     <DynaGrid
                         dataSource={dataSource}

@@ -9,6 +9,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
 
+        case USER_ACTIONS.SET_USER_ONLY:
+            return {...state, 
+                currentUser:  action.payload
+            }
+
         case USER_ACTIONS.SUCCESS_LOGIN:
             return {...state,
                 userType: action.payload.user ? 'user' : 'company',

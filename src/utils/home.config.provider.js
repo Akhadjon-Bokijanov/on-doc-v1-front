@@ -1,6 +1,62 @@
 export const get_home_config = doc => {
     switch (doc) {
 
+        case 'notification':
+            return {
+                title: "Notifications",
+                createTitle: "Notification yaratish",
+                createUrl: "/admin/notification/create",
+                gridSourceUrl: "/api/v1/notifications",
+                gridConfig: {
+                    deleteRequestPath: 'api/v1/notifications',
+                    viewActionPath: '/admin/notification/view',
+                    editActionPath: '/admin/notification/edit',
+                    deleteConfirmText: "Shu notification ochirilsinmi?",
+                    actions: {
+                        edit: true,
+                        delete: true,
+                        view: true
+                    },
+                    allColumns: [{
+                            title: "Sarlavha",
+                            dataIndex: 'title_uz',
+                            isSearchable: true,
+                            width: 300
+                        },
+                        {
+                            title: "Mazmuni",
+                            dataIndex: 'body_uz',
+                            isSearchable: true,
+                            width: 400
+                        },
+                        {
+                            title: "Muhimligi",
+                            dataIndex: 'importance',
+                            isFilterable: true,
+                            width: 100,
+                            filters: [
+                                { value: 1, text: "1 - Uncha muxim emas" },
+                                { value: 2, text: "2 - Muxim emas" },
+                                { value: 3, text: "3 - Muxim" },
+                                { value: 4, text: "4 - Muximroq" },
+                                { value: 5, text: "5 - O'ta muxim" },
+                            ]
+
+                        },
+                        {
+                            title: "Holati",
+                            dataIndex: "isActive",
+                            isFilterable: true,
+                            width: 100,
+                            filters: [
+                                { value: 0, text: "Aktiv emas" },
+                                { value: 1, text: "Aktiv" },
+                            ]
+                        }
+                    ]
+                }
+            }
+
         case 'act':
             return {
                 title: "Aktlar",

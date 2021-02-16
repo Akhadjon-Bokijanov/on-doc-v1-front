@@ -15,8 +15,15 @@ const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form, tinCol, nameCol }
                     //setBuyerData(res.data)
                     const { name, fullName } = res.data;
                     let data = {};
-                    data[pName] = name ?? fullName;
-                    form.setFieldsValue(data)
+                    if(Array.isArray(pName)){
+                        let fetcherData = form.getFieldValue("contract_partners");
+                        fetcherData[pName[0]][pName[1]] = name ?? fullName;
+                        form.setFieldsValue({contract_partners: [...fetcherData, ]})
+                    }else{
+                        data[pName] = name ?? fullName;
+                        form.setFieldsValue(data)
+                    }
+                    
                 }).catch(err => {
                     console.log(err)
                 })

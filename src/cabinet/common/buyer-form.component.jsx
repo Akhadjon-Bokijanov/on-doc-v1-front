@@ -4,12 +4,14 @@ import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import axios from 'axios';
 import PersonFetch from './person-fetch/person-fetch.component';
+import { setActClient } from '../act/create/create.component';
 
 const { Option } = Select;
 
 const BuyerForm = ({ form, docType, remove, fieldList }) => {
 
   const [isFacturaSingleSided, setIsFacturaSingleSided] = useState(false);
+  const [buyerBranches, setBuyerBranches] = useState([]);
 
   const handleSingleSided = (value) => {
     setIsFacturaSingleSided(value)
@@ -24,18 +26,51 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
           method: "GET",
         }).then(res => {
           //setBuyerData(res.data)
-          const { tin, accountant, account, address, phone, name, fullName, mfo, directorName, regCode } = res.data;
+          const { 
+            tin, 
+            accountant, 
+            account, 
+            address, 
+            phone, 
+            name, 
+            fullName, 
+            mfo, 
+            directorName,
+            directorTin, 
+            regCode } = res.data;
           let data = {
+            buyerTin: tin,
             buyerAccountant: accountant,
             buyerAccount: account,
             buyerAddress: address,
-            buyerPhone: phone,
+            buyerMobilePhone: phone,
             buyerName: name ?? fullName,
             buyerMfo: mfo,
             buyerDirector: directorName,
+            buyerDirectorTin: directorTin,
             buyerVatRegCode: regCode
           }
-          form.setFieldsValue(data)
+
+          if(docType==="act"){
+            form.setFieldsValue({
+              actText: setActClient(form.getFieldValue("sellerName"), name ?? fullName)
+            })
+          }
+
+
+          if(fieldList){
+            let fetcherData = form.getFieldValue("contract_partners");
+            
+            fetcherData[fieldList.name] = {...fetcherData[fieldList.name], ...data}
+
+            setBuyerBranches(res.data.branches ?? []);
+
+            form.setFieldsValue({contract_partners: [...fetcherData]})
+          }else{
+            
+            form.setFieldsValue(data)
+          }
+         
         }).catch(err => {
           console.log(err)
         })
@@ -44,7 +79,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
           buyerAccountant: null,
           buyerAccount: null,
           buyerAddress: null,
-          buyerPhone: null,
+          buyerMobilePhone: null,
           buyerName: null,
           buyerMfo: null,
           buyerDirector: null,
@@ -59,18 +94,18 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
 
   return (
     <div>
+      
+      <h3>Контрагент маълумотлари</h3>
       {
         docType ==="contract"
         ? <PersonFetch 
           form={form} 
-          pTin={fieldList ? [fieldList.name,"physicalTin"] : "physicalTin"} 
-          pName={fieldList ? [fieldList.name, "physicalName"] : "physicalName"} tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
+          pTin={fieldList ? [fieldList.name,"buyerPhysicalTin"] : "buyerPhysicalTin"} 
+          pName={fieldList ? [fieldList.name, "buyerPhysicalFio"] : "buyerPhysicalFio"} 
+          tinLabel="Jis. Shaxs STIR" nameLabel="Jis. Shaxs FIO" tinCol={11} nameCol={11} />
         : null
       }
       
-      
-
-      {docType=="contract" ? null :<h3>Контрагент маълумотлари</h3>}
       <Row justify="space-between">
         <Col md={docType !== "factura" ? 24 : 11}>
           <Form.Item>
@@ -132,6 +167,11 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                 name={fieldList ? [fieldList.name,"buyerName"] : "buyerName"}
               >
                 <Input
+                  onChange={val=>{
+                    form.setFieldsValue({
+                      actText: setActClient(form.getFieldValue("sellerName"), val.target.value)})
+                    }
+                  }
                   size="large"
                   placeholder="Hоми" />
               </Form.Item>
@@ -216,7 +256,28 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                     </Form.Item>
                     <span className="custom-input-label-1">Манзил</span>
                   </Form.Item>
-
+                    
+                  {
+                      docType==="contract"?
+                      <Col md={24} >
+                      <Form.Item>
+                        <Form.Item
+                          key="seler-account"
+                          name={fieldList ? [fieldList.name,"buyerBranch"] : "buyerBranch"}
+                        >
+                          <Select
+                            bordered={false}
+                            size="large"
+                            defaultActiveFirstOption
+                            placeholder="">
+                              {buyerBranches.map(item=><Option value={item.tin}>{ item.tin } - {item.name}</Option>)}
+                          </Select>
+                        </Form.Item>
+                        <span className="custom-input-label-1">Filiali</span>
+                      </Form.Item>
+                    </Col>
+                    :null
+                    }
 
                   <Row justify="space-between" align="stretch">
                     <Col md={11} >
@@ -258,7 +319,25 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                       }
 
                     </Col>
+                    {
+                    docType==="contract" ?
+                    <Col md={11}>
+                      <Form.Item
+                        key="seler-account-buyer-dir-tin"
+                        name={ fieldList ? [fieldList.name, "buyerDirectorTin"] :"buyerDirectorTin"}
+                        >
+                        <Input
+                          type="hidden"
+                          size="large"
+                          placeholder="Директор INN" />
+                      </Form.Item>
+                      
+                      </Col>
+                    : null
+                  }
                   </Row>
+                  
+                  
                 </Fragment>
                 : null
             }

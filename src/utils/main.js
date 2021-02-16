@@ -6,6 +6,21 @@ export const getFileExtension = filename => {
     return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2);
 }
 
+export const FIRST_TTY_GRID_ROW = [
+    { readOnly: true, value: "", width: 50 }, //0 ordNo
+    { readOnly: true, value: 'Товар/хизмат лар номи*' }, //1 product name
+    { readOnly: true, value: "ўлчов бирлиги.*", dataEditor: SelectMeasureEditor }, //2 measure
+    { readOnly: true, value: 'миқдори' }, //3 count
+    { readOnly: true, value: "Нарҳ*", }, //4 price
+    { readOnly: true, value: "Юкнинг умумий қиймати", readOnly: true }, //5 total
+    { readOnly: true, value: 'етказиб бериш нарҳи*' }, //6 delivery cost
+    { readOnly: true, value: "Юкка доир хужжатлар", }, //7 Docs
+    { readOnly: true, value: "Массани аниқлаш усули", }, //8 weight measure method
+    { readOnly: true, value: "Юк синфи", }, //9 item class
+    { readOnly: true, value: "Масса (брутто)", }, //10 brutto weight
+    { readOnly: true, value: "Масса (нетто)", }, //11 netto weight
+]
+
 export const FIRST_FACTURA_GRID_ROW = [
     { readOnly: true, value: '', width: 50 },
     { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
@@ -133,6 +148,28 @@ export const convertProductsToGrid = (products, doc = "factura") => {
                     ]
                 })
                 gridProducts.unshift(FIRST_CONTRACT_GRID_ROW);
+            }
+            break;
+
+        case "tty":
+            {
+                gridProducts = products.map((product, index) => {
+                    return [
+                        { readOnly: true, value: index + 1, width: 50 }, //0 ordNo
+                        { value: product.name }, //1 product name
+                        { value: product.measureId, dataEditor: SelectMeasureEditor }, //2 measure
+                        { value: product.count }, //3 count
+                        { value: product.price }, //4 price
+                        { value: product.count * product.price, readOnly: true }, //5 total
+                        { value: product.deliveryCost }, //6 delivery cost
+                        { value: product.docs, }, //7 Docs
+                        { value: product.weightMeasureMethod, }, //8 weight measure method
+                        { value: product.itemClass, }, //9 item class
+                        { value: product.weightBrut, }, //10 brutto weight
+                        { value: product.weightNet, }, //11 netto weight
+                    ]
+                })
+                gridProducts.unshift(FIRST_TTY_GRID_ROW);
             }
             break;
 

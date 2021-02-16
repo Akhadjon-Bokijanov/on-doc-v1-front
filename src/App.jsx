@@ -14,6 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, selectToken } from './redux/user/user.selector';
 import { logOut } from './redux/user/user.action';
 import { API_HOST } from './env';
+import AdminIndexRouter from './admin/admin.router';
 
 const App = ({ user, token, signOut }) => {
 
@@ -51,6 +52,10 @@ const App = ({ user, token, signOut }) => {
 
                 <Route path="/cabinet"
                     render={() => user ? <CabinetIndex /> : <Redirect to="/home/login" />} />
+
+                <Route path="/admin" 
+                    render={()=>user.role_id===1? <AdminIndexRouter /> : <Redirect to="/home" />}
+                />
             </Switch>
         </div>
     )

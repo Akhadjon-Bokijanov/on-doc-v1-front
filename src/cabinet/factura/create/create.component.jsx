@@ -18,6 +18,7 @@ import {
   FullscreenExitOutlined, 
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_FACTURA_GRID_ROW } from '../../../utils/main';
+import PersonFetch from '../../common/person-fetch/person-fetch.component';
 
 const { Option } = Select;
 
@@ -218,7 +219,11 @@ const FacturaCreateForm = ({ token, match })=> {
         method: 'PATCH',
         data: {factura: values, products: grid}
       }).then(res=>{
-        message.success("Faktura o'zgartirildi!")
+        if(res.data.ok){
+          message.success("Faktura o'zgartirildi!")
+        }else{
+          message.error("Faktura o'zgartirishda xatolik!");
+        }
         console.log(res)
         setSaveLoading(false);
       }).catch(err=>{
@@ -232,7 +237,12 @@ const FacturaCreateForm = ({ token, match })=> {
         method: 'post',
         data: {factura: values, products: grid}
       }).then(res=>{
-        message.success("Faktura yaratili!")
+        if(res.data.ok){
+          message.success("Faktura yaratili!")
+        }
+        else{
+          message.error("Faktura yaratishda xatolik!");
+        }
         console.log(res)
         setSaveLoading(false);
       }).catch(err=>{
@@ -469,32 +479,18 @@ const FacturaCreateForm = ({ token, match })=> {
                 <span className="custom-input-label-1">Ишончнома санаси</span>
               </Form.Item>
             </Col>
-            <Col md={5}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account-tyin-inn"
-              name="agentTin">
-                <Input
-                  size="large"
-                  placeholder="СТИР" />
-              </Form.Item>
-                <span className="custom-input-label-1">СТИР</span>
-              </Form.Item>
+            <Col md={12}>
+              <PersonFetch 
+                pName="agentFio"
+                pTin="agentTin"
+                nameLabel="Масъул шахснинг Ф.И.Ш.и"
+                tinLabel="СТИР"
+                tinCol={11}
+                nameCol={11}
+                form={form}
+              />
             </Col>
-            <Col md={5}>
           
-                <Form.Item>
-                  <Form.Item 
-                key="seler-account-agent-fioe"
-                name="agentFio">
-                  <Input
-                    size="large"
-                    placeholder="Масъул шахснинг Ф.И.Ш.и" />
-                </Form.Item>
-                  <span className="custom-input-label-1">Масъул шахснинг Ф.И.Ш.и</span>
-                </Form.Item>
-            
-            </Col>
           </Row>
 
          
@@ -552,7 +548,7 @@ const FacturaCreateForm = ({ token, match })=> {
       name="facturaId"
       >
         <Input 
-        //type="hidden"
+        type="hidden"
         />
 
       </Form.Item>
@@ -561,7 +557,7 @@ const FacturaCreateForm = ({ token, match })=> {
       name="facturaProductId"
       >
         <Input 
-        //type="hidden"
+        type="hidden"
         />
 
       </Form.Item>

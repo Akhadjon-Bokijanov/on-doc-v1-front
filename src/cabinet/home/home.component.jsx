@@ -69,7 +69,8 @@ const CabinetHome = () => {
     const dyna_config = {
         deleteRequestPath: 'ES/api/blogs',
         addActionPath: 'actions/add',
-        viewActionPath: '/cabinet/factura/view',
+        viewActionPath: '/cabinet/{docType}/view',
+        replaceInViewPath: "docType",
         deleteConfirmText: "Shu faktura ochirilsinmi?",
         actions: {
             edit: activeTab===3 ? true : false,
@@ -86,7 +87,7 @@ const CabinetHome = () => {
                 title: "Hujjat turi",
                 dataIndex: "docType",
                 isFilterable: true,
-                filters: ['factura', 'act', 'contract', 'empowerment']
+                filters: ['factura', 'act', 'contract', 'empowerment', "tty"]
             },
             {
                 title: "Kontrakt №",

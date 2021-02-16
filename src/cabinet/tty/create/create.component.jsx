@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'react-datasheet/lib/react-datasheet.css';
-import { Button, Input, Form, Row, Col, DatePicker, message, Radio } from 'antd';
+import { Button, Input, Form, Row, Col, DatePicker, message, Radio, Upload } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import Datasheet from 'react-datasheet';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
@@ -10,15 +11,159 @@ import { selectCurrentUser, selectToken } from '../../../redux/user/user.selecto
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import PersonFetch from '../../common/person-fetch/person-fetch.component';
+import { convertProductsToGrid, FIRST_TTY_GRID_ROW } from '../../../utils/main';
+import { 
+  FullscreenOutlined, 
+  FullscreenExitOutlined, 
+  } from '@ant-design/icons';
+import SelectEditor from '../../../components/data-sheet-custom-selector/custom-selector.component';
+import SelectMeasureEditor from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
 
 
-const TTYForm = ({ match }) => {
+const TTYForm = ({ match, token, user }) => {
 
   const [form] = Form.useForm();
   const { ttyId } = match.params;
   const [initialData, setInitialData] = useState()
   const [isLoading, setIsloading] = useState(false);
 
+
+  //#region DATA SHEET
+
+  const [fullView, toglleFullView] = useState(false)
+
+
+  const [grid, setGrid] = useState([
+    FIRST_TTY_GRID_ROW,
+    [
+      { readOnly: true, value: 1 }, //0 ordNo
+      { value: "" }, //1 product name
+      { value: "", dataEditor:  SelectMeasureEditor }, //2 measure
+      { value: '' }, //3 count
+      { value: "", }, //4 price
+      { value: "", readOnly: true}, //5 total
+      { value: '' }, //6 delivery cost
+      { value: "", }, //7 Docs
+      { value: "", }, //8 weight measure method
+      { value: "", }, //9 item class
+      { value: "", }, //10 brutto weight
+      { value: "", }, //11 netto weight                       //12 total
+    ], 
+    [
+      { readOnly: true, value:2 }, //0 ordNo
+      { value: "" }, //1 product name
+      { value: "", dataEditor:  SelectMeasureEditor }, //2 measure
+      { value: '' }, //3 count
+      { value: "", }, //4 price
+      { value: "", readOnly: true}, //5 total
+      { value: '' }, //6 delivery cost
+      { value: "", }, //7 Docs
+      { value: "", }, //8 weight measure method
+      { value: "", }, //9 item class
+      { value: "", }, //10 brutto weight
+      { value: "", }, //11 netto weight
+    ], 
+    [
+      { readOnly: true, value:3 }, //0 ordNo
+      { value: "" }, //1 product name
+      { value: "", dataEditor:  SelectMeasureEditor }, //2 measure
+      { value: '' }, //3 count
+      { value: "", }, //4 price
+      { value: "", readOnly: true}, //5 total
+      { value: '' }, //6 delivery cost
+      { value: "", }, //7 Docs
+      { value: "", }, //8 weight measure method
+      { value: "", }, //9 item class
+      { value: "", }, //10 brutto weight
+      { value: "", }, //11 netto weight
+    ], 
+    [
+      { readOnly: true, value:4 }, //0 ordNo
+      { value: "" }, //1 product name
+      { value: "", dataEditor:  SelectMeasureEditor }, //2 measure
+      { value: '' }, //3 count
+      { value: "", }, //4 price
+      { value: "", readOnly: true}, //5 total
+      { value: '' }, //6 delivery cost
+      { value: "", }, //7 Docs
+      { value: "", }, //8 weight measure method
+      { value: "", }, //9 item class
+      { value: "", }, //10 brutto weight
+      { value: "", }, //11 netto weight
+    ], 
+  ])
+
+  const handleImportExecl =(value)=>{
+    console.log("me fired")
+
+    if(value.file.status=="done"){
+      
+      const { response } = value.file
+
+      response.excel.forEach((element, index)=>{
+        element[0].value = index + 1;
+        element[0].readOnly = true;
+        element[2].dataEditor = SelectEditor;
+        element[4].dataEditor = SelectMeasureEditor;
+      })
+
+      setGrid([grid[0], ...response.excel])
+      console.log(response)
+    }
+  }
+
+  //#region data-sheet methods
+  const handleRemoveRow = (rowId)=>{
+
+    grid.splice(rowId, 1)
+    setGrid([...grid])
+  }
+
+  const valueRenderer = cell => cell.value;
+  const onCellsChanged = changes => {
+    changes.forEach(({ cell, row, col, value }, index) => {
+        //this sets changed values
+        grid[row][col] = { ...grid[row][col], value };
+        
+
+        //Lets calculate
+        let priceamount = parseFloat(grid[row][3].value??0) * parseFloat(grid[row][4].value??0);
+
+        grid[row][5] = {...grid[row][5], value: priceamount ?? 0}
+
+       
+     
+    });
+     setGrid([...grid]);
+  };
+
+  const handleAddRow = ()=>{
+    
+    const sampleRow = [
+      { readOnly: true, value:    grid.length }, //0 ordNo
+      { value: "" }, //1 product name
+      { value: "", dataEditor:  SelectMeasureEditor }, //2 measure
+      { value: '' }, //3 count
+      { value: "", }, //4 price
+      { value: "", readOnly: true}, //5 total
+      { value: '' }, //6 delivery cost
+      { value: "", }, //7 Docs
+      { value: "", }, //8 weight measure method
+      { value: "", }, //9 item class
+      { value: "", }, //10 brutto weight
+      { value: "", }, //11 netto weight
+    ]
+
+    let newgrid = [...grid, sampleRow];
+
+     setGrid(newgrid)
+  }
+
+  const onContextMenu = (e, cell, i, j) =>
+    cell.readOnly ? e.preventDefault() : null;
+//#endregion
+
+  //#endregion
 
 
   useEffect(() => {
@@ -39,6 +184,7 @@ const TTYForm = ({ match }) => {
 
         setInitialData(res.data);
         form.resetFields();
+        setGrid(convertProductsToGrid(res.data.products, "tty"))
       }).catch(err => {
         console.log(err);
       })
@@ -68,7 +214,7 @@ const TTYForm = ({ match }) => {
       axios({
         url: `/api/v1/ttys/${ttyId}`,
         method: 'PATCH',
-        data: { tty: values }
+        data: { tty: values, products: grid }
       }).then(res => {
         setIsloading(false);
         message.success("TTY yangilandi!");
@@ -82,7 +228,7 @@ const TTYForm = ({ match }) => {
       axios({
         url: '/api/v1/ttys',
         method: 'post',
-        data: { tty: values }
+        data: { tty: values, products: grid }
       }).then(res => {
         setIsloading(false)
         message.success("TTY yaratildi!");
@@ -400,8 +546,8 @@ const TTYForm = ({ match }) => {
             <Col md={11}>
               <Form.Item>
                 <Form.Item
-                  name="tekerFio"
-                  key="tekerFio"
+                  name="takerFio"
+                  key="takerFio"
                 >
                   <Input size="large" />
                 </Form.Item>
@@ -472,6 +618,66 @@ const TTYForm = ({ match }) => {
 
           </Row>
         </div>
+
+        <div className={`factura-data-sheet-container ${fullView ? 'grid-full-view' : null}`}>
+        <div style={{marginBottom: 10, display: 'flex', justifyContent:'space-between'}}>
+          <div style={{display: 'flex'}}>
+              <Upload 
+                headers={{
+                  Authorization: "Bearer " + token
+                }}
+                multiple={false}
+                action="http://127.0.0.1:8000/api/v1/factura-products/read-excel"
+                accept=".xlsx, .xls" 
+                onChange={handleImportExecl}>
+                
+                  <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
+               
+              </Upload>
+              <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
+                <Button >
+                  Shablon yuklash
+                </Button>
+              </a>
+            </div>
+            <Button
+              type="primary"
+              icon={fullView ? <FullscreenExitOutlined /> : <FullscreenOutlined />} 
+              onClick={()=>toglleFullView(!fullView)}>
+                { fullView ? "Kichraytirish" : "Kengaytirish" }
+            </Button>
+        </div>
+        
+      <div style={{overflowX: 'auto'}} >
+        <div style={{width: '100%'}}>
+          <Datasheet
+            data={ grid}
+            valueRenderer={ valueRenderer}
+            onContextMenu={ onContextMenu}
+            onCellsChanged={ onCellsChanged}
+          />
+        </div>
+      </div>
+      <Button 
+        size="large" 
+        style={{marginTop: 20, marginRight: 7, width: 220}} 
+        type="primary" 
+        icon={<FontAwesomeIcon 
+          style={{marginRight: 7}} 
+          icon={["far", "plus-square"]} />} 
+        onClick={  handleAddRow }>Qo'shish</Button>
+      
+      <Button 
+        size="large" 
+        style={{marginTop: 20, width: 220 }} 
+        danger
+        type="primary" 
+        icon={<FontAwesomeIcon 
+          style={{marginRight: 7}} 
+          icon={["far", "trash-alt"]} />} 
+        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
+      </div>
+
         <div className="factura-data-sheet-container">
           <Row justify="space-around">
             <Col >

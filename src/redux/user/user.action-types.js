@@ -1,6 +1,7 @@
 const USER_ACTIONS = {
     SUCCESS_LOGIN: "SUCCESS_LOGIN",
     LOG_OUT: "LOG_OUT",
+    SET_USER_ONLY: "SET_USER_ONLY",
 }
 
 export default USER_ACTIONS;

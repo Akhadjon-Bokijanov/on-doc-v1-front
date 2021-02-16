@@ -66,6 +66,11 @@ body {
     display: none !important;
 }
 
+.ant-form-item-has-error .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) .ant-select-selector {
+    height: 55px !important;
+    border-radius: 11px;
+}
+
 .ant-form-item-explain.ant-form-item-explain-error {
     font-size: 11px;
     position: absolute !important;
@@ -94,6 +99,16 @@ body {
 .show-help-leave,
 .show-help-leave-active {
     display: none;
+}
+
+.ant-modal{
+    width: 65vw !important;
+}
+
+@media screen and (max-width: 600px){
+    .ant-modal{
+    width: 85vw !important;
+}
 }
 
 .ant-select-selection-placeholder {

@@ -97,6 +97,37 @@ const EmpowermentForm = ({ token, match })=> {
     ], 
   ])
 
+  const fetchAgent = e=>{
+    let val = e.target.value;
+    if(!isNaN(val)){
+
+      if(val > 100000000 && val<999999999){
+        axios({
+          method: "GET",
+          url: "/api/v1/users/tin/"+val
+        })
+        .then(res=>{
+          const { 
+            name, 
+            fullName, 
+            passIssuedAt, 
+            passOrg,
+            passNum 
+          } = res.data;
+          console.log(moment('2020-00-00 00:00:00')._isValid)
+          form.setFieldsValue({
+            agentFio: fullName ?? name,
+            agentPassportDateOfIssue: moment(passIssuedAt)._isValid ? moment(passIssuedAt) : null,
+            agentPassportIssuedBy: passOrg,
+            agentPassportNumber: passNum
+          })
+        })
+      }
+
+    }else{
+      message.warning("STIR notog'ri kiritildi!");
+    }
+  }
 
 
   //#region data-sheet methods
@@ -150,7 +181,12 @@ const EmpowermentForm = ({ token, match })=> {
       }).then(res=>{
         console.log(res)
         setIsLoading(false);
-        message.success("Ishonchnoma ozgartirildi!")
+        if(res.data.ok){
+          message.success("Ishonchnoma ozgartirildi!")
+        }
+        else{
+          message.error("Ishonchnoma o'zgartirishda xatolik!");
+        }
       }).catch(err=>{
         setIsLoading(false);
         message.error("Ishonchnoma o'zgartirishda xatolik!");
@@ -163,7 +199,12 @@ const EmpowermentForm = ({ token, match })=> {
         data: {emp: values, products: grid}
       }).then(res=>{
         setIsLoading(false)
-        message.success("Ishonchnma yaratildi!");
+        if(res.data.ok){
+          message.success("Ishonchnma yaratildi!");
+        }else{
+          message.error("Ishonchnoma yaratishda xatolik");
+        }
+
         console.log(res)
       }).catch(err=>{
         setIsLoading(false);
@@ -353,6 +394,21 @@ const EmpowermentForm = ({ token, match })=> {
         <div className="factura-data-sheet-container">
 
           <Row justify="space-between">
+          <Col md={7}>
+              <Form.Item>
+                <Form.Item 
+              key="seler-account-tyin-inn"
+              name="agentTin">
+                <Input
+                  size="large"
+                  placeholder="СТИР"
+                  onChange={fetchAgent}
+
+                  />
+              </Form.Item>
+                <span className="custom-input-label-1">СТИР</span>
+              </Form.Item>
+            </Col>
             <Col md={7} >
               <Form.Item>
                 <Form.Item 
@@ -377,18 +433,7 @@ const EmpowermentForm = ({ token, match })=> {
                 <span className="custom-input-label-1">Мансаб</span>
               </Form.Item>
             </Col>
-            <Col md={7}>
-              <Form.Item>
-                <Form.Item 
-              key="seler-account-tyin-inn"
-              name="agentTin">
-                <Input
-                  size="large"
-                  placeholder="СТИР" />
-              </Form.Item>
-                <span className="custom-input-label-1">СТИР</span>
-              </Form.Item>
-            </Col>
+            
             <Col md={7}>
           
                 <Form.Item>
@@ -467,13 +512,13 @@ const EmpowermentForm = ({ token, match })=> {
             name="empowermentId"
             key="empowermemt-id"
           >
-            <Input />
+            <Input type="hidden" />
           </Form.Item>
           <Form.Item
             name="empowermentProductId"
             key="empowermemt-product-id"
           >
-            <Input />
+            <Input type="hidden" />
           </Form.Item>
       </Form>
     </div>

@@ -4,9 +4,9 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { API_HOST } from '../../../env';
 
-const FacturaView = ({ match, user }) => {
+const TTYView = ({ match, user }) => {
 
-    const {facturaId} = match.params;
+    const {ttyId} = match.params;
    
 
     return (
@@ -14,7 +14,7 @@ const FacturaView = ({ match, user }) => {
             <embed 
             width="100%"
             height="600px"
-            src={`${API_HOST}/api/v1/facturas/get-pdf/${facturaId}/${user.auth_key}/${user.tin}`} 
+            src={`${API_HOST}/api/v1/ttys/get-pdf/${ttyId}/${user.auth_key}/${user.tin}`} 
             type="application/pdf" />
             
         </div>
@@ -25,4 +25,4 @@ const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser
 })
 
-export default connect(mapStateToProps)(FacturaView)
+export default connect(mapStateToProps)(TTYView)
