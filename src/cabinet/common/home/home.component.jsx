@@ -11,22 +11,34 @@ const { TabPane } = Tabs;
 
 const HomePage = ({ doc, hideTabs })=> {
 
+    const tabs = {
+        1: "in",
+        2: "out",
+        3: "saved",
+        4: "all"
+    }
+
     const { title, createTitle, createUrl, gridSourceUrl, gridConfig } = get_home_config(doc);
 
     const [dataSource, setDataSource] = useState([]);
 
     const [activeTab, setActiveTab] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true)
         axios({
             method: "get",
-            url: gridSourceUrl,
+            url: `${gridSourceUrl}?tab=${tabs[activeTab]}`,
         }).then(res=>{
             setDataSource(res.data)
+            setLoading(false)
         }).catch(err=>{
             console.log(err);
+            setLoading(false)
+
         })
-    }, [])
+    }, [activeTab])
 
     return (
         <div className="factura-home-page-container">
@@ -59,6 +71,7 @@ const HomePage = ({ doc, hideTabs })=> {
                 
                 <div>
                     <DynaGrid
+                        loading={loading}
                         dataSource={dataSource}
                         config={gridConfig}
                     />

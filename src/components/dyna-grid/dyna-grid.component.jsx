@@ -23,6 +23,7 @@ import {
 import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 
 const DynaGrid = ({
+  loading,                //loading state of table
   currentUser,            //Provided by the comonent
   match,                  //Provided by the comonent
   setItemToBeEdited,      //Provided by the comonent
@@ -420,6 +421,7 @@ const DynaGrid = ({
         </div>
       </div>
       <Table
+        loading={loading}
         rowKey="id"
         onChange={handleChange} 
         bordered 
