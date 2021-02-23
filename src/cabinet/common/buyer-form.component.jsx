@@ -26,10 +26,10 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
           url: 
           //"http://cabinet.ahadjon.onlinefactura.uz/api/get-company",
           `/api/v1/companies/tin/${e.target.value}`,
-          method: "POST",
-          headers:{
-            "Content-Type":"application/x-www-form-urlencoded"
-          },
+          method: "GET",
+          // headers:{
+          //   "Content-Type":"application/x-www-form-urlencoded"
+          // },
           data: {
             tin: e.target.value
           }
@@ -47,6 +47,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
             directorName,
             directorTin, 
             regCode } = res.data;
+
           let data = {
             buyerTin: tin,
             buyerAccountant: accountant,
