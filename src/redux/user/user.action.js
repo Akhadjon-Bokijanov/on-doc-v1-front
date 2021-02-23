@@ -14,3 +14,8 @@ export const setUser = user=>({
     type: USER_ACTIONS.SET_USER_ONLY,
     payload: user
 })
+
+export const setCabinetData = data=>({
+    type: USER_ACTIONS.SET_CABINET_DATA,
+    payload: data
+})

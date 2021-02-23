@@ -21,6 +21,7 @@ import {
   } from '@ant-design/icons';
 //import { RESOURCES_PATH } from '../../env';
 import RichTextParser from '../rich-text-parser/rich-text-parser.component';
+import { useEffect } from 'react';
 
 const DynaGrid = ({
   loading,                //loading state of table
@@ -30,8 +31,9 @@ const DynaGrid = ({
   triggerAction,          //Provided by the comonent, redux action consumer
   triggerActionWithPayload, //Provided by comonent, redux action and payload consumer
   title,                  //title of DynaGrid
-  dataSource,             //data source for the component
+  //dataSource,             //data source for the component
   config:{                //Config object
+    dataSourcePath,       //data source path for the table should be pagination
     addElementViewPath,     //add element to the core
     deleteRequestPath,    //delete request path for API server 
     replaceInViewPath,
@@ -72,8 +74,39 @@ const DynaGrid = ({
   const [searchedColumn, setSearchedColumn] = useState('');
   const [filteredInfo, setFilteredInfo] = useState(null);
   const [isFulliew, toggleFullView] = useState(false);
+  
+  const [pagination, setPagination] = useState({current: 1, pageSize: 10})
+  const [totalDataCount, setTotalDataCount] = useState(0);
+  const [ajaxDataSource, setAjaxDataSource] = useState([])
+  const [loadingSource, setLoadingResource] = useState(false);
+
 
   let searchInput = null;
+
+  //#region PAGINATION PART
+  useEffect(()=>{
+
+    let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&search=${searchText}&searchFrom=${searchedColumn}` : ''}`
+
+    setLoadingResource(true)
+    axios({
+      url: url.replace(/[ ]+/g, ""),
+      method: "GET"
+    }).then(res=>{
+
+      if (Array.isArray(res.data.data)){
+        setAjaxDataSource(res.data.data);
+        setTotalDataCount(res.data.total)
+      }else{
+        console.log(res);
+      }
+      setLoadingResource(false)
+    }).catch(error=>{
+      console.log(error);
+      setLoadingResource(false)
+    })
+  }, [pagination, dataSourcePath, searchText, searchedColumn])
+  //#endregion PAGINATION PART
 
   
   //#region PopConfirm functions
@@ -207,7 +240,7 @@ const DynaGrid = ({
 
   const handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
-    
+    setPagination(pagination)
     setFilteredInfo(filters);
     //setSortedInfo(sorter);
 
@@ -236,7 +269,11 @@ const DynaGrid = ({
     {
       columns[index] = {...columns[index], 
         filters: element.filters.map(univer=>({text: univer.text ?? univer, value: univer.value ?? univer})), 
-        onFilter: (value, record) => record[element.dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),}
+        onFilter: (value, record) => {
+          setSearchText(value.toString().toLowerCase())
+          setSearchedColumn(element.dataIndex)
+          return ajaxDataSource;
+        }}//record[element.dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),}
     }
 
     if(element.isBoolean){
@@ -421,14 +458,16 @@ const DynaGrid = ({
         </div>
       </div>
       <Table
-        loading={loading}
+        
+        loading={loadingSource}
         rowKey="id"
         onChange={handleChange} 
         bordered 
+        pagination={pagination}
         columns={columns} 
-        dataSource={dataSource} 
+          dataSource={ajaxDataSource} 
         scroll={{ x: allColumns.length * 120, }}//y: window.innerHeight - window.innerHeight / 13 }} 
-        pagination={{position: ['bottomCenter']}}
+        pagination={{position: ['bottomCenter'], total: totalDataCount}}
       />
     </div>);
   }

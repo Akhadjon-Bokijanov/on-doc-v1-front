@@ -3,26 +3,18 @@ import axios from 'axios';
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 import AdminCard from '../../components/admin-card/admin-card.component';
 import DynaGrid from '../../components/dyna-grid/dyna-grid.component';
+import { selectCabinetData } from '../../redux/user/user.selector';
 import './home.component.scss';
 
-const CabinetHome = () => {
+const CabinetHome = ({ cabinetData }) => {
 
-    const [gridDataSource, setGridDataSource] = useState([]);
     const [activeTab, setActiveTab] = useState(0)
-    useEffect(()=>{
-        axios({
-            url: `/api/v1/cabinet/${activeTab}`,
-            method: "GET"
-        }).then(res=>{
-            setGridDataSource(res.data.docs)
-        }).catch(er=>{
-            console.log(er);
-        })
-    }, [activeTab])
-
+    const { income, outcome, rejected, saved } = cabinetData ?? {};
     const TabList= {
         0: "Kiruvchi hujjatlar",
         1: "Chiquvchi hujjatlar",
@@ -33,7 +25,7 @@ const CabinetHome = () => {
     const list_of_docs = [
         {
             title: "Kiruvchi",
-            count: 24,
+            count: income,
             icon: "cloud-download-alt",
             color: "purple",
             footer: "Faktura yaratish",
@@ -41,7 +33,7 @@ const CabinetHome = () => {
         },
         {
             title: "Chiquvchi",
-            count: 39,
+            count: outcome,
             icon: "cloud-upload-alt",
             color: "green",
             footer: "Shartnoma yaratish",
@@ -49,7 +41,7 @@ const CabinetHome = () => {
         },
         {
             title: "Rad etilgan",
-            count: 19,
+            count: rejected,
             icon: "ban",
             color: "pink",
             footer: "Akt yaratish",
@@ -57,7 +49,7 @@ const CabinetHome = () => {
         },
         {
             title: "Saqlangan",
-            count: 30,
+            count: saved,
             icon: ["far", "bookmark"],
             color: "orange",
             footer: "Ishonchnoma yaratish",
@@ -67,7 +59,7 @@ const CabinetHome = () => {
     ]
 
     const dyna_config = {
-        deleteRequestPath: 'ES/api/blogs',
+        dataSourcePath: `/api/v1/cabinet/${activeTab}?hi`,
         addActionPath: 'actions/add',
         viewActionPath: '/cabinet/{docType}/view',
         replaceInViewPath: "docType",
@@ -151,7 +143,6 @@ const CabinetHome = () => {
                 </Row>
                 <DynaGrid
                     title={TabList[activeTab]}
-                    dataSource={gridDataSource} 
                     config={dyna_config}
                 />
             </div>
@@ -159,4 +150,9 @@ const CabinetHome = () => {
     )
 }
 
-export default CabinetHome
+
+const mapStateToProps = createStructuredSelector({
+    cabinetData: selectCabinetData
+})
+
+export default connect(mapStateToProps)(CabinetHome)

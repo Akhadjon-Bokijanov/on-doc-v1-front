@@ -11,3 +11,8 @@ export const selectToken = createSelector(
     [selectUser],
     user => user.token
 )
+
+export const selectCabinetData = createSelector(
+    [selectUser],
+    user=>user.cabinetData
+)

@@ -3,11 +3,15 @@ import USER_ACTIONS from "./user.action-types";
 const INITIAL_STATE = {
     currentUser: null,
     token: null,
+    cabinetData: null,
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+
+        case USER_ACTIONS.SET_CABINET_DATA:
+            return { ...state,  cabinetData: action.payload}
 
         case USER_ACTIONS.SET_USER_ONLY:
             return {...state, 

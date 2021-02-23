@@ -6,8 +6,10 @@ import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import './right-sidebar.style.scss';
 import { IMPORTANCE } from '../../env';
+import { setCabinetData } from '../../redux/user/user.action';
+import { connect } from 'react-redux';
 
-const RightSidebar = ({ location, admin }) => {
+const RightSidebar = ({ location, admin, setData }) => {
 
     
 
@@ -44,6 +46,7 @@ const RightSidebar = ({ location, admin }) => {
             url: "/api/v1/cabinet"
         }).then(res=>{
             const { notifications } = res.data
+            setData(res.data)
             setNotifications(notifications);
             if(Array.isArray(notifications) && notifications.length){
                 setShowModal(true)
@@ -135,4 +138,9 @@ const RightSidebar = ({ location, admin }) => {
     )
 }
 
-export default withRouter(RightSidebar);
+
+const mapDispatchToProps = dispatch =>({
+    setData: data => dispatch(setCabinetData(data))
+})
+
+export default connect(null, mapDispatchToProps)(withRouter(RightSidebar));
