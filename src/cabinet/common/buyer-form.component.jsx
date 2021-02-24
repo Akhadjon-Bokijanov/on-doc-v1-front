@@ -21,7 +21,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
     console.log(e.target.value)
     if (!isNaN(e.target.value)) {
       if (e.target.value > 100000000 && e.target.value <= 999999999) {
-        delete axios.defaults.headers.common["Authorization"]
+        //delete axios.defaults.headers.common["Authorization"]
         axios({
           url: 
           //"http://cabinet.ahadjon.onlinefactura.uz/api/get-company",
