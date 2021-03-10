@@ -1,7 +1,8 @@
 import React, { useState }  from 'react';
 import { Twirl as Hamburger } from 'hamburger-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './header.style.scss';
+import LanguagesDropdown from "../language-dropdown/locale-dropdown";
 
 import LeftSidebar from '../left-sidebar/left-sidebar.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,19 +12,21 @@ import { selectCurrentUser } from '../../redux/user/user.selector';
 import { logOut } from '../../redux/user/user.action';
 import { connect } from 'react-redux';
 
-const Header = ({ user, logOut})=>{
+const Header = ({ user, logOut, location})=>{
 
     window.onscroll = ()=>setActive(false);
     const [active, setActive] = useState(false);    
     return(<div><div className="header-main-component-container-main">
+            <div style={{textAlign: "right", padding: '5px 40px', backgroundColor: 'rgba(0,0,0,0.1)'}}>Call center: +998 71 123 45 67</div>
         <div className="header-main-component-container">
             <div className="header-main-conatainer">
                 <span>
                     <Link to="/">
-                        <img className="logo-on-doc-img" src="/assests/logo.png" alt="logo On Doc"/>
+                        <img className="logo-on-doc-img" src="/assests/logo.png" alt="logo On Doc" /> <span style={{fontSize: 27, color: 'black', fontWeight: "bold"}}>Online<span style={{ color: "rgb(0,174,255)" }}>Factura</span></span>
                     </Link>
                 </span>
                 <div className="heasder-actions-con">
+                    <LanguagesDropdown />
                     {
                         user ?
                         <div className="header-action">
@@ -47,7 +50,12 @@ const Header = ({ user, logOut})=>{
                         </Link>
                     </Tooltip>
                     }
-                    <Hamburger className="burger-main" toggled={active} toggle={setActive} />
+                    {
+                        //console.log(location)
+                        location.pathname.includes("/cabinet")
+                            ? <Hamburger className="burger-main" toggled={active} toggle={setActive} />
+                            :null
+                    }
                 </div>
             </div>
         </div>
@@ -65,4 +73,4 @@ const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
