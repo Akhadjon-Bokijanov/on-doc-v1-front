@@ -10,7 +10,7 @@ import ContractIndexRouter from './contract/index.router';
 import TTYIndexRouter from './tty/index.router';
 import './create.style.scss';
 import Notifications from './notifications/notifications.component';
-import AccountForm from './account-form/account-form.component';
+import ProfileComponent from './profile/profile.component';
 
 const CabinetIndex = ({ match }) => {
     return (
@@ -34,7 +34,7 @@ const CabinetIndex = ({ match }) => {
 
                     <Route path={`${match.path}/notifications`} component={ Notifications } />
 
-                    <Route path={`${match.path}/profile`} component={ AccountForm } />
+                    <Route path={`${match.path}/profile`} component={ ProfileComponent } />
                </Col>
             </Row>
         </div>

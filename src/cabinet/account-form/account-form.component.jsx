@@ -70,7 +70,7 @@ const AccountForm = ({user, setUserOnly}) => {
     ]
 
     return (
-        <div className="factura-data-sheet-container" style={{ margin: 15 }}>
+        
             <Form
                 initialValues={user}
                 onFinish={onSubmit}
@@ -120,7 +120,6 @@ const AccountForm = ({user, setUserOnly}) => {
                    </Col>
                 </Row>
             </Form>
-        </div>
     )
 }
 

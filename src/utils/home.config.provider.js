@@ -1,6 +1,42 @@
 export const get_home_config = doc => {
     switch (doc) {
 
+        case "user-products":
+            return {
+                title: "Maxsulotlaringiz",
+                createTitle: "Maxsulotlarni yuklash",
+                gridSourceUrl: "/api/v1/products",
+                createUrl: "/cabinet/products",
+                gridConfig: {
+                    deleteRequestPath: 'api/v1/user-products',
+                    deleteConfirmText: "Shu productni ochirilsinmi?",
+                    actions: {
+                        delete: true,
+                    },
+                    allColumns: [{
+                        title: "Katalog kodi",
+                        dataIndex: 'CatalogCode',
+                        isSearchable: true,
+                        width: 200
+                    },
+                    {
+                        title: "Klass kodi",
+                        dataIndex: 'ClassCode',
+                        isSearchable: true,
+                        width: 200
+                    },
+                    {
+                        title: "Nomi",
+                        dataIndex: 'CatalogName',
+                        isSearchable: true,
+                        width: 300,
+                        
+
+                    },
+                    ]
+                }
+            }
+
         case 'notification':
             return {
                 title: "Notifications",
