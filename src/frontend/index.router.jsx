@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import Home from './home/home.component'
 import Login from './login/login.component'
 import { selectCurrentUser } from '../redux/user/user.selector'
+import ChooseCompany from './choose_company/choose-company.component'
 
 const FrontIndexRouter = ({ match, user }) => {
     console.log(user)
@@ -12,6 +13,11 @@ const FrontIndexRouter = ({ match, user }) => {
         <div>
             <Route exact path={`${match.path}`} component={ Home } />
             {/* <Route exact path={`${match.path}/login`} component={ Login } /> */}
+            <Route
+                exact="choosecompany"
+                path={`${match.path}/choosecompany`}
+                component={ChooseCompany}
+            />
             <Route 
                 exact 
                 path={`${match.path}/login`} 

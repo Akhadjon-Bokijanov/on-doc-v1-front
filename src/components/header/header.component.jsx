@@ -26,6 +26,13 @@ const Header = ({ user, logOut, location})=>{
                     </Link>
                 </span>
                 <div className="heasder-actions-con">
+                    {
+                        user ?
+                            <div className="header-action" style={{display: "flex", alignItems: "center"}}>
+                                <FontAwesomeIcon className="header-action-icon" icon="wallet" />  <strong style={{marginLeft: 10}}> 40500.00</strong>
+                            </div>
+                            :null
+                    }
                     <LanguagesDropdown />
                     {
                         user ?

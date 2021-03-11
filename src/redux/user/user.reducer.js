@@ -4,11 +4,15 @@ const INITIAL_STATE = {
     currentUser: null,
     token: null,
     cabinetData: null,
+    userCompanies: []
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+
+        case USER_ACTIONS.SET_USER_COMPANIES:
+            return { ...state, userCompanies: action.payload }
 
         case USER_ACTIONS.SET_CABINET_DATA:
             return { ...state,  cabinetData: action.payload}

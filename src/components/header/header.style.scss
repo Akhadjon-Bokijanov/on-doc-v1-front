@@ -21,12 +21,13 @@
             .heasder-actions-con {
                 display: flex;
                 justify-content: space-between;
-                max-width: 400px;
+                max-width: 50vw;
                 align-items: center;
+                margin-right: 30px;
                 .header-action-icon {
                     font-size: 25px;
                     color: #999999;
-                    margin-right: 30px;
+                    
                 }
                 .header-action {
                     margin-right: 30px;

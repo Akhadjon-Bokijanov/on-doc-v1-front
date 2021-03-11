@@ -28,14 +28,8 @@ const LeftSidebar = ({ active })=>{
                             <Link to="/cabinet/profile"><FontAwesomeIcon icon="user-cog" /></Link>
                         </Tooltip>
                     </div>
-                    <div>
-                        <Tooltip title="Xavfsizlik" color="#0075ff" placement="left">
-                            <Link to="/home/certificate"><FontAwesomeIcon icon="certificate" /></Link>
-                        </Tooltip>
-                        </div>
-                    <div><Link to="/home/quality"><FontAwesomeIcon icon="check-square" /></Link></div>
+                    
                     <div><Link to="/home/faq"><FontAwesomeIcon icon="question-circle" /></Link></div>
-                    <div><Link to="/home/someurl"><FontAwesomeIcon icon="address-card" /></Link></div>
                 </div>
             </div>
     )

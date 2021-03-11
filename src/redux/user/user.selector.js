@@ -16,3 +16,8 @@ export const selectCabinetData = createSelector(
     [selectUser],
     user=>user.cabinetData
 )
+
+export const selectUserCompanies = createSelector(
+    [selectUser],
+    user=>user.userCompanies
+)

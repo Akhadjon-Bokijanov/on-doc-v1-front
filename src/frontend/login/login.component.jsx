@@ -4,14 +4,15 @@ import axios from 'axios';
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { succesLogIn } from '../../redux/user/user.action';
+import { setUserCompanies, succesLogIn } from '../../redux/user/user.action';
 import { EIMZOClient } from '../../utils/e-imzo';
 import moment from 'moment';
 import './login.style.scss'
+import { withRouter } from 'react-router-dom';
 
 const { Option } = Select;
 
-const Login = ({ setCurrentUser }) => {
+const Login = ({ setCurrentUser, history, setUserComps }) => {
 
     const [eKeys, setEKeys] = useState([])
 
@@ -57,6 +58,19 @@ const Login = ({ setCurrentUser }) => {
         }).then(res => {
             setCurrentUser(res.data)
             setIsLoading(false)
+            setUserComps([
+                {
+                    name: "Tech Stack ma'sulyati cheklangan jamiyati",
+                    tin: 307607131,
+                    id: 1
+                },
+                {
+                    name: "Updated User",
+                    tin: 518059386,
+                    id: 2
+                }
+            ])
+            history.push("/home/choosecompany")
         }).catch(err => {
             console.log(err)
             setIsLoading(false)
@@ -213,7 +227,8 @@ const Login = ({ setCurrentUser }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentUser: (data) => dispatch(succesLogIn(data))
+    setCurrentUser: (data) => dispatch(succesLogIn(data)),
+    setUserComps: data=>dispatch(setUserCompanies(data))
 })
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(null, mapDispatchToProps)(withRouter(Login))

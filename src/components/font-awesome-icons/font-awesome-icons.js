@@ -17,7 +17,9 @@ import {
     faFileInvoiceDollar,
     faSignInAlt,
     faCloudDownloadAlt,
-    faCloudUploadAlt
+    faCloudUploadAlt,
+    faWallet,
+    faArrowCircleLeft
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -64,5 +66,7 @@ library.add(
     faCloudDownloadAlt,
     faCloudUploadAlt,
     faTimesCircle,
-    faBell
+    faBell,
+    faWallet,
+    faArrowCircleLeft
 )
