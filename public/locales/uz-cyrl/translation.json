@@ -1,0 +1,138 @@
+{   
+    "llc": "LLC",
+
+    "home": {
+        "title": "EduStack for you!",
+        "register": "Register now",
+        "pro_ser": "Products and services",
+        "ser_title1": "Accelarate your business!",
+        "ser_title2": "Do not wait till quarantine is over!",
+        "ser_title3": "Be in progress: ask questions, answer questions, take tests!",
+        "ser_desc1": "You can offer your courses and resources as an individual, educational center or university",
+        "ser_desc2": "We have thousands of resources to read, watch and learn! We will provide you recent news concerning education.",
+        "ser_desc3": "EduStack provides you a community to ask your questions which can be answered by firiends, tutors, specialists. Moreover, you can take tests to measure your progress!"
+    },
+
+    "sidebar":{
+        "new": "News",
+        "cou": "Courses",
+        "exe": "Exercises",
+        "res": "Resources",
+        "sur": "Surveys",
+        "blo": "Blogs & Articles",
+        "com": "Community",
+        "abo": "About",
+        "adm": "Dashboard",
+        "in": "Log in",
+        "out": "Log out"
+    },
+
+    "news": {
+        "break": "Breaking news",
+        "cat": "Categories",
+        "univ": "Universities",
+        "recent": "Recent news",
+        "copyurl": "Copy Url",
+
+        "education": "Education",
+        "sport": "Sport",
+        "social": "Social",
+        "health": "Health",
+        "general": "General"
+    },
+
+    "exercises": {
+        "allTime": "Allocated time",
+        "price": "Price",
+        "by": "By",
+
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced",
+        "professional": "Professional",
+        
+        "start": "Start exercise!",
+        "cancel": "Cancel",
+        "goToYours": "Go to started exercise!",
+        "timeLeft": "Time left"
+    },
+
+    "sign": {
+        "haveAccTit": "I already have an account.",
+        "haveAccDesc": "Sign in with your email and password!",
+        "email": "Email",
+        "pass": "Password",
+        "rem": "Remember me",
+        "forgot": "Forgot password?",
+        "login": "Log in",
+        "noAccTit": "I do not have an account.",
+        "noAccDesc": "Sign up with your email and password!",
+        "firstName": "Firstname",
+        "lastName": "Lastname",
+        "confirmPass": "Confirm password",
+        "selUserRole": "Select a user role",
+        "user": "User",
+        "coll": "Collaborator",
+        "agree": "I have read the agreement",
+        "reg": "Register",
+        "accept": "Should accept agreement",
+        "matchPas": "The two passwords that you entered do not match!"
+    },
+
+    "categories": {
+        "ielts": "IELTS",
+        "math": "Math",
+        "chemistry": "Chemistry",
+        "it": "IT",
+        "logic": "Logic",
+        "physics": "Physics",
+        "designing": "Designing",
+        "law": "Law",
+        "economics": "Economics",
+        "literature": "Literature",
+        "linguistics": "Linguistics",
+        "educational": "Educational",
+        "history": "History",
+        "other": "Other"
+    },
+
+    "forms": {
+        "subm_btn": "Submit",
+        "can_btn": "Go back",
+        "val_mes": "This field is required!",
+        "invalid_inp_mes": "Invalid input!",
+        "drag_dr_text": "Click or drag file to this area to upload",
+
+        "add_btn": "Add field",
+        "add_ques_btn": "Add question",
+        "add_opt_btn": "Add option",
+        "is_true": "Is true ?",
+        "que_lb": "Question",
+        "an_type": "Answer type",
+        "is_req_field": "is it required field?",
+        "sing_choice": "Single choice",
+        "multi_choice": "Multiple choice",
+        "short_text": "Short text",
+        "long_text": "Long text",
+        "lvl_ans": "Level",
+        "rt_ans": "Rate",
+        "dt_ans": "Date",
+        "opt_lb": "Option",
+        "ent_right": "Enter right answer or answers with ';' semicolon ",
+        "ent_right1": "Enter the right answer",
+        "file_rule": "Please, your file size should not exceed than 160GB!",
+
+        "news_fr" : {
+            "edit_tit": "Edit news",
+            "add_tit": "Add news",
+            "tit_lb": "Title",
+            "subt_lb": "Subtitle",
+            "imp_lb": "Is important?",
+            "cat_lb": "Category",
+            "img_lb": "Image",
+            "org_lb": "Organization",
+            "det_lb": "Detail"
+        }
+    }
+
+}

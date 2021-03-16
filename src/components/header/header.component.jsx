@@ -51,16 +51,15 @@ const Header = ({ user, logOut, location})=>{
                                 </div>
                             </Tooltip>
                         </div>
-                        : <Tooltip title="Tizimga kirish">
-                        <Link to="/home/login">
-                            <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />
-                        </Link>
-                    </Tooltip>
+                        : <div className="header-action">
+                                <Tooltip title="Tizimga kirish">
+                                    <Link to="/home/login">
+                                        <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />
+                                    </Link>
+                                </Tooltip>
+                        </div>
                     }
-                    {
-                        //console.log(location)
-                        <Hamburger className="burger-main" toggled={active} toggle={setActive} />
-                    }
+                    <Hamburger className="burger-main" toggled={active} toggle={setActive} />
                 </div>
             </div>
         </div>

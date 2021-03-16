@@ -16,6 +16,12 @@ const LanguagesDropdown = ({ locale, changeLocale }) => {
                 }}>
                 <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src="/images/uz.png" /> O'zb
             </Menu.Item>
+            <Menu.Item onClick={() => {
+                //changeLocale('uz');
+                //i18n.changeLanguage('uz')
+            }}>
+                <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src="/images/uz.png" /> Ўзб
+            </Menu.Item>
             <Menu.Item onClick={() => { 
                 //changeLocale('ru'); 
                 //i18n.changeLanguage('ru') 
