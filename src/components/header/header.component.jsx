@@ -59,9 +59,7 @@ const Header = ({ user, logOut, location})=>{
                     }
                     {
                         //console.log(location)
-                        location.pathname.includes("/cabinet")
-                            ? <Hamburger className="burger-main" toggled={active} toggle={setActive} />
-                            :null
+                        <Hamburger className="burger-main" toggled={active} toggle={setActive} />
                     }
                 </div>
             </div>
