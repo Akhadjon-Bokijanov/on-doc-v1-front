@@ -17,7 +17,7 @@ const Header = ({ user, logOut, location})=>{
     window.onscroll = ()=>setActive(false);
     const [active, setActive] = useState(false);    
     return(<div><div className="header-main-component-container-main">
-            <div style={{textAlign: "right", padding: '5px 40px', backgroundColor: 'rgba(0,0,0,0.1)'}}>Call center: +998 71 123 45 67</div>
+            <div style={{textAlign: "right", padding: '5px 40px', backgroundColor: 'rgba(0,0,0,0.1)'}}>Call center: +998 71 200 11 22</div>
         <div className="header-main-component-container">
             <div className="header-main-conatainer">
                 <span>
