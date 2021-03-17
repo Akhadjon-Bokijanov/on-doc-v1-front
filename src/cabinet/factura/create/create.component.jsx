@@ -17,18 +17,21 @@ import {
   FullscreenOutlined, 
   FullscreenExitOutlined, 
   } from '@ant-design/icons';
-import { convertProductsToGrid, FIRST_FACTURA_GRID_ROW } from '../../../utils/main';
+import { convertProductsToGrid } from '../../../utils/main';
 import PersonFetch from '../../common/person-fetch/person-fetch.component';
+import {useTranslation} from "react-i18next";
 
 const { Option } = Select;
 
 const FacturaCreateForm = ({ token, match })=> {
 
+    const {t, i18n} = useTranslation();
   const [form] = Form.useForm();
   const { facturaId } = match.params;
   const [initialData, setInitialData] = useState({facturaType: 0})
   const [facturaType, setFacturaType] = useState();
   const [saveLoading, setSaveLoading] = useState(false);
+
 
   useEffect(()=>{
     if(facturaId){
@@ -59,7 +62,7 @@ const FacturaCreateForm = ({ token, match })=> {
   
 
   const validateMessages = {
-    required: 'Bu maydon majburiy!',
+    required: t('Bu maydon majburiy!'),
     types: {
       email: '${label} is not a valid email!',
       number: '${label} is not a valid number!',
@@ -80,9 +83,22 @@ const FacturaCreateForm = ({ token, match })=> {
 
   const [fullView, toglleFullView] = useState(false)
 
-
   const [grid, setGrid] = useState([
-    FIRST_FACTURA_GRID_ROW,
+      [
+          { readOnly: true, value: '', width: 50 },
+          { value: t('Tovar/xizmat nomi'), readOnly: true, width: 200 },
+          { value: t('Tovar/xizmatlar yagona elektron milliy katalog identifikatsiya kodi'), readOnly: true, width: 150 },
+          { value: t('Tovar/xizmat shtrix kodi'), readOnly: true, width: 100 },
+          { value: t("O'lchov birligi"), readOnly: true, width: 100 },
+          { value: t("Miqdori"), readOnly: true, width: 100 },
+          { value: t("Narxi"), readOnly: true, width: 100 },
+          { value: t("Aksiz soliq (%)"), readOnly: true, width: 100 },
+          { value: t("Aksiz soliq, miqdori"), readOnly: true, width: 100 },
+          { value: t("Yetkazib berish narxi"), readOnly: true, width: 100 },
+          { value: t("QQS (%)"), readOnly: true, width: 100 },
+          { value: t("QQS, miqdori"), readOnly: true, width: 100 },
+          { value: t("Umumiy summa"), readOnly: true, width: 150 },
+      ],
     [
       { readOnly: true, value: 1 },                           //0 ordNo
       { value: "" },                                          //1 product name
@@ -145,15 +161,11 @@ const FacturaCreateForm = ({ token, match })=> {
     ], 
   ])
 
-
-
   //#region data-sheet methods
   const handleRemoveRow = (rowId)=>{
     console.log(rowId)
 
-    console.log(grid)
     grid.splice(rowId, 1)
-    console.log(grid)
     setGrid([...grid])
   }
 
@@ -220,14 +232,14 @@ const FacturaCreateForm = ({ token, match })=> {
         data: {factura: values, products: grid}
       }).then(res=>{
         if(res.data.ok){
-          message.success("Faktura o'zgartirildi!")
+          message.success(t("Faktura o'zgartirildi!"))
         }else{
-          message.error("Faktura o'zgartirishda xatolik!");
+          message.error(t("Faktura o'zgartirishda xatolik!"));
         }
         console.log(res)
         setSaveLoading(false);
       }).catch(err=>{
-        message.error("Faktura o'zgartirishda xatolik!");
+        message.error(t("Faktura o'zgartirishda xatolik!"));
         console.log(err)
         setSaveLoading(false);
       })
@@ -238,16 +250,16 @@ const FacturaCreateForm = ({ token, match })=> {
         data: {factura: values, products: grid}
       }).then(res=>{
         if(res.data.ok){
-          message.success("Faktura yaratili!")
+          message.success(t("Faktura yaratili!"))
         }
         else{
-          message.error("Faktura yaratishda xatolik!");
+          message.error(t("Faktura yaratishda xatolik!"));
         }
         console.log(res)
         setSaveLoading(false);
       }).catch(err=>{
         console.log(err)
-        message.error("Faktura yaratishda xatolik!");
+        message.error(t("Faktura yaratishda xatolik!"));
         setSaveLoading(false);
       })
     }
@@ -256,7 +268,6 @@ const FacturaCreateForm = ({ token, match })=> {
   }
 
   const handleImportExecl =(value)=>{
-    console.log("me fired")
 
     if(value.file.status=="done"){
       
@@ -288,7 +299,7 @@ const FacturaCreateForm = ({ token, match })=> {
       >
 
       <div className="factura-data-sheet-container">
-      <h3>Ҳужжат тури</h3>
+      <h3>{t("Hujjat turi")}</h3>
       <Row justify="space-between">
           <Col md={11}>
             <Form.Item>
@@ -301,14 +312,14 @@ const FacturaCreateForm = ({ token, match })=> {
                     bordered={false}
                     size="large"
                     placeholder="Faktura turi">
-                      <Option value={FACTURA_TYPES["STANDARD"]}>Standard</Option>
-                      <Option value={FACTURA_TYPES["QOSHIMCHA"]}>Qo'shimcha</Option>
-                      <Option value={FACTURA_TYPES["HARAJATLARNI QOPLASH"]}>Harajatni qoplash</Option>
-                      <Option value={FACTURA_TYPES["TOLOVSIZ"]}>To'lovsiz</Option>
-                      <Option value={FACTURA_TYPES["TUZATUVCHI"]}>Tuzatuvchi</Option>
+                      <Option value={FACTURA_TYPES["STANDARD"]}>{t("Standard")}</Option>
+                      <Option value={FACTURA_TYPES["QOSHIMCHA"]}>{t("Qo'shimcha")}</Option>
+                      <Option value={FACTURA_TYPES["HARAJATLARNI QOPLASH"]}>{t("Harajatni qoplash")}</Option>
+                      <Option value={FACTURA_TYPES["TOLOVSIZ"]}>{t("To'lovsiz")}</Option>
+                      <Option value={FACTURA_TYPES["TUZATUVCHI"]}>{t("Tuzatuvchi")}</Option>
                     </Select>
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura turi</span>
+                  <span className="custom-input-label-1">{t("Faktura turi")}</span>
             </Form.Item>
           </Col>
           <Col md={facturaType===FACTURA_TYPES["QOSHIMCHA"] || facturaType===FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
@@ -321,7 +332,7 @@ const FacturaCreateForm = ({ token, match })=> {
                     size="large"
                     placeholder="Eski faktura ID" />
               </Form.Item>
-                  <span className="custom-input-label-1">Eski faktura ID</span>
+                  <span className="custom-input-label-1">{t("Eski faktura ID")}</span>
               </Form.Item>
           </Col>
       </Row>  
@@ -334,9 +345,9 @@ const FacturaCreateForm = ({ token, match })=> {
                 name="facturaNo">
                   <Input
                     size="large"
-                    placeholder="Faktura raqami" />
+                    placeholder={t("Faktura raqami")} />
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura raqami</span>
+                  <span className="custom-input-label-1">{t("Faktura raqami")}</span>
               </Form.Item>
             </Col>
             <Col md={11}>
@@ -347,9 +358,9 @@ const FacturaCreateForm = ({ token, match })=> {
                 rules={[{required: true}]}>
                   <DatePicker                
                     size="large"
-                    placeholder="Faktura sanasi" />
+                    placeholder={t("Faktura sanasi")} />
               </Form.Item>
-                  <span className="custom-input-label-1">Faktura sanasi</span>
+                  <span className="custom-input-label-1">{t("Faktura sanasi")}</span>
               </Form.Item>
             </Col>
             <Col md={11}>
@@ -360,9 +371,9 @@ const FacturaCreateForm = ({ token, match })=> {
                 name="contractNo">
                   <Input
                     size="large"
-                    placeholder="Shartnoma raqami" />
+                    placeholder={t("Shartnoma raqami")} />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma raqami</span>
+                  <span className="custom-input-label-1">{t("Shartnoma raqami")}</span>
               </Form.Item>
             </Col>
             <Col md={11}>
@@ -373,9 +384,9 @@ const FacturaCreateForm = ({ token, match })=> {
                 name="contractDate">
                   <DatePicker
                     size="large"
-                    placeholder="Shartnoma sanasi" />
+                    placeholder={t("Shartnoma sanasi")} />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma sanasi</span>
+                  <span className="custom-input-label-1">{t("Shartnoma sanasi")}</span>
               </Form.Item>
             </Col>
           </Row>
@@ -405,12 +416,12 @@ const FacturaCreateForm = ({ token, match })=> {
                 accept=".xlsx, .xls" 
                 onChange={handleImportExecl}>
                 
-                  <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
+                  <Button style={{marginRight: 10}}>{t("Exceldan yuklash")}</Button>
                
               </Upload>
               <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
                 <Button >
-                  Shablon yuklash
+                    {t("Shablonni yuklash")}
                 </Button>
               </a>
             </div>
@@ -418,7 +429,7 @@ const FacturaCreateForm = ({ token, match })=> {
               type="primary"
               icon={fullView ? <FullscreenExitOutlined /> : <FullscreenOutlined />} 
               onClick={()=>toglleFullView(!fullView)}>
-                { fullView ? "Kichraytirish" : "Kengaytirish" }
+                { fullView ? t("Kichraytirish") : t("Kengaytirish") }
             </Button>
         </div>
         
@@ -439,7 +450,7 @@ const FacturaCreateForm = ({ token, match })=> {
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
           icon={["far", "plus-square"]} />} 
-        onClick={  handleAddRow }>Qo'shish</Button>
+        onClick={  handleAddRow }>{t("Qo'shish")}</Button>
       
       <Button 
         size="large" 
@@ -449,7 +460,7 @@ const FacturaCreateForm = ({ token, match })=> {
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
           icon={["far", "trash-alt"]} />} 
-        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
+        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>{t("Oxirgi qatorni o'chirish")}</Button>
       </div>
           
         <div className="factura-data-sheet-container">
@@ -462,9 +473,9 @@ const FacturaCreateForm = ({ token, match })=> {
               name="empowermentNo">
                 <Input
                   size="large"
-                  placeholder="Ишончнома рақами" />
+                  placeholder={t("Ishonchnoma raqami")} />
               </Form.Item>
-                <span className="custom-input-label-1">Ишончнома рақами</span>
+                <span className="custom-input-label-1">{t("Ishonchnoma raqami")}</span>
               </Form.Item>
             </Col>
             <Col md={5}>
@@ -474,17 +485,17 @@ const FacturaCreateForm = ({ token, match })=> {
               name="empowermentDateOfIssue">
                 <DatePicker
                   size="large"
-                  placeholder="Ишончнома санаси" />
+                  placeholder={t("Ishonchnoma sanasi")} />
               </Form.Item>
-                <span className="custom-input-label-1">Ишончнома санаси</span>
+                <span className="custom-input-label-1">{t("Ishonchnoma sanasi")}</span>
               </Form.Item>
             </Col>
             <Col md={12}>
               <PersonFetch 
                 pName="agentFio"
                 pTin="agentTin"
-                nameLabel="Масъул шахснинг Ф.И.Ш.и"
-                tinLabel="СТИР"
+                nameLabel={t("Ma'sul shaxs FIO")}
+                tinLabel={t("STIR")}
                 tinCol={11}
                 nameCol={11}
                 form={form}
@@ -503,9 +514,9 @@ const FacturaCreateForm = ({ token, match })=> {
     name="notes">
       <Input
         size="large"
-        placeholder="Қўшимча майдон" />
+        placeholder={t("Qo'shimcha ma'lumotlar")} />
     </Form.Item>
-      <span className="custom-input-label-1">Қўшимча майдон</span>
+      <span className="custom-input-label-1">{t("Qo'shimcha ma'lumotlar")}</span>
     </Form.Item>
   </Col>
   
@@ -521,7 +532,7 @@ const FacturaCreateForm = ({ token, match })=> {
                   className="factra-action-btns save-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons"  />}>
-                    Сақлаб қолиш
+                    {t("Saqlash")}
                   </Button>
               </Col>
               <Col>
@@ -529,7 +540,7 @@ const FacturaCreateForm = ({ token, match })=> {
                   className="factra-action-btns sing-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
-                    Имзолаш
+                    {t("Imzolash")}
                   </Button>
               </Col>
               <Col>
@@ -538,7 +549,7 @@ const FacturaCreateForm = ({ token, match })=> {
                   danger 
                   className="factra-action-btns" 
                   size="large">
-                    Бекор қилиш
+                    {t("Bekor qilish")}
                   </Button>
               </Col>
             </Row>

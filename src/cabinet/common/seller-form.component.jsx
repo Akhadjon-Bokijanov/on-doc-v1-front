@@ -4,15 +4,18 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
 import PersonFetch from './person-fetch/person-fetch.component';
+import {useTranslation} from "react-i18next";
 
 const SellerForm = ({ user, docType, form }) => {
+
+    const {t} = useTranslation();
 
   const { tin, name, fullName, regCode, mfo, account, address, directorName, directorTin, accountant, phone } = user;
 
   return (
     <div>
 
-      <h3>Сизнинг маълумотларингиз</h3>
+      <h3>{t("Sizning ma'lumotlaringiz")}</h3>
 
       {
         docType=="contract" ?
@@ -20,8 +23,8 @@ const SellerForm = ({ user, docType, form }) => {
         form={form}
         nameCol={11}
         tinCol={11}
-        tinLabel="Jis.Shaxs STIR"
-        nameLabel="Jis.Shaxs FIO"
+        tinLabel={t("Jis.Shaxs STIR")}
+        nameLabel={t("Jis.Shaxs FIO")}
         pTin="sellerFizTin"
         pName="sellerFizFio"
       />
@@ -38,13 +41,13 @@ const SellerForm = ({ user, docType, form }) => {
           <Input
             disabled
             size="large"
-            placeholder="Sotuvchi INN" />
+            placeholder={t("STIR")} />
         </Form.Item>
-        <span className="custom-input-label-1">INN</span>
+        <span className="custom-input-label-1">{t("STIR")}</span>
       </Form.Item>
       {
         docType !== "contract" ?
-          <h3>Ташкилот</h3>
+          <h3>{t("Tashkilot")}</h3>
           : null
       }
       <Form.Item>
@@ -56,9 +59,9 @@ const SellerForm = ({ user, docType, form }) => {
           <Input
 
             size="large"
-            placeholder="Сотувчи номи" />
+            placeholder={t("Sotuvchi nomi")} />
         </Form.Item>
-        <span className="custom-input-label-1">Сотувчи номи</span>
+        <span className="custom-input-label-1">{t("Sotuvchi nomi")}</span>
       </Form.Item>
       {
         docType !== "act" ?
@@ -73,9 +76,9 @@ const SellerForm = ({ user, docType, form }) => {
                     initialValue={regCode}>
                     <Input
                       size="large"
-                      placeholder="ҚҚС тўловчисининг регистрация рақами" />
+                      placeholder={t("QQS tolovchi registratsiya raqami")} />
                   </Form.Item>
-                  <span className="custom-input-label-1">ҚҚС тўловчисининг регистрация рақами</span>
+                  <span className="custom-input-label-1">{t("QQS tolovchi registratsiya raqami")}</span>
                 </Form.Item>
             }
 
@@ -88,9 +91,9 @@ const SellerForm = ({ user, docType, form }) => {
                     initialValue={account}>
                     <Input
                       size="large"
-                      placeholder="Ҳисоб рақами" />
+                      placeholder={t("Hisob raqami")} />
                   </Form.Item>
-                  <span className="custom-input-label-1">Ҳисоб рақами</span>
+                  <span className="custom-input-label-1">{t("Hisob raqami")}</span>
                 </Form.Item>
               </Col>
               <Col md={11}>
@@ -103,9 +106,9 @@ const SellerForm = ({ user, docType, form }) => {
                         initialValue={phone}>
                         <Input
                           size="large"
-                          placeholder="Mobile phone" />
+                          placeholder={t("Telfon raqam")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">Mobile phone</span>
+                      <span className="custom-input-label-1">{t("Telfon raqam")}</span>
                     </Form.Item>
                     : <Form.Item>
                       <Form.Item
@@ -114,9 +117,9 @@ const SellerForm = ({ user, docType, form }) => {
                         initialValue={mfo}>
                         <Input
                           size="large"
-                          placeholder="МФО" />
+                          placeholder={t("MFO")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">МФО</span>
+                      <span className="custom-input-label-1">{t("MFO")}</span>
                     </Form.Item>
                 }
 
@@ -130,9 +133,9 @@ const SellerForm = ({ user, docType, form }) => {
                 <Input
                   rules={[{ required: true }]}
                   size="large"
-                  placeholder="Манзил" />
+                  placeholder={t("Manzil")} />
               </Form.Item>
-              <span className="custom-input-label-1">Манзил</span>
+              <span className="custom-input-label-1">{t("Manzil")}</span>
             </Form.Item>
             <Row justify="space-between">
               <Col md={11} >
@@ -143,9 +146,9 @@ const SellerForm = ({ user, docType, form }) => {
                     initialValue={directorName}>
                     <Input
                       size="large"
-                      placeholder="Директор" />
+                      placeholder={t("Direktor")} />
                   </Form.Item>
-                  <span className="custom-input-label-1">Директор</span>
+                  <span className="custom-input-label-1">{t("Direktor")}</span>
                 </Form.Item>
               </Col>
               <Col md={11}>
@@ -159,9 +162,9 @@ const SellerForm = ({ user, docType, form }) => {
                         initialValue={directorTin}>
                         <Input
                           size="large"
-                          placeholder="Директор INN" />
+                          placeholder={t("Direktor") + " " + t("STIR")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">Директор INN</span>
+                      <span className="custom-input-label-1">{t("Direktor")+ " " +t("STIR")}</span>
                     </Form.Item>
                     : <Form.Item>
                       <Form.Item
@@ -170,9 +173,9 @@ const SellerForm = ({ user, docType, form }) => {
                         initialValue={accountant}>
                         <Input
                           size="large"
-                          placeholder="Бош хисобчи" />
+                          placeholder={t("Bosh hisobchi")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">Бош хисобчи</span>
+                      <span className="custom-input-label-1">{t("Bosh hisobchi")}</span>
                     </Form.Item>
                 }
               </Col>

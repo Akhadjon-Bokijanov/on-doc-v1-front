@@ -1,6 +1,9 @@
 import moment from 'moment';
 import SelectMeasureEditor from '../components/data-sheet-custom-measure-selector/custom-selector.component';
 import SelectEditor from '../components/data-sheet-custom-selector/custom-selector.component';
+import i18n from "../translate";
+
+const t = i18n.t.bind(i18n)
 
 export const getFileExtension = filename => {
     return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2);
@@ -12,7 +15,7 @@ export const FIRST_TTY_GRID_ROW = [
     { readOnly: true, value: "ўлчов бирлиги.*", dataEditor: SelectMeasureEditor }, //2 measure
     { readOnly: true, value: 'миқдори' }, //3 count
     { readOnly: true, value: "Нарҳ*", }, //4 price
-    { readOnly: true, value: "Юкнинг умумий қиймати", readOnly: true }, //5 total
+    { readOnly: true, value: "Юкнинг умумий қиймати", }, //5 total
     { readOnly: true, value: 'етказиб бериш нарҳи*' }, //6 delivery cost
     { readOnly: true, value: "Юкка доир хужжатлар", }, //7 Docs
     { readOnly: true, value: "Массани аниқлаш усули", }, //8 weight measure method
@@ -23,18 +26,18 @@ export const FIRST_TTY_GRID_ROW = [
 
 export const FIRST_FACTURA_GRID_ROW = [
     { readOnly: true, value: '', width: 50 },
-    { value: 'Товар/хизмат лар номи*', readOnly: true, width: 200 },
-    { value: 'Товар/хизмат лар Ягона электрон миллий каталоги бўйича идентификация коди*', readOnly: true, width: 150 },
-    { value: 'Товар/хизмат штрих коди', readOnly: true, width: 100 },
-    { value: 'ўлчов бирлиги.*', readOnly: true, width: 100 },
-    { value: "миқдори", readOnly: true, width: 100 },
-    { value: "Нарҳ*", readOnly: true, width: 100 },
-    { value: "Акциз солиғи ставкаси (%)", readOnly: true, width: 100 },
-    { value: "Акциз, Миқдор", readOnly: true, width: 100 },
-    { value: "етказиб бериш нарҳи*", readOnly: true, width: 100 },
-    { value: "ққс, %", readOnly: true, width: 100 },
-    { value: "ққс, Миқдор*", readOnly: true, width: 100 },
-    { value: "Total*", readOnly: true, width: 150 },
+    { value: t('Tovar/xizmat nomi'), readOnly: true, width: 200 },
+    { value: t('Tovar/xizmatlar yagona elektron milliy katalog identifikatsiya kodi'), readOnly: true, width: 150 },
+    { value: t('Tovar/xizmat shtrix kodi'), readOnly: true, width: 100 },
+    { value: t("O'lchov birligi"), readOnly: true, width: 100 },
+    { value: t("Miqdori"), readOnly: true, width: 100 },
+    { value: t("Narxi"), readOnly: true, width: 100 },
+    { value: t("Aksiz soliq (%)"), readOnly: true, width: 100 },
+    { value: t("Aksiz soliq, miqdori"), readOnly: true, width: 100 },
+    { value: t("Yetkazib berish narxi"), readOnly: true, width: 100 },
+    { value: t("QQS (%)"), readOnly: true, width: 100 },
+    { value: t("QQS, miqdori"), readOnly: true, width: 100 },
+    { value: t("Umumiy summa"), readOnly: true, width: 150 },
 ];
 
 export const FIRST_ACT_GRID_ROW = [
