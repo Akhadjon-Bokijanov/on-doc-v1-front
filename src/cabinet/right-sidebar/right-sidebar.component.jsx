@@ -8,10 +8,11 @@ import './right-sidebar.style.scss';
 import { IMPORTANCE } from '../../env';
 import { setCabinetData } from '../../redux/user/user.action';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const RightSidebar = ({ location, admin, setData }) => {
 
-    
+    const { t } = useTranslation()
 
     const [active, setActive] = useState({})
     const [notifications, setNotifications] = useState([])
@@ -89,36 +90,36 @@ const RightSidebar = ({ location, admin, setData }) => {
                 <div className="cabinet-documents-action-containers-bloks">
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="home" /> Bosh sahifa
+                            <FontAwesomeIcon icon="home" /> {t("Bosh sahifa")}
                         </div>
                     </Link>
                     <Link to="/cabinet/factura">
                             <div className={`action-bloks ${active.factura ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="file-invoice" className="action-icon" /> Faktura
+                                <FontAwesomeIcon icon="file-invoice" className="action-icon" /> {t("Faktura")}
                                 <Badge style={{marginLeft: 10}} count={badgeCount.factura_awaiting} />
                             </div>
                     </Link>
                     <Link to="/cabinet/contract">
                         <div className={`action-bloks ${active.contract ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="file-contract" className="action-icon"/> Shartnoma
+                            <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Shartnoma")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.contract_awaiting} />
                         </div>
                     </Link>
                     <Link to="/cabinet/act">
                         <div className={`action-bloks ${active.act ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon={["far", "file-alt"]} className="action-icon"/> Akt
+                            <FontAwesomeIcon icon={["far", "file-alt"]} className="action-icon"/> {t("Akt")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.act_awaiting} />
                         </div>
                     </Link>
                     <Link to="/cabinet/empowerment">
                         <div className={`action-bloks ${active.empowerment ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="file-signature" className="action-icon"/>Ishonchnoma
+                            <FontAwesomeIcon icon="file-signature" className="action-icon"/>{t("Ishonchnoma")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.emp_awating} />
                         </div>
                     </Link>
                     <Link to="/cabinet/tty">
                         <div className={`action-bloks ${active.tty ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon={["far", "file-archive"]} className="action-icon"/> TTY
+                            <FontAwesomeIcon icon={["far", "file-archive"]} className="action-icon"/> {t("TTY")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.tty_awaiting} />
                         </div>
                     </Link>

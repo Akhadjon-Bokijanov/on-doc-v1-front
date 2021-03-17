@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -7,13 +7,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import './translate';
+import { Spin } from 'antd';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <PersistGate persistor={persistor}>
         <React.StrictMode>
-          <App />
+          <Suspense fallback={<Spin />}>
+            <App />
+          </Suspense>
         </React.StrictMode>
       </PersistGate>
     </BrowserRouter>

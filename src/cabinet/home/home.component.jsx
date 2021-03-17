@@ -10,21 +10,24 @@ import AdminCard from '../../components/admin-card/admin-card.component';
 import DynaGrid from '../../components/dyna-grid/dyna-grid.component';
 import { selectCabinetData } from '../../redux/user/user.selector';
 import './home.component.scss';
+import {useTranslation} from "react-i18next";
 
 const CabinetHome = ({ cabinetData }) => {
+
+    const {t} = useTranslation()
 
     const [activeTab, setActiveTab] = useState(0)
     const { income, outcome, rejected, saved } = cabinetData ?? {};
     const TabList= {
-        0: "Kiruvchi hujjatlar",
-        1: "Chiquvchi hujjatlar",
-        2: "Rad etilgan hujjatlar",
-        3: "Saqlangan hujjatlar"
+        0: t("Kiruvchi hujjatlar"),
+        1: t("Chiquvchi hujjatlar"),
+        2: t("Rad etilgan hujjatlar"),
+        3: t("Saqlangan hujjatlar")
     }
 
     const list_of_docs = [
         {
-            title: "Kiruvchi",
+            title: t("Kiruvchi"),
             count: income,
             icon: "cloud-download-alt",
             color: "purple",
@@ -32,7 +35,7 @@ const CabinetHome = ({ cabinetData }) => {
             create_url: "/cabinet/documents/waiting"
         },
         {
-            title: "Chiquvchi",
+            title: t("Chiquvchi"),
             count: outcome,
             icon: "cloud-upload-alt",
             color: "green",
@@ -40,7 +43,7 @@ const CabinetHome = ({ cabinetData }) => {
             create_url: "/cabinet/documents/signed"
         },
         {
-            title: "Rad etilgan",
+            title: t("Rad etilgan"),
             count: rejected,
             icon: "ban",
             color: "pink",
@@ -48,7 +51,7 @@ const CabinetHome = ({ cabinetData }) => {
             create_url: "/cabinet/documents/rejected"
         },
         {
-            title: "Saqlangan",
+            title: t("Saqlangan"),
             count: saved,
             icon: ["far", "bookmark"],
             color: "orange",
@@ -71,29 +74,29 @@ const CabinetHome = ({ cabinetData }) => {
         },
         allColumns: [
             {
-                title: "Hujjat №",
+                title: t("Hujjat №"),
                 dataIndex: 'docNo',
                 isSearchable: true,
             },
             {
-                title: "Hujjat turi",
+                title: t("Hujjat turi"),
                 dataIndex: "docType",
                 isFilterable: true,
                 filters: ['factura', 'act', 'contract', 'empowerment', "tty"]
             },
             {
-                title: "Kontrakt №",
+                title: t("Kontrakt №"),
                 dataIndex: 'contractNo',
                 isSearchable: true,
             },
             {
-                title: "Sotuvchi",
+                title: t("Kontragent"),
                 dataIndex: 'sellerName',
                 isSearchable: true,
                 width: 150
             },
             {
-                title: "Sotuvchi STIR",
+                title: t("Kontragent")+" "+t("STIR"),
                 dataIndex: "sellerTin",
                 isSearchable: true,
             },
@@ -109,7 +112,7 @@ const CabinetHome = ({ cabinetData }) => {
                 isSearchable: true,
             },
             {
-                title: "Holati",
+                title: t("Holati"),
                 dataIndex: "status",
                 isFilterable: true,
                 width: 70,
@@ -123,7 +126,7 @@ const CabinetHome = ({ cabinetData }) => {
                     {value: 7, text: "7-Muaffaqiyatli"}]
             },
             {
-                title: 'Yaratilgan sanasi',
+                title: t('Yaratilgan sana'),
                 dataIndex: "created_at",
                 dataType: 'date',
             },

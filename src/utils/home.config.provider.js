@@ -1,32 +1,38 @@
+import React from "react";
+import i18n from "../translate";
+
 export const get_home_config = doc => {
+
+    const t = i18n.t.bind(i18n)
+
     switch (doc) {
 
         case "user-products":
             return {
-                title: "Maxsulotlaringiz",
-                createTitle: "Maxsulotlarni yuklash",
+                title: t("Maxsulotlarim"),
+                createTitle: t("Maxsulotlarni yuklash"),
                 gridSourceUrl: "/api/v1/products",
                 createUrl: "/cabinet/products",
                 gridConfig: {
                     deleteRequestPath: 'api/v1/user-products',
-                    deleteConfirmText: "Shu productni ochirilsinmi?",
+                    deleteConfirmText: t("Shu productni ochirilsinmi?"),
                     actions: {
                         delete: true,
                     },
                     allColumns: [{
-                        title: "Katalog kodi",
+                        title: t("Katalog kodi"),
                         dataIndex: 'CatalogCode',
                         isSearchable: true,
                         width: 200
                     },
                     {
-                        title: "Klass kodi",
+                        title: t("Klass kodi"),
                         dataIndex: 'ClassCode',
                         isSearchable: true,
                         width: 200
                     },
                     {
-                        title: "Nomi",
+                        title: t("Nomi"),
                         dataIndex: 'CatalogName',
                         isSearchable: true,
                         width: 300,
@@ -374,38 +380,38 @@ export const get_home_config = doc => {
 
         default:
             return {
-                title: "Hisob fakturalar",
-                createTitle: "Faktura yaratish",
+                title: t("Hisob fakturalar"),
+                createTitle: t("Faktura yaratish"),
                 createUrl: "/cabinet/factura/create",
                 gridSourceUrl: "/api/v1/facturas",
                 gridConfig: {
                     deleteRequestPath: 'api/v1/facturas',
                     viewActionPath: '/cabinet/factura/view',
                     editActionPath: '/cabinet/factura/edit',
-                    deleteConfirmText: "Shu faktura ochirilsinmi?",
+                    deleteConfirmText: t("Shu faktura ochirilsinmi?"),
                     actions: {
                         edit: true,
                         delete: true,
                         view: true
                     },
                     allColumns: [{
-                            title: "Faktura №",
+                            title: t("Faktura №"),
                             dataIndex: 'facturaNo',
                             isSearchable: true,
                         },
                         {
-                            title: "Kontrakt №",
+                            title: t("Kontrakt №"),
                             dataIndex: 'contractNo',
                             isSearchable: true,
                         },
                         {
-                            title: "Oluvchi",
+                            title: t("Kontragent"),
                             dataIndex: 'buyerName',
                             isSearchable: true,
                             width: 150
                         },
                         {
-                            title: "Oluvchi STIR",
+                            title: t("Kontragent") + " " + t("STIR"),
                             dataIndex: "buyerTin",
                             isSearchable: true,
                         },
@@ -421,7 +427,7 @@ export const get_home_config = doc => {
                             isSearchable: true,
                         },
                         {
-                            title: "Holati",
+                            title: t("Holati"),
                             dataIndex: 'status',
                             isFilterable: true,
                             filters: [
@@ -435,7 +441,7 @@ export const get_home_config = doc => {
                             ]
                         },
                         {
-                            title: 'Yaratilgan sanasi',
+                            title: t('Yaratilgan sana'),
                             dataIndex: "created_at",
                             dataType: 'date',
                         },

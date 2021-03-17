@@ -11,13 +11,16 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { logOut } from '../../redux/user/user.action';
 import { connect } from 'react-redux';
+import {useTranslation} from "react-i18next";
 
 const Header = ({ user, logOut, location})=>{
+
+    const {t} = useTranslation()
 
     window.onscroll = ()=>setActive(false);
     const [active, setActive] = useState(false);    
     return(<div><div className="header-main-component-container-main">
-            <div style={{textAlign: "right", padding: '5px 40px', backgroundColor: 'rgba(0,0,0,0.1)'}}>Call center: +998 71 200 11 22</div>
+            <div style={{textAlign: "right", padding: '5px 40px', backgroundColor: 'rgba(0,0,0,0.1)'}}>{t("Call center")}: +998 71 200 11 22</div>
         <div className="header-main-component-container">
             <div className="header-main-conatainer">
                 <span>
@@ -37,7 +40,7 @@ const Header = ({ user, logOut, location})=>{
                     {
                         user ?
                         <div className="header-action">
-                            <strong>STIR:</strong>  {user.tin}
+                            <strong>{t("STIR")}:</strong>  {user.tin}
                         </div>
                         : null
                     }
@@ -45,14 +48,14 @@ const Header = ({ user, logOut, location})=>{
                         user ? 
                         <div className="header-action">
                             
-                            <Tooltip title="Tizimdan chiqish">
+                            <Tooltip title={t("Tizimdan chiqish")}>
                                 <div style={{cursor: 'pointer'}} onClick={logOut}>
                                     <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />
                                 </div>
                             </Tooltip>
                         </div>
                         : <div className="header-action">
-                                <Tooltip title="Tizimga kirish">
+                                <Tooltip title={t("Tizimga kirish") }>
                                     <Link to="/home/login">
                                         <FontAwesomeIcon icon="sign-in-alt" className="header-action-icon" />
                                     </Link>

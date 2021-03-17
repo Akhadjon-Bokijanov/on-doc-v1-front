@@ -7,7 +7,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 // have a look at the Quick start guide 
 // for passing in lng and translations on init
 
-const Languages = ['uz', 'en', 'ru', 'uz-cyrl'];
+const Languages = ['uz', 'en', 'ru', 'uz-Cyrl'];
 
 
 i18n

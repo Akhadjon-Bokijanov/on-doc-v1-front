@@ -5,11 +5,14 @@ import DynaGrid from '../../../components/dyna-grid/dyna-grid.component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { get_home_config } from '../../../utils/home.config.provider';
+import {useTranslation} from "react-i18next";
 
 
 const { TabPane } = Tabs;
 
 const HomePage = ({ doc, hideTabs })=> {
+
+    const {t} = useTranslation();
 
     const tabs = {
         1: "in",
@@ -36,16 +39,16 @@ const HomePage = ({ doc, hideTabs })=> {
                     : <div className="factura-home-list-tabs">
                     <div className="factura-home-list-tab-con">
                         <div onClick={()=>setActiveTab(1)} className={`status-tab-bar ${activeTab===1 ? 'active-tab' : ''}`}>
-                            Kiruvchi hujjatlar    
+                            {t("Kiruvchi")}
                         </div> 
                         <div onClick={()=>setActiveTab(2)} className={`status-tab-bar ${activeTab===2 ? 'active-tab' : ''}`}>
-                            Yuborilganlar
+                            {t("Chiquvchi")}
                         </div>
                         <div onClick={()=>setActiveTab(3)} className={`status-tab-bar ${activeTab===3 ? 'active-tab' : ''}`}>
-                            Saqlanganlar
+                            {t("Saqlangan")}
                         </div>
                         <div onClick={()=>setActiveTab(4)} className={`status-tab-bar ${activeTab===4 ? 'active-tab' : ''}`}>
-                            Barchasi
+                            {t("Barchasi")}
                         </div>
                     </div>
                 </div>

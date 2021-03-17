@@ -24,3 +24,4 @@ export const setUserCompanies = data=>({
     type: USER_ACTIONS.SET_USER_COMPANIES,
     payload: data
 })
+
