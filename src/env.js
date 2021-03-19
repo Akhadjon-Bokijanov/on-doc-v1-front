@@ -1,10 +1,10 @@
 //ENVIRONMENT VARIABLES
 export const API_HOST = process.env.NODE_ENV === "development" ?
-    "http://127.0.0.1:8000" :
-    "https://murmuring-inlet-47691.herokuapp.com";
+    "http://api.onlinefactura.uz" :
+    "http://api.onlinefactura.uz";
 export const SELF_HOST = process.env.NODE_ENV === "development" ?
     "http://127.0.0.1:3000" :
-    "https://ondoc.herokuapp.com";
+    "https://new.onlinefactura.uz";
 
 export const IMPORTANCE = {
         1: {color: "#00FF00", text: "Uncha muxim emas"},

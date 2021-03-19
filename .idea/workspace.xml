@@ -5,21 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.e1808c27.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.e1808c27.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.e1808c27.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/3.c35c918a.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/3.c35c918a.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.46f7af03.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.46f7af03.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.9a78bbb4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.9a78bbb4.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/translate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/translate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.83f10801.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.83f10801.chunk.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.83f10801.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.cf326875.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.cf326875.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/header.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/choose_company/choose-company.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/choose_company/choose-company.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/login/login.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/login/login.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/user/user.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.reducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +68,8 @@
       <option name="presentableId" value="Default" />
       <updated>1615885938563</updated>
       <workItem from="1615885943178" duration="6455000" />
-      <workItem from="1615955884650" duration="15179000" />
+      <workItem from="1615955884650" duration="16247000" />
+      <workItem from="1616148717034" duration="2774000" />
     </task>
     <servers />
   </component>

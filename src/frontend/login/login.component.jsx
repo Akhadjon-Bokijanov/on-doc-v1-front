@@ -9,11 +9,14 @@ import { EIMZOClient } from '../../utils/e-imzo';
 import moment from 'moment';
 import './login.style.scss'
 import { withRouter } from 'react-router-dom';
+import { Generator } from '../../utils/utils';
+import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 
 const Login = ({ setCurrentUser, history, setUserComps }) => {
 
+    const { t } = useTranslation();
     const [eKeys, setEKeys] = useState([])
 
     const [activeTab, setActiveTab] = useState(0);
@@ -74,45 +77,73 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
         }).catch(err => {
             console.log(err)
             setIsLoading(false)
-            message.error("Kabinetga kirishda xatolik!");
+            message.error(t("Kabinetga kirishda xatolik!"));
         })
     }
 
     const handleKeySubmit = value => {
-        //setKeyIsLoading(true)
-        console.log(value)
+        //setKeyIsLoading(true)        
+        let data = Generator(24);
 
         EIMZOClient.loadKey(
             value.key.text,
             id => {
+
                 console.log(id);
-                EIMZOClient.createPkcs7(id, "some_auth_text",
+                EIMZOClient.createPkcs7(
+                    id, 
+                    data,
+                    null,
                     pkcs7Text => {
-                        console.log(pkcs7Text);
+                        //console.log(pkcs7Text);
+                        
+                        console.log(JSON.stringify(
+                            {
+                                keyId: id,
+                                guid: data,
+                                pkcs7: pkcs7Text
+                            }
+                        ))
+
+                        axios({
+                            url: "site/auth",
+                            method: "post",
+                            data: {
+                                keyId: id,
+                                guid: data,
+                                pkcs7: pkcs7Text
+                            }
+                        }).then(res=>{
+                            console.log(res)
+                            let { success } = res.data;
+                            if (success){
+                                setCurrentUser(res.data)
+                                message.success(t("Muaffaqiyatli kirish!"));
+                                history.push("/home/choosecompany")
+                            }else{
+                                message.error(t("Kabinetga kirishda xatolik!"))
+                            }
+                        }).catch(e=>{
+                            console.log(e);
+                        })
                     },
                     (e, r) => {
                         console.log("e:", e);
                         console.log("r:", r);
-                    })
+                        message.error(r);
+                    },
+                    (e, r)=>{
+                        console.log("e:", e);
+                        console.log("r:", r);
+                        message.error(r);
+                    }
+                    )
             },
             function (e, r) {
                 console.log("Load key e:", e);
                 console.log("Load key r:", r);
             })
-
-        EIMZOClient.createPkcs7(
-            value.key,
-            "random_key_to_authorize",
-            null,
-            pkcs7Text => {
-                console.log(pkcs7Text);
-            },
-            (e, r) => {
-                console.log(e);
-                console.log(r)
-            }
-        )
-
+        
     }
 
     return (
@@ -143,10 +174,10 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                             {
                                                 eKeys.map(data => <Radio key={data.value} value={data}>
                                                     <div className="client-availbale-key">
-                                                        <div>FIO: {data.text.CN} </div>
-                                                        <div>STIR: {data.text.TIN}</div>
-                                                        <div>Tashkilot: {data.text.O}</div>
-                                                        <div>Amal qilish muddati: 
+                                                        <div>{t("FIO")}: {data.text.CN} </div>
+                                                        <div>{t("STIR")}: {data.text.TIN}</div>
+                                                        <div>{t("Tashkilot")}: {data.text.O}</div>
+                                                        <div>{t("Amal qilish muddati")}: 
                                                             {moment(data.text.validTo).format("MMMM Do YYYY, H:mm:ss")}
                                                         </div>
                                                     </div>
@@ -164,15 +195,15 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                             htmlType="submit"
                                             icon={<FontAwesomeIcon icon="sign-in-alt" 
                                             className="factura-action-btn-icons" />}>
-                                            Kirish
+                                            {t("Kirish")}
                                         </Button>
                                     </Form.Item>
                                 </Form>
-                                <div onClick={()=>setActiveTab(1)} style={{ textAlign: "center", cursor: "pointer" }}>STIR va parol orqali kirish</div>
+                                <div onClick={()=>setActiveTab(1)} style={{ textAlign: "center", cursor: "pointer" }}>{t("STIR va parol orqali kirish")}</div>
                             </div>
                             :
                             <div className="login-form-containrer">
-                                <h3>STIR va parol bilan kirish</h3>
+                                <h3>{t("STIR va parol bilan kirish")}</h3>
                                 <Form
                                     name="tin-pass"
                                     onFinish={handleSubmit}
@@ -186,9 +217,9 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                             rules={[{ required: true }]}>
                                             <Input
                                                 size="large"
-                                                placeholder="STIR" />
+                                                placeholder={t("STIR")} />
                                         </Form.Item>
-                                        <span className="custom-input-label-1">STIR</span>
+                                        <span className="custom-input-label-1">{t("STIR")}</span>
                                     </Form.Item>
                                     <Form.Item>
                                         <Form.Item
@@ -197,9 +228,9 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                             rules={[{ required: true }]}>
                                             <Input.Password
                                                 size="large"
-                                                placeholder="Parol" />
+                                                placeholder={t("Parol")} />
                                         </Form.Item>
-                                        <span className="custom-input-label-1">Parol</span>
+                                        <span className="custom-input-label-1">{t("Parol")}</span>
                                     </Form.Item>
 
                                     <Form.Item>
@@ -210,11 +241,11 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                             size="large"
                                             htmlType="submit"
                                             icon={<FontAwesomeIcon icon="sign-in-alt" className="factura-action-btn-icons" />}>
-                                            Kirish
+                                            {t("Kirish")}
                                         </Button>
                                     </Form.Item>
                                 </Form>
-                                <div style={{textAlign: "center", cursor: "pointer"}} onClick={()=>setActiveTab(0)}>E-imzo bilan kirish</div>
+                                <div style={{textAlign: "center", cursor: "pointer"}} onClick={()=>setActiveTab(0)}>{t("E-imzo bilan kirish")}</div>
                             </div>
 
                     }

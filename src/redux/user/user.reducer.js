@@ -4,7 +4,8 @@ const INITIAL_STATE = {
     currentUser: null,
     token: null,
     cabinetData: null,
-    userCompanies: []
+    userCompanies: [],
+    selectedEsign:null
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -24,8 +25,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
 
         case USER_ACTIONS.SUCCESS_LOGIN:
             return {...state,
-                userType: action.payload.user ? 'user' : 'company',
-                currentUser: action.payload.user ? action.payload.user : action.payload.company,
+                currentUser: action.payload.data,
                 token: action.payload.token
             }
 
