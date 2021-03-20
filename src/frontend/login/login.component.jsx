@@ -4,7 +4,7 @@ import axios from 'axios';
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { setLoadedKeyId, setUserCompanies, succesLogIn } from '../../redux/user/user.action';
+import { setLoadedKeyId, setKeyUser, succesLogIn } from '../../redux/user/user.action';
 import { EIMZOClient } from '../../utils/e-imzo';
 import moment from 'moment';
 import './login.style.scss'
@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 
-const Login = ({ setCurrentUser, history, setUserComps, setKeyId }) => {
+const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
 
     const { t } = useTranslation();
     const [eKeys, setEKeys] = useState([])
@@ -92,6 +92,7 @@ const Login = ({ setCurrentUser, history, setUserComps, setKeyId }) => {
                             let { success } = res.data;
                             if (success){
                                 setCurrentUser(res.data)
+                                setEspUser(res.data.data)
                                 message.success(t("Muaffaqiyatli kirish!"));
                                 history.push("/home/choosecompany")
                             }else{
@@ -233,7 +234,7 @@ const Login = ({ setCurrentUser, history, setUserComps, setKeyId }) => {
 
 const mapDispatchToProps = dispatch => ({
     setCurrentUser: (data) => dispatch(succesLogIn(data)),
-    setUserComps: data=>dispatch(setUserCompanies(data)),
+    setEspUser: data=>dispatch(setKeyUser(data)),
     setKeyId: id => dispatch(setLoadedKeyId(id))
 })
 

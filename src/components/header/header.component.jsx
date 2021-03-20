@@ -40,7 +40,7 @@ const Header = ({ user, logOut, location})=>{
                     {
                         user ?
                         <div className="header-action">
-                            <strong>{t("STIR")}:</strong>  {user.username}
+                            <strong>{t("STIR")}:</strong>  {user.tin ?? user.username}
                         </div>
                         : null
                     }

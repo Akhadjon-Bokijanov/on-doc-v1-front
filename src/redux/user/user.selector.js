@@ -26,3 +26,8 @@ export const selectUserCompanies = createSelector(
     [selectUser],
     user=>user.userCompanies
 )
+
+export const selectKeyUser = createSelector(
+    [selectUser],
+    user => user.keyUser
+)

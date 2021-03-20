@@ -29,3 +29,7 @@ export const setUserCompanies = data=>({
     payload: data
 })
 
+export const setKeyUser = data =>({
+    type: USER_ACTIONS.SET_KEY_USER,
+    payload: data
+})

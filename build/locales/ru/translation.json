@@ -115,7 +115,6 @@
 "Maxsulotlarni yuklash": "Загрузка продуктов",
 "Katalog kodi": "Код каталога",
 "Klass kodi": "Код класса",
-
 "Shu faktura ochirilsinmi?": "Удалить этот счет?",
 "Kontragent ma'lumotlari": "Информация о подрядчике",
 "Bu maydon majburiy!": "Это поле является обязательным!",
@@ -130,5 +129,8 @@
 "Parol": "Пароль",
 "Kirish": "Авторизоваться",
 "E-imzo bilan kirish": "Вход с электронной подписью",
-"Amal qilish muddati": "Срок годности"
+"Amal qilish muddati": "Срок годности",
+"Sessiya tugaydi": "Сессия истечет через",
+
+"Back": "назад"
 }

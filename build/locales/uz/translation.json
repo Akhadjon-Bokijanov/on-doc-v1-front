@@ -115,7 +115,6 @@
     "Maxsulotlarni yuklash": "Maxsulotlarni yuklash",
     "Katalog kodi": "Katalog kodi",
     "Klass kodi": "Klass kodi",
-
     "Shu faktura ochirilsinmi?": "Shu faktura ochirilsinmi?",
     "Kontragent ma'lumotlari": "Kontragent ma'lumotlari",
     "Bu maydon majburiy!": "Bu maydon majburiy!",
@@ -130,5 +129,9 @@
     "Parol": "Parol",
     "Kirish": "Kirish",
     "E-imzo bilan kirish": "E-imzo bilan kirish",
-    "Amal qilish muddati": "Amal qilish muddati"
+    "Amal qilish muddati": "Amal qilish muddati",
+    "Back": "Ortga",
+    "Sessiya tugaydi": "Sessiya tugaydi",
+
+    "E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!": "E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!"
 }

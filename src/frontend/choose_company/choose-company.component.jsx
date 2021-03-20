@@ -6,30 +6,28 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { setUserCompanies } from '../../redux/user/user.action';
-import { selectCurrentUser } from '../../redux/user/user.selector';
+import { setUser, setUserCompanies } from '../../redux/user/user.action';
+import { selectCurrentUser, selectUserCompanies } from '../../redux/user/user.selector';
 import './choose-company.style.scss';
 
-const ChooseCompany = ({ history, user, setUserComps }) => {
+const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies }) => {
 
 
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
-    const [companies, setCompanies] = useState([]);
 
     const [chosen, setChosen] = useState(null);
 
     useEffect(()=>{
 
-        if(chosen && chosen !== user.username){
+        if(chosen){
             axios({
-                url: `info/company-by-tin?tin=${chosen}`,
+                url: `user/get-company-data?tin=${chosen}`,
                 method: 'get'
             }).then(res=>{
 
-                console.log(res)
-
-                //history.push("/cabinet")
+                setCurrentUser(res.data.company)
+                history.push("/cabinet")
             
             }).catch(e=>{
 
@@ -37,9 +35,9 @@ const ChooseCompany = ({ history, user, setUserComps }) => {
             
             })
         }
-        else if(chosen == user.username){
-            history.push("/cabinet")
-        }
+        // else if(chosen === user.username){
+        //     history.push("/cabinet")
+        // }
 
     }, [chosen]);
 
@@ -51,8 +49,10 @@ const ChooseCompany = ({ history, user, setUserComps }) => {
         }).then(res=>{
             console.log(res);
             if(res.data.success){
-                setCompanies(res.data.data)
                 setUserComps(res.data.data)
+                if(res.data?.data?.length==1){
+                    setChosen(res.data.data[0].comp_tin)
+                }
             }else{
                 message.error("Serverda xatolik!");
             }
@@ -116,11 +116,13 @@ const ChooseCompany = ({ history, user, setUserComps }) => {
 }
 
 const mapDispatchToProps = dispatch=>({
-    setUserComps: data => dispatch(setUserCompanies(data))
+    setUserComps: data => dispatch(setUserCompanies(data)),
+    setCurrentUser: data => dispatch(setUser(data)),
 })
 
 const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser
+    user: selectCurrentUser,
+    companies: selectUserCompanies
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ChooseCompany));

@@ -21,7 +21,7 @@ const FrontIndexRouter = ({ match, user }) => {
             <Route 
                 exact 
                 path={`${match.path}/login`} 
-                render={()=>user ? < Redirect to ="/cabinet" /> : <Login />} 
+                component={ Login } 
                 />
         </div>
     )

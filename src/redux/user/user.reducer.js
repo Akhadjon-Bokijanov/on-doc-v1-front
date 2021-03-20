@@ -6,12 +6,16 @@ const INITIAL_STATE = {
     cabinetData: null,
     userCompanies: [],
     selectedEsign:null,
-    loadedKeyId: null
+    loadedKeyId: null,
+    keyUser: null
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+
+        case USER_ACTIONS.SET_KEY_USER:
+            return { ...state, keyUser: action.payload }
 
         case USER_ACTIONS.SET_LOADED_KEY_ID:
             return { ...state, loadedKeyId: action.payload }
@@ -34,7 +38,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
             }
 
         case USER_ACTIONS.LOG_OUT:
-            return {...state, currentUser: null, token: null, loadedKeyId: null }
+            return {...state, 
+                currentUser: null, 
+                token: null, 
+                loadedKeyId: null,
+                keyUser: null,
+                userCompanies: []
+            }
 
         default:
             return state;

@@ -123,11 +123,13 @@
     "Oxirgi qatorni o'chirish": "Delete last line",
     "Korxona tanlang": "Choose a business",
     "Serverda xatolik!": "Server error!",
-    "Kabinetga kirishda xatolik!": "Error entering stock!",
+    "Kabinetga kirishda xatolik!": "Error log in!",
     "Muaffaqiyatli kirish!": "Successful entry!",
     "STIR va parol bilan kirish": "Login with TIN and password",
     "Parol": "Password",
     "Kirish": "Login",
     "E-imzo bilan kirish": "Login with e-signature",
-    "Amal qilish muddati": "Validity period"
+    "Amal qilish muddati": "Validity period",
+    "Back": "Back",
+    "Sessiya tugaydi": "Session will expire in"
 }
