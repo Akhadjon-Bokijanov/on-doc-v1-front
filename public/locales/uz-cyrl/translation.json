@@ -114,5 +114,22 @@
 "Parolni tasdiqlang":  "Паролни тасдиқланг", 
 "Maxsulotlarni yuklash":  "Махсулотларни юклаш", 
 "Katalog kodi":  "Каталог коди", 
-"Klass kodi":  "Класс коди"
+"Klass kodi":  "Класс коди",
+"Shu faktura ochirilsinmi?": "Шу фактура очирилсинми?",
+"Kontragent ma'lumotlari": "Контрагент маълумотлари",
+"Bu maydon majburiy!": "Бу майдон мажбурий!",
+"Jis. Shaxs FIO": "Жис. Шахс ФИО",
+"Eski faktura ID": "Eски фактура ИД",
+"Oxirgi qatorni o'chirish": "Охирги қаторни ўчириш",
+"Korxona tanlang": "Корхона танланг",
+"Serverda xatolik!": "Серверда хатолик!",
+"Kabinetga kirishda xatolik!": "Кабинетга киришда хатолик!",
+"Muaffaqiyatli kirish!": "Муаффақиятли кириш!",
+"STIR va parol bilan kirish": "СТИР ва парол билан кириш",
+"Parol": "Парол",
+"Kirish": "Кириш",
+"E-imzo bilan kirish": "E-имзо билан кириш",
+"Amal qilish muddati": "Амал қилиш муддати",
+"Sessiya tugaydi": "Сессия тугайди",
+"Back": "Ортга"
 }

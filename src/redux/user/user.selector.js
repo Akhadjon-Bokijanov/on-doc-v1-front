@@ -17,6 +17,11 @@ export const selectCabinetData = createSelector(
     user=>user.cabinetData
 )
 
+export const selectLoadedKey = createSelector(
+    [selectUser],
+    user => user.loadedKeyId
+)
+
 export const selectUserCompanies = createSelector(
     [selectUser],
     user=>user.userCompanies

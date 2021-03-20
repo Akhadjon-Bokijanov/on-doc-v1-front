@@ -114,5 +114,23 @@
 "Parolni tasdiqlang": "Подтвердить Пароль",
 "Maxsulotlarni yuklash": "Загрузка продуктов",
 "Katalog kodi": "Код каталога",
-"Klass kodi": "Код класса"
+"Klass kodi": "Код класса",
+"Shu faktura ochirilsinmi?": "Удалить этот счет?",
+"Kontragent ma'lumotlari": "Информация о подрядчике",
+"Bu maydon majburiy!": "Это поле является обязательным!",
+"Jis. Shaxs FIO": "Jis. Person FIO",
+"Eski faktura ID": "Старый идентификатор счета",
+"Oxirgi qatorni o'chirish": "Удалить последнюю строку",
+"Korxona tanlang": "Выберите бизнес",
+"Serverda xatolik!": "Ошибка сервера!",
+"Kabinetga kirishda xatolik!": "Ошибка при вводе запасов!",
+"Muaffaqiyatli kirish!": "Удачного входа!",
+"STIR va parol bilan kirish": "Войти с помощью ИНН и пароля",
+"Parol": "Пароль",
+"Kirish": "Авторизоваться",
+"E-imzo bilan kirish": "Вход с электронной подписью",
+"Amal qilish muddati": "Срок годности",
+"Sessiya tugaydi": "Сессия истечет через",
+
+"Back": "назад"
 }

@@ -1,5 +1,9 @@
 import USER_ACTIONS from "./user.action-types";
 
+export const setLoadedKeyId = id => ({
+    type: USER_ACTIONS.SET_LOADED_KEY_ID,
+    payload: id
+})
 
 export const succesLogIn = data => ({
     type: USER_ACTIONS.SUCCESS_LOGIN,

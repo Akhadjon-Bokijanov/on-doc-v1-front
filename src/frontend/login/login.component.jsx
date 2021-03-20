@@ -4,7 +4,7 @@ import axios from 'axios';
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { setUserCompanies, succesLogIn } from '../../redux/user/user.action';
+import { setLoadedKeyId, setUserCompanies, succesLogIn } from '../../redux/user/user.action';
 import { EIMZOClient } from '../../utils/e-imzo';
 import moment from 'moment';
 import './login.style.scss'
@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 const { Option } = Select;
 
-const Login = ({ setCurrentUser, history, setUserComps }) => {
+const Login = ({ setCurrentUser, history, setUserComps, setKeyId }) => {
 
     const { t } = useTranslation();
     const [eKeys, setEKeys] = useState([])
@@ -29,17 +29,14 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
         }, function (itemId, v) {
             eKeys.push({ value: itemId, text: v })
             setEKeys([...eKeys])
-            console.log(v)
-            console.log(eKeys)
             //return uiCreateItem(itemId, v);
         }, function (items, firstId) {
-            console.log(items, firstId)
             // uiFillCombo(items);
             // uiLoaded();
             // uiComboSelect(firstId);
         }, function (e, r) {
             console.log((e, r))
-            message.error("E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!")
+            message.error(t("E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!"))
         });
     }, [])
 
@@ -61,18 +58,6 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
         }).then(res => {
             setCurrentUser(res.data)
             setIsLoading(false)
-            setUserComps([
-                {
-                    name: "Tech Stack ma'sulyati cheklangan jamiyati",
-                    tin: 307607131,
-                    id: 1
-                },
-                {
-                    name: "Updated User",
-                    tin: 518059386,
-                    id: 2
-                }
-            ])
             history.push("/home/choosecompany")
         }).catch(err => {
             console.log(err)
@@ -88,23 +73,13 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
         EIMZOClient.loadKey(
             value.key.text,
             id => {
-
-                console.log(id);
+                setKeyId({id: id, time: Date.now()});
                 EIMZOClient.createPkcs7(
                     id, 
                     data,
                     null,
                     pkcs7Text => {
-                        //console.log(pkcs7Text);
                         
-                        console.log(JSON.stringify(
-                            {
-                                keyId: id,
-                                guid: data,
-                                pkcs7: pkcs7Text
-                            }
-                        ))
-
                         axios({
                             url: "site/auth",
                             method: "post",
@@ -114,7 +89,6 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                 pkcs7: pkcs7Text
                             }
                         }).then(res=>{
-                            console.log(res)
                             let { success } = res.data;
                             if (success){
                                 setCurrentUser(res.data)
@@ -199,7 +173,7 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
                                         </Button>
                                     </Form.Item>
                                 </Form>
-                                <div onClick={()=>setActiveTab(1)} style={{ textAlign: "center", cursor: "pointer" }}>{t("STIR va parol orqali kirish")}</div>
+                                <div onClick={()=>setActiveTab(1)} style={{ textAlign: "center", cursor: "pointer" }}>{t("STIR va parol bilan kirish")}</div>
                             </div>
                             :
                             <div className="login-form-containrer">
@@ -259,7 +233,8 @@ const Login = ({ setCurrentUser, history, setUserComps }) => {
 
 const mapDispatchToProps = dispatch => ({
     setCurrentUser: (data) => dispatch(succesLogIn(data)),
-    setUserComps: data=>dispatch(setUserCompanies(data))
+    setUserComps: data=>dispatch(setUserCompanies(data)),
+    setKeyId: id => dispatch(setLoadedKeyId(id))
 })
 
 export default connect(null, mapDispatchToProps)(withRouter(Login))

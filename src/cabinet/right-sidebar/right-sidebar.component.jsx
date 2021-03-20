@@ -1,16 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Badge, Modal, Tag } from 'antd';
+import { Badge, Modal, Tag, Statistic } from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import './right-sidebar.style.scss';
 import { IMPORTANCE } from '../../env';
-import { setCabinetData } from '../../redux/user/user.action';
+import { logOut, setCabinetData } from '../../redux/user/user.action';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { createStructuredSelector } from 'reselect';
+import { selectLoadedKey } from '../../redux/user/user.selector';
 
-const RightSidebar = ({ location, admin, setData }) => {
+const { Countdown } = Statistic;
+
+const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
     const { t } = useTranslation()
 
@@ -133,15 +137,30 @@ const RightSidebar = ({ location, admin, setData }) => {
                         </Link>
                         : null
                     }
+
+                    {
+                        loadedKey ?
+                            <Countdown
+                                valueStyle={{fontSize: 15}}
+                                value={loadedKey.time + 1000 * 60 * 30}
+                                title={t("Sessiya tugaydi")}
+                                onFinish={uOut} />
+                            : null
+                    }
+
                 </div>
             </div> 
         </div>
     )
 }
 
-
-const mapDispatchToProps = dispatch =>({
-    setData: data => dispatch(setCabinetData(data))
+const mapStateToProps = createStructuredSelector({
+    loadedKey: selectLoadedKey
 })
 
-export default connect(null, mapDispatchToProps)(withRouter(RightSidebar));
+const mapDispatchToProps = dispatch =>({
+    setData: data => dispatch(setCabinetData(data)),
+    uOut: () => dispatch(logOut())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RightSidebar));

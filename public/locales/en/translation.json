@@ -114,5 +114,22 @@
     "Parolni tasdiqlang": "Confirm Password",
     "Maxsulotlarni yuklash": "Loading products",
     "Katalog kodi": "Catalog code",
-    "Klass kodi": "Class code"
+    "Klass kodi": "Class code",
+    "Shu faktura ochirilsinmi?": "Delete this invoice?",
+    "Kontragent ma'lumotlari": "Contractor Information",
+    "Bu maydon majburiy!": "This field is mandatory!",
+    "Jis. Shaxs FIO": "Jis. Person FIO",
+    "Eski faktura ID": "Old invoice ID",
+    "Oxirgi qatorni o'chirish": "Delete last line",
+    "Korxona tanlang": "Choose a business",
+    "Serverda xatolik!": "Server error!",
+    "Kabinetga kirishda xatolik!": "Error log in!",
+    "Muaffaqiyatli kirish!": "Successful entry!",
+    "STIR va parol bilan kirish": "Login with TIN and password",
+    "Parol": "Password",
+    "Kirish": "Login",
+    "E-imzo bilan kirish": "Login with e-signature",
+    "Amal qilish muddati": "Validity period",
+    "Back": "Back",
+    "Sessiya tugaydi": "Session will expire in"
 }

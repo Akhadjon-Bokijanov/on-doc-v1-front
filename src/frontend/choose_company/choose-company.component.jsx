@@ -17,6 +17,32 @@ const ChooseCompany = ({ history, user, setUserComps }) => {
     const [loading, setLoading] = useState(false);
     const [companies, setCompanies] = useState([]);
 
+    const [chosen, setChosen] = useState(null);
+
+    useEffect(()=>{
+
+        if(chosen && chosen !== user.username){
+            axios({
+                url: `info/company-by-tin?tin=${chosen}`,
+                method: 'get'
+            }).then(res=>{
+
+                console.log(res)
+
+                //history.push("/cabinet")
+            
+            }).catch(e=>{
+
+                console.log(e)
+            
+            })
+        }
+        else if(chosen == user.username){
+            history.push("/cabinet")
+        }
+
+    }, [chosen]);
+
     useEffect(()=>{
         setLoading(true)
         axios({
@@ -48,34 +74,39 @@ const ChooseCompany = ({ history, user, setUserComps }) => {
                 icon={<FontAwesomeIcon
                     style={{ marginRight: 10 }}
                     icon="arrow-circle-left" />}>
-                Back
+                {t("Back")}
             </Button>
-            <h2 style={{ textAlign: "center" }}>{t("Korxona tanglang")}</h2>
+            <h2 style={{ textAlign: "center" }}>{t("Korxona tanlang")}</h2>
             <div className="company-card-con">
-                <List 
-                    grid={{ 
-                        gutter: 8,
-                        xs: 1,
-                        md: 2,
-                        lg: 3
-                    }}
-                    loading={loading}
-                    dataSource={companies}
-                    renderItem={comp => <div onClick={() => history.push("/cabinet")} className="company-card">
-                        <div className="company-name">
-                            {comp.company_name}
-                        </div>
+                {
+                    companies.length !== 1 ?
+                        <List
+                            grid={{
+                                gutter: 8,
+                                xs: 1,
+                                md: 2,
+                                lg: 3
+                            }}
+                            loading={loading}
+                            dataSource={companies}
+                            renderItem={comp => <div onClick={() => setChosen(comp.company_tin)} 
+                            className="company-card">
+                                <div className="company-name">
+                                    {comp.company_name}
+                                </div>
 
-                        <div className="company-text">
-                            <span
-                                className="company-tin"
-                                style={{ margin: 0, padding: 0 }}
-                            >{comp.company_tin}</span>
-                            <div>{t("STIR")}</div>
-                        </div>
+                                <div className="company-text">
+                                    <span
+                                        className="company-tin"
+                                        style={{ margin: 0, padding: 0 }}
+                                    >{comp.company_tin}</span>
+                                    <div>{t("STIR")}</div>
+                                </div>
 
-                    </div>}
-                />
+                            </div>}
+                        />
+                        : history.push("/cabinet")
+                }
                
                 
             </div>

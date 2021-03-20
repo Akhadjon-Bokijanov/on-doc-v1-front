@@ -9,10 +9,11 @@ const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form, tinCol, nameCol }
         if (!isNaN(e.target.value)) {
             if (e.target.value > 100000000 && e.target.value <= 999999999) {
                 axios({
-                    url: `/api/v1/companies/tin/${e.target.value}`,
+                    url: `/info/contragent-yur/?tin=${e.target.value}`,
                     method: "GET",
                 }).then(res => {
                     //setBuyerData(res.data)
+                    console.log(res)
                     const { name, fullName } = res.data;
                     let data = {};
                     if(Array.isArray(pName)){
