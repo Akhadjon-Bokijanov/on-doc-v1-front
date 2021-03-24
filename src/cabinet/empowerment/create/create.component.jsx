@@ -104,22 +104,23 @@ const EmpowermentForm = ({ token, match })=> {
       if(val > 100000000 && val<999999999){
         axios({
           method: "GET",
-          url: "/api/v1/users/tin/"+val
+          url: "info/contragent-by-tin?tin="+val
         })
         .then(res=>{
           const { 
             name, 
             fullName, 
-            passIssuedAt, 
+            passIssueDate, 
             passOrg,
-            passNum 
+            passNumber,
+            passSeries
           } = res.data;
           console.log(moment('2020-00-00 00:00:00')._isValid)
           form.setFieldsValue({
             agentFio: fullName ?? name,
-            agentPassportDateOfIssue: moment(passIssuedAt)._isValid ? moment(passIssuedAt) : null,
+            agentPassportDateOfIssue: moment(passIssueDate)._isValid ? moment(passIssueDate) : null,
             agentPassportIssuedBy: passOrg,
-            agentPassportNumber: passNum
+            agentPassportNumber: passSeries + passNumber
           })
         })
       }

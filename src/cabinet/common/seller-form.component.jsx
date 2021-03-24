@@ -10,7 +10,7 @@ const SellerForm = ({ user, docType, form }) => {
 
     const {t} = useTranslation();
 
-  const { tin, name, fullName, regCode, mfo, account, address, directorName, directorTin, accountant, phone } = user;
+  const { tin, name, fullName, regCode, mfo, bank_account, address, director_fio, director_tin, accountant, phone } = user;
 
   return (
     <div>
@@ -88,7 +88,7 @@ const SellerForm = ({ user, docType, form }) => {
                   <Form.Item
                     key="seler-account"
                     name="sellerAccount"
-                    initialValue={account}>
+                    initialValue={bank_account}>
                     <Input
                       size="large"
                       placeholder={t("Hisob raqami")} />
@@ -143,7 +143,7 @@ const SellerForm = ({ user, docType, form }) => {
                   <Form.Item
                     key="seler-account"
                     name="sellerDirector"
-                    initialValue={directorName}>
+                    initialValue={director_fio}>
                     <Input
                       size="large"
                       placeholder={t("Direktor")} />
@@ -159,7 +159,7 @@ const SellerForm = ({ user, docType, form }) => {
                       <Form.Item
                         key="seler-account"
                         name="sellerDirectorTin"
-                        initialValue={directorTin}>
+                        initialValue={director_tin}>
                         <Input
                           size="large"
                           placeholder={t("Direktor") + " " + t("STIR")} />

@@ -332,7 +332,7 @@ export const EIMZOClient = {
         }
     },
     createPkcs7: function(id, data, timestamper, success, fail) {
-        CAPIWS.callFunction({ plugin: "pkcs7", name: "create_pkcs7", arguments: [btoa(data), id, 'no'] }, function(event, data) {
+        CAPIWS.callFunction({ plugin: "pkcs7", name: "create_pkcs7", arguments: [btoa(unescape(encodeURIComponent(data))), id, 'no'] }, function(event, data) {
             if (data.success) {
                 var pkcs7 = data.pkcs7_64;
                 if (timestamper) {

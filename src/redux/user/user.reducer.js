@@ -7,12 +7,20 @@ const INITIAL_STATE = {
     userCompanies: [],
     selectedEsign:null,
     loadedKeyId: null,
-    keyUser: null
+    keyUser: null,
+    isAferta: false,
+    isRouming: false
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+
+        case USER_ACTIONS.SET_IS_AFERTA:
+            return { ...state, isAferta: action.payload }
+
+        case USER_ACTIONS.SET_IS_ROUMING: 
+            return { ...state, isRouming: action.payload }
 
         case USER_ACTIONS.SET_KEY_USER:
             return { ...state, keyUser: action.payload }
@@ -43,7 +51,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 token: null, 
                 loadedKeyId: null,
                 keyUser: null,
-                userCompanies: []
+                userCompanies: [],
+                
             }
 
         default:

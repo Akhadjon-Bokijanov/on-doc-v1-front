@@ -6,27 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/en/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/locales/en/translation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/ru/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/locales/ru/translation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/uz-cyrl/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/locales/uz-cyrl/translation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/uz/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/locales/uz/translation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.58811ff2.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.58811ff2.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/2.58811ff2.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/3.e3e05004.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/3.e3e05004.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.fcaeb035.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/main.fcaeb035.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.eb0ba354.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.eb0ba354.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.7c73b433.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.7c73b433.chunk.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.7c73b433.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.e4aae639.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.e4aae639.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/account-form/account-form.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/account-form/account-form.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/common/buyer-form.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/common/buyer-form.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/common/person-fetch/person-fetch.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/common/person-fetch/person-fetch.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/common/seller-form.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/common/seller-form.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/password-change/password-change.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/password-change/password-change.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/profile/profile.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/profile/profile.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/right-sidebar/right-sidebar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/right-sidebar/right-sidebar.component.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/header.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/choose_company/choose-company.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/choose_company/choose-company.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/index.router.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/index.router.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/login/login.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/login/login.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/env.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/user/user.action-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.action-types.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/user/user.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.action.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/user/user.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.reducer.js" afterDir="false" />
@@ -82,7 +80,8 @@
       <workItem from="1615885943178" duration="6455000" />
       <workItem from="1615955884650" duration="16247000" />
       <workItem from="1616148717034" duration="7392000" />
-      <workItem from="1616231080786" duration="2348000" />
+      <workItem from="1616231080786" duration="3303000" />
+      <workItem from="1616516882246" duration="583000" />
     </task>
     <servers />
   </component>

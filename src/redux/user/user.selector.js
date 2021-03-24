@@ -31,3 +31,12 @@ export const selectKeyUser = createSelector(
     [selectUser],
     user => user.keyUser
 )
+
+export const selectIsAferta = createSelector(
+    [selectUser],
+    user => user.isAferta
+)
+export const selectKeyIsRouming = createSelector(
+    [selectUser],
+    user => user.isRouming
+)

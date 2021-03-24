@@ -11,37 +11,41 @@ import FrontIndexRouter from './frontend/index.router';
 import Header from './components/header/header.component';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser, selectToken } from './redux/user/user.selector';
+import { selectCurrentUser, selectLoadedKey, selectToken } from './redux/user/user.selector';
 import { logOut } from './redux/user/user.action';
 import { API_HOST } from './env';
 import AdminIndexRouter from './admin/admin.router';
+import { message, Modal } from 'antd';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const App = ({ user, token, signOut }) => {
+const App = ({ user, token, loadedKey, signOut }) => {
 
     moment.locale('uz-latn');
+    const { t } = useTranslation();
+
+    
+
     axios.defaults.baseURL = API_HOST
 
-    axios.interceptors.response.use(res => {
-
-        console.log(res)
-
-        if (res.status === 401) {
-            signOut();
-        }
-
-        return res;
-    }, e => {
-
-        return Promise.reject(e)
-    })
-
     axios.defaults.headers.common['Authorization'] = "Bearer " + token;
-    // useEffect(()=>{
-    // }, [token])
+
+    useEffect(()=>{
+
+        if (loadedKey?.time + 1000 * 60 * 30 < Date.now()){
+            console.log("Hi")
+            signOut()
+            message.warn((t("Sessiyangiz tugadi!")))
+        }
+    }, [])
+    
+   
 
     return (
         <div className="App">
+            
             <Header />
+
             <Switch>
                 <Route exact path="/"
                     render={
@@ -63,7 +67,8 @@ const App = ({ user, token, signOut }) => {
 
 const mapStateToProps = createStructuredSelector({
     user: selectCurrentUser,
-    token: selectToken
+    token: selectToken,
+    loadedKey: selectLoadedKey
 })
 
 const mapDispatchToProps = dispatch => ({

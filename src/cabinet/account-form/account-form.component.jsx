@@ -1,20 +1,25 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Col, Input, Row, Form, Button, message} from 'antd';
+import { Col, Input, Row, Form, Button, message, Select} from 'antd';
 import axios from 'axios';
 import React from 'react'
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { setUser } from '../../redux/user/user.action';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 
+const { Option } = Select;
+
 const AccountForm = ({user, setUserOnly}) => {
+
+    const { t } = useTranslation();
 
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
     const onSubmit=(values)=>{
-        console.log(values);
+        console.log(JSON.stringify(values));
         setLoading(true)
         axios({
             method: "patch",
@@ -44,7 +49,7 @@ const AccountForm = ({user, setUserOnly}) => {
             label: "OKED"
         },
         {
-            name: "directorName",
+            name: "director_fio",
             label: "Direktor"
         },
         {
@@ -56,7 +61,7 @@ const AccountForm = ({user, setUserOnly}) => {
             label: "Telephone"
         },
         {
-            name: "account",
+            name: "bank_account",
             label: "Hisob raqam"
         },
         {
@@ -64,7 +69,7 @@ const AccountForm = ({user, setUserOnly}) => {
             label: "MFO"
         },
         {
-            name: "regCode",
+            name: "vat_reg_code",
             label: "QQS tolovchi royxatdan otish kodi"
         }
     ]
@@ -89,7 +94,7 @@ const AccountForm = ({user, setUserOnly}) => {
                                     disabled
                                     />
                             </Form.Item>
-                            <span className="custom-input-label-1">STIR</span>
+                            <span className="custom-input-label-1">{t("STIR")}</span>
                         </Form.Item>
                     </Col>
                     {
@@ -108,6 +113,26 @@ const AccountForm = ({user, setUserOnly}) => {
                             </Form.Item>
                         </Col>)
                     }
+                    <Col md={11}>
+                        <Form.Item>
+                            <Form.Item
+                                key={`dyna-form-facutura-no-old-tin-vil`}
+                                name="region_id"
+                            >
+                                <Select
+                                    rules={[{ required: true }]}
+                                    size="large"
+                                    bordered={false}
+                                >
+
+                                <Option value={1}>Tashkent</Option>
+                                <Option value={2}>Andijon</Option>
+                                <Option value={3}>Tashkent</Option>
+                                </Select>
+                            </Form.Item>
+                            <span className="custom-input-label-1">{t("Viloyat")}</span>
+                        </Form.Item>
+                    </Col>
                    <Col md={11}>
                         <Button
                             htmlType="submit"

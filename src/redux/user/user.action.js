@@ -33,3 +33,12 @@ export const setKeyUser = data =>({
     type: USER_ACTIONS.SET_KEY_USER,
     payload: data
 })
+
+export const setIsAferta = bool =>({
+    type: USER_ACTIONS.SET_IS_AFERTA,
+    payload: bool
+})
+export const setIsRouming = bool => ({
+    type: USER_ACTIONS.SET_IS_ROUMING,
+    payload: bool
+})

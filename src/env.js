@@ -1,7 +1,7 @@
 //ENVIRONMENT VARIABLES
 export const API_HOST = process.env.NODE_ENV === "development" ?
-    "http://api.onlinefactura.uz" :
-    "http://api.onlinefactura.uz";
+    "http://api.onlinefactura.uz/uz" :
+    "http://api.onlinefactura.uz/uz";
 export const SELF_HOST = process.env.NODE_ENV === "development" ?
     "http://127.0.0.1:3000" :
     "https://new.onlinefactura.uz";

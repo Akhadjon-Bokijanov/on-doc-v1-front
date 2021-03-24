@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Badge, Modal, Tag, Statistic } from 'antd';
+import { Badge, Modal, Tag, Statistic, Spin, Checkbox } from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
@@ -11,12 +11,16 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { createStructuredSelector } from 'reselect';
 import { selectLoadedKey } from '../../redux/user/user.selector';
+import AfertaPopup from '../aferta-popup/aferta-popup.component';
 
 const { Countdown } = Statistic;
 
 const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+
+   
+
 
     const [active, setActive] = useState({})
     const [notifications, setNotifications] = useState([])
@@ -46,6 +50,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
     }
 
     useEffect(()=>{
+
         axios({
             method: "GET",
             url: "/api/v1/cabinet"
@@ -64,7 +69,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
     return (
         <div className="cabiner-right-sidebar-cmain-container">
-
+            <AfertaPopup />
+            
             <Modal 
             bodyStyle={{width: '70wv'}}
             title="Notifications"
