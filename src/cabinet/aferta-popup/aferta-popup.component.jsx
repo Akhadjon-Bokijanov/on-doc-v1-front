@@ -82,7 +82,7 @@ const AfertaPopup = ({ user, signOut, loadedKey }) => {
                 visible={isOpen}
                 okButtonProps={{ disabled: okDisable }}
                 title={t("Afertaga rozimisiz?")}
-
+                maskClosable={false}
             >
                 <div style={{ top: 0, width: '100%', bottom: 20, height: '60vh', overflowY: 'scroll'}}>
                     {

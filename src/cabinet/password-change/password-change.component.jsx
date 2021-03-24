@@ -1,16 +1,43 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Form, Row, Col, Input, Button } from 'antd'
+import { Form, Row, Col, Input, Button, message } from 'antd'
+import axios from 'axios'
 import React, {useState} from 'react'
 import { useTranslation } from 'react-i18next'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectLoadedKey } from '../../redux/user/user.selector'
+import { EIMZOClient } from '../../utils/e-imzo'
+import PaymeForm from '../payme-form/payme-form.component'
 
-const PasswordChange = () => {
+const PasswordChange = ({ loadedKey }) => {
 
     const { t} = useTranslation();
 
     const [loading, setLoading] = useState(false);
     
     const handleFinish = values=>{
-        console.log(values)
+        setLoading(true);
+        EIMZOClient.createPkcs7(
+            loadedKey.id,
+            values.password,
+            null,
+            pkcs7=>{
+                axios({
+                    url: "user/set-password",
+                    method:"post",
+                    data: {
+                        pkcs7: pkcs7,
+                        password: values.password,
+                        phone: values.phone
+                    }
+                })
+            },
+            (e, r)=>{
+                message.error(r)
+                console.log("r",r,"e",e)
+            }
+            )
+
     }
 
 
@@ -91,8 +118,15 @@ const PasswordChange = () => {
                     </Col>
                 </Row>
             </Form>
+
+            <PaymeForm />
+
         </div>
     )
 }
 
-export default PasswordChange
+const mapStateToProps = createStructuredSelector({
+    loadedKey: selectLoadedKey,
+})
+
+export default connect(mapStateToProps)(PasswordChange)
