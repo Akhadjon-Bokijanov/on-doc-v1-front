@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { setUser } from '../../redux/user/user.action';
 import { selectCurrentUser } from '../../redux/user/user.selector';
+import { TextInBracket } from '../../utils/utils';
 
 const { Option } = Select;
 
@@ -22,19 +23,19 @@ const AccountForm = ({user, setUserOnly}) => {
         console.log(JSON.stringify(values));
         setLoading(true)
         axios({
-            method: "patch",
+            method: "post",
             data: values,
-            url: `api/v1/companies/${user.id}`
+            
+            url: `company/update?id=${user.id}`
         }).then(res=>{
             setLoading(false)
-            setUserOnly(res.data)
+            //setUserOnly(res.data)
             message.success("Succesfully updated!")
         }).catch(err=>{
             setLoading(false)
             console.log(err)
         })
     }
-
     const fields = [
         {
             name: "name",
@@ -56,10 +57,10 @@ const AccountForm = ({user, setUserOnly}) => {
             name: "accountant",
             label: "Hisobchi"
         },
-        {
-            name: "phone",
-            label: "Telephone"
-        },
+        // {
+        //     name: "phone",
+        //     label: "Telephone"
+        // },
         {
             name: "bank_account",
             label: "Hisob raqam"
@@ -68,11 +69,9 @@ const AccountForm = ({user, setUserOnly}) => {
             name: "mfo",
             label: "MFO"
         },
-        {
-            name: "vat_reg_code",
-            label: "QQS tolovchi royxatdan otish kodi"
-        }
+        
     ]
+   
 
     return (
         
@@ -83,8 +82,10 @@ const AccountForm = ({user, setUserOnly}) => {
             >
                 <Row justify="space-between">
                     <Col md={11}>
+                    
                         <Form.Item>
                             <Form.Item
+                                initialValue={user.tin??user.username}
                                 key={`dyna-form-facutura-no-old-tin`}
                                 name="tin"
                                 >
@@ -117,7 +118,7 @@ const AccountForm = ({user, setUserOnly}) => {
                         <Form.Item>
                             <Form.Item
                                 key={`dyna-form-facutura-no-old-tin-vil`}
-                                name="region_id"
+                                name="ns10_code"
                             >
                                 <Select
                                     rules={[{ required: true }]}
@@ -128,6 +129,7 @@ const AccountForm = ({user, setUserOnly}) => {
                                 <Option value={1}>Tashkent</Option>
                                 <Option value={2}>Andijon</Option>
                                 <Option value={3}>Tashkent</Option>
+                                <Option value={14}>Namangan</Option>
                                 </Select>
                             </Form.Item>
                             <span className="custom-input-label-1">{t("Viloyat")}</span>

@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { createStructuredSelector } from 'reselect';
 import { selectLoadedKey } from '../../redux/user/user.selector';
 import AfertaPopup from '../aferta-popup/aferta-popup.component';
+import BindroumingPopup from '../bindrouming-popup/bindrouming-popup.component';
 
 const { Countdown } = Statistic;
 
@@ -70,7 +71,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
     return (
         <div className="cabiner-right-sidebar-cmain-container">
             <AfertaPopup />
-            
+            <BindroumingPopup />
             <Modal 
             bodyStyle={{width: '70wv'}}
             title="Notifications"

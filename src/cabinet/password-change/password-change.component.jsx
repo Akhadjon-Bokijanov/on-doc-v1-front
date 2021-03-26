@@ -119,8 +119,6 @@ const PasswordChange = ({ loadedKey }) => {
                 </Row>
             </Form>
 
-            <PaymeForm />
-
         </div>
     )
 }

@@ -7,3 +7,8 @@ export const Generator = (length) => {
     }
     return result;
 }
+
+//TEXT IN [] bracket
+export const TextInBracket = text =>{
+    return text.match(/\[(.*?)\]/)[1]
+}

@@ -7,37 +7,40 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { setUser, setUserCompanies } from '../../redux/user/user.action';
-import { selectCurrentUser, selectUserCompanies } from '../../redux/user/user.selector';
+import { selectKeyUser, selectUserCompanies } from '../../redux/user/user.selector';
 import './choose-company.style.scss';
 
 const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies }) => {
 
+    const [loading, setLoading] = useState(false);
+    const setChoosenCompany = async (tin, push_to_cabinet=true)=>{
+        await axios({
+            url: `user/get-company-data?tin=${tin}`,
+            method: 'get'
+        }).then(res => {
+            setLoading(false)
+            setCurrentUser(res.data.company)
+            if(push_to_cabinet){
+                history.push("/cabinet")
+            }
+
+        }).catch(e => {
+
+            console.log(e)
+
+        })
+    }
 
     const { t } = useTranslation();
-    const [loading, setLoading] = useState(false);
+    
 
     const [chosen, setChosen] = useState(null);
 
     useEffect(()=>{
 
         if(chosen){
-            axios({
-                url: `user/get-company-data?tin=${chosen}`,
-                method: 'get'
-            }).then(res=>{
-
-                setCurrentUser(res.data.company)
-                history.push("/cabinet")
-            
-            }).catch(e=>{
-
-                console.log(e)
-            
-            })
+            setChoosenCompany(chosen)
         }
-        // else if(chosen === user.username){
-        //     history.push("/cabinet")
-        // }
 
     }, [chosen]);
 
@@ -50,13 +53,15 @@ const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies 
             console.log(res);
             if(res.data.success){
                 setUserComps(res.data.data)
+                setLoading(false)
                 if(res.data?.data?.length==1){
-                    setChosen(res.data.data[0].comp_tin)
+                    setChoosenCompany(res.data.data[0].company_tin)
                 }
             }else{
                 message.error("Serverda xatolik!");
+                setLoading(false)
             }
-            setLoading(false)
+            
         }).catch(err=>{
             console.log(err);
             message.error("Serverda xatolik!");
@@ -78,35 +83,35 @@ const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies 
             </Button>
             <h2 style={{ textAlign: "center" }}>{t("Korxona tanlang")}</h2>
             <div className="company-card-con">
-                {
-                    companies.length !== 1 ?
-                        <List
-                            grid={{
-                                gutter: 8,
-                                xs: 1,
-                                md: 2,
-                                lg: 3
-                            }}
-                            loading={loading}
-                            dataSource={companies}
-                            renderItem={comp => <div onClick={() => setChosen(comp.company_tin)} 
-                            className="company-card">
-                                <div className="company-name">
-                                    {comp.company_name}
-                                </div>
+                
+                    
+                <List
+                    grid={{
+                        gutter: 8,
+                        xs: 1,
+                        md: 2,
+                        lg: 3
+                    }}
+                    loading={loading}
+                    dataSource={companies}
+                    renderItem={comp => <div onClick={() => setChosen(comp.company_tin)} 
+                    className="company-card">
+                        <div className="company-name">
+                            {comp.company_name}
+                        </div>
 
-                                <div className="company-text">
-                                    <span
-                                        className="company-tin"
-                                        style={{ margin: 0, padding: 0 }}
-                                    >{comp.company_tin}</span>
-                                    <div>{t("STIR")}</div>
-                                </div>
+                        <div className="company-text">
+                            <span
+                                className="company-tin"
+                                style={{ margin: 0, padding: 0 }}
+                            >{comp.company_tin}</span>
+                            <div>{t("STIR")}</div>
+                        </div>
 
-                            </div>}
-                        />
-                        : history.push("/cabinet")
-                }
+                    </div>}
+                />
+                        
+                
                
                 
             </div>
@@ -121,7 +126,7 @@ const mapDispatchToProps = dispatch=>({
 })
 
 const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser,
+    user: selectKeyUser,
     companies: selectUserCompanies
 })
 

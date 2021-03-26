@@ -37,11 +37,16 @@ const AfertaPopup = ({ user, signOut, loadedKey }) => {
             null, 
             pkcs7=>{
 
+                console.log(JSON.stringify({
+                    tin: user.tin ?? user.username,
+                    pkcs7: pkcs7
+                }))
+
                 axios({
                     url: 'user/set-aferta',
                     method: "post",
                     data: {
-                        tin: user.tin,
+                        tin: user.tin ?? user.username,
                         pkcs7: pkcs7
                     }
                 }).then(res=>{
