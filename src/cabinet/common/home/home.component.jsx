@@ -10,7 +10,7 @@ import {useTranslation} from "react-i18next";
 
 const { TabPane } = Tabs;
 
-const HomePage = ({ doc, hideTabs })=> {
+const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
 
     const {t} = useTranslation();
 
@@ -31,7 +31,11 @@ const HomePage = ({ doc, hideTabs })=> {
             <div className="factura-home-sub-con">
                 <div className="factura-home-title">
                     <h2>{ title }</h2>
-                    <Link to={ createUrl }><span>{ createTitle }</span></Link>
+                    {
+                        customButton 
+                        ?customButton
+                        : <Link to={createUrl}><span>{createTitle}</span></Link>
+                    }
                 </div>
                 {
                     hideTabs
@@ -56,8 +60,8 @@ const HomePage = ({ doc, hideTabs })=> {
                 
                 
                 <div>
-                    <DynaGrid    
-                        config={{ ...gridConfig, dataSourcePath: `${gridSourceUrl}?tab=${tabs[activeTab]}`}}
+                    <DynaGrid   
+                        config={{ ...gridConfig, dataSourcePath: `${gridSourceUrl}?tab=${tabs[activeTab]}&${addParams ? addParams.map(p=>`${p.name}=${p.value}`): ""}`}}
                     />
                 </div>
             </div>

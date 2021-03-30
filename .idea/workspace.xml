@@ -5,7 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/css/2.17ab67c8.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/css/2.17ab67c8.chunk.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/css/main.91c8f176.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/css/main.91c8f176.chunk.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.cd945150.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.cd945150.chunk.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/2.cd945150.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/3.88a31d75.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/3.88a31d75.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.49773cd9.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/main.49773cd9.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.0ceda16b.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/js/runtime-main.0ceda16b.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/common/buyer-form.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/common/buyer-form.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/common/home/home.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/common/home/home.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/user-products/user-products.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/user-products/user-products.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/data-sheet-custom-measure-selector/custom-selector.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/data-sheet-custom-measure-selector/custom-selector.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/data-sheet-custom-selector/custom-selector.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/data-sheet-custom-selector/custom-selector.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/data-sheet-custom-selector/custom-selector.style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/data-sheet-custom-selector/custom-selector.style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dyna-grid/dyna-grid.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dyna-grid/dyna-grid.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/font-awesome-icons/font-awesome-icons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/font-awesome-icons/font-awesome-icons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/user/user.action-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.action-types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/user/user.action.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.action.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/user/user.reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/user/user.selector.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/user/user.selector.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/home.config.provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/home.config.provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +92,11 @@
       <workItem from="1616231080786" duration="3303000" />
       <workItem from="1616516882246" duration="583000" />
       <workItem from="1616590905184" duration="950000" />
+      <workItem from="1616756167339" duration="926000" />
+      <workItem from="1616822043904" duration="1923000" />
+      <workItem from="1616925571521" duration="16000" />
+      <workItem from="1616994703947" duration="10000" />
+      <workItem from="1617101074749" duration="644000" />
     </task>
     <servers />
   </component>

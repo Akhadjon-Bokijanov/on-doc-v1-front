@@ -15,6 +15,7 @@ export default class SelectMeasureEditor extends PureComponent {
       // if (!opt) {
       //   return onRevert()
       // }
+      console.log(opt)
       const { e } = this.state
       onCommit(opt.target.value, e)
     }
@@ -22,7 +23,6 @@ export default class SelectMeasureEditor extends PureComponent {
     render () {
       return (
         <select
-          defaultValue={1}
           onChange={this.handleChange}
         >
           {

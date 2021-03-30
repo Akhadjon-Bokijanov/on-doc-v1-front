@@ -11,29 +11,29 @@ export const get_home_config = doc => {
             return {
                 title: t("Maxsulotlarim"),
                 createTitle: t("Maxsulotlarni yuklash"),
-                gridSourceUrl: "/api/v1/products",
+                gridSourceUrl: "/classifications/index",
                 createUrl: "/cabinet/products",
                 gridConfig: {
-                    deleteRequestPath: 'api/v1/user-products',
+                    deleteRequestPath: 'classifications/delete',
                     deleteConfirmText: t("Shu productni ochirilsinmi?"),
                     actions: {
                         delete: true,
                     },
                     allColumns: [{
                         title: t("Katalog kodi"),
-                        dataIndex: 'CatalogCode',
+                        dataIndex: 'groupCode',
                         isSearchable: true,
                         width: 200
                     },
                     {
                         title: t("Klass kodi"),
-                        dataIndex: 'ClassCode',
+                        dataIndex: 'classCode',
                         isSearchable: true,
                         width: 200
                     },
                     {
                         title: t("Nomi"),
-                        dataIndex: 'CatalogName',
+                        dataIndex: 'className',
                         isSearchable: true,
                         width: 300,
                         

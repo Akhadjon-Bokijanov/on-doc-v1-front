@@ -40,3 +40,8 @@ export const selectKeyIsRouming = createSelector(
     [selectUser],
     user => user.isRouming
 )
+
+export const selectUserProducts = createSelector(
+    [selectUser],
+    user => user.products
+)

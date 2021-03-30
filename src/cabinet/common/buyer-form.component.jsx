@@ -57,7 +57,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
 
           if(docType==="act"){
             form.setFieldsValue({
-              actText: setActClient(form.getFieldValue("sellerName"), name ?? fullName)
+              actText: setActClient(form.getFieldValue("SellerName"), name ?? fullName)
             })
           }
 
@@ -114,7 +114,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
         <Col md={docType !== "factura" ? 24 : 11}>
           <Form.Item>
             <Form.Item
-              key={fieldList ? `dyna-form-item-inn-buyer-${fieldList.key}` : "dyna-form-item-inn-buyer"}
+              key={fieldList ? `dyna-form-item-inn-Buyer-${fieldList.key}` : "dyna-form-item-inn-Buyer"}
               name={fieldList ? [fieldList.name,"buyerTin"] : "buyerTin"}
               rules={[{ required: true }]}
             >
@@ -147,7 +147,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
               <Form.Item>
                 <Select bordered={false} size="large">
                   <Option value={1}>На физ. лицо</Option>
-                  <Option value={2}> На экспорт</Option>
+                  <Option value={2}>На экспорт</Option>
                   <Option value={3}>На импорт</Option>
                   <Option value={4}>Реализация, связанная с гос. секретом</Option>
                   <Option value={5}>Финансовые услуги</Option>
@@ -167,13 +167,13 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
             <Form.Item>
               <Form.Item
                 rules={[{ required: true }]}
-                key="buyer-name-1-buyerName"
+                key="buyer-name-1-BuyerName"
                 name={fieldList ? [fieldList.name,"buyerName"] : "buyerName"}
               >
                 <Input
                   onChange={val=>{
                     form.setFieldsValue({
-                      actText: setActClient(form.getFieldValue("sellerName"), val.target.value)})
+                      actText: setActClient(form.getFieldValue("SellerName"), val.target.value)})
                     }
                   }
                   size="large"
@@ -327,7 +327,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                     docType==="contract" ?
                     <Col md={11}>
                       <Form.Item
-                        key="seler-account-buyer-dir-tin"
+                        key="seler-account-Buyer-dir-tin"
                         name={ fieldList ? [fieldList.name, "buyerDirectorTin"] :"buyerDirectorTin"}
                         >
                         <Input

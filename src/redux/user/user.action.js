@@ -10,6 +10,11 @@ export const succesLogIn = data => ({
     payload: data,
 })
 
+export const setUserProducts = data=>({
+    type: USER_ACTIONS.SET_USER_PRODUCTS,
+    payload: data
+})
+
 export const logOut = () => ({
     type: USER_ACTIONS.LOG_OUT
 })

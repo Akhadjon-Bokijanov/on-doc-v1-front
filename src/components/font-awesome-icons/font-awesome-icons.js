@@ -19,7 +19,8 @@ import {
     faCloudDownloadAlt,
     faCloudUploadAlt,
     faWallet,
-    faArrowCircleLeft
+    faArrowCircleLeft,
+    faSyncAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -68,5 +69,6 @@ library.add(
     faTimesCircle,
     faBell,
     faWallet,
-    faArrowCircleLeft
+    faArrowCircleLeft,
+    faSyncAlt
 )

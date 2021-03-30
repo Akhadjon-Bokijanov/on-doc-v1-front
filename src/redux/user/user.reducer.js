@@ -9,12 +9,16 @@ const INITIAL_STATE = {
     loadedKeyId: null,
     keyUser: null,
     isAferta: false,
-    isRouming: false
+    isRouming: false,
+    products: []
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type) {
+
+        case USER_ACTIONS.SET_USER_PRODUCTS:
+            return { ...state, products: Array.isArray(action.payload) ? action.payload : [] }
 
         case USER_ACTIONS.SET_IS_AFERTA:
             return { ...state, isAferta: action.payload }
@@ -52,7 +56,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 loadedKeyId: null,
                 keyUser: null,
                 userCompanies: [],
-                
+                products: []
             }
 
         default:

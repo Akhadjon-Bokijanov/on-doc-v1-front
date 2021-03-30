@@ -22,8 +22,10 @@ import {
 //import { RESOURCES_PATH } from '../../env';
 import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 import { useEffect } from 'react';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 const DynaGrid = ({
+  reload,
   loading,                //loading state of table
   currentUser,            //Provided by the comonent
   match,                  //Provided by the comonent
@@ -79,7 +81,7 @@ const DynaGrid = ({
   const [totalDataCount, setTotalDataCount] = useState(0);
   const [ajaxDataSource, setAjaxDataSource] = useState([])
   const [loadingSource, setLoadingResource] = useState(false);
-
+  const [reRenderer, setRerenderer]=useState(reload??1)
 
   let searchInput = null;
 
@@ -105,7 +107,7 @@ const DynaGrid = ({
       console.log(error);
       setLoadingResource(false)
     })
-  }, [pagination, dataSourcePath, searchText, searchedColumn])
+  }, [pagination, dataSourcePath, searchText, searchedColumn, reRenderer])
   //#endregion PAGINATION PART
 
   
@@ -113,14 +115,14 @@ const DynaGrid = ({
   const confirmDelete = (record) => {
 
     //setVisible(false);
-    
+    setLoadingResource(true)
     axios({
-      url: `/${deleteRequestPath}/${record.id}`, 
+      url: `/${deleteRequestPath}?id=${record.id}&tin=${currentUser.tin??currentUser.username}`, 
       method: 'delete',
-      data: {creator: record.creator}
       })
       .then(res=>{
-        
+        setRerenderer(reRenderer+1)
+        setLoadingResource(false)
         if(triggerReload){
           triggerAction(triggerReload)
         }
@@ -131,6 +133,7 @@ const DynaGrid = ({
         //setAction(Math.random())
         message.success(`${record.id} is deleted!`);
       }).catch(error=>{
+        setLoadingResource(false)
         message.error('Failed to delete!');
         console.error(error);
         
@@ -474,7 +477,7 @@ const DynaGrid = ({
 
 
 const mapStateToProps = createStructuredSelector({
-  //currentUser: selectCurrentUser,
+  currentUser: selectCurrentUser,
 })
 
 const dispatchMapStateToPros = (dispatch)=>({
