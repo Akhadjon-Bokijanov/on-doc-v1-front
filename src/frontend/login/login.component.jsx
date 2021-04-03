@@ -69,7 +69,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
     const handleKeySubmit = value => {
         //setKeyIsLoading(true)        
         let data = Generator(24);
-
+        console.log(value);
         EIMZOClient.loadKey(
             value.key.text,
             id => {

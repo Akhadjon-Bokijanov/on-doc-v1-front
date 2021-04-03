@@ -380,11 +380,15 @@ export const get_home_config = doc => {
 
         default:
             return {
+                
                 title: t("Hisob fakturalar"),
                 createTitle: t("Faktura yaratish"),
                 createUrl: "/cabinet/factura/create",
-                gridSourceUrl: "/api/v1/facturas",
+                gridSourceUrl: "facturas/index",
                 gridConfig: {
+                    modelName:"AllDocumentsSearch",
+                    primaryKeyName: "FacturaId",
+                    primaryKeyValue: "doc_id",
                     deleteRequestPath: 'api/v1/facturas',
                     viewActionPath: '/cabinet/factura/view',
                     editActionPath: '/cabinet/factura/edit',
@@ -396,57 +400,54 @@ export const get_home_config = doc => {
                     },
                     allColumns: [{
                             title: t("Faktura №"),
-                            dataIndex: 'facturaNo',
+                            dataIndex: 'doc_no',
                             isSearchable: true,
                         },
                         {
                             title: t("Kontrakt №"),
-                            dataIndex: 'contractNo',
+                            dataIndex: 'contract_no',
                             isSearchable: true,
                         },
                         {
                             title: t("Kontragent"),
-                            dataIndex: 'buyerName',
+                            dataIndex: 'contragent_name',
                             isSearchable: true,
                             width: 150
                         },
                         {
                             title: t("Kontragent") + " " + t("STIR"),
-                            dataIndex: "buyerTin",
-                            isSearchable: true,
-                        },
-                        {
-                            title: "Sotuvchi",
-                            dataIndex: 'sellerName',
-                            isSearchable: true,
-                            width: 150
-                        },
-                        {
-                            title: "Sotuvchi STIR",
-                            dataIndex: "sellerTin",
+                            dataIndex: "contragent_tin",
                             isSearchable: true,
                         },
                         {
                             title: t("Holati"),
                             dataIndex: 'status',
-                            isFilterable: true,
-                            filters: [
-                                { value: 1, text: "1-Saqlangan" },
-                                { value: 2, text: "2-Imzo kutilmoqda" },
-                                { value: 3, text: "3-Jo'natilgan" },
-                                { value: 4, text: "4-Xatolik yuzbergan" },
-                                { value: 5, text: "5-Qaytarib yuborilgan" },
-                                { value: 6, text: "6-Qabul qilingan" },
-                                { value: 7, text: "7-Muaffaqiyatli" }
-                            ]
+                            customView: status_renderer,
+                            
                         },
                         {
                             title: t('Yaratilgan sana'),
-                            dataIndex: "created_at",
+                            dataIndex: "created_date",
                             dataType: 'date',
                         },
                     ]
                 }
             }
     }
+}
+
+export const status_renderer = code=>{
+
+    const t = i18n.t.bind(i18n)
+
+    const status = {
+        10: t("Saqlangan"),
+        15: t("Imzo kutilmoqda"),
+        17: t("Jo'natuvchi bekor qilgan"),
+        20: t("Qabul qiluvchi bekor qilgan"),
+        30: t("Qabul qilingan"),
+        40: t("Send_and_accepted")
+    }
+
+    return <span>{status[code]??"N/A"}</span>
 }

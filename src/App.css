@@ -138,3 +138,10 @@ span.custom-input-label-1 {
     bottom: 57px;
     left: 15px;
 }
+
+div.custom-section-wrapper{
+    border-radius: 11px;
+    padding: 20px;
+    margin: 15px;
+    background-color: #fff;
+}

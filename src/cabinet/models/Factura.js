@@ -1,5 +1,3 @@
-import FacturaProduct from "./FacturaProduct";
-
 export default class Factura {
     "Version"= 1;
     "FacturaType"= null;
@@ -77,7 +75,8 @@ export default class Factura {
 
 export const GetFacturaDataToSign = (data, products, FacturaId) => {
 
-    let { agentFio,
+    let { 
+        agentFio,
         agentTin,
         buyerAccount,
         buyerAccountant,
@@ -105,7 +104,8 @@ export const GetFacturaDataToSign = (data, products, FacturaId) => {
         sellerName,
         sellerTin,
         sellerVatRegCode,
-        singleSidedType } = data
+        singleSidedType, 
+    } = data
 
     let Buyer = {
         "Name": buyerName,
@@ -172,6 +172,61 @@ export const GetFacturaDataToSign = (data, products, FacturaId) => {
     f.ProductList=products;
     console.log(products)
     return f;
+}
+
+export const FacturaDataToForm = data=>{
+    
+    let { 
+        Buyer, 
+        Seller,
+        ContractDoc,
+        FacturaDoc,
+        FacturaEmpowermentDoc,
+        FacturaId,
+        FacturaProductId,
+        ForeignCompany,
+        BuyerTin,
+        SellerTin,
+        ProductList,
+        FacturaType,
+        OldFacturaDoc,
+        SingleSidedType
+    } = data;
+
+    let f = {
+        agentFio: FacturaEmpowermentDoc.AgentFio,
+        agentTin: FacturaEmpowermentDoc.AgentTin,
+        buyerAccount: Buyer.Account,
+        buyerAccountant: Buyer.Accountant,
+        buyerAddress: Buyer.Address,
+        buyerDirector: Buyer.Director,
+        buyerMfo: Buyer.BankId,
+        buyerName: Buyer.Name,
+        buyerTin: BuyerTin,
+        buyerVatRegCode: Buyer.VatRegCode,
+        contractDate: ContractDoc.ContractDate,
+        contractNo: ContractDoc.ContractNo,
+        empowermentDateOfIssue: FacturaEmpowermentDoc.EmpowermentDateOfIssue,
+        empowermentNo: FacturaEmpowermentDoc.EmpowermentNo,
+        facturaDate: FacturaDoc.FacturaDate,
+        facturaNo: FacturaDoc.FacturaNo,
+        facturaType: FacturaType,
+        oldFacturaId: OldFacturaDoc.OldFacturaId,
+        oldFacturaNo: OldFacturaDoc.OldFacturaNo,
+        oldFacturaDate: OldFacturaDoc.OldFacturaDate,
+        sellerAccount: Seller.Account,
+        sellerAccountant: Seller.Accountant,
+        sellerAddress: Seller.Address,
+        sellerDirector: Seller.Director,
+        sellerMfo: Seller.BankId,
+        sellerName: Seller.Name,
+        sellerTin: SellerTin,
+        sellerVatRegCode: Seller.VatRegCode,
+        singleSidedType: SingleSidedType,
+    }
+
+    return f;
+
 }
 
 const formProperties = [

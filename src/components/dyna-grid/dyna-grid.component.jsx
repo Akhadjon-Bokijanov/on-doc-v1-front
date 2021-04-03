@@ -25,6 +25,7 @@ import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 
 const DynaGrid = ({
+  
   reload,
   loading,                //loading state of table
   currentUser,            //Provided by the comonent
@@ -35,6 +36,9 @@ const DynaGrid = ({
   title,                  //title of DynaGrid
   //dataSource,             //data source for the component
   config:{                //Config object
+    modelName,
+    primaryKeyName,
+    primaryKeyValue,
     dataSourcePath,       //data source path for the table should be pagination
     addElementViewPath,     //add element to the core
     deleteRequestPath,    //delete request path for API server 
@@ -88,7 +92,7 @@ const DynaGrid = ({
   //#region PAGINATION PART
   useEffect(()=>{
 
-    let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&search=${searchText}&searchFrom=${searchedColumn}` : ''}`
+    let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&${modelName}[${searchedColumn}]=${searchText}` : ''}`
 
     setLoadingResource(true)
     axios({
@@ -98,7 +102,7 @@ const DynaGrid = ({
 
       if (Array.isArray(res.data.data)){
         setAjaxDataSource(res.data.data);
-        setTotalDataCount(res.data.total)
+        setTotalDataCount(res.data.pages?.total)
       }else{
         console.log(res);
       }
@@ -117,7 +121,7 @@ const DynaGrid = ({
     //setVisible(false);
     setLoadingResource(true)
     axios({
-      url: `/${deleteRequestPath}?id=${record.id}&tin=${currentUser.tin??currentUser.username}`, 
+      url: `/${deleteRequestPath}?${primaryKeyName??'id'}=${record[primaryKeyValue??'id']}&tin=${currentUser.tin??currentUser.username}`, 
       method: 'delete',
       })
       .then(res=>{
@@ -131,7 +135,7 @@ const DynaGrid = ({
           triggerActionWithPayload(triggerActionWithPayload, payload)
         }
         //setAction(Math.random())
-        message.success(`${record.id} is deleted!`);
+        message.success(`${record[primaryKeyValue]} is deleted!`);
       }).catch(error=>{
         setLoadingResource(false)
         message.error('Failed to delete!');
@@ -140,27 +144,6 @@ const DynaGrid = ({
       })
   };
 
-  const confirmApprove = (record) => {
-
-    //setVisible(false);
-    axios.patch(`/${approveRequestPath}/${record.id}`, 
-      {userId: currentUser.id},)
-    .then(res=>{
-      if(triggerReload){
-        triggerAction(triggerReload)
-      }
-      
-      if(triggerWithPayload){
-        triggerActionWithPayload(triggerActionWithPayload, payload)
-      }
-      //setAction(Math.random())
-      message.success(`${record.id} is approved!`);
-    }).catch(error=>{
-      message.error('Failed to approve!');
-      console.error(error);
-      
-    })
-  };
 
   const cancel = () => {
     //setVisible(false);
@@ -279,6 +262,13 @@ const DynaGrid = ({
         }}//record[element.dataIndex].toString().toLowerCase().includes(value.toString().toLowerCase()),}
     }
 
+    if(element.customView){
+      columns[index] = { ...columns[index],
+      dataIndex: null,
+      render: record=>element.customView(record[element.dataIndex])
+      }
+    }
+
     if(element.isBoolean){
       columns[index] = {...columns[index], 
       dataIndex: null,
@@ -374,8 +364,10 @@ const DynaGrid = ({
         <div className="dyna-grid-actions">
           {actions.edit 
           ? <Tooltip placement="left" title="O'zgartirish">
+              {console.log(primaryKeyValue)}
               <Link 
-                to={`${editActionPath}/${record.id}`}>
+              
+                to={`${editActionPath}/${record[primaryKeyValue]}`}>
                   <EditOutlined style={{color: 'blue'}}/>
               </Link>
             </Tooltip>
@@ -397,26 +389,11 @@ const DynaGrid = ({
           : null
           }
           
-          {actions.approve 
-            ? <Tooltip placement="bottom" title="Tasdiqlash">
-                <Popconfirm
-                  title="Approve this news?"
-                  onConfirm={()=>{confirmApprove(record)}}
-                  onCancel={cancel}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <FontAwesomeIcon style={{color: 'green'}} icon="check-circle" />
-                </Popconfirm>
-              </Tooltip>
-          : null
-          }
-
           {actions.view 
           ? <Tooltip placement="bottom" title="Ko'rish" >
                 <Link to={`${ replaceInViewPath 
                   ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
-                  : viewActionPath}/${record.id}`}><EyeOutlined /></Link>
+                  : viewActionPath}/${record[primaryKeyValue??'id']}`}><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }
@@ -424,23 +401,13 @@ const DynaGrid = ({
           {actions.chart
           ?
             <Tooltip placement="bottomLeft" title="Natijalar">
-              <Link to={`${resultsViewPath}/${record.id}`}>
+              <Link to={`${resultsViewPath}/${record[primaryKeyValue??'id']}`}>
                 <FontAwesomeIcon icon="chart-line" style={{color: '#fb8c00'}} />
               </Link>
             </Tooltip>
           : null
           }
 
-          {
-            actions.addElement
-            ?
-              <Tooltip placement="bottomLeft" title="Qoshimcha  qoshish">
-                <Link to={`${match.path}/${addElementViewPath}/${record.id}`}>
-                  <FontAwesomeIcon style={{color: "#e91e63"}} icon="plus-circle" />
-                </Link>
-              </Tooltip>
-            :null
-          }
         </div>,
     })
 

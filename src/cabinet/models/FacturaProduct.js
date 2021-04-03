@@ -1,3 +1,6 @@
+import SelectMeasureEditor from "../../components/data-sheet-custom-measure-selector/custom-selector.component";
+import SelectEditor from '../../components/data-sheet-custom-selector/custom-selector.component'
+import { ProductValueRendered } from '../factura/create/product-grid.component';
 export default class FacturaProduct {
     "OrdNo"= 1;
     "CommittentName"= null;
@@ -103,3 +106,22 @@ export const ConvertGridToProduct = (data, Tin, FacturaId)=>{
 
 }
 
+export const ConvertProductToGrid = products=>{
+    
+        let res = products.map(product => [
+            { readOnly: true, value: product.OrdNo }, //0 ordNo
+            { value: product.Name }, //1 product name
+            { value: {classCode: product.CatalogCode, className: product.CatalogName}, dataEditor: SelectEditor, valueViewer: ProductValueRendered }, //2 catalogCode
+            { value: product.Barcode }, //3 shrix code
+            { value: product.MeasureId, dataEditor: SelectMeasureEditor }, //4 measure
+            { value: product.Count }, //5 amount
+            { value: product.BaseSumma, }, //6 price
+            { value: product.ExciseRate }, //7 aksiz rate
+            { value: product.ExciseSum, readOnly: true }, //8 aksiz amount
+            { value: product.DeliverySum }, //9 delivery cost
+            { value: product.VatRate }, //10 VAT rate
+            { value: product.VatSum, readOnly: true }, //11 VAT amount
+            { value: product.DeliverySumWithVat, readOnly: true }, //12 total
+        ])
+        return res
+}

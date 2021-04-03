@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Tabs } from 'antd';
+import React, { useState } from 'react';
 import './home.style.scss';
 import DynaGrid from '../../../components/dyna-grid/dyna-grid.component';
 import axios from 'axios';
@@ -7,24 +6,20 @@ import { Link } from 'react-router-dom';
 import { get_home_config } from '../../../utils/home.config.provider';
 import {useTranslation} from "react-i18next";
 
-
-const { TabPane } = Tabs;
-
 const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
 
     const {t} = useTranslation();
 
     const tabs = {
-        1: "in",
-        2: "out",
-        3: "saved",
-        4: "all"
+        1: [0],
+        2: [2],
+        3: [1],
+        4: [0, 1, 2, 3]
     }
 
     const { title, createTitle, createUrl, gridSourceUrl, gridConfig } = get_home_config(doc);
 
     const [activeTab, setActiveTab] = useState(1);
-    const [loading, setLoading] = useState(false);
 
     return (
         <div className="factura-home-page-container">
@@ -61,7 +56,7 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                 
                 <div>
                     <DynaGrid   
-                        config={{ ...gridConfig, dataSourcePath: `${gridSourceUrl}?tab=${tabs[activeTab]}&${addParams ? addParams.map(p=>`${p.name}=${p.value}`): ""}`}}
+                        config={{ ...gridConfig, dataSourcePath: `${gridSourceUrl}?${tabs[activeTab].map(text=>'AllDocumentsSearch[write_type]='+text+'&')}${addParams ? addParams.map(p=>`${p.name}=${p.value}`): ""}`}}
                     />
                 </div>
             </div>

@@ -133,5 +133,7 @@
     "Back": "Ortga",
     "Sessiya tugaydi": "Sessiya tugaydi",
 
-    "E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!": "E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!"
+    "E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!": "E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!",
+    "ContractDate dagi ContractNo sonli shartnomaga FacturaDate dagi FacturaNo sonli": "{{ContractDate}} dagi {{ContractNo}} sonli shartnomaga \n {{FacturaDate}} dagi {{FacturaNo}} sonli",
+    "ID: ": "ID: "
 }

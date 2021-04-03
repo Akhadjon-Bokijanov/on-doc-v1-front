@@ -1,13 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import { Route } from 'react-router-dom'
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 import HomePage from '../common/home/home.component';
 import FacturaCreateForm from './create/create.component'
 import FacturaView from "./view/view.component";
 
-const FacturaIndex = ({ match }) => {
+const FacturaIndex = ({ match, user }) => {
     return (
         <div>
-            <Route exact path={`${match.path}`} component={HomePage} />
+            <Route exact path={`${match.path}`} render={()=><HomePage addParams={[
+                {
+                    name: "tin",
+                    value: user.tin ?? user.username
+                }
+            ]} />} />
             <Route exact path={`${match.path}/create`} component={FacturaCreateForm} />
             <Route exact path={`${match.path}/view/:facturaId`} component={FacturaView} />
             <Route exact path={`${match.path}/edit/:facturaId`} component={FacturaCreateForm} />
@@ -16,4 +24,8 @@ const FacturaIndex = ({ match }) => {
     )
 }
 
-export default FacturaIndex
+const mapStateToProps = createStructuredSelector({
+    user: selectCurrentUser
+})
+
+export default connect(mapStateToProps)(FacturaIndex)

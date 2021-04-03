@@ -16,13 +16,22 @@ import { selectCurrentUser } from '../../../redux/user/user.selector';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-const ProductValueRendered = prop => {
+export const ProductValueRendered = prop => {
 
     const { value } = prop;
     return <span>{value.CatalogName}</span>
 }
 
-const FacturaProductGrid = ({ token, loadProducts, user, getProducts }) => {
+const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialValues }) => {
+
+    useEffect(()=>{
+        if(Array.isArray(initialValues)){
+            setGrid([
+                grid[0],
+                ...initialValues
+            ])
+        }
+    }, [initialValues])
 
     useEffect(()=>{
         axios({
@@ -54,8 +63,8 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts }) => {
             { value: t("QQS, miqdori"), readOnly: true, width: 100 },
             { value: t("Umumiy summa"), readOnly: true, width: 150 },
         ],
-        ...[1, 2, 3, 4].map(ord => [
-            { readOnly: true, value: ord },                           //0 ordNo
+        [
+            { readOnly: true, value: 1 },                           //0 ordNo
             { value: "" },                                          //1 product name
             { value: "", dataEditor: SelectEditor, valueViewer: ProductValueRendered },                //2 catalogCode
             { value: "" },                                          //3 shrix code
@@ -68,8 +77,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts }) => {
             { value: "" },                                          //10 VAT rate
             { value: '', readOnly: true },                          //11 VAT amount
             { value: '', readOnly: true, },                          //12 total
-        ])
-
+        ]
     ])
 
     
@@ -182,7 +190,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts }) => {
                         <Button style={{ marginRight: 10 }}>{t("Exceldan yuklash")}</Button>
 
                     </Upload>
-                    <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
+                    <a target="_blank" href="../../../excels/factura_products.xlsx" download>
                         <Button >
                             {t("Shablonni yuklash")}
                         </Button>

@@ -34,7 +34,7 @@ export default class SelectMeasureEditor extends PureComponent {
   }
 
 
-  const measures = [
+export const measures = [
     { value: 0, label: "boshqa" },
     {value: 1,	label: "штука"},
   {value: 2,	label: "пачка"},

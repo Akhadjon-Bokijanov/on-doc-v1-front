@@ -22,6 +22,7 @@ import { useTranslation } from 'react-i18next';
 const App = ({ user, token, loadedKey, signOut }) => {
 
     moment.locale('uz-latn');
+    moment.defaultFormat='MMMM Do YYYY'
     const { t } = useTranslation();
 
     

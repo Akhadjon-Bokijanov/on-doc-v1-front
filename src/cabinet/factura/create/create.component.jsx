@@ -13,13 +13,14 @@ import moment from 'moment';
 import PersonFetch from '../../common/person-fetch/person-fetch.component';
 import { useTranslation } from "react-i18next";
 import FacturaProductGrid from './product-grid.component';
-import { ConvertGridToProduct } from '../../models/FacturaProduct';
-import { GetFacturaDataToSign } from '../../models/Factura';
+import { ConvertGridToProduct, ConvertProductToGrid } from '../../models/FacturaProduct';
+import { FacturaDataToForm, GetFacturaDataToSign } from '../../models/Factura';
 import { EIMZOClient } from '../../../utils/e-imzo';
+import { setLoadedKeyId } from '../../../redux/user/user.action';
 
 const { Option } = Select;
 
-const FacturaCreateForm = ({ match, user, loadedKey }) => {
+const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
 
   const { t, i18n } = useTranslation();
   const [form] = Form.useForm();
@@ -29,6 +30,7 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
   const [facturaType, setFacturaType] = useState();
   const [saveLoading, setSaveLoading] = useState(false);
   const [products, setProducts] = useState();
+  const [gridInitialValue, setGridInitialValue] = useState();
 
 
   useEffect(() => {
@@ -36,10 +38,10 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
       //fetch fatura data
       setNewFacturaId(facturaId)
       axios({
-        url: `/api/v1/facturas/${facturaId}`,
+        url: `facturas/view?FacturaId=${facturaId}&tin=${user.tin??user.username}`,
         method: "GET",
       }).then(res => {
-        let data = res.data;
+        let data = FacturaDataToForm(res.data.data[0]);
         data.contractDate = moment(data.contractDate);
         data.created_at = moment(data.created_at);
         data.facturaDate = moment(data.facturaDate);
@@ -48,8 +50,8 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
         data.updated_at = moment(data.updated_at);
         console.log(data);
 
-        setInitialData(res.data);
-
+        setInitialData(data);
+        setGridInitialValue(ConvertProductToGrid(res.data.data[0]?.ProductList.Products))
         form.resetFields();
       }).catch(err => {
         console.log(err);
@@ -98,17 +100,10 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
 
   const getProducts = data=>{
 
-    //console.log(data)
-
-    //console.log(ConvertGridToProduct(data, user.tin??user.username, newFacturaId))
-
     setProducts(ConvertGridToProduct(data, user.tin ?? user.username, newFacturaId))
-
-    //console.log(products)
-     //return 
     
   }
-
+  //#endregion
 
   //#region form methods
 
@@ -121,22 +116,33 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
       JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)),
       null,
       pkcs7=>{
-        console.log(JSON.stringify({
-          Sign: pkcs7
-        }))
+        console.log(JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)))
+        console.log(pkcs7)
         axios({
-          url: `facturas/send?id=${newFacturaId}`,
+          url: `facturas/send?tin=${user.tin??user.username}`,
           method: 'post',
           data: {
             Sign: pkcs7
           }
         })
         .then(res=>{
-          console.log(res)
+
+          if(res.data.success){
+            message.success(t("Faktura muaffaqiyatli imzolandi!"))
+            if(!facturaId){
+              handleSubmit(values)
+            }
+          }
+          else{
+            message.error(t("Faktura imzolashda xatolik!"))
+          }
+
           setSaveLoading(false)
         })
         .catch(ex=>{
           console.log(ex)
+          message.error(t("Faktura imzolashda xatolik!"))
+          setSaveLoading(false)
         })
       },
       (e,r)=>{
@@ -144,15 +150,12 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
         setSaveLoading(false)
       }
       )
+      setTimer({id: loadedKey.id, time: Date.now()})
     
   }
 
   const handleSubmit = (values) => {
     setSaveLoading(true);
-    //console.log(values)
-
-    //console.log(GetFacturaDataToSign(values, products, newFacturaId))
-    console.log(JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)))
 
     if (facturaId) {
       axios({
@@ -160,7 +163,7 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
         method: 'PATCH',
         data: { factura: values }
       }).then(res => {
-        if (res.data.ok) {
+        if (res.data.success) {
           message.success(t("Faktura o'zgartirildi!"))
         } else {
           message.error(t("Faktura o'zgartirishda xatolik!"));
@@ -178,7 +181,7 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
         method: 'post',
         data: GetFacturaDataToSign(values, products, newFacturaId)
       }).then(res => {
-        if (res.data.ok) {
+        if (res.data.success) {
           message.success(t("Faktura yaratili!"))
         }
         else {
@@ -341,7 +344,7 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
             </Col>
           </Row>
         </div>
-        <FacturaProductGrid getProducts={getProducts} form={form} />
+        <FacturaProductGrid initialValues={ gridInitialValue } getProducts={getProducts} form={form} />
 
         <div className="factura-data-sheet-container">
 
@@ -384,23 +387,6 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
 
           </Row>
 
-
-
-          <Row justify="space-between">
-            <Col md={24} >
-              <Form.Item>
-                <Form.Item
-                  key="selenote-field"
-                  name="notes">
-                  <Input
-                    size="large"
-                    placeholder={t("Qo'shimcha ma'lumotlar")} />
-                </Form.Item>
-                <span className="custom-input-label-1">{t("Qo'shimcha ma'lumotlar")}</span>
-              </Form.Item>
-            </Col>
-
-          </Row>
         </div>
         <div className="factura-data-sheet-container">
           <Row justify="space-around">
@@ -417,7 +403,7 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
             </Col>
             <Col>
               <Button
-                //loading={saveLoading}
+                loading={saveLoading}
                 className="factra-action-btns sing-btn"
                 size="large"
                 onClick={handleSign}
@@ -436,29 +422,17 @@ const FacturaCreateForm = ({ match, user, loadedKey }) => {
             </Col>
           </Row>
         </div>
-        <Form.Item
-          key="hidden-factura-id"
-          name="facturaId"
-        >
-          <Input
-            type="hidden"
-          />
-
-        </Form.Item>
-        <Form.Item
-          key="hidden-factura-product-id"
-          name="facturaProductId"
-        >
-          <Input
-            type="hidden"
-          />
-
-        </Form.Item>
+        
 
       </Form>
     </div>
   );
 }
+
+
+const mapDispatchToProps = dispatch=>({
+  setTimer: data=>dispatch(setLoadedKeyId(data))
+})
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
@@ -466,4 +440,4 @@ const mapStateToProps = createStructuredSelector({
   loadedKey: selectLoadedKey
 })
 
-export default connect(mapStateToProps)(FacturaCreateForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FacturaCreateForm);
