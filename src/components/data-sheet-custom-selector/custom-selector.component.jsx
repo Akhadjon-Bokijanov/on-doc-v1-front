@@ -55,7 +55,8 @@ class SelectEditor extends PureComponent {
         style={{width: "100%"}}
         dropdownMatchSelectWidth={false}
         open={true}
-        
+        menuPortalTarget={document.body}
+        styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
         value={this.state.selected}
         onChange={this.handleChange}
         //onSelect={this.handleChange}

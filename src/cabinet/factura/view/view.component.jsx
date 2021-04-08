@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from '../../../redux/user/user.selector';
+import { selectCurrentUser, selectLoadedKey } from '../../../redux/user/user.selector';
 import axios from 'axios';
-import Pdf from "react-to-pdf";
-import { Button, Spin } from 'antd';
+import { Button, message, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import './view.style.scss';
+import ReactToPrint from "react-to-print";
 import moment from 'moment';
 import { measures } from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
+import { EIMZOClient } from '../../../utils/e-imzo';
 
 var QRCode = require('qrcode.react');
 
-const FacturaView = ({ match, user }) => {
+const FacturaView = ({ match, user, loadedKey }) => {
 
-    const ref = React.createRef();
+    const printRef = useRef();
     const [factura, setFactura] = useState();
     const [loading, setLoading] = useState(true)
     const {facturaId} = match.params;
@@ -39,18 +40,41 @@ const FacturaView = ({ match, user }) => {
     },[facturaId, user])
    
 
+    const handleSign = ()=>{
+        EIMZOClient.createPkcs7(loadedKey.id,
+            JSON.stringify(factura),
+            null,
+            pkcs7=>{
+                axios({
+                    url: `facturas/send?tin=${user.tin??user.username}`,
+                    method: "post",
+                    data: {
+                        Sign: pkcs7
+                    }
+                }).then(res=>{
+                    console.log(res)
+                }).catch(ex=>{
+                    console.log(ex)
+                })
+            },
+            (e, r)=>{
+                message.error(r)
+            }
+            )
+    }
+
 
     return (
         <Spin spinning={loading}>
         <div className="custom-section-wrapper">
 
-                <Pdf options={{
-                    orientation: 'landscape',
-                    
-                }}  targetRef={ref} filename={`factura-${factura?.FacturaId}.pdf`}  >
-                {({toPdf}) => <Button onClick={toPdf} >{ t("Chop etish") }</Button>}
-            </Pdf>
-            <div className="factura-view-page-pdf-container" ref={ ref } >
+                <ReactToPrint
+                    trigger={() => <Button>{t("Chop etish")}</Button>}
+                    content={() => printRef.current}
+                    documentTitle={`factura-${factura?.FacturaId}`}
+                />
+                <Button type="primary" onClick={handleSign}>{t("Jonatish")}</Button>
+            <div className="factura-view-page-pdf-container" ref={printRef } >
                 <div style={{display: 'flex', justifyContent:'space-between'}}>
                     <div>
                             <div><strong>ID:</strong> {factura?.FacturaId}</div>
@@ -283,9 +307,7 @@ const FacturaView = ({ match, user }) => {
                             </table>
                         </div>
                 </div>
-                <div style={{marginTop: 200}}>
-
-                </div>
+               
             </div>
 
         </div>
@@ -295,7 +317,8 @@ const FacturaView = ({ match, user }) => {
 
 
 const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser
+    user: selectCurrentUser,
+    loadedKey: selectLoadedKey
 })
 
 export default connect(mapStateToProps)(FacturaView)

@@ -17,15 +17,17 @@ import { ConvertGridToProduct, ConvertProductToGrid } from '../../models/Factura
 import { FacturaDataToForm, GetFacturaDataToSign } from '../../models/Factura';
 import { EIMZOClient } from '../../../utils/e-imzo';
 import { setLoadedKeyId } from '../../../redux/user/user.action';
+import { saveFacturaDraft } from '../../../redux/factura-draft/factura-draft.action';
+import { selectDrafts } from '../../../redux/factura-draft/factura-draft.selector';
 
 const { Option } = Select;
 
-const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
+const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, drafts }) => {
 
   const { t, i18n } = useTranslation();
   const [form] = Form.useForm();
   const { facturaId } = match.params;
-  const [newFacturaId, setNewFacturaId]=useState();
+  const [newFacturaId, setNewFacturaId]=useState(facturaId);
   const [initialData, setInitialData] = useState({ facturaType: 0 })
   const [facturaType, setFacturaType] = useState();
   const [saveLoading, setSaveLoading] = useState(false);
@@ -51,6 +53,9 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
         console.log(data);
 
         setInitialData(data);
+        console.log(res.data.data[0]?.ProductList.Products);
+        setProducts(res.data.data[0]?.ProductList)
+        
         setGridInitialValue(ConvertProductToGrid(res.data.data[0]?.ProductList.Products))
         form.resetFields();
       }).catch(err => {
@@ -69,6 +74,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
         console.log(ex)
       })
     }
+    
   }, [])
 
 
@@ -129,6 +135,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
 
           if(res.data.success){
             message.success(t("Faktura muaffaqiyatli imzolandi!"))
+            setTimer({ id: loadedKey.id, time: Date.now() })
             if(!facturaId){
               handleSubmit(values)
             }
@@ -150,7 +157,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
         setSaveLoading(false)
       }
       )
-      setTimer({id: loadedKey.id, time: Date.now()})
+      
     
   }
 
@@ -158,10 +165,11 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
     setSaveLoading(true);
 
     if (facturaId) {
+      console.log(JSON.stringify(GetFacturaDataToSign(values, products, facturaId)))
       axios({
-        url: `/api/v1/facturas/${facturaId}`,
-        method: 'PATCH',
-        data: { factura: values }
+        url: `facturas/update?id=${facturaId}&tin=${user.tin??user.username}`,
+        method: 'post',
+        data: GetFacturaDataToSign(values, products, facturaId)
       }).then(res => {
         if (res.data.success) {
           message.success(t("Faktura o'zgartirildi!"))
@@ -199,11 +207,28 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
 
   }
 
+  const handleRecoverLastDarft = ()=>{
+    if(drafts[user.tin??user.username]){
+      console.log(drafts[user.tin ?? user.username])
+      drafts[user.tin??user.username].contractDate = moment(drafts[user.tin??user.username].contractDate);
+      drafts[user.tin??user.username].created_at = moment(drafts[user.tin??user.username].created_at);
+      drafts[user.tin??user.username].facturaDate = moment(drafts[user.tin??user.username].facturaDate);
+      drafts[user.tin??user.username].empowermentDateOfIssue = moment(drafts[user.tin??user.username].empowermentDateOfIssue);
+      drafts[user.tin??user.username].oldFacturaDate = moment(drafts[user.tin??user.username].oldFacturaDate);
+      drafts[user.tin??user.username].updated_at = moment(drafts[user.tin??user.username].updated_at);
+      form.setFieldsValue(drafts[user.tin ?? user.username])
+    }
+  }
+
   //#endregion
 
   return (
     <div style={{ padding: 15 }}>
+      <div className="factur-settins-menu">
+        <button onClick={handleRecoverLastDarft} className="load-last-draft-btn">L</button>
+      </div>
       <Form
+        onValuesChange={(value, values)=>setDraftFactura(values, newFacturaId)}
         initialValues={initialData}
         form={form}
         name="factura"
@@ -431,13 +456,15 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer }) => {
 
 
 const mapDispatchToProps = dispatch=>({
-  setTimer: data=>dispatch(setLoadedKeyId(data))
+  setTimer: data=>dispatch(setLoadedKeyId(data)),
+  setDraftFactura: (values, tin) => dispatch(saveFacturaDraft(values, tin))
 })
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
   user: selectCurrentUser,
-  loadedKey: selectLoadedKey
+  loadedKey: selectLoadedKey,
+  drafts: selectDrafts
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FacturaCreateForm);

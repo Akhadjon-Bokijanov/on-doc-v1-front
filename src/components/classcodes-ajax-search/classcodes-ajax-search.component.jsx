@@ -43,7 +43,7 @@ const ClasscodeAjaxSearch = ({ user })=>{
             method: "post",
             data: {
                 tin: user.tin ?? user.username,
-                class_codes: selected
+                class_code: selected
             }
         }).then(data=>{
             console.log(data)
