@@ -75,6 +75,7 @@ export default class Factura {
 
 export const GetFacturaDataToSign = (data, products, FacturaId) => {
 
+    console.log(data)
     let { 
         agentFio,
         agentTin,

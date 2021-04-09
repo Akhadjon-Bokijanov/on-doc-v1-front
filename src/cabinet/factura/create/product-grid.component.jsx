@@ -12,7 +12,7 @@ import { Upload, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setUserProducts } from '../../../redux/user/user.action';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from '../../../redux/user/user.selector';
+import { selectCurrentUser, selectToken } from '../../../redux/user/user.selector';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -94,16 +94,17 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
 
     const handleImportExecl = (value) => {
 
+        
         if (value.file.status == "done") {
 
             const { response } = value.file
 
-            response.excel.forEach((element, index) => {
-                element[0].value = index + 1;
-                element[0].readOnly = true;
-                element[2].dataEditor = SelectEditor;
-                element[4].dataEditor = SelectMeasureEditor;
-            })
+            // response.excel.forEach((element, index) => {
+            //     element[0].value = index + 1;
+            //     element[0].readOnly = true;
+            //     element[2].dataEditor = SelectEditor;
+            //     element[4].dataEditor = SelectMeasureEditor;
+            // })
 
             //setGrid([grid[0], ...response.excel])
             console.log(response)
@@ -183,7 +184,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                             Authorization: "Bearer " + token
                         }}
                         multiple={false}
-                        action="http://127.0.0.1:8000/api/v1/factura-products/read-excel"
+                        action="http://api.onlinefactura.uz/facturas/import-excel"
                         accept=".xlsx, .xls"
                         onChange={handleImportExecl}>
 
@@ -241,7 +242,8 @@ const mapDispatchToProps = dispatch=>({
     loadProducts: (data)=>dispatch(setUserProducts(data))
 })
 const mapStateToProps = createStructuredSelector({
-    user: selectCurrentUser
+    user: selectCurrentUser,
+    token: selectToken
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FacturaProductGrid)

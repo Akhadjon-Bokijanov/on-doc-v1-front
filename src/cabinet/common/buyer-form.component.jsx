@@ -142,9 +142,11 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
             <h3>{t("Turi")}</h3>
             <Form.Item
               key="sigle-sided-factura-type-1"
-              name={fieldList ? [fieldList.name,"singleSidedType"] : "singleSidedType"}
+              
               >
-              <Form.Item>
+              <Form.Item
+                name={fieldList ? [fieldList.name, "singleSidedType"] : "singleSidedType"}
+              >
                 <Select bordered={false} size="large">
                   <Option value={1}>На физ. лицо</Option>
                   <Option value={2}>На экспорт</Option>
