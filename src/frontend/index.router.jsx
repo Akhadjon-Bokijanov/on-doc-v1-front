@@ -14,7 +14,7 @@ const FrontIndexRouter = ({ match, user }) => {
             <Route exact path={`${match.path}`} component={ Home } />
             {/* <Route exact path={`${match.path}/login`} component={ Login } /> */}
             <Route
-                exact="choosecompany"
+                exact={true}
                 path={`${match.path}/choosecompany`}
                 component={ChooseCompany}
             />

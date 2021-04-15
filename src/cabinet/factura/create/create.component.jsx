@@ -32,7 +32,6 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
   const [facturaType, setFacturaType] = useState();
   const [saveLoading, setSaveLoading] = useState(false);
   const [products, setProducts] = useState();
-  const [draftsExpanded, setDraftsExpanded]=useState(false);
   const [gridInitialValue, setGridInitialValue] = useState();
 
 
@@ -108,7 +107,15 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
   const getProducts = data=>{
 
     setProducts(ConvertGridToProduct(data, user.tin ?? user.username, newFacturaId))
-    setGridInitialValue(data)
+    //setGridInitialValue(data)
+    let formValues = form.getFieldsValue();
+    console.log("trigger set draft");
+    // setDraftFactura(
+    //   GetFacturaDataToSign((
+    //     formValues, 
+    //     ConvertGridToProduct(data, user.tin ?? user.username, newFacturaId), 
+    //     newFacturaId)), 
+    // newFacturaId)
     
   }
   //#endregion
@@ -212,40 +219,23 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
 
   }
 
-  const handleRecoverLastDarft = (id)=>{
-    if(drafts[id]){
-      console.log(drafts[user.tin ?? user.username])
-      drafts[id].contractDate = moment(drafts[id].contractDate);
-      drafts[id].created_at = moment(drafts[id].created_at);
-      drafts[id].facturaDate = moment(drafts[id].facturaDate);
-      drafts[id].empowermentDateOfIssue = moment(drafts[id].empowermentDateOfIssue);
-      drafts[id].oldFacturaDate = moment(drafts[id].oldFacturaDate);
-      drafts[id].updated_at = moment(drafts[id].updated_at);
-      //setGridInitialValue(ConvertProductToGrid(drafts[id]?.productList))
-      form.setFieldsValue(drafts[id])
-    }
+  const handleSaveDraft = (formValues, products)=>{
+    //setDraftFactura(GetFacturaDataToSign((formValues, products, newFacturaId)), newFacturaId)
   }
 
   //#endregion
 
-  var draftComponents = [];
-  for (var i in drafts) {
-    console.log("draft-"+i, drafts[i]);
-    draftComponents.push(i)
-  }
+  // var draftComponents = [];
+  // for (var i in drafts) {
+  //   console.log("draft-"+i, drafts[i]);
+  //   draftComponents.push(i)
+  // }
 
   return (
     <div style={{ padding: 15 }}>
-      <div className="factur-settins-menu">
-        {
-          draftComponents.map(item => <div
-            className={`floating-drafts-list ${draftsExpanded?'active':'dis-active'}`}
-            onClick={() => handleRecoverLastDarft(item)}>{drafts[item].facturaNo}</div>)
-        }
-        <button onClick={()=>setDraftsExpanded(!draftsExpanded)} className="load-last-draft-btn">L</button>
-      </div>
+      
       <Form
-        //onValuesChange={(value, values)=>setDraftFactura(values, newFacturaId, products)}
+        onValuesChange={(value, values)=>handleSaveDraft(values, products, newFacturaId)}
         initialValues={initialData}
         form={form}
         name="factura"
@@ -474,7 +464,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
 
 const mapDispatchToProps = dispatch=>({
   setTimer: data=>dispatch(setLoadedKeyId(data)),
-  setDraftFactura: (values, tin, products) => dispatch(saveFacturaDraft(values, tin, products))
+  setDraftFactura: (values, id) => dispatch(saveFacturaDraft(values, id))
 })
 
 const mapStateToProps = createStructuredSelector({

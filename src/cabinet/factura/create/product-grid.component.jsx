@@ -184,8 +184,10 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                             Authorization: "Bearer " + token
                         }}
                         multiple={false}
-                        action="http://api.onlinefactura.uz/facturas/import-excel"
+                        action={`http://api.onlinefactura.uz/uz/facturas/import-excel`}
                         accept=".xlsx, .xls"
+                        name="Files[file]"
+                        data={{tin: user.tin}}
                         onChange={handleImportExecl}>
 
                         <Button style={{ marginRight: 10 }}>{t("Exceldan yuklash")}</Button>

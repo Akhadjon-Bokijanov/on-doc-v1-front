@@ -116,7 +116,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
             <Form.Item
               key={fieldList ? `dyna-form-item-inn-Buyer-${fieldList.key}` : "dyna-form-item-inn-Buyer"}
               name={fieldList ? [fieldList.name,"buyerTin"] : "buyerTin"}
-              rules={[{ required: true }]}
+              
             >
               <Input
                 onChange={handleFetchBuyer}

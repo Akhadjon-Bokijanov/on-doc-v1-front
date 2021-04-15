@@ -6,8 +6,6 @@ import { selectUserProducts } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
 import './custom-selector.style.scss'
 
-const { Option } = Select
-
 class SelectEditor extends PureComponent {
   constructor(props) {
     super(props)
