@@ -65,6 +65,7 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
         buyerAccountant,
         buyerAddress,
         buyerDirector,
+        buyerOked,
         buyerMfo,
         buyerName,
         buyerTin,
@@ -79,7 +80,41 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
         sellerDirector,
         sellerMfo,
         sellerName,
+        sellerOked,
         sellerTin
     } = formData;
+
+    let emp = new Empowerment();
+    emp.Agent = {
+        AgentTin: agentTin,
+        Fio: agentFio,
+        JobTitle: agentJobTitle,
+        AgentEmpowermentId: empId,
+        Passport:{
+            DateOfIssue: agentPassportDateOfIssue,
+            Number: agentPassportNumber,
+            IssuedBy: agentPassportIssuedBy
+        }
+    }
+    emp.SellerTin=sellerTin;
+    emp.BuyerTin=buyerTin;
+    emp.Seller={
+        Name: sellerName,
+        Account: sellerAccount,
+        BankId: sellerMfo,
+        Address: sellerAddress,
+        Oked: sellerOked,
+        Director: sellerDirector,
+        Accountant: sellerAccountant,
+    }
+    emp.Buyer={
+        Name: sellerName,
+        Account: sellerAccount,
+        BankId: sellerMfo,
+        Address: sellerAddress,
+        Oked: sellerOked,
+        Director: sellerDirector,
+        Accountant: sellerAccountant,
+    }
 }
 
