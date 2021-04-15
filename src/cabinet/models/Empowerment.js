@@ -108,13 +108,13 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
         Accountant: sellerAccountant,
     }
     emp.Buyer={
-        Name: sellerName,
-        Account: sellerAccount,
-        BankId: sellerMfo,
-        Address: sellerAddress,
-        Oked: sellerOked,
-        Director: sellerDirector,
-        Accountant: sellerAccountant,
+        Name: buyerName,
+        Account: buyerAccount,
+        BankId: buyerMfo,
+        Address: buyerAddress,
+        Oked: buyerOked,
+        Director: buyerDirector,
+        Accountant: buyerAccountant,
     }
 }
 
