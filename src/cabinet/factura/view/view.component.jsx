@@ -11,6 +11,7 @@ import ReactToPrint from "react-to-print";
 import moment from 'moment';
 import { measures } from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
 import { EIMZOClient } from '../../../utils/e-imzo';
+import { Link } from 'react-router-dom';
 
 var QRCode = require('qrcode.react');
 
@@ -74,6 +75,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
                     documentTitle={`factura-${factura?.FacturaId}`}
                 />
                 <Button type="primary" onClick={handleSign}>{t("Jonatish")}</Button>
+                <Link to={`/cabinet/factura/duplicate/${factura?.FacturaId}`}><Button type="primary" color="#ff99101">{t("Duplikat")}</Button></Link>
             <div className="factura-view-page-pdf-container" ref={printRef } >
                 <div style={{display: 'flex', justifyContent:'space-between'}}>
                     <div>

@@ -26,7 +26,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
 
   const { t, i18n } = useTranslation();
   const [form] = Form.useForm();
-  const { facturaId } = match.params;
+  const { facturaId, duplicateId } = match.params;
   const [newFacturaId, setNewFacturaId]=useState(facturaId);
   const [initialData, setInitialData] = useState({ facturaType: 0 })
   const [facturaType, setFacturaType] = useState();
@@ -34,13 +34,25 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
   const [products, setProducts] = useState();
   const [gridInitialValue, setGridInitialValue] = useState();
 
+  const setNewDocId = ()=>{
+    axios({
+      url: "info/get-guid",
+      method: "get"
+    }).then(res => {
+      if (res.data.success) {
+        setNewFacturaId(res.data.data)
+      }
+    }).catch(ex => {
+      console.log(ex)
+    })
+  }
 
   useEffect(() => {
-    if (facturaId) {
+    if (facturaId || duplicateId) {
       //fetch fatura data
       setNewFacturaId(facturaId)
       axios({
-        url: `facturas/view?FacturaId=${facturaId}&tin=${user.tin??user.username}`,
+        url: `facturas/view?FacturaId=${facturaId??duplicateId}&tin=${user.tin??user.username}`,
         method: "GET",
       }).then(res => {
         let data = FacturaDataToForm(res.data.data[0]);
@@ -56,6 +68,10 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
         console.log(res.data.data[0]?.ProductList.Products);
         setProducts(res.data.data[0]?.ProductList)
         
+        if(duplicateId){
+          setNewDocId()
+        }
+        
         setGridInitialValue(ConvertProductToGrid(res.data.data[0]?.ProductList.Products))
         form.resetFields();
       }).catch(err => {
@@ -63,16 +79,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
       })
       //end fetch factura data;
     }else{
-      axios({
-        url: "info/get-guid",
-        method: "get"
-      }).then(res=>{
-        if(res.data.success){
-          setNewFacturaId(res.data.data)
-        }
-      }).catch(ex=>{
-        console.log(ex)
-      })
+      setNewDocId();
     }
     
   }, [])

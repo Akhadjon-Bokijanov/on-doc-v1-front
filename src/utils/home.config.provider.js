@@ -389,7 +389,6 @@ export const get_home_config = doc => {
                     modelName:"AllDocumentsSearch",
                     primaryKeyName: "FacturaId",
                     primaryKeyValue: "doc_id",
-                    deleteRequestPath: 'api/v1/facturas',
                     viewActionPath: '/cabinet/factura/view',
                     editActionPath: '/cabinet/factura/edit',
                     deleteConfirmText: t("Shu faktura ochirilsinmi?"),
