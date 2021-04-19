@@ -75,7 +75,9 @@ const FacturaView = ({ match, user, loadedKey }) => {
                     documentTitle={`factura-${factura?.FacturaId}`}
                 />
                 <Button type="primary" onClick={handleSign}>{t("Jonatish")}</Button>
-                <Link to={`/cabinet/factura/duplicate/${factura?.FacturaId}`}><Button type="primary" color="#ff99101">{t("Duplikat")}</Button></Link>
+                <Link to={`/cabinet/factura/duplicate/${factura?.FacturaId}`}>
+                    <Button type="primary">{t("Duplikat")}</Button>
+                </Link>
             <div className="factura-view-page-pdf-container" ref={printRef } >
                 <div style={{display: 'flex', justifyContent:'space-between'}}>
                     <div>
@@ -238,22 +240,22 @@ const FacturaView = ({ match, user, loadedKey }) => {
                                     Narxi
                                 </th>
                                 {
-                                    factura?.ProductList.HasExcise ?
+                                    factura?.ProductList?.HasExcise ?
                                         <th>
                                                 Aksiz soliq (%)
                                         </th>
                                 :null
                                 }
-                                {factura?.ProductList.HasExcise ? <th>
+                                {factura?.ProductList?.HasExcise ? <th>
                                     Aksiz soliq, miqdori
                                 </th>: null}
                                 <th>
                                     Yetkazib berish narxi
                                 </th>
-                                {factura?.ProductList.HasVat? <th>
+                                {factura?.ProductList?.HasVat? <th>
                                     QQS (%)
                                 </th> : null}
-                                {factura?.ProductList.HasVat ? <th>
+                                {factura?.ProductList?.HasVat ? <th>
                                     QQS, miqdori
                                 </th>:null}
                                 <th>
@@ -264,7 +266,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
 
                         <tbody className="product-list-body">
                             {
-                                factura?.ProductList.Products.map(p=><tr>
+                                factura?.ProductList?.Products.map(p=><tr>
                                     <td align="center">{p.OrdNo}</td>
                                     <td>{p.Name}</td>
                                     <td>{p.CatalogCode} - {p.CatalogName}</td>
