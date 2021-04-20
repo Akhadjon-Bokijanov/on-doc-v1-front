@@ -9,7 +9,7 @@ import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
-import { selectToken } from '../../../redux/user/user.selector';
+import {selectCurrentUser, selectToken} from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import { 
@@ -17,31 +17,38 @@ import {
   FullscreenExitOutlined, 
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_EMPOWERMENT_GRID_ROW } from '../../../utils/main';
+import { GetEmpowermentDataToSign } from '../../models/Empowerment';
+import {ConverEmpGridToData, ConvertEmpDataToForm, ConvertEmpDataToGrid} from "../../models/EmpowermentProduct";
+import {ConvertGridToProduct, ConvertProductToGrid} from "../../models/FacturaProduct";
 
-const EmpowermentForm = ({ token, match })=> {
+const EmpowermentForm = ({ token, match, user })=> {
 
   const [form] = Form.useForm();
   const { empowermentId } = match.params;
   const [initialData, setInitialData] = useState()
+  const [newEmpId,setNewEmpId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [tin,setTin] = useState('');
 
 
   useEffect(()=>{
     if(empowermentId){
-
+        // setNewEmpId(empowermentId)
       //fetch fatura data
       axios({
-        url: `/api/v1/empowerments/${empowermentId}`,
+        url: `emp/view/?EmpId=${empowermentId}&tin=${user.tin}`,
         method: "GET",
       }).then(res=>{
-        let data = res.data;
+        let data = (res.data.data[0]);
+        console.log("data",res)
         data.contractDate=moment(data.contractDate);
         data.created_at=moment(data.created_at);
         data.empowermentDateOfExpire=moment(data.empowermentDateOfExpire);
         data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
         data.agentPassportDateOfIssue=moment(data.agentPassportDateOfIssue);
         data.updated_at=moment(data.updated_at);
-  
+
         setInitialData(data);
         form.resetFields();
         setGrid(convertProductsToGrid(res.data.products, "empowerment"));
@@ -49,6 +56,18 @@ const EmpowermentForm = ({ token, match })=> {
         console.log(err);
       })
       //end fetch factura data;
+    }else{
+      axios({
+        url: "info/get-guid",
+        method: "get"
+      }).then(res=>{
+        if(res.data.success){
+          setNewEmpId(res.data.data)
+          console.log("resId",res)
+        }
+      }).catch(ex=>{
+        console.log("err",ex)
+      })
     }
   }, [])
   
@@ -76,25 +95,7 @@ const EmpowermentForm = ({ token, match })=> {
       { value: "" },                                          //1 product name
       { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
       { value: '' },                                          //3 amount
-    ], 
-    [
-      { readOnly: true, value: 2 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
-      { value: '' },                                          //3 amount
-    ], 
-    [
-      { readOnly: true, value: 3 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
-      { value: '' },                                          //3 amount
-    ], 
-    [
-      { readOnly: true, value: 4 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //4 measure
-      { value: '' },                                          //5 amount
-    ], 
+    ],
   ])
 
   const fetchAgent = e=>{
@@ -107,6 +108,7 @@ const EmpowermentForm = ({ token, match })=> {
           url: "info/contragent-by-tin?tin="+val
         })
         .then(res=>{
+          setTin(val);
           const { 
             name, 
             fullName, 
@@ -165,15 +167,18 @@ const EmpowermentForm = ({ token, match })=> {
      setGrid(newgrid)
   }
 
+
+
   const onContextMenu = (e, cell, i, j) =>
     cell.readOnly ? e.preventDefault() : null;
 //#endregion
   
   //#region form methods
 
+
   const handleSubmit = (values)=>{
+    console.log("data",GetEmpowermentDataToSign( values, products,newEmpId))
     setIsLoading(true)
-    console.log(values)
     if(empowermentId){
       axios({
         url:`/api/v1/empowerments/${empowermentId}`,
@@ -195,18 +200,18 @@ const EmpowermentForm = ({ token, match })=> {
       })
     } else{
       axios({
-        url:'/api/v1/empowerments',
+        url:'emp/create',
         method: 'post',
-        data: {emp: values, products: grid}
+        data: GetEmpowermentDataToSign( values, products,newEmpId)
       }).then(res=>{
         setIsLoading(false)
-        if(res.data.ok){
+        if(res.data?.success){
           message.success("Ishonchnma yaratildi!");
         }else{
-          message.error("Ishonchnoma yaratishda xatolik");
+          message.error("Ishonchnoma yaratishda xatolikkk");
         }
 
-        console.log(res)
+        console.log("resp",res)
       }).catch(err=>{
         setIsLoading(false);
         message.error("Ishonchnoma yaratishda xatolik");
@@ -215,6 +220,12 @@ const EmpowermentForm = ({ token, match })=> {
     }
     
   }
+  function getProducts(){
+     setProducts(ConverEmpGridToData(grid, tin, newEmpId));
+  }
+  useEffect(()=>{
+    getProducts();
+  },[grid])
 
   const handleImportExecl =(value)=>{
     console.log("me fired")
@@ -365,7 +376,7 @@ const EmpowermentForm = ({ token, match })=> {
       <div style={{overflowX: 'auto'}} >
         <div style={{width: '100%'}}>
           <Datasheet
-            data={ grid}
+            data={grid}
             valueRenderer={ valueRenderer}
             onContextMenu={ onContextMenu}
             onCellsChanged={ onCellsChanged}
@@ -450,33 +461,33 @@ const EmpowermentForm = ({ token, match })=> {
             
             </Col>
 
-  <Col md={7} >
-    <Form.Item>
-      <Form.Item 
-    key="selenote-field"
-    name="agentPassportIssuedBy">
-      <Input
-        size="large"
-        placeholder="Ким томонидан берилган" />
-    </Form.Item>
-      <span className="custom-input-label-1">Ким томонидан берилган</span>
-    </Form.Item>
-  </Col>
-  <Col md={7} >
-    <Form.Item>
-      <Form.Item 
-    key="selenote-field"
-    name="agentPassportDateOfIssue">
-      <DatePicker
-        size="large"
-        placeholder="Паспорт берилган сана" />
-    </Form.Item>
-      <span className="custom-input-label-1">Паспорт берилган сана</span>
-    </Form.Item>
-  </Col>
-  
-</Row>
-</div>
+            <Col md={7} >
+              <Form.Item>
+                <Form.Item
+              key="selenote-field"
+              name="agentPassportIssuedBy">
+                <Input
+                  size="large"
+                  placeholder="Ким томонидан берилган" />
+              </Form.Item>
+                <span className="custom-input-label-1">Ким томонидан берилган</span>
+              </Form.Item>
+            </Col>
+            <Col md={7} >
+              <Form.Item>
+                <Form.Item
+              key="selenote-field"
+              name="agentPassportDateOfIssue">
+                <DatePicker
+                  size="large"
+                  placeholder="Паспорт берилган сана" />
+              </Form.Item>
+                <span className="custom-input-label-1">Паспорт берилган сана</span>
+              </Form.Item>
+            </Col>
+
+          </Row>
+          </div>
           <div className="factura-data-sheet-container">
             <Row justify="space-around">
               <Col >
@@ -527,7 +538,8 @@ const EmpowermentForm = ({ token, match })=> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  token: selectToken
+  token: selectToken,
+  user: selectCurrentUser
 })
 
 export default connect(mapStateToProps)(EmpowermentForm);

@@ -94,9 +94,12 @@ const DynaGrid = ({
 
     let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&${modelName}[${searchedColumn}]=${searchText}` : ''}`
 
+    console.log(url)
+    console.log("replace",url.replace(/[ ]+/g, ""))
     setLoadingResource(true)
+
     axios({
-      url: url.replace(/[ ]+/g, ""),
+      url: url,///url.replace(/[ ]+/g, ""),
       method: "GET"
     }).then(res=>{
 
@@ -364,7 +367,7 @@ const DynaGrid = ({
         <div className="dyna-grid-actions">
           {actions.edit 
           ? <Tooltip placement="left" title="O'zgartirish">
-              {console.log(primaryKeyValue)}
+              {console.log("primaryKeyValue",primaryKeyValue)}
               <Link 
               
                 to={`${editActionPath}/${record[primaryKeyValue]}`}>
@@ -414,7 +417,7 @@ const DynaGrid = ({
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
       <div onDoubleClick={()=>toggleFullView(!isFulliew)} 
-        
+
         style={{marginTop: 40, marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
         <Button 
           

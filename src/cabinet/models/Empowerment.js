@@ -1,5 +1,5 @@
 export default class Empowerment {
-    "EmpowermentId"= "";
+    "EmpowermentID"= "";
     "EmpowermentDoc"= {
         "EmpowermentNo": "",
         "EmpowermentDateOfIssue": "",
@@ -85,6 +85,16 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
     } = formData;
 
     let emp = new Empowerment();
+    emp.EmpowermentID=empId;
+    emp.EmpowermentDoc={
+        EmpowermentDateOfExpire:empowermentDateOfExpire,
+        EmpowermentDateOfIssue: empowermentDateOfIssue,
+        EmpowermentNo:empowermentNo
+    }
+    emp.ContractDoc={
+        ContractNo:contractNo,
+        ContractDate:contractDate
+    }
     emp.Agent = {
         AgentTin: agentTin,
         Fio: agentFio,
@@ -116,5 +126,22 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
         Director: buyerDirector,
         Accountant: buyerAccountant,
     }
+
+    emp.ProductList={
+        EmpowermentProductId:empId,
+        Tin:sellerTin,
+        Products:products
+    }
+
+    return emp;
 }
 
+export const EmpowermentDataToForm=formData=>{
+    let {
+
+    } = formData;
+
+    let emp = {
+
+    }
+}

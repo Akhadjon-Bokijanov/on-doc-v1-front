@@ -139,6 +139,7 @@ export const GetFacturaDataToSign = (data, products, FacturaId) => {
         "BranchCode": "",
         "BranchName": ""
     }
+
     let f = new Factura();
 
     f.OldFacturaDoc = {
@@ -174,7 +175,7 @@ export const GetFacturaDataToSign = (data, products, FacturaId) => {
     console.log(products)
     return f;
 }
-
+//for editing forms
 export const FacturaDataToForm = data=>{
     
     let { 
@@ -229,6 +230,8 @@ export const FacturaDataToForm = data=>{
     return f;
 
 }
+
+
 
 const formProperties = [
     "agentFio",

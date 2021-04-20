@@ -44,13 +44,14 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
         method: "GET",
       }).then(res => {
         let data = FacturaDataToForm(res.data.data[0]);
+        console.log("data",(res.data.data[0]))
         data.contractDate = moment(data.contractDate);
         data.created_at = moment(data.created_at);
         data.facturaDate = moment(data.facturaDate);
         data.empowermentDateOfIssue = moment(data.empowermentDateOfIssue);
         data.oldFacturaDate = moment(data.oldFacturaDate);
         data.updated_at = moment(data.updated_at);
-        console.log(data);
+        console.log("dat",data);
 
         setInitialData(data);
         console.log(res.data.data[0]?.ProductList.Products);
@@ -194,7 +195,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
       })
     } else {
 
-      console.log(JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)))
+      console.log("fact",JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)))
 
       axios({
         url: 'facturas/create',

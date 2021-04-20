@@ -243,48 +243,40 @@ export const get_home_config = doc => {
                 title: "Ishonchnomalar",
                 createTitle: "Ishonchnoma yaratish",
                 createUrl: "/cabinet/empowerment/create",
-                gridSourceUrl: "/api/v1/empowerments",
+                gridSourceUrl: "emp/index",
                 gridConfig: {
-                    deleteRequestPath: 'api/v1/empowerments',
+                    modelName:"AllDocumentsSearch",
+                    // deleteRequestPath: 'api/v1/empowerments',
                     viewActionPath: '/cabinet/empowerment/view',
                     editActionPath: '/cabinet/empowerment/edit',
                     deleteConfirmText: "Shu ishonchnoma ochirilsinmi?",
+                    primaryKeyValue: "doc_id",
                     actions: {
                         edit: true,
                         delete: true,
                         view: true
                     },
-                    allColumns: [{
+                    allColumns: [
+                        {
                             title: "Ishonchnoma №",
-                            dataIndex: 'empowermentNo',
+                            dataIndex: 'doc_no',
                             isSearchable: true,
                             width: 100
                         },
                         {
                             title: "Kontrakt №",
-                            dataIndex: 'contractNo',
+                            dataIndex: 'contract_no',
                             isSearchable: true,
                         },
                         {
-                            title: "Oluvchi",
-                            dataIndex: 'buyerName',
-                            isSearchable: true,
-                            width: 150
-                        },
-                        {
-                            title: "Oluvchi STIR",
-                            dataIndex: "buyerTin",
-                            isSearchable: true,
-                        },
-                        {
-                            title: "Sotuvchi",
-                            dataIndex: 'sellerName',
+                            title: "Kontragent",
+                            dataIndex: 'contragent_name',
                             isSearchable: true,
                             width: 150
                         },
                         {
-                            title: "Sotuvchi STIR",
-                            dataIndex: "sellerTin",
+                            title: "Kontragent STIR",
+                            dataIndex: "contragent_tin",
                             isSearchable: true,
                         },
                         {

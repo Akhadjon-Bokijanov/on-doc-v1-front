@@ -50,6 +50,7 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                             {t("Barchasi")}
                         </div>
                     </div>
+                            {console.log("tab3",tabs[3])}
                 </div>
                 }
                 
