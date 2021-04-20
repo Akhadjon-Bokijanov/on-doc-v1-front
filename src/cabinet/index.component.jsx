@@ -13,6 +13,7 @@ import Notifications from './notifications/notifications.component';
 import ProfileComponent from './profile/profile.component';
 
 const CabinetIndex = ({ match }) => {
+    const {url} = match
     return (
         <div>
             <Row justify="space-around">
@@ -20,21 +21,21 @@ const CabinetIndex = ({ match }) => {
                     <RightSidebar />
                </Col>
                <Col md={19} lg={20}>
-                    <Route exact path={match.path} component={ CabinetHome } />
+                    <Route exact path={url} component={ CabinetHome } />
 
-                    <Route path={`${match.path}/factura`} component={ FacturaIndex } />
+                    <Route path={`${url}/factura`} component={ FacturaIndex } />
 
-                    <Route path={`${match.path}/empowerment`} component={ EmpowermentIndex } />
+                    <Route path={`${url}/empowerment`} component={ EmpowermentIndex } />
 
-                    <Route path={`${match.path}/act`} component={ ActIndexRouter } />
+                    <Route path={`${url}/act`} component={ ActIndexRouter } />
 
-                    <Route path={`${match.path}/contract`} component={ ContractIndexRouter } />
+                    <Route path={`${url}/contract`} component={ ContractIndexRouter } />
 
-                    <Route path={`${match.path}/tty`} component={ TTYIndexRouter } />
+                    <Route path={`${url}/tty`} component={ TTYIndexRouter } />
 
-                    <Route path={`${match.path}/notifications`} component={ Notifications } />
+                    <Route path={`${url}/notifications`} component={ Notifications } />
 
-                    <Route path={`${match.path}/profile`} component={ ProfileComponent } />
+                    <Route path={`${url}/profile`} component={ ProfileComponent } />
                </Col>
             </Row>
         </div>

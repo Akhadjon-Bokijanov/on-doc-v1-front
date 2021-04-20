@@ -42,7 +42,9 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             act: location.pathname.includes("/act"),
             tty: location.pathname.includes("/tty"),
             freeDoc: location.pathname.includes("/free-template"),
-            notification: location.pathname.includes("/notification")
+            notification: location.pathname.includes("/notification"),
+            settings: location.pathname.includes("/"),
+            exit: location.pathname.includes("/")
         })
     }, [location.pathname])
 
@@ -154,6 +156,23 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                                 onFinish={uOut} />
                             : null
                     }
+
+
+
+                    <div style={{marginTop:"100px"}}>
+                        <Link to="#">
+                            <div className={`action-bloks ${active.settings ? 'active' : ''}`}>
+                                <FontAwesomeIcon icon="file-invoice" className="action-icon" /> {t("Settings")}
+                                <Badge style={{marginLeft: 10}}  />
+                            </div>
+                        </Link>
+                        <Link to="#">
+                            <div className={`action-bloks ${active.exit ? 'active' : ''}`}>
+                                <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Exit")}
+                                <Badge style={{marginLeft: 10}}  />
+                            </div>
+                        </Link>
+                    </div>
 
                 </div>
             </div> 

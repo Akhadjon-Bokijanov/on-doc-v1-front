@@ -1,5 +1,69 @@
 .auth_img{
-  object-fit: cover;
+  object-fit:cover!important;
   width: 660px!important;
-  height: 620px!important;
+  height: 625px!important;
+}
+//@media (max-width:1600px) {
+//  .auth_img{
+//    object-fit:cover!important;
+//    width: 810px!important;
+//    height: 760px!important;
+//  }
+//}
+//@media (max-width:1500px) {
+//  .auth_img{
+//    object-fit:cover!important;
+//    width: 760px!important;
+//    height: 710px!important;
+//  }
+//}
+//@media (max-width:1400px) {
+//  .auth_img{
+//    object-fit:cover!important;
+//    width: 710px!important;
+//    height: 655px!important;
+//  }
+//}
+@media (max-width:1326px) {
+  .auth_img{
+    object-fit:cover!important;
+    width: 660px!important;
+    height: 568px!important;
+  }
+}
+
+@media (max-width:1160px) {
+  .auth_img{
+    object-fit:cover!important;
+    width: 560px!important;
+    height: 500px!important;
+  }
+}
+@media (max-width:1010px) {
+  .auth_img{
+    object-fit:cover!important;
+    width: 540px!important;
+    height: 500px!important;
+  }
+}
+@media (max-width:940px) {
+  .auth_img{
+    object-fit:cover!important;
+    width: 490px!important;
+    height: 418px!important;
+  }
+}
+@media (max-width:860px) {
+  .auth_img{
+    object-fit:cover!important;
+    width: 440px!important;
+    height: 390px!important;
+  }
+}
+@media (max-width:770px) {
+  .auth_img{
+    object-fit:cover!important;
+    width: 330px!important;
+    height: 345px!important;
+  }
 }
