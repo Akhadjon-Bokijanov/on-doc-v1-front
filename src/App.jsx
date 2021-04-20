@@ -18,14 +18,27 @@ import AdminIndexRouter from './admin/admin.router';
 import { message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Auth from "./pages/auth";
+
+const ForAuthenticatedUsers=()=>{
+    return(
+        <>
+            <Switch>
+                <Route exact path="/" render={() => < Redirect to="/home" />} />
+                <Route path="/home" component={FrontIndexRouter} />
+                <Route path="/cabinet" render={()=> <CabinetIndex /> } />
+                <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
+            </Switch>
+        </>
+    )
+}
+
 
 const App = ({ user, token, loadedKey, signOut }) => {
 
     moment.locale('uz-latn');
     moment.defaultFormat='MMMM Do YYYY'
     const { t } = useTranslation();
-
-    
 
     axios.defaults.baseURL = API_HOST
 
@@ -45,23 +58,12 @@ const App = ({ user, token, loadedKey, signOut }) => {
     return (
         <div className="App">
             
-            {/* <Header /> */}
 
-            <Switch>
-                <Route exact path="/"
-                    render={
-                        () => < Redirect to="/home" />
-                    } />
-                <Route path="/home"
-                    component={FrontIndexRouter} />
 
-                <Route path="/cabinet"
-                    render={() => user ? <CabinetIndex /> : <Redirect to="/home/login" />} />
-
-                <Route path="/admin" 
-                    render={()=>user.role_id===1? <AdminIndexRouter /> : <Redirect to="/home" />}
-                />
-            </Switch>
+            {
+                user?<ForAuthenticatedUsers/>:<Auth/>
+            }
+            
         </div>
     )
 }
