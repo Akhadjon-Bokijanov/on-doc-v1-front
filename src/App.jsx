@@ -45,7 +45,7 @@ const App = ({ user, token, loadedKey, signOut }) => {
     return (
         <div className="App">
             
-            <Header />
+            {/* <Header /> */}
 
             <Switch>
                 <Route exact path="/"

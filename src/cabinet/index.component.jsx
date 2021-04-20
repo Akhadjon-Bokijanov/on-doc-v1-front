@@ -11,6 +11,7 @@ import TTYIndexRouter from './tty/index.router';
 import './create.style.scss';
 import Notifications from './notifications/notifications.component';
 import ProfileComponent from './profile/profile.component';
+import CabinetHeader from './cabinet-header/CabinetHeader';
 
 const CabinetIndex = ({ match }) => {
     return (
@@ -20,6 +21,7 @@ const CabinetIndex = ({ match }) => {
                     <RightSidebar />
                </Col>
                <Col md={19} lg={20}>
+                   <CabinetHeader />
                     <Route exact path={match.path} component={ CabinetHome } />
 
                     <Route path={`${match.path}/factura`} component={ FacturaIndex } />
