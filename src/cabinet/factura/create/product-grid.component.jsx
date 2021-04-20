@@ -107,6 +107,42 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
             // })
 
             //setGrid([grid[0], ...response.excel])
+            let collector=[];
+            if(response.success){
+                response.data.forEach((row, index)=>{
+                    const { 
+                        CatalogCode,
+                        ProductCount,
+                        ProductDeliverySum,
+                        ProductDeliverySumWithVat,
+                        ProductFuelRate,
+                        ProductFuelSum,
+                        ProductMeasureId,
+                        ProductName, 
+                        ProductSumma,
+                        ProductVatRate,
+                        ProductVatSum
+                    } = row;
+                    collector.push(
+                        [
+                            { readOnly: true, value: index+1 },                           //0 ordNo
+                            { value: ProductName },                                          //1 product name
+                            { value: {CatalogName: "Hi", CatalogCode}, dataEditor: SelectEditor, valueViewer: ProductValueRendered },                //2 catalogCode
+                            { value: "" },                                          //3 shrix code
+                            { value: ProductMeasureId, dataEditor: SelectMeasureEditor },        //4 measure
+                            { value: ProductCount },                                          //5 amount
+                            { value: ProductSumma},                                         //6 price
+                            { value: ProductFuelRate },                                          //7 aksiz rate
+                            { value: ProductFuelSum, readOnly: true },                          //8 aksiz amount
+                            { value: ProductDeliverySum },                                          //9 delivery cost
+                            { value: ProductVatRate },                                          //10 VAT rate
+                            { value: ProductVatSum, readOnly: true },                          //11 VAT amount
+                            { value: ProductDeliverySumWithVat, readOnly: true, },                          //12 total
+                        ]
+                    )
+                })
+            }
+            setGrid([grid[0], ...collector]);
             console.log(response)
         }
     }
@@ -182,14 +218,13 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                     <Upload
                         headers={{
                             Authorization: "Bearer " + token
-                        }}
+                        }}  
                         multiple={false}
                         action={`http://api.onlinefactura.uz/uz/facturas/import-excel`}
                         accept=".xlsx, .xls"
                         name="Files[file]"
                         data={{tin: user.tin}}
                         onChange={handleImportExecl}>
-
                         <Button style={{ marginRight: 10 }}>{t("Exceldan yuklash")}</Button>
 
                     </Upload>
