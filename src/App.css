@@ -2,6 +2,10 @@ body {
     background-color: #f3f7f8!important;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
 
 /* a {
     color: #3a3939;
@@ -147,4 +151,13 @@ div.custom-section-wrapper{
 }
 .ant-radio-inner{
     margin-bottom: -10px;
+}
+
+.custom-primary-btn{
+    border: none;
+    outline: none;
+    background-color: #2B63C0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
 }
