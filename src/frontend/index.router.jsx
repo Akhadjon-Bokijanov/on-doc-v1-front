@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect, Route } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import Home from './home/home.component'
-import Login from './login/login.component'
+import Login from '../pages/auth/login/login.component'
 import { selectCurrentUser } from '../redux/user/user.selector'
 import ChooseCompany from './choose_company/choose-company.component'
 
@@ -18,11 +18,11 @@ const FrontIndexRouter = ({ match, user }) => {
                 path={`${match.path}/choosecompany`}
                 component={ChooseCompany}
             />
-            <Route 
-                exact 
-                path={`${match.path}/login`} 
-                component={ Login } 
-                />
+            {/*<Route */}
+            {/*    exact */}
+            {/*    path={`${match.path}/login`} */}
+            {/*    component={ Login } */}
+            {/*    />*/}
         </div>
     )
 }

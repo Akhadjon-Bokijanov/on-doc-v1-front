@@ -82,10 +82,10 @@ body {
 .ant-radio-wrapper {
     display: flex !important;
     align-items: center;
-    border: 1px solid #999999;
+    border: 1px solid #dbd9d9;
     width: 100%;
-    border-radius: 5px;
-    margin-bottom: 7px !important;
+    border-radius: 8px;
+    /*margin-bottom: 7px !important;*/
 }
 
 .ant-radio {
@@ -144,4 +144,7 @@ div.custom-section-wrapper{
     padding: 20px;
     margin: 15px;
     background-color: #fff;
+}
+.ant-radio-inner{
+    margin-bottom: -10px;
 }
