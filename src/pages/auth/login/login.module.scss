@@ -6,9 +6,12 @@ $blue: #2B63C0;
     //margin-top: 20px;
     //padding: 40px;
     .login_form_container {
-        background-color: #ffffff;
         padding: 0;
-        margin-bottom: 200px!important;
+        //margin-bottom: 200px!important;
+        label{
+            background-color: #ffffff;
+            margin-bottom: 10px;
+        }
     }
     .client_availbale_key {
         padding-bottom: 20px;
