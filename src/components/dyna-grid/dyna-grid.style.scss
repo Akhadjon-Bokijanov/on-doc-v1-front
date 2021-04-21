@@ -38,7 +38,12 @@ table {
 .ant-table tfoot>tr>td {
     padding: 5px 10px !important;
 }
-
+.ant-table-thead > tr > th{
+    background-color: #ffffff;
+}
+.ant-table-thead > tr {
+    border-radius: 11px !important;
+}
 .ant-table-tbody > tr > td, .ant-table tfoot > tr > td{
     text-align: center;
 }
