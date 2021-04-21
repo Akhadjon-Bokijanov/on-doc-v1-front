@@ -5,7 +5,8 @@
 
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
+    /* font-family: 'Poppins', sans-serif !important; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #F2F3F8;
