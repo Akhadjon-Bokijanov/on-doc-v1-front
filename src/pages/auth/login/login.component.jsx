@@ -117,7 +117,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
         
     }
 
-
+    const [psw,setPsw]=useState('');
     return (
         <div className={st.login_main_container} style={{
             marginTop:"70px",
@@ -196,11 +196,15 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                     <Form.Item
                                         key="dyna-form-facutura-no-old"
                                         name="password"
-                                        rules={[{required: true}]}>
-                                        <Input.Password
-                                            size="large"
-                                            // iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                            placeholder={t("Parol")}/>
+                                        rules={[{required: true}]} // couse of show "Paused in debugger"
+                                    >
+                                        <div className={st.psw}>
+                                            <Input.Password size={"large"}
+                                                            name="password"
+                                                            onChange={e=>console.log("E",e.target.defaultValue.toString())}
+                                                            placeholder={t("Parol")}/>
+                                        </div>
+
                                     </Form.Item>
                                     {/*<span className="custom-input-label-1">{t("Parol")}</span>*/}
                                     {/*</Form.Item>*/}

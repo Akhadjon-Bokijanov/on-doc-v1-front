@@ -42,3 +42,11 @@ $blue: #2B63C0;
     color:$blue;
     text-decoration: underline;
 }
+
+.psw{
+    input[type="text"]{
+        border: none!important;
+        height: auto!important;
+        -webkit-appearance: none;
+    }
+}

@@ -58,17 +58,12 @@ const App = ({ user, token, loadedKey, signOut }) => {
     return (
         <div className="App">
             
-            {/*<Header />*/}
+
 
             {
                 user?<ForAuthenticatedUsers/>:<Auth/>
             }
-            {/*<Switch>*/}
-            {/*    <Route exact path="/" render={() => < Redirect to="/home" />} />*/}
-            {/*    <Route path="/home" component={FrontIndexRouter} />*/}
-            {/*    <Route path="/cabinet" render={() => user ? <CabinetIndex /> : <Redirect to="/home/login" />} />*/}
-            {/*    <Route path="/admin" render={()=>user.role_id===1? <AdminIndexRouter /> : <Redirect to="/home" />}/>*/}
-            {/*</Switch>*/}
+            
         </div>
     )
 }
