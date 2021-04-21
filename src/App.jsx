@@ -25,17 +25,17 @@ const ForAuthenticatedUsers=()=>{
     return(
         <>
             <Switch>
-                <Route path="/home" render={()=> <FrontIndexRouter/> } />
+                <Route path="/home" render={()=> <FrontIndexRouter /> } />
                 <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
                 <Route path="/cabinet" render={()=> <CabinetIndex /> } />
                 {/*<Route render={() => <Redirect to="/cabinet" />}></Route>*/}
             </Switch>
         </>
     )
-}
+};
 
 
-const App = ({ user, token, loadedKey, signOut }) => {
+const App = ({ user, token, loadedKey, signOut })=> {
 
     moment.locale('uz-latn');
     moment.defaultFormat='MMMM Do YYYY'
@@ -58,9 +58,6 @@ const App = ({ user, token, loadedKey, signOut }) => {
 
     return (
         <div className="App">
-            
-
-
             {
                 user?<ForAuthenticatedUsers/>:<Auth/>
             }
