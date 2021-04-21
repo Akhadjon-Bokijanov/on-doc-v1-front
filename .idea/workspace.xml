@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/cabinet/cabinet-header/CabinetHeader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/cabinet/cabinet-header/cabinet-header.style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/index.router.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/index.router.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/login/login.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/login/login.style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/index.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/index.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/login/login.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +75,7 @@
       <recent name="C:\HISOBXONA\on_doc\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\pages" />
       <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\pages\auth" />
     </key>
   </component>
@@ -112,7 +114,9 @@
       <workItem from="1618806054413" duration="12887000" />
       <workItem from="1618820328007" duration="7415000" />
       <workItem from="1618892058007" duration="3492000" />
-      <workItem from="1618897049015" duration="11972000" />
+      <workItem from="1618897049015" duration="25604000" />
+      <workItem from="1618933974617" duration="1962000" />
+      <workItem from="1618979180361" duration="4453000" />
     </task>
     <servers />
   </component>
@@ -163,6 +167,11 @@
           <url>file://$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx</url>
           <line>393</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/auth/login/login.component.jsx</url>
+          <line>121</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

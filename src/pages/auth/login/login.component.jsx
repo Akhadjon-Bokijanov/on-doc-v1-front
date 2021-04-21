@@ -11,6 +11,8 @@ import st from './login.module.scss'
 import { withRouter } from 'react-router-dom';
 import { Generator } from '../../../utils/utils';
 import { useTranslation } from 'react-i18next';
+import {loginApi} from "../../../sevices/loginService";
+import axiosInstance from "../../../sevices/api";
 
 const { Option } = Select;
 
@@ -50,14 +52,11 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
     const handleSubmit = value => {
         setIsLoading(true)
         console.log(value)
-        axios({
-            url: '/api/v1/login-with-password',
-            data: value,
-            method: 'POST',
-        }).then(res => {
+        loginApi.login(value)
+            .then(res => {
             setCurrentUser(res.data)
             setIsLoading(false)
-            history.push("/home/choosecompany")
+            history.push("/cabinet")
         }).catch(err => {
             console.log(err)
             setIsLoading(false)
@@ -81,21 +80,16 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                     null,
                     pkcs7Text => {
                         
-                        axios({
-                            url: "site/auth",
-                            method: "post",
-                            data: {
-                                keyId: id,
-                                guid: data,
-                                pkcs7: pkcs7Text
-                            }
-                        }).then(res=>{
+                        loginApi.loginWithEKeys( {
+                            keyId: id, guid: data, pkcs7: pkcs7Text
+                        })
+                            .then(res=>{
                             let { success } = res.data;
                             if (success){
                                 setCurrentUser(res.data)
                                 setEspUser(res.data.data)
                                 message.success(t("Muaffaqiyatli kirish!"));
-                                history.push("/home/choosecompany")
+                                history.push("/cabinet")
                             }else{
                                 message.error(t("Kabinetga kirishda xatolik!"))
                                 setNotFound(!notFound);
@@ -122,18 +116,19 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
             })
         
     }
+
+    const [psw,setPsw]=useState('');
     return (
         <div className={st.login_main_container} style={{
-            marginTop:"140px",
-            marginRight:"100px"}
-        }>
+            marginTop:"70px",
+            marginRight:"100px"}}>
             <Row justify="space-around">
                 {
                     !notFound&&
                     <Col md={24}>
                     {
                         activeTab === 0 ?
-                            <div>
+                            <div style={{height:"350px",overflowY:'auto'}}>
                                 <h2>Welcome</h2>
                                 <Form
                                     name="e-key"
@@ -141,7 +136,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                     scrollToFirstError
                                     validateMessages={validateMessages}
                                 >
-                                    <div>
+                                    <div >
                                         <Form.Item
                                             className={st.login_form_container}
                                             name="key">
@@ -201,11 +196,15 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                     <Form.Item
                                         key="dyna-form-facutura-no-old"
                                         name="password"
-                                        rules={[{required: true}]}>
-                                        <Input.Password
-                                            size="large"
-                                            // iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                                            placeholder={t("Parol")}/>
+                                        rules={[{required: true}]} // couse of show "Paused in debugger"
+                                    >
+                                        <div className={st.psw}>
+                                            <Input.Password size={"large"}
+                                                            name="password"
+                                                            onChange={e=>console.log("E",e.target.defaultValue.toString())}
+                                                            placeholder={t("Parol")}/>
+                                        </div>
+
                                     </Form.Item>
                                     {/*<span className="custom-input-label-1">{t("Parol")}</span>*/}
                                     {/*</Form.Item>*/}
