@@ -19,15 +19,16 @@ import { message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Auth from "./pages/auth";
+import ChooseCompany from "./frontend/choose_company/choose-company.component";
 
 const ForAuthenticatedUsers=()=>{
     return(
         <>
             <Switch>
-                <Route exact path="/" render={() => < Redirect to="/home" />} />
-                <Route path="/home" component={FrontIndexRouter} />
-                <Route path="/cabinet" render={()=> <CabinetIndex /> } />
+                <Route path="/home" render={()=> <FrontIndexRouter/> } />
                 <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
+                <Route path="/cabinet" render={()=> <CabinetIndex /> } />
+                {/*<Route render={() => <Redirect to="/cabinet" />}></Route>*/}
             </Switch>
         </>
     )

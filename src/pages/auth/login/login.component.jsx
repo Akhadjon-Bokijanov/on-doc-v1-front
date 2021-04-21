@@ -56,7 +56,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
             .then(res => {
             setCurrentUser(res.data)
             setIsLoading(false)
-            history.push("/cabinet")
+            history.push("/home/choosecompany")
         }).catch(err => {
             console.log(err)
             setIsLoading(false)
@@ -89,7 +89,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                 setCurrentUser(res.data)
                                 setEspUser(res.data.data)
                                 message.success(t("Muaffaqiyatli kirish!"));
-                                history.push("/cabinet")
+                                history.push("/home/choosecompany")
                             }else{
                                 message.error(t("Kabinetga kirishda xatolik!"))
                                 setNotFound(!notFound);
@@ -128,49 +128,57 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                     <Col md={24}>
                     {
                         activeTab === 0 ?
-                            <div style={{height:"350px",overflowY:'auto'}}>
-                                <h2>Welcome</h2>
-                                <Form
-                                    name="e-key"
-                                    onFinish={handleKeySubmit}
-                                    scrollToFirstError
-                                    validateMessages={validateMessages}
-                                >
-                                    <div >
-                                        <Form.Item
-                                            className={st.login_form_container}
-                                            name="key">
-                                            <Radio.Group
-                                                size="large">
-                                                {
-                                                    eKeys.map(data => <Radio key={data.value} value={data}>
-                                                        <div className={st.client_availbale_key}>
-                                                            <div>{t("FIO")}: {data.text.CN} </div>
-                                                            <div>{t("STIR")}: {data.text.TIN}</div>
-                                                            <div>{t("Tashkilot")}: {data.text.O}</div>
-                                                            <div>{t("Amal qilish muddati")}:
-                                                                {moment(data.text.validTo).format("MMMM Do YYYY, H:mm:ss")}
-                                                            </div>
-                                                        </div>
-                                                    </Radio>)
-                                                }
-                                            </Radio.Group>
-                                        </Form.Item>
+                            <div>
+                                <div>
+                                    <h2>Welcome</h2>
+                                    <Form
+                                        name="e-key"
+                                        onFinish={handleKeySubmit}
+                                        scrollToFirstError
+                                        validateMessages={validateMessages}
+                                    >
+                                    <div style={{height:"180px",overflowY:'auto'}}>
+
+                                            <div>
+                                                <Form.Item
+                                                    className={st.login_form_container}
+                                                    name="key">
+                                                    <Radio.Group
+                                                        size="large">
+                                                        {
+                                                            eKeys.map(data => <Radio key={data.value} value={data}>
+                                                                <div className={`${st.client_availbale_key}`}>
+                                                                    <div>{t("FIO")}: {data.text.CN} </div>
+                                                                    <div>{t("STIR")}: {data.text.TIN}</div>
+                                                                    <div>{t("Tashkilot")}: {data.text.O}</div>
+                                                                    <div>{t("Amal qilish muddati")}:
+                                                                        {moment(data.text.validTo).format("MMMM Do YYYY, H:mm:ss")}
+                                                                    </div>
+                                                                </div>
+                                                            </Radio>)
+                                                        }
+                                                    </Radio.Group>
+                                                </Form.Item>
+                                            </div>
+
+
+
                                     </div>
-                                    <Form.Item>
-                                        <Button
-                                            loading={isKeyLoading}
-                                            style={{display: 'block', width: '55%'}}
-                                            className={st.login_btn}
-                                            size="large"
-                                            htmlType="submit"
-                                        >
-                                            {t("Kirish")}
-                                        </Button>
-                                    </Form.Item>
-                                </Form>
-                                <div onClick={() => setActiveTab(1)}
-                                     className={st.login_link}>{t("STIR va parol bilan kirish")}</div>
+                                        <Form.Item>
+                                            <Button
+                                                loading={isKeyLoading}
+                                                style={{display: 'block', width: '55%'}}
+                                                className={st.login_btn}
+                                                size="large"
+                                                htmlType="submit"
+                                            >
+                                                {t("Kirish")}
+                                            </Button>
+                                        </Form.Item>
+                                    </Form>
+                                </div>
+
+                                <div onClick={() => setActiveTab(1)} className={st.login_link}>{t("STIR va parol bilan kirish")}</div>
                             </div>
                             :
                             <div>
