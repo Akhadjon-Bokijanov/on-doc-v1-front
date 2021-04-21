@@ -84,31 +84,7 @@ const ActForm = ({ token, match, user })=> {
       { value: '' },                                          //3 amount
       { value: "", },                                         //4 price
       { value: '', readOnly: true,}                           //6 total
-    ], 
-    [
-      { readOnly: true, value: 2 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
-      { value: '' },                                          //3 amount
-      { value: "", },                                         //4 price
-      { value: '', readOnly: true,}                           //6 total
-    ],  
-    [
-      { readOnly: true, value: 3 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
-      { value: '' },                                          //3 amount
-      { value: "", },                                         //4 price
-      { value: '', readOnly: true,}                           //6 total
-    ], 
-    [
-      { readOnly: true, value: 4 },                           //0 ordNo
-      { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
-      { value: '' },                                          //3 amount
-      { value: "", },                                         //4 price
-      { value: '', readOnly: true,}                           //6 total
-    ], 
+    ] 
   ])
 
 
@@ -182,12 +158,12 @@ const ActForm = ({ token, match, user })=> {
       })
     } else{
       axios({
-        url:'/api/v1/acts',
+        url:'act/create',
         method: 'post',
         data: {act: values, products: grid}
       }).then(res=>{
         setIsloading(false)
-        if(res.data.ok){
+        if(res.data.success){
           message.success("Akt yaratildi!");
         }
         else{
@@ -374,26 +350,6 @@ const ActForm = ({ token, match, user })=> {
         onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
       </div>
           
-          
-
-        <div className="factura-data-sheet-container">
-
-<Row justify="space-between">
-  <Col md={24} >
-    <Form.Item>
-      <Form.Item 
-    key="selenote-field"
-    name="notes">
-      <Input
-        size="large"
-        placeholder="Қўшимча майдон" />
-    </Form.Item>
-      <span className="custom-input-label-1">Қўшимча майдон</span>
-    </Form.Item>
-  </Col>
-  
-</Row>
-</div>
           <div className="factura-data-sheet-container">
             <Row justify="space-around">
               <Col >
@@ -426,13 +382,6 @@ const ActForm = ({ token, match, user })=> {
               </Col>
             </Row>
           </div>
-
-          <Form.Item
-          name="actId"
-          key="act-id"
-          >
-            <Input type="hidden" />
-          </Form.Item>
 
       </Form>
     </div>
