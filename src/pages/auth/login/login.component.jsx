@@ -137,7 +137,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                         scrollToFirstError
                                         validateMessages={validateMessages}
                                     >
-                                    <div style={{height:"180px",overflowY:'auto'}}>
+                                    <div style={{maxHeight:"380px",overflowY:'auto'}}>
 
                                             <div>
                                                 <Form.Item
@@ -182,7 +182,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                             </div>
                             :
                             <div>
-                                <h2>Enter with pssword</h2>
+                                <h2>Enter with password</h2>
                                 <Form
                                     name="tin-pass"
                                     onFinish={handleSubmit}
