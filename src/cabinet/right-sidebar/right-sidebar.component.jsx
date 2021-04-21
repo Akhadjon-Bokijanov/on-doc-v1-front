@@ -72,8 +72,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
     return (
         <div className="cabiner-right-sidebar-cmain-container">
-            <AfertaPopup />
-            <BindroumingPopup />
+            {/*<AfertaPopup />*/}
+            {/*<BindroumingPopup />*/}
             <Modal 
             bodyStyle={{width: '70wv'}}
             title="Notifications"

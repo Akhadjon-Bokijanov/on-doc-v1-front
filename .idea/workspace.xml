@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/cabinet/cabinet-header/CabinetHeader.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/cabinet/cabinet-header/cabinet-header.style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cabinet/index.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/index.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/right-sidebar/right-sidebar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/right-sidebar/right-sidebar.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/header.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/header.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/choose_company/choose-company.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/choose_company/choose-company.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/home/home.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/home/home.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/index.router.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/index.router.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/auth/login/login.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.module.scss" afterDir="false" />
     </list>
@@ -65,7 +69,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -116,7 +120,8 @@
       <workItem from="1618892058007" duration="3492000" />
       <workItem from="1618897049015" duration="25604000" />
       <workItem from="1618933974617" duration="1962000" />
-      <workItem from="1618979180361" duration="4453000" />
+      <workItem from="1618979180361" duration="12165000" />
+      <workItem from="1618991759415" duration="8297000" />
     </task>
     <servers />
   </component>
@@ -172,6 +177,11 @@
           <url>file://$PROJECT_DIR$/src/pages/auth/login/login.component.jsx</url>
           <line>121</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/cabinet/common/seller-form.component.jsx</url>
+          <line>57</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

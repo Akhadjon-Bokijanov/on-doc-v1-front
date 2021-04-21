@@ -21,7 +21,7 @@ const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies 
             setLoading(false)
             setCurrentUser(res.data.company)
             if(push_to_cabinet){
-                history.push("/cabinet")
+                    history.push("/cabinet")
             }
 
         }).catch(e => {
@@ -46,8 +46,9 @@ const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies 
 
     useEffect(()=>{
         setLoading(true)
+        console.log("user,",user)
         axios({
-            url: `info/director-company/?tin=${user.username}`,
+            url: `info/director-company/?tin=${user?.username}`,
             method: 'get',
         }).then(res=>{
             console.log(res);
@@ -94,7 +95,7 @@ const ChooseCompany = ({ setCurrentUser, history, user, setUserComps, companies 
                     }}
                     loading={loading}
                     dataSource={companies}
-                    renderItem={comp => <div onClick={() => setChosen(comp.company_tin)} 
+                    renderItem={comp => <div onClick={() => setChosen(comp.company_tin)}
                     className="company-card">
                         <div className="company-name">
                             {comp.company_name}
