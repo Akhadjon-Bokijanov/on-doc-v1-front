@@ -435,7 +435,7 @@ const DynaGrid = ({
         loading={loadingSource}
         rowKey="id"
         onChange={handleChange} 
-        bordered 
+      
         pagination={pagination}
         columns={columns} 
           dataSource={ajaxDataSource} 

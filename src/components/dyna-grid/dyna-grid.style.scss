@@ -8,6 +8,7 @@
 
 .dyna-grid-main-container {
     th.ant-table-cell {
+        text-align: center !important;
         font-size: 10px;
         div.ant-table-filter-column {
             span.ant-table-filter-column-title {}
@@ -15,6 +16,7 @@
     }
     td.ant-table-cell {
         font-size: 10px;
+        text-align: center !important;
     }
     &.akhadjon-dyna-grid-full-view {
         position: fixed;
@@ -35,4 +37,8 @@ table {
 .ant-table-tbody>tr>td,
 .ant-table tfoot>tr>td {
     padding: 5px 10px !important;
+}
+
+.ant-table-tbody > tr > td, .ant-table tfoot > tr > td{
+    text-align: center;
 }

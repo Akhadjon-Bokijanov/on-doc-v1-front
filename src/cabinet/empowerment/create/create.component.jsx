@@ -117,7 +117,7 @@ const EmpowermentForm = ({ token, match, user })=> {
             passNumber,
             passSeries
           } = res.data;
-          console.log(moment('2020-00-00 00:00:00')._isValid)
+          
           form.setFieldsValue({
             agentFio: fullName ?? name,
             agentPassportDateOfIssue: moment(passIssueDate)._isValid ? moment(passIssueDate) : null,
