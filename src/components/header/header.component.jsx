@@ -23,7 +23,7 @@ const Header = ({ user, logOut, location})=>{
         <div style={{ textAlign: "right", padding: '5px 40px', backgroundColor: 'rgba(0,0,0,0.1)' }}>{t("Call center")}: <a href="tel:+998712001122">+998 71 200 11 22</a> </div>
         <div className="header-main-component-container">
             <div className="header-main-conatainer">
-                <span>
+                <span>{console.log("STIR",user.tin ?? user.username)}
                     <Link to="/">
                         <img className="logo-on-doc-img" src="/assests/logo.png" alt="logo On Doc" /> <span style={{fontSize: 27, color: 'black', fontWeight: "bold"}}>Online<span style={{ color: "rgb(0,174,255)" }}>Factura</span></span>
                     </Link>

@@ -25,7 +25,7 @@ const CabinetIndex = ({ match }) => {
                     {/* <Route exact path={url} component={ CabinetHome } /> */}
 
                    <CabinetHeader />
-                    <Route exact path={match.path} component={ CabinetHome } />
+                    <Route  path={match.path} component={ CabinetHome } />
 
                     <Route path={`${url}/factura`} component={ FacturaIndex } />
 
