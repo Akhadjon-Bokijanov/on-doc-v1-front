@@ -1,4 +1,5 @@
 import {useState} from "react";
+import SelectMeasureEditor from "../../components/data-sheet-custom-measure-selector/custom-selector.component";
 
 export default class EmpowermentProduct{
     "OrdNo" = 1;
@@ -14,7 +15,7 @@ const properties=[
     "Count"
 ];
 
-export const ConverEmpGridToData = (data, tin, empId) => {
+export const ConverEmpGridToData = (data) => {/*, tin, empId*/
     // const [datum,setDatum]=useState([]);
     let res=[];
     let emp = new EmpowermentProduct();
@@ -33,12 +34,52 @@ export const ConverEmpGridToData = (data, tin, empId) => {
     return res;
 }
 
-// export const ConvertEmpDataToForm=(products)=>{
-//     let resp = products.map(product=>[
-//         {value:product.ordNo,readOnly:true},
-//         {value:product.Name},
-//         {value:product.MeasureId},
-//         {value:product.Count}
-//     ])
-//     return resp;
-// }
+
+export const ConvertEmpProductToGrid=products=>{
+    let res = products.map((item,index)=>[
+        {value:item.OrdNo,readOnly:true},
+        {value:item.Name},
+        { value: item.MeasureId, dataEditor: SelectMeasureEditor },
+        {value:item.Count}
+    ])
+    return res;
+}
+export const ConvertEmpDataToForm=(data)=>{
+    let {
+        Agent,
+        Buyer,
+        BuyerTin,
+        ContractDoc,
+        EmpowermentDoc,
+        EmpowermentId,
+        // ProductList,
+        Seller,
+        SellerTin,
+
+    } = data
+
+    let emp = {
+        agentTin:Agent.AgentTin,
+        agentFio:Agent.Fio,
+        buyerName:Buyer.Name,
+        buyerAddress:Buyer.Address,
+        buyerTin:BuyerTin,
+        contractNo:ContractDoc.ContractNo,
+        contarctDate:ContractDoc.ContractDate,
+        empowermentDateOfExpire:EmpowermentDoc.EmpowermentDateOfExpire,
+        empowermentDateOfIssue:EmpowermentDoc.EmpowermentDateOfIssue,
+        empowermentNo:EmpowermentDoc.EmpowermentNo,
+        empowermentId:EmpowermentId,
+        sellerAccount:Seller.Account,
+        sellerAccountant:Seller.Accountant,
+        sellerAddress:Seller.Address,
+        sellerBankId:Seller.BankId,
+        sellerDirector:Seller.Director,
+        sellerName:Seller.Name,
+        sellerTin:SellerTin,
+        agentPassportDateOfIssue:Agent.Passport.DateOfIssue,
+        agentPassportNumber:Agent.Passport.Number,
+        agentPassportIssuedBy:Agent.Passport.IssuedBy
+    }
+    return emp;
+}

@@ -11,14 +11,22 @@ $sidebarColor:#0C2556;
     top: 0;
     z-index: 99;
     .cabiner-right-sidebar-sub-container {
-        padding: 40px 5px 40px 30px;
+        padding: 18px 5px 40px 30px;
         .cabinet-documents-action-containers-bloks {
             display: flex;
-            margin-top: 50px;
+            //margin-top: 50px;
             height: 300px;
             flex-direction: column;
             justify-content: space-between;
             //justify-content: ;
+            .line{
+                //color:red!important;
+                border-left-style: none;
+                border-right-style: none;
+                border-bottom-style: none;
+                border-top-color: rgba(200, 194, 194, 0.34) !important;
+                height: 20px;
+            }
             .action-bloks {
                 color: #FFFFFF;
                 padding: 10px;
@@ -38,7 +46,7 @@ $sidebarColor:#0C2556;
                         position: absolute;
                         left: 0;
                         top: 0;
-                        width: 7px;
+                        width: 6px;
                         height: 100%;
                         transition: all ease-in-out 0.1s 0.1s;
                     }
