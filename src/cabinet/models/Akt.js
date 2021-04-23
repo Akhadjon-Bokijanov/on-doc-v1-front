@@ -52,5 +52,6 @@ export const GetActDataToSign = (data, products, actId)=>{
         Tin: sellerTin,
         Products: products
     }
+    return m;
 
 }
