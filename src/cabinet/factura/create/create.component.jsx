@@ -201,9 +201,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
         setSaveLoading(false);
       })
     } else {
-
       console.log("fact",JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)))
-
       axios({
         url: 'facturas/create',
         method: 'post',

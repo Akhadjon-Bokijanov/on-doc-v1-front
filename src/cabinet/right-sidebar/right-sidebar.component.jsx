@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Badge, Modal, Tag, Statistic, Spin, Checkbox } from 'antd';
+import {Badge, Modal, Tag, Statistic, Spin, Checkbox, Row, Col, Button} from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { selectLoadedKey } from '../../redux/user/user.selector';
 import AfertaPopup from '../aferta-popup/aferta-popup.component';
 import BindroumingPopup from '../bindrouming-popup/bindrouming-popup.component';
 
+import logo from '../../assests/logo_new.png'
 const { Countdown } = Statistic;
 
 const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
@@ -24,6 +25,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
 
     const [active, setActive] = useState({})
+    const [show, setShow] = useState(false)
     const [notifications, setNotifications] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [badgeCount, setBedgeCount]=useState({
@@ -43,8 +45,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             tty: location.pathname.includes("/tty"),
             freeDoc: location.pathname.includes("/free-template"),
             notification: location.pathname.includes("/notification"),
-            settings: location.pathname.includes("/"),
-            exit: location.pathname.includes("/")
+            settings: location.pathname.includes("/settings"),
+            exit: location.pathname.includes("/login")
         })
     }, [location.pathname])
 
@@ -69,6 +71,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             console.log(err)
         })
     }, [])
+
+    const handleModal=()=>setShow(!show);
 
     return (
         <div className="cabiner-right-sidebar-cmain-container">
@@ -101,6 +105,12 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
             <div className="cabiner-right-sidebar-sub-container">
                 <div className="cabinet-documents-action-containers-bloks">
+                    <div style={{marginBottom:"25px",marginLeft:'20px'}}>
+                        <img src={logo} alt=""/>
+                    </div>
+                    <div>
+                        <hr className={"line"}/>
+                    </div>
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''}`}>
                             <FontAwesomeIcon icon="home" /> {t("Bosh sahifa")}
@@ -160,22 +170,27 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
 
                     <div style={{marginTop:"100px"}}>
-                        <Link to="#">
+                        <Link to="/cabinet/settings">
                             <div className={`action-bloks ${active.settings ? 'active' : ''}`}>
                                 <FontAwesomeIcon icon="file-invoice" className="action-icon" /> {t("Settings")}
                                 <Badge style={{marginLeft: 10}}  />
                             </div>
                         </Link>
                         <Link to="#">
-                            <div className={`action-bloks ${active.exit ? 'active' : ''}`}>
+                            <div onClick={handleModal} className={`action-bloks ${active.exit ? 'active' : ''}`}>
                                 <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Exit")}
-                                <Badge style={{marginLeft: 10}}  />
+                                <Badge style={{marginLeft: 10}} />
                             </div>
                         </Link>
                     </div>
 
                 </div>
-            </div> 
+            </div>
+            <div>
+                <Modal title="Basic Modal" style={{width:"500px"}} visible={show} onOk={()=>uOut()} onCancel={handleModal}>
+                    <h4>Are you sure,you want to exit!!!</h4>
+                </Modal>
+            </div>
         </div>
     )
 }
