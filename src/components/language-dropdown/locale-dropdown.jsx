@@ -47,7 +47,7 @@ const LanguagesDropdown = ({ locale, changeLocale }) => {
 
     return (<span className="trigger text-float-right">
         <Dropdown overlay={languagesMenu}>
-            <img style={{ width: 25, borderRadius: '50%', marginRight:30 }} alt="languange" src={`/images/${activeLang==="uz-Cyrl"?"uz": activeLang}.png`} />
+            <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src={`/images/${activeLang==="uz-Cyrl"?"uz": activeLang}.png`} />
         </Dropdown>
     </span>)
 }

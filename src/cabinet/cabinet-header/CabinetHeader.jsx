@@ -9,6 +9,7 @@ import wallet from "../../images/wallet.svg"
 import settings from "../../images/settings.svg";
 import question_mark from "../../images/question_mark.svg";
 import chat from "../../images/chat.svg";
+import LanguagesDropdown from '../../components/language-dropdown/locale-dropdown';
 
 const CabinetHeader = ({ user }) => {
 
@@ -22,6 +23,9 @@ const CabinetHeader = ({ user }) => {
                     <div>{user.tin}</div>
                 </div>
                 <div className="ch-user-info-con-2">
+                    <div>
+                        <LanguagesDropdown />
+                    </div>
                     <div className="ch-action-container">
                         <div style={{ display: 'flex' }}>
                             <img className="wallet-img" src={wallet} alt=""/>
