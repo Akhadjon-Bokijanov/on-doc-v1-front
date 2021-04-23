@@ -179,14 +179,14 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         <Link to="#">
                             <div onClick={handleModal} className={`action-bloks ${active.exit ? 'active' : ''}`}>
                                 <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Exit")}
-                                <Badge style={{marginLeft: 10}}  />
+                                <Badge style={{marginLeft: 10}} />
                             </div>
                         </Link>
                     </div>
 
                 </div>
             </div>
-            <div >
+            <div>
                 <Modal title="Basic Modal" style={{width:"500px"}} visible={show} onOk={()=>uOut()} onCancel={handleModal}>
                     <h4>Are you sure,you want to exit!!!</h4>
                 </Modal>

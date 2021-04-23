@@ -18,7 +18,12 @@ import {
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_EMPOWERMENT_GRID_ROW } from '../../../utils/main';
 import { GetEmpowermentDataToSign } from '../../models/Empowerment';
-import {ConverEmpGridToData, ConvertEmpDataToForm, ConvertEmpDataToGrid} from "../../models/EmpowermentProduct";
+import {
+  ConverEmpGridToData,
+  ConvertEmpDataToForm,
+  ConvertEmpDataToGrid,
+  ConvertEmpProductToGrid
+} from "../../models/EmpowermentProduct";
 import {ConvertGridToProduct, ConvertProductToGrid} from "../../models/FacturaProduct";
 
 const EmpowermentForm = ({ token, match, user })=> {
@@ -29,19 +34,19 @@ const EmpowermentForm = ({ token, match, user })=> {
   const [newEmpId,setNewEmpId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
+  const [gridInitialValues, setGridInitialValues] = useState([]);
   const [tin,setTin] = useState('');
 
 
   useEffect(()=>{
     if(empowermentId){
-        // setNewEmpId(empowermentId)
-      //fetch fatura data
+      setNewEmpId(empowermentId);
       axios({
-        url: `emp/view/?EmpId=${empowermentId}&tin=${user.tin}`,
+        url: `emp/view/?tin=${user.tin}&EmpId=${empowermentId}`,
         method: "GET",
       }).then(res=>{
-        let data = (res.data.data[0]);
-        console.log("data",res)
+        let data = ConvertEmpDataToForm(res.data.data[0])
+        console.log(data);
         data.contractDate=moment(data.contractDate);
         data.created_at=moment(data.created_at);
         data.empowermentDateOfExpire=moment(data.empowermentDateOfExpire);
@@ -51,7 +56,8 @@ const EmpowermentForm = ({ token, match, user })=> {
 
         setInitialData(data);
         form.resetFields();
-        setGrid(convertProductsToGrid(res.data.products, "empowerment"));
+        setGridInitialValues(ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
+        console.log("grid",ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
       }).catch(err=>{
         console.log(err);
       })
@@ -63,14 +69,22 @@ const EmpowermentForm = ({ token, match, user })=> {
       }).then(res=>{
         if(res.data.success){
           setNewEmpId(res.data.data)
-          console.log("resId",res)
         }
       }).catch(ex=>{
         console.log("err",ex)
       })
     }
   }, [])
-  
+
+  useEffect(()=>{
+    console.log("gridEdit",gridInitialValues)
+    if (empowermentId){
+      setGrid([
+        grid[0],
+        ...gridInitialValues
+      ])
+    }
+  },[gridInitialValues]);
 
   const validateMessages = {
     required: 'Bu maydon majburiy!',
@@ -169,8 +183,7 @@ const EmpowermentForm = ({ token, match, user })=> {
 
 
 
-  const onContextMenu = (e, cell, i, j) =>
-    cell.readOnly ? e.preventDefault() : null;
+  const onContextMenu = (e, cell, i, j) => cell.readOnly ? e.preventDefault() : null;
 //#endregion
   
   //#region form methods
@@ -181,13 +194,13 @@ const EmpowermentForm = ({ token, match, user })=> {
     setIsLoading(true)
     if(empowermentId){
       axios({
-        url:`/api/v1/empowerments/${empowermentId}`,
-        method: 'PATCH',
-        data: {emp: values, products: grid}
+        url:`/emp/update?id=${empowermentId}&tin=${user.tin??user.username}`,
+        method: 'post',
+        data:GetEmpowermentDataToSign( values, products,newEmpId)
       }).then(res=>{
         console.log(res)
         setIsLoading(false);
-        if(res.data.ok){
+        if(res.data.success){
           message.success("Ishonchnoma ozgartirildi!")
         }
         else{
@@ -207,7 +220,9 @@ const EmpowermentForm = ({ token, match, user })=> {
         setIsLoading(false)
         if(res.data?.success){
           message.success("Ishonchnma yaratildi!");
+          console.log("res",res)
         }else{
+          console.log("resErr",res)
           message.error("Ishonchnoma yaratishda xatolikkk");
         }
 
@@ -218,10 +233,10 @@ const EmpowermentForm = ({ token, match, user })=> {
         console.log(err)
       })
     }
-    
   }
+
   function getProducts(){
-     setProducts(ConverEmpGridToData(grid, tin, newEmpId));
+     setProducts(ConverEmpGridToData(grid));
   }
   useEffect(()=>{
     getProducts();

@@ -82,8 +82,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                         
                         loginApi.loginWithEKeys( {
                             keyId: id, guid: data, pkcs7: pkcs7Text
-                        })
-                            .then(res=>{
+                        }).then(res=>{
                             let { success } = res.data;
                             if (success){
                                 setCurrentUser(res.data)
@@ -117,7 +116,6 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
         
     }
 
-    const [psw,setPsw]=useState('');
     return (
         <div className={st.login_main_container} style={{
             marginTop:"70px",
