@@ -57,7 +57,7 @@ const EmpView = ({ match, user }) => {
                             <div style={{width: 300, textAlign:'center'}}>
                                 <h4>
                                     {
-                                        t("hi",{
+                                        t("ContractDate dagi EmpowermentNo sonli shartnomaga EmpowermentDateOfIssue dagi",{
                                             ContractDate: moment(emp?.ContractDoc.ContractDate).format('MMMM Do YYYY'),
                                             EmpowermentNo: emp?.EmpowermentDoc.EmpowermentNo,
                                             EmpowermentDateOfIssue: moment(emp?.EmpowermentDoc.EmpowermentDateOfIssue).format('MMMM Do YYYY')
@@ -139,23 +139,42 @@ const EmpView = ({ match, user }) => {
                                             Tovar/xizmat nomi
                                         </th>
                                         <th>
-                                            Tovar/xizmatlar yagona elektron milliy katalog identifikatsiya kodi
-                                        </th>
-                                        <th>
                                             O'lchov birligi
                                         </th>
                                         <th>
-                                            Miqdori
-                                        </th>
-                                        <th>
-                                            Narxi
+                                            Soni
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody className="product-list-body">
-
+                                {
+                                    emp?.ProductList.Products.map((item,index)=><tr key={index}>
+                                        <td align="center">{item.OrdNo}</td>
+                                        <td>{item.Name}</td>
+                                        <td>{item.MeasureId}</td>
+                                        <td>{item.Count}</td>
+                                    </tr>)
+                                }
                                 </tbody>
                             </table>
+                        </div>
+                        <div style={{marginTop: 30, display: 'flex', justifyContent: 'space-between'}}>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td><strong>Raxbar: </strong></td>
+                                        <td>{emp?.Seller.Director}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td><strong>Raxbar: </strong></td>
+                                        <td>{emp?.Buyer.Name}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

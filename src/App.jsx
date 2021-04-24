@@ -28,7 +28,7 @@ const ForAuthenticatedUsers=()=>{
                 <Route path="/home" render={()=> <FrontIndexRouter /> } />
                 <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
                 <Route path="/cabinet" render={()=> <CabinetIndex /> } />
-                <Route render={() => <Redirect to="/home/choosecompany" />}></Route>
+                {/*<Route render={() => <Redirect to="/home/choosecompany" />}></Route>*/}
             </Switch>
         </>
     )
