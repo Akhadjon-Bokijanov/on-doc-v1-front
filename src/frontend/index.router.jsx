@@ -13,7 +13,7 @@ const FrontIndexRouter = ({ match, user }) => {
     // let {url}=match;
     return (
         <div>
-            <Route render={() => <Redirect to={`/home/choosecompany`} />}></Route>
+            {/*<Route render={() => <Redirect to={`/home/choosecompany`} />}></Route>*/}
             <Route exact path={`/home`} component={ Home } />
             <Route
                 exact={true}

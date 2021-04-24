@@ -1,0 +1,23 @@
+.factura_view_page_pdf_container{
+    padding: 25px;
+}
+td{
+    padding-right: 15px;
+}
+.product_table_head {
+    th{
+        border: 1px #999 solid;
+        padding: 3px;
+        border-collapse: collapse;
+    }
+}
+
+.product_list_body {
+    td{
+        border: 1px solid #999;
+        padding: 2px;
+        font-size: 10px;
+        border-collapse: collapse;
+    }
+}
+
