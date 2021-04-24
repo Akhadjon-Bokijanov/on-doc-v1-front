@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/.htaccess" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/assests/logo.png" beforeDir="false" />
@@ -157,9 +156,14 @@
       <workItem from="1619065425764" duration="20789000" />
       <workItem from="1619096193610" duration="795000" />
       <workItem from="1619110207364" duration="3793000" />
+<<<<<<< HEAD
+      <workItem from="1619154542766" duration="2065000" />
+      <workItem from="1619157304688" duration="3879000" />
+=======
       <workItem from="1619154542766" duration="3532000" />
       <workItem from="1619158164353" duration="14507000" />
       <workItem from="1619239211340" duration="20703000" />
+>>>>>>> 8ebab77074944b3998697e12089384b46444b073
     </task>
     <servers />
   </component>
@@ -183,17 +187,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx</url>
-          <line>384</line>
+          <line>422</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
-          <line>392</line>
+          <line>418</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx</url>
-          <line>391</line>
+          <line>429</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -208,12 +212,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
-          <line>215</line>
+          <line>235</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
-          <line>104</line>
+          <line>119</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

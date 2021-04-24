@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import 'antd/dist/antd.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './components/font-awesome-icons/font-awesome-icons';

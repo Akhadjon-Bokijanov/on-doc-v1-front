@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {Badge, Modal, Tag, Statistic, Spin, Checkbox, Row, Col, Button} from 'antd';
+import {Badge, Modal, Tag, Statistic, Spin, Checkbox, Row, Col, Button, Popconfirm} from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
@@ -178,21 +178,28 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                                 <Badge style={{marginLeft: 10}}  />
                             </div>
                         </Link>
-                        <Link to="#">
-                            <div onClick={handleModal} className={`action-bloks ${active.exit ? 'active' : ''}`}>
+                        <Popconfirm
+                        onConfirm={()=>uOut()}
+                        okText={t("Chiqish")}
+                        title={t("Chiqishni xoxlaysizmi?")}
+                        cancelText={t("Bekor qilish")}
+                        >
+                            <div 
+                                style={{cursor: 'pointer'}} 
+                                className={`action-bloks ${active.exit ? 'active' : ''}`}>
                                 <FontAwesomeIcon icon="sign-out-alt" className="action-icon"/> {t("Exit")}
                                 <Badge style={{marginLeft: 10}} />
                             </div>
-                        </Link>
+                        </Popconfirm>
                     </div>
 
                 </div>
             </div>
-            <div>
+            {/* <div>
                 <Modal title="Basic Modal" style={{width:"500px"}} visible={show} onOk={()=>uOut()} onCancel={handleModal}>
                     <h4>Are you sure,you want to exit!!!</h4>
                 </Modal>
-            </div>
+            </div> */}
         </div>
     )
 }
