@@ -29,7 +29,7 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                     {
                         customButton 
                         ?customButton
-                        : <Link to={createUrl}><span>{createTitle}</span></Link>
+                            : <Link to={createUrl}><button style={{marginRight: 10}} className="custom-primary-btn">{createTitle}</button></Link>
                     }
                 </div>
                 {
@@ -50,7 +50,6 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                             {t("Barchasi")}
                         </div>
                     </div>
-                            {console.log("tab3",tabs[3])}
                 </div>
                 }
                 

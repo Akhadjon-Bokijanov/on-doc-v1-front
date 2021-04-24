@@ -102,7 +102,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
                                 ContractNo: factura?.ContractDoc.ContractNo
                                 })}
                             </h4>
-                            <h2 style={{textTransform: "uppercase", fontWeight: "bold"}}>{t("Faktura")}</h2>
+                            <h2 style={{textTransform: "uppercase", fontWeight: "bold"}}>{t("Ishonchnoma")}</h2>
                     </div>
                     <div>
                         <QRCode

@@ -15,6 +15,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, selectToken } from '../../../redux/user/user.selector';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import MeasureViewer from '../../../components/data-sheet-custom-measure-selector/measure-viewer';
 
 export const ProductValueRendered = prop => {
 
@@ -68,7 +69,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
             { value: "" },                                          //1 product name
             { value: "", dataEditor: SelectEditor, valueViewer: ProductValueRendered },                //2 catalogCode
             { value: "" },                                          //3 shrix code
-            { value: "", dataEditor: SelectMeasureEditor },        //4 measure
+            { value: "", dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //4 measure
             { value: '' },                                          //5 amount
             { value: "", },                                         //6 price
             { value: '' },                                          //7 aksiz rate
@@ -129,7 +130,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                             { value: ProductName },                                          //1 product name
                             { value: {CatalogName: "Hi", CatalogCode}, dataEditor: SelectEditor, valueViewer: ProductValueRendered },                //2 catalogCode
                             { value: "" },                                          //3 shrix code
-                            { value: ProductMeasureId, dataEditor: SelectMeasureEditor },        //4 measure
+                            { value: ProductMeasureId, dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //4 measure
                             { value: ProductCount },                                          //5 amount
                             { value: ProductSumma},                                         //6 price
                             { value: ProductFuelRate },                                          //7 aksiz rate

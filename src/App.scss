@@ -1,7 +1,11 @@
 body {
-    background-color: #f3f7f8!important;
+    background-color: #F8FAFC!important;
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
 
 /* a {
     color: #3a3939;
@@ -46,7 +50,7 @@ body {
 .ant-select-lg {
     border: 1px solid #dadce0 !important;
     border-radius: 11px !important;
-    height: 55px;
+    height: 50px;
     min-width: 200px;
 }
 
@@ -74,7 +78,7 @@ body {
 .ant-form-item-explain.ant-form-item-explain-error {
     font-size: 11px;
     position: absolute !important;
-    top: 53px;
+    top: 48px;
     left: 10px;
     transition: none !important;
 }
@@ -82,10 +86,10 @@ body {
 .ant-radio-wrapper {
     display: flex !important;
     align-items: center;
-    border: 1px solid #999999;
+    border: 1px solid #dbd9d9;
     width: 100%;
-    border-radius: 5px;
-    margin-bottom: 7px !important;
+    border-radius: 8px;
+    /*margin-bottom: 7px !important;*/
 }
 
 .ant-radio {
@@ -129,14 +133,14 @@ body {
 }
 
 span.custom-input-label-1 {
-    font-size: 12px;
-    padding: 0 5px;
+    font-size: 13px;
+    padding: 0 0px;
     border-radius: 5px;
-    background-color: #fff;
+    /* background-color: #fff; */
     z-index: 99 !important;
     position: absolute;
-    bottom: 57px;
-    left: 15px;
+    bottom: 60px;
+    /* left: 15px; */
 }
 
 div.custom-section-wrapper{
@@ -145,3 +149,55 @@ div.custom-section-wrapper{
     margin: 15px;
     background-color: #fff;
 }
+.ant-radio-inner{
+    margin-bottom: -10px;
+}
+
+.custom-primary-btn{
+    border: none;
+    outline: none;
+    background-color: #2B63C0;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.factura-home-list-tabs {
+            margin-top: 10px;
+            .factura-home-list-tab-con {
+                display: flex;
+                justify-content: space-around;
+                border-radius: 11px !important;
+                z-index: 99;
+                overflow: hidden;
+                background-color: #fff;
+                // border-bottom: 1px solid #0075ff;
+                .status-tab-bar {
+                    width: 100%;
+                    padding: 17px 5px;
+                    text-align: center;
+                    // border-top-left-radius: 11px;
+                    border: 1px solid rgba(0, 0, 0, 0.04);
+                    font-weight: bold;
+                    cursor: pointer;
+                    a{
+                        color: #303030;
+                    }
+                    &:hover {
+                        // background-color: #0075ff;
+                        color: #2B63C0;
+                        border-bottom: 1px solid #2B63C0;
+                        a{
+                            color: #2B63C0;
+                        }
+                    }
+                    &.active-tab {
+                        color: #2B63C0;
+                        border-bottom: 1px solid #2B63C0;
+                        a{
+                            color: #2B63C0;
+                        }
+                    }
+                }
+            }
+        }

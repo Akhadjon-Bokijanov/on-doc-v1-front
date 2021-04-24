@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Badge, Modal, Tag, Statistic, Spin, Checkbox } from 'antd';
+import {Badge, Modal, Tag, Statistic, Spin, Checkbox, Row, Col, Button, Popconfirm} from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
@@ -14,6 +14,7 @@ import { selectLoadedKey } from '../../redux/user/user.selector';
 import AfertaPopup from '../aferta-popup/aferta-popup.component';
 import BindroumingPopup from '../bindrouming-popup/bindrouming-popup.component';
 
+import logo from '../../assests/logo_new.png'
 const { Countdown } = Statistic;
 
 const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
@@ -24,6 +25,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
 
     const [active, setActive] = useState({})
+    const [show, setShow] = useState(false)
     const [notifications, setNotifications] = useState([])
     const [showModal, setShowModal] = useState(false);
     const [badgeCount, setBedgeCount]=useState({
@@ -42,7 +44,9 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             act: location.pathname.includes("/act"),
             tty: location.pathname.includes("/tty"),
             freeDoc: location.pathname.includes("/free-template"),
-            notification: location.pathname.includes("/notification")
+            notification: location.pathname.includes("/notification"),
+            settings: location.pathname.includes("/settings"),
+            exit: location.pathname.includes("/login")
         })
     }, [location.pathname])
 
@@ -68,10 +72,12 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
         })
     }, [])
 
+    const handleModal=()=>setShow(!show);
+
     return (
         <div className="cabiner-right-sidebar-cmain-container">
-            <AfertaPopup />
-            <BindroumingPopup />
+            {/*<AfertaPopup />*/}
+            {/*<BindroumingPopup />*/}
             <Modal 
             bodyStyle={{width: '70wv'}}
             title="Notifications"
@@ -99,6 +105,12 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
             <div className="cabiner-right-sidebar-sub-container">
                 <div className="cabinet-documents-action-containers-bloks">
+                    <div style={{marginBottom:"25px",marginLeft:'20px'}}>
+                        <img src={logo} alt=""/>
+                    </div>
+                    <div>
+                        <hr className={"line"}/>
+                    </div>
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''}`}>
                             <FontAwesomeIcon icon="home" /> {t("Bosh sahifa")}
@@ -147,16 +159,47 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     {
                         loadedKey ?
+                            <div className="action-bloks">
                             <Countdown
-                                valueStyle={{fontSize: 15}}
+                                valueStyle={{fontSize: 15, color: '#fff'}}
                                 value={loadedKey.time + 1000 * 60 * 30}
-                                title={t("Sessiya tugaydi")}
+                                title={<span style={{color: '#fff'}}>{t("Sessiya tugaydi")}</span>}
                                 onFinish={uOut} />
+                            </div>
                             : null
                     }
 
+
+
+                    <div style={{marginTop:"100px"}}>
+                        <Link to="/cabinet/settings">
+                            <div className={`action-bloks ${active.settings ? 'active' : ''}`}>
+                                <FontAwesomeIcon icon="cog" className="action-icon" /> {t("Settings")}
+                                <Badge style={{marginLeft: 10}}  />
+                            </div>
+                        </Link>
+                        <Popconfirm
+                        onConfirm={()=>uOut()}
+                        okText={t("Chiqish")}
+                        title={t("Chiqishni xoxlaysizmi?")}
+                        cancelText={t("Bekor qilish")}
+                        >
+                            <div 
+                                style={{cursor: 'pointer'}} 
+                                className={`action-bloks ${active.exit ? 'active' : ''}`}>
+                                <FontAwesomeIcon icon="sign-out-alt" className="action-icon"/> {t("Exit")}
+                                <Badge style={{marginLeft: 10}} />
+                            </div>
+                        </Popconfirm>
+                    </div>
+
                 </div>
-            </div> 
+            </div>
+            {/* <div>
+                <Modal title="Basic Modal" style={{width:"500px"}} visible={show} onOk={()=>uOut()} onCancel={handleModal}>
+                    <h4>Are you sure,you want to exit!!!</h4>
+                </Modal>
+            </div> */}
         </div>
     )
 }

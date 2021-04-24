@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import 'antd/dist/antd.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './components/font-awesome-icons/font-awesome-icons';
@@ -18,21 +18,37 @@ import AdminIndexRouter from './admin/admin.router';
 import { message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Auth from "./pages/auth";
+import UserContext from "./context/UserContext";
 
-const App = ({ user, token, loadedKey, signOut }) => {
+const ForAuthenticatedUsers=()=>{
+    return(
+        <>
+            <Switch>
+                <Route path="/home" render={()=> <FrontIndexRouter /> } />
+                <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
+                <Route path="/cabinet" render={()=> <CabinetIndex /> } />
+                {/*<Route render={() => <Redirect to="/home/choosecompany" />}></Route>*/}
+            </Switch>
+        </>
+    )
+};
+
+
+const App = ({ user, token, loadedKey, signOut })=> {
+
+    const [btoken,setBtoken]=useState('');
 
     moment.locale('uz-latn');
     moment.defaultFormat='MMMM Do YYYY'
     const { t } = useTranslation();
-
-    
-
+    localStorage.setItem("bearer", JSON.stringify(token))
     axios.defaults.baseURL = API_HOST
-
     axios.defaults.headers.common['Authorization'] = "Bearer " + token;
 
     useEffect(()=>{
 
+        setBtoken(JSON.stringify(token))
         if (loadedKey?.time + 1000 * 60 * 30 < Date.now()){
             console.log("Hi")
             signOut()
@@ -44,24 +60,16 @@ const App = ({ user, token, loadedKey, signOut }) => {
 
     return (
         <div className="App">
+            {
+                user?
+                    <UserContext.Provider value={{
+                        token:btoken
+                    }}>
+                        <ForAuthenticatedUsers/>
+                    </UserContext.Provider>
+                    :<Auth/>
+            }
             
-            <Header />
-
-            <Switch>
-                <Route exact path="/"
-                    render={
-                        () => < Redirect to="/home" />
-                    } />
-                <Route path="/home"
-                    component={FrontIndexRouter} />
-
-                <Route path="/cabinet"
-                    render={() => user ? <CabinetIndex /> : <Redirect to="/home/login" />} />
-
-                <Route path="/admin" 
-                    render={()=>user.role_id===1? <AdminIndexRouter /> : <Redirect to="/home" />}
-                />
-            </Switch>
         </div>
     )
 }

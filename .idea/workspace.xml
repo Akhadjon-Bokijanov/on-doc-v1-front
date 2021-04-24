@@ -5,18 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/common/home/home.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/common/home/home.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/index.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/index.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/models/Empowerment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/models/Empowerment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/models/EmpowermentProduct.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/models/EmpowermentProduct.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/models/Factura.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/models/Factura.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/dyna-grid/dyna-grid.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dyna-grid/dyna-grid.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/home.config.provider.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/home.config.provider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/assests/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/e-imzo/application.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/e-imzo/default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/e-imzo/e-imzo-client.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/e-imzo/e-imzo.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/excels/empowerment_products.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/excels/factura_products.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/excels/on_doc_contract_products.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/about_profile.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/banner_bg_2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/en.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/financial.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/home_banner.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/logo1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/progress.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/ru.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/time.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/images/uz.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/locales/en/translation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/locales/ru/translation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/locales/uz-cyrl/translation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/locales/uz/translation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/css/2.4672bdbb.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/css/2.4672bdbb.chunk.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/static/media/getFetch.d7d6010d.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/uz/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/uz/translation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/view/view.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/view/view.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/factura/view/view.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/factura/view/view.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/index.router.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/index.router.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +89,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../xammasi rabochi/React/react-quiz" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/cabinet/empowerment/view" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -69,13 +97,21 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2021.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\cabinet\empowerment\view" />
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\context" />
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\assests" />
       <recent name="C:\HISOBXONA\on_doc\public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\sevices" />
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\pages" />
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\pages\auth" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -113,6 +149,21 @@
       <workItem from="1618806054413" duration="12887000" />
       <workItem from="1618820328007" duration="7415000" />
       <workItem from="1618892058007" duration="3492000" />
+      <workItem from="1618897049015" duration="25604000" />
+      <workItem from="1618933974617" duration="1962000" />
+      <workItem from="1618979180361" duration="12165000" />
+      <workItem from="1618991759415" duration="17403000" />
+      <workItem from="1619065425764" duration="20789000" />
+      <workItem from="1619096193610" duration="795000" />
+      <workItem from="1619110207364" duration="3793000" />
+<<<<<<< HEAD
+      <workItem from="1619154542766" duration="2065000" />
+      <workItem from="1619157304688" duration="3879000" />
+=======
+      <workItem from="1619154542766" duration="3532000" />
+      <workItem from="1619158164353" duration="14507000" />
+      <workItem from="1619239211340" duration="20703000" />
+>>>>>>> 8ebab77074944b3998697e12089384b46444b073
     </task>
     <servers />
   </component>
@@ -136,33 +187,44 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx</url>
-          <line>199</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx</url>
-          <line>379</line>
+          <line>422</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
-          <line>377</line>
+          <line>418</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
-          <line>101</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
-          <line>226</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx</url>
-          <line>386</line>
+          <line>429</line>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/pages/auth/login/login.component.jsx</url>
+          <line>119</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/cabinet/common/seller-form.component.jsx</url>
+          <line>57</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
+          <line>235</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
+          <line>119</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/cabinet/factura/view/view.component.jsx</url>
+          <line>107</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
