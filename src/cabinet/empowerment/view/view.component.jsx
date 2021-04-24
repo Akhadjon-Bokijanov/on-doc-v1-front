@@ -64,6 +64,7 @@ const EmpView = ({ match, user }) => {
                                         })
                                     }
                                 </h4>
+                                <h2>Ishonchnoma</h2>
                             </div>
                             <div>
                                 <QRCode value={JSON.stringify({ID:emp?.EmpowermentId,Doc:"Empowerment"})}/>
