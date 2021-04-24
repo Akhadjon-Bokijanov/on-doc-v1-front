@@ -19,7 +19,7 @@ import { message, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Auth from "./pages/auth";
-import ChooseCompany from "./frontend/choose_company/choose-company.component";
+import UserContext from "./context/UserContext";
 
 const ForAuthenticatedUsers=()=>{
     return(
@@ -28,7 +28,7 @@ const ForAuthenticatedUsers=()=>{
                 <Route path="/home" render={()=> <FrontIndexRouter /> } />
                 <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
                 <Route path="/cabinet" render={()=> <CabinetIndex /> } />
-                {/*<Route render={() => <Redirect to="/cabinet" />}></Route>*/}
+                {/*<Route render={() => <Redirect to="/home/choosecompany" />}></Route>*/}
             </Switch>
         </>
     )
@@ -37,16 +37,18 @@ const ForAuthenticatedUsers=()=>{
 
 const App = ({ user, token, loadedKey, signOut })=> {
 
+    const [btoken,setBtoken]=useState('');
+
     moment.locale('uz-latn');
     moment.defaultFormat='MMMM Do YYYY'
     const { t } = useTranslation();
-
+    localStorage.setItem("bearer", JSON.stringify(token))
     axios.defaults.baseURL = API_HOST
-
     axios.defaults.headers.common['Authorization'] = "Bearer " + token;
 
     useEffect(()=>{
 
+        setBtoken(JSON.stringify(token))
         if (loadedKey?.time + 1000 * 60 * 30 < Date.now()){
             console.log("Hi")
             signOut()
@@ -59,7 +61,13 @@ const App = ({ user, token, loadedKey, signOut })=> {
     return (
         <div className="App">
             {
-                user?<ForAuthenticatedUsers/>:<Auth/>
+                user?
+                    <UserContext.Provider value={{
+                        token:btoken
+                    }}>
+                        <ForAuthenticatedUsers/>
+                    </UserContext.Provider>
+                    :<Auth/>
             }
             
         </div>

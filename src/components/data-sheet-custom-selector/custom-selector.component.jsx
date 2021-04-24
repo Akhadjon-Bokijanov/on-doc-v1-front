@@ -59,7 +59,7 @@ class SelectEditor extends PureComponent {
         onChange={this.handleChange}
         //onSelect={this.handleChange}
         onInputKeyDown={this.handleKeyDown}
-       options={this.optionstag} 
+        options={this.optionstag}
       />
        
     )
