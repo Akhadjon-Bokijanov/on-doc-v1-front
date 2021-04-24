@@ -69,7 +69,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
             { value: "" },                                          //1 product name
             { value: "", dataEditor: SelectEditor, valueViewer: ProductValueRendered },                //2 catalogCode
             { value: "" },                                          //3 shrix code
-            { value: "", dataEditor: SelectMeasureEditor },        //4 measure
+            { value: "", dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //4 measure
             { value: '' },                                          //5 amount
             { value: "", },                                         //6 price
             { value: '' },                                          //7 aksiz rate
