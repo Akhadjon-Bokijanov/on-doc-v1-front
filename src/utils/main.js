@@ -104,15 +104,14 @@ export const convertProductsToGrid = (products, doc = "factura") => {
 
         case "empowerment":
             {
-                gridProducts = products.map(product => {
-                    return [
-                        { readOnly: true, value: product["ordNo"], width: 50 },
-                        { value: product["name"] },
-                        { value: product["measureId"], dataEditor: SelectMeasureEditor },
-                        { value: product["count"] },
-                    ]
-                })
+                gridProducts = products.map(product =>[
+                    { readOnly: true, value: product["OrdNo"], width: 50 },
+                    { value: product["Name"] },
+                    { value: product["MeasureId"], dataEditor: SelectMeasureEditor },
+                    { value: product["Count"] },
+                ])
                 gridProducts.unshift(FIRST_EMPOWERMENT_GRID_ROW);
+                return gridProducts
             }
             break;
 

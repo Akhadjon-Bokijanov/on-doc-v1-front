@@ -85,7 +85,8 @@ const DynaGrid = ({
   const [totalDataCount, setTotalDataCount] = useState(0);
   const [ajaxDataSource, setAjaxDataSource] = useState([])
   const [loadingSource, setLoadingResource] = useState(false);
-  const [reRenderer, setRerenderer]=useState(reload??1)
+  const [reRenderer, setRerenderer]=useState(reload??1);
+  const [selectedRowKeys, setSelectedRowKeys] = useState();
 
   let searchInput = null;
 
@@ -414,6 +415,10 @@ const DynaGrid = ({
         </div>,
     })
 
+  const onSelectChange = selectedRowKeys => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    setSelectedRowKeys(selectedRowKeys)
+  };
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
       <div onDoubleClick={()=>toggleFullView(!isFulliew)} 
@@ -431,11 +436,14 @@ const DynaGrid = ({
         </div>
       </div>
       <Table
-        
+        rowSelection={{
+          selectedRowKeys,
+          onChange: onSelectChange
+        }}
         loading={loadingSource}
-        rowKey="id"
+        rowKey={primaryKeyValue ?? "id"}
         onChange={handleChange} 
-        bordered 
+      
         pagination={pagination}
         columns={columns} 
           dataSource={ajaxDataSource} 

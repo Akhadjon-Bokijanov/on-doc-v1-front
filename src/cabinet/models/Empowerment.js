@@ -1,5 +1,5 @@
 export default class Empowerment {
-    "EmpowermentID"= "";
+    "EmpowermentId"= "";
     "EmpowermentDoc"= {
         "EmpowermentNo": "",
         "EmpowermentDateOfIssue": "",
@@ -85,7 +85,7 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
     } = formData;
 
     let emp = new Empowerment();
-    emp.EmpowermentID=empId;
+    emp.EmpowermentId=empId;
     emp.EmpowermentDoc={
         EmpowermentDateOfExpire:empowermentDateOfExpire,
         EmpowermentDateOfIssue: empowermentDateOfIssue,

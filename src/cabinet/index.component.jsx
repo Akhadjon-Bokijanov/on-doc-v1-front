@@ -11,8 +11,10 @@ import TTYIndexRouter from './tty/index.router';
 import './create.style.scss';
 import Notifications from './notifications/notifications.component';
 import ProfileComponent from './profile/profile.component';
+import CabinetHeader from './cabinet-header/CabinetHeader';
 
 const CabinetIndex = ({ match }) => {
+    const {url} = match
     return (
         <div>
             <Row justify="space-around">
@@ -20,21 +22,24 @@ const CabinetIndex = ({ match }) => {
                     <RightSidebar />
                </Col>
                <Col md={19} lg={20}>
-                    <Route exact path={match.path} component={ CabinetHome } />
+                    {/* <Route exact path={url} component={ CabinetHome } /> */}
 
-                    <Route path={`${match.path}/factura`} component={ FacturaIndex } />
+                    <CabinetHeader/>
+                    <Route  exact path={match.path} component={ CabinetHome } />
 
-                    <Route path={`${match.path}/empowerment`} component={ EmpowermentIndex } />
+                    <Route path={`${url}/factura`} component={ FacturaIndex } />
 
-                    <Route path={`${match.path}/act`} component={ ActIndexRouter } />
+                    <Route path={`${url}/empowerment`} component={ EmpowermentIndex } />
 
-                    <Route path={`${match.path}/contract`} component={ ContractIndexRouter } />
+                    <Route path={`${url}/act`} component={ ActIndexRouter } />
 
-                    <Route path={`${match.path}/tty`} component={ TTYIndexRouter } />
+                    <Route path={`${url}/contract`} component={ ContractIndexRouter } />
 
-                    <Route path={`${match.path}/notifications`} component={ Notifications } />
+                    <Route path={`${url}/tty`} component={ TTYIndexRouter } />
 
-                    <Route path={`${match.path}/profile`} component={ ProfileComponent } />
+                    <Route path={`${url}/notifications`} component={ Notifications } />
+
+                    <Route path={`${url}/settings`} component={ ProfileComponent } />
                </Col>
             </Row>
         </div>

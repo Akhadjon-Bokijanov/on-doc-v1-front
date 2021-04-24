@@ -17,18 +17,21 @@ export default class SelectMeasureEditor extends PureComponent {
       // }
       console.log(opt)
       const { e } = this.state
-      onCommit(opt.target.value, e)
+      onCommit(opt.value)
     }
-  
+
     render () {
       return (
-        <select
-          onChange={this.handleChange}
-        >
-          {
-            measures.map(measure=><option value={measure.value}> {measure.value} - {measure.label}</option>)
-          }
-        </select>
+        <Select
+            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+            onChange={this.handleChange}
+            options={measures}
+            style={{width: "100%"}}
+            dropdownMatchSelectWidth={false}
+            open={true}
+            menuPortalTarget={document.body}
+        />
+
       )
     }
   }

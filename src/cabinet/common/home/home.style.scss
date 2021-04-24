@@ -1,5 +1,5 @@
 .factura-home-page-container {
-    background-color: #ffffff;
+    //background-color: #ffffff;
     border-radius: 11px;
     min-height: 400px;
     margin: 15px;
@@ -25,30 +25,6 @@
                 }
             }
         }
-        .factura-home-list-tabs {
-            margin-top: 30px;
-            .factura-home-list-tab-con {
-                display: flex;
-                justify-content: space-around;
-                border-bottom: 1px solid #0075ff;
-                .status-tab-bar {
-                    background-color: #f3f7f8;
-                    width: 100%;
-                    padding: 20px 5px;
-                    text-align: center;
-                    border-top-left-radius: 11px;
-                    margin-right: 10px;
-                    font-weight: bold;
-                    &:hover {
-                        background-color: #0075ff;
-                        color: #ffffff;
-                    }
-                    &.active-tab {
-                        background-color: #0075ff;
-                        color: #ffffff;
-                    }
-                }
-            }
-        }
+        
     }
 }
