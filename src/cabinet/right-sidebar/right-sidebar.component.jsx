@@ -159,11 +159,13 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     {
                         loadedKey ?
+                            <div className="action-bloks">
                             <Countdown
-                                valueStyle={{fontSize: 15}}
+                                valueStyle={{fontSize: 15, color: '#fff'}}
                                 value={loadedKey.time + 1000 * 60 * 30}
-                                title={t("Sessiya tugaydi")}
+                                title={<span style={{color: '#fff'}}>{t("Sessiya tugaydi")}</span>}
                                 onFinish={uOut} />
+                            </div>
                             : null
                     }
 
@@ -172,13 +174,13 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     <div style={{marginTop:"100px"}}>
                         <Link to="/cabinet/settings">
                             <div className={`action-bloks ${active.settings ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="file-invoice" className="action-icon" /> {t("Settings")}
+                                <FontAwesomeIcon icon="cog" className="action-icon" /> {t("Settings")}
                                 <Badge style={{marginLeft: 10}}  />
                             </div>
                         </Link>
                         <Link to="#">
                             <div onClick={handleModal} className={`action-bloks ${active.exit ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Exit")}
+                                <FontAwesomeIcon icon="sign-out-alt" className="action-icon"/> {t("Exit")}
                                 <Badge style={{marginLeft: 10}} />
                             </div>
                         </Link>
