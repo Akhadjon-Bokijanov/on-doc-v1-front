@@ -75,7 +75,6 @@ export default class Factura {
 
 export const GetFacturaDataToSign = (data, products, FacturaId) => {
 
-    console.log(data)
     let { 
         agentFio,
         agentTin,
@@ -172,7 +171,7 @@ export const GetFacturaDataToSign = (data, products, FacturaId) => {
         AgentTin: agentTin,
     }
     f.ProductList=products;
-    console.log(products)
+    
     return f;
 }
 //for editing forms

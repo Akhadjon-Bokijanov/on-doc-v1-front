@@ -20,7 +20,9 @@ import {
     faCloudUploadAlt,
     faWallet,
     faArrowCircleLeft,
-    faSyncAlt
+    faSyncAlt,
+    faCog,
+    faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -70,5 +72,7 @@ library.add(
     faBell,
     faWallet,
     faArrowCircleLeft,
-    faSyncAlt
+    faSyncAlt,
+    faCog,
+    faSignOutAlt
 )
