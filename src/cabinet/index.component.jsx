@@ -39,7 +39,7 @@ const CabinetIndex = ({ match }) => {
 
                     <Route path={`${url}/notifications`} component={ Notifications } />
 
-                    <Route path={`${url}/profile`} component={ ProfileComponent } />
+                    <Route path={`${url}/settings`} component={ ProfileComponent } />
                </Col>
             </Row>
         </div>
