@@ -131,5 +131,7 @@
     "E-imzo bilan kirish": "Login with e-signature",
     "Amal qilish muddati": "Validity period",
     "Back": "Back",
-    "Sessiya tugaydi": "Session will expire in"
+    "Sessiya tugaydi": "Session will expire in",
+
+    "ContractDate dagi EmpowermentNo sonli shartnomaga EmpowermentDateOfIssue dagi": "{{ContractDate}} dagi {{EmpowermentNo}} sonli shartnomaga \n {{EmpowermentDateOfIssue}} dagi"
 }

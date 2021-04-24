@@ -7,12 +7,19 @@
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/factura/create/create.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/models/EmpowermentProduct.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/models/EmpowermentProduct.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cabinet/right-sidebar/right-sidebar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/right-sidebar/right-sidebar.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/login/login.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/locales/en/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/locales/en/translation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/locales/uz/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/locales/uz/translation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/index.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/index.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/view/view.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/view/view.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cabinet/index.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/index.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/data-sheet-custom-measure-selector/custom-selector.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/data-sheet-custom-measure-selector/custom-selector.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/data-sheet-custom-selector/custom-selector.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/data-sheet-custom-selector/custom-selector.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sevices/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sevices/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sevices/loginService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sevices/loginService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sevices/tokenService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/sevices/getToken.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +64,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/cabinet/empowerment/view" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -71,10 +78,13 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\cabinet\empowerment\view" />
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\context" />
       <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\assests" />
       <recent name="C:\HISOBXONA\on_doc\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\sevices" />
       <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\pages" />
       <recent name="D:\DigitlWorld\version_1\ofactura-v1-front\src\pages\auth" />
     </key>
@@ -121,7 +131,9 @@
       <workItem from="1619065425764" duration="20789000" />
       <workItem from="1619096193610" duration="795000" />
       <workItem from="1619110207364" duration="3793000" />
-      <workItem from="1619154542766" duration="2065000" />
+      <workItem from="1619154542766" duration="3532000" />
+      <workItem from="1619158164353" duration="14507000" />
+      <workItem from="1619239211340" duration="16480000" />
     </task>
     <servers />
   </component>
@@ -177,6 +189,12 @@
           <url>file://$PROJECT_DIR$/src/cabinet/empowerment/create/create.component.jsx</url>
           <line>104</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/cabinet/factura/view/view.component.jsx</url>
+          <line>107</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
