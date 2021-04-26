@@ -55,20 +55,20 @@ const ClasscodeAjaxSearch = ({ user })=>{
     const optionstag = options.map(d => <Option value={d.classCode} key={d.classCode}>{d.className}</Option>);
 
     return <div>
-        
+        <label>{t("Maxsulot qidirish")}</label>
+        <br />
         <Select
-            //size="large"
-            //bordered={false}
-            //placeholder={ t("Maxsulot izlash") }
             mode="multiple"
             value={selected}
-            showSearch
+            
+            style={{padding: 10}}
+            showSearch={true}
             showArrow={false}
             defaultActiveFirstOption={false}
             filterOption={false}
             onSearch={handleOptionSearch}
             onChange={setSelected}
-            style={{width: '100%'}}
+            style={{width: '50%'}}
             loading={loading}
             notFoundContent={null}
         >
