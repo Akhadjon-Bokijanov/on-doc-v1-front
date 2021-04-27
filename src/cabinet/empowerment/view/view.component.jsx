@@ -16,6 +16,7 @@ import GetToken from "../../../sevices/getToken";
 import ViewHeader from "../../../components/viewHeader";
 import {ConvertEmpDataToForm} from "../../models/EmpowermentProduct";
 import {formats} from "../../../utils/main";
+import {Link} from "react-router-dom";
 
 const QRCode = require('qrcode.react');
 const EmpView = ({ match, user }) => {
@@ -57,7 +58,9 @@ const EmpView = ({ match, user }) => {
                         documentTitle={`emp-${emp?.empId}`}
                     />
                     <Button type="primary">{t("Jonatish")}</Button>
-
+                    <Link to={`/cabinet/empowerment/duplicate/${emp?.EmpowermentId}`}>
+                        <Button type="primary">{t("Duplikat")}</Button>
+                    </Link>
                     <div className={st.factura_view_page_pdf_container} ref={printRef }>
                         <div style={{display: 'flex', justifyContent:'space-between'}}>
                             <div>

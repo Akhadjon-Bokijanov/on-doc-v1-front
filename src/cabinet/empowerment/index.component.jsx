@@ -6,6 +6,7 @@ import {createStructuredSelector} from "reselect";
 import {selectCurrentUser} from "../../redux/user/user.selector";
 import {connect} from "react-redux";
 import EmpView from "./view/view.component";
+import FacturaCreateForm from "../factura/create/create.component";
 
 const EmpowermentIndex = ({ match, user }) => {
     return (
@@ -19,6 +20,8 @@ const EmpowermentIndex = ({ match, user }) => {
             <Route exact path={`${match.path}/create`} component={EmpowermentForm} />
             <Route exact path={`${match.path}/edit/:empowermentId`} component={EmpowermentForm} />
             <Route exact path={`${match.path}/view/:empId`} component={EmpView} />
+            <Route exact path={`${match.path}/duplicate/:duplicateId`} component={EmpowermentForm} />
+
         </div>
     )
 }
