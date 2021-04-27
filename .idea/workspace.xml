@@ -6,45 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="105bb7d6-27e7-4171-b05f-a2883cf0fea7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/assests/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/e-imzo/application.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/e-imzo/default.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/e-imzo/e-imzo-client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/e-imzo/e-imzo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/excels/empowerment_products.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/excels/factura_products.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/excels/on_doc_contract_products.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/about_profile.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/banner_bg_2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/en.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/financial.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/home_banner.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/logo1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/progress.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/ru.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/time.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/images/uz.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/en/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/ru/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/uz-cyrl/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/locales/uz/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/2.4672bdbb.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/css/2.4672bdbb.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/static/media/getFetch.d7d6010d.cjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/uz/translation.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/uz/translation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cabinet/empowerment/view/view.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/empowerment/view/view.component.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cabinet/factura/view/view.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/cabinet/factura/view/view.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/index.router.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/index.router.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,8 +125,12 @@
 =======
       <workItem from="1619154542766" duration="3532000" />
       <workItem from="1619158164353" duration="14507000" />
+<<<<<<< HEAD
+      <workItem from="1619239211340" duration="23208000" />
+=======
       <workItem from="1619239211340" duration="20703000" />
 >>>>>>> 8ebab77074944b3998697e12089384b46444b073
+>>>>>>> c6050b932518167d77411915061bc753eb7f1474
     </task>
     <servers />
   </component>
