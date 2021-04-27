@@ -34,6 +34,7 @@ export const GetActDataToSign = (data, products, actId)=>{
     } = data;
 
     let m = new Akt();
+    m.ActId=actId;
     m.ActDoc={
         ActDate: actDate,
         ActText: actText,

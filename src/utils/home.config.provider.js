@@ -104,8 +104,11 @@ export const get_home_config = doc => {
                 title: "Aktlar",
                 createTitle: "Akt yaratish",
                 createUrl: "/cabinet/act/create",
-                gridSourceUrl: "/api/v1/acts",
+                gridSourceUrl: "act/index",
                 gridConfig: {
+                    modelName: "AllDocumentsSearch",
+                    primaryKeyValue: "doc_id",
+                    primaryKeyName: "AktId",
                     deleteRequestPath: 'api/v1/atcs',
                     viewActionPath: '/cabinet/act/view',
                     editActionPath: '/cabinet/act/edit',

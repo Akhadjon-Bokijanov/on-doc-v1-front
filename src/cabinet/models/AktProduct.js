@@ -17,17 +17,20 @@ export const ConvertGridToData = data=>{
     //6 total
     let res = [];
     if(Array.isArray(data)){
-        data.forEach(row=>{
-            let m = new AktProduct()
-            m.OrdNo = row[0].value; 
-            m.Name = row[1].value;
-            m.MeasureId = row[2].value;
-            m.Count = row[3].value;
-            m.Summa = row[4].value;
-            m.Summa=row[5].value;
-            m.TotalSum=row[6].value;
+        //data.shift();
+        data.forEach((row, index)=>{
+            //console.log("row", row)
+            if(index> 0){
+                let m = new AktProduct()
+                m.OrdNo = row[0].value;
+                m.Name = row[1].value;
+                m.MeasureId = row[2].value;
+                m.Count = row[3].value;
+                m.Summa = row[4].value;
+                m.TotalSum = row[5].value;
 
-            res.push(m);
+                res.push(m);
+            }
         })
     }
     return res;
