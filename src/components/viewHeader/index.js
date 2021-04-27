@@ -3,17 +3,18 @@ import st from "./viewHead.module.css";
 import {Button} from "antd";
 import moment from 'moment'
 import {DownloadOutlined,ArrowUpOutlined, PrinterFilled,CheckCircleOutlined ,PlusCircleOutlined} from "@ant-design/icons";
+import {DateFormat} from "../../utils/DateFormat";
 
 export default function ViewHeader({data,doc}) {
 
     return(
         <>
-            <div className={`${st.flexible}`}>{console.log('props',data)}
+            <div className={`${st.flexible}`}>{console.log('props',DateFormat(data?.contractDate))}
                 <div className={`custom-section-wrapper ${st.flexible}`} style={{width:'65%'}}>
                     <div style={{width:'75%'}}>
                         <div>
                             <p className={st.title}>{doc}</p>
-                            <h4>№ {data?.number} от {(data?.contractDate)}</h4>
+                            <h4>№ {data?.number} от {DateFormat(data?.contractDate)}</h4>
                         </div>
                         <br/>
                         <div className={st.flexible}>
@@ -22,7 +23,7 @@ export default function ViewHeader({data,doc}) {
                         </div>
                         <div className={st.flexible}>
                             <h4 className={st.number}>Дата:</h4>
-                            <p style={{marginLeft:'55px'}}>№{data?.number} от {data?.date}</p>
+                            <p style={{marginLeft:'55px'}}>№{data?.number} от {DateFormat(data?.date)}</p>
                         </div>
                     </div>
                     <div  style={{width:'35%'}}>
