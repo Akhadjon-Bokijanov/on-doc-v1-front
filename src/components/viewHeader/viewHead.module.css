@@ -1,0 +1,69 @@
+.flexible{
+    display: flex;
+}
+.title{
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.02em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    /*font-style: normal;*/
+}
+.number{
+    font-weight: bold!important;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+}
+.desc{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
+.right_text{
+    font-size: 14px;
+    line-height: 24px;
+    color:#2B63C0;
+    margin-left: 20px;
+}
+.btns{
+    border: none;
+    color: #000;
+}
+.status_waiting{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 30px;
+    color:#FFA41D;
+}
+.status_signed{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 30px;
+    color:#40DC75;
+}
+.status_trash{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 30px;
+    color:#8C8C8C;
+}
+.sign{
+    justify-content: center;
+    align-items: center;
+    background: #40DC75;
+    border-radius: 8px;
+    color:#FFFFFF;
+}
+.delete{
+    justify-content: center;
+    align-items: center;
+    background: #EB5757;
+    border-radius: 8px;
+    color:#FFFFFF;
+    margin-left: 10px;
+}
+.delete_icon{
+    transform:rotate(45deg);
+}
