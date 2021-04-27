@@ -14,8 +14,8 @@ axios.interceptors.response.use(
 
         try{
             if(error.response.status === 400 ||error.response.status === 401 || error.response.status === 402){
-                localStorage.removeItem("token");
-                window.location.replace("/login");
+                //localStorage.removeItem("token");
+                //window.location.replace("/login");
                 message.error("Error status is started with 400")
             }else if(error.response.status>499) {
                 message.error("Server Errrrror")
