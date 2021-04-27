@@ -33,7 +33,7 @@ import {generateId} from "../../../sevices/api";
 const EmpowermentForm = ({ token, match, user })=> {
 
   const [form] = Form.useForm();
-  const { empowermentId } = match.params;
+  const { empowermentId,duplicateId } = match.params;
   const [initialData, setInitialData] = useState()
   const [newEmpId,setNewEmpId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +43,7 @@ const EmpowermentForm = ({ token, match, user })=> {
 
 
   const editEmp=()=>{
-    empApi.getEmp(user?.tin,empowermentId)
+    empApi.getEmp(user?.tin,empowermentId??duplicateId)
         .then(res=>{
           let data = ConvertEmpDataToForm(res.data.data[0])
           console.log(data);
@@ -53,15 +53,18 @@ const EmpowermentForm = ({ token, match, user })=> {
           data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
           data.agentPassportDateOfIssue=moment(data.agentPassportDateOfIssue);
           data.updated_at=moment(data.updated_at);
-
           setInitialData(data);
           form.resetFields();
           setGridInitialValues(ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
-          console.log("grid",ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
+            if (duplicateId){
+                generateId().then(res=>{
+                    setNewEmpId(res.data.data)
+                })
+            }
         })
   }
   useEffect(()=>{
-    if(empowermentId){
+    if(empowermentId || duplicateId){
       setNewEmpId(empowermentId);
       editEmp();
     } else {
