@@ -20,8 +20,8 @@ import {
 import { convertProductsToGrid, FIRST_ACT_GRID_ROW } from '../../../utils/main';
 import TextArea from 'antd/lib/input/TextArea';
 import MeasureViewer from '../../../components/data-sheet-custom-measure-selector/measure-viewer';
-import { ConvertGridToData } from '../../models/AktProduct';
-import { GetActDataToSign } from '../../models/Akt';
+import { ConvertDataToGrid, ConvertGridToData } from '../../models/AktProduct';
+import { ConvertDataToForm, GetActDataToSign } from '../../models/Akt';
 
 export const setActClient = (seller, client) => {
   return `Биз қуйида имзо чекувчилар, "${seller ?? "___________"}" бир томондан,бундан кейин Пудратчи деб номланади ва "${client ?? '__________'}" бошқа томондан, бундан кейин Буюртмачи деб номланади, иш Буюртмачининг талабларига мувофиқ тўлиқ бажарилганлиги тўғрисида акт туздик.`;
@@ -54,19 +54,16 @@ const ActForm = ({ token, match, user })=> {
       setNewActId(actId)
       //fetch fatura data
       axios({
-        url: `facturas/view?ActId=${actId ?? duplicateId}&tin=${user.tin ?? user.username}`,
+        url: `act/view?ActId=${actId ?? duplicateId}&tin=${user.tin ?? user.username}`,
         method: "GET",
       }).then(res=>{
-        let data = res.data;
-        data.contractDate=moment(data.contractDate);
-        data.created_at=moment(data.created_at);
-        data.actDate=moment(data.actDate);
-        data.updated_at=moment(data.updated_at);
-        console.log(data);
-  
-        setInitialData(res.data);
+        
+        if(res.data?.success){
+          setInitialData(ConvertDataToForm(res.data?.data[0]));
+        }
         form.resetFields();
-        setGrid(convertProductsToGrid(res.data.act_products, 'act'));
+
+        setGrid([grid[0], ...ConvertDataToGrid(res.data?.data[0]?.ProductList.Products)]);
       }).catch(err=>{
         console.log(err);
       })
@@ -157,8 +154,8 @@ const ActForm = ({ token, match, user })=> {
 
     if(actId){
       axios({
-        url: `facturas/update?id=${actId}&tin=${user.tin ?? user.username}`,
-        method: 'PATCH',
+        url: `act/update?id=${actId}&tin=${user.tin ?? user.username}`,
+        method: 'post',
         data: GetActDataToSign(values, ConvertGridToData(grid), newActId)
       }).then(res=>{
         setIsloading(false);
@@ -372,7 +369,7 @@ const ActForm = ({ token, match, user })=> {
             <Row justify="space-around">
               <Col >
                 <Button 
-                  //loading={isLoading}
+                  loading={isLoading}
                   primary
                   htmlType="submit"
                   className="factra-action-btns save-btn" 

@@ -1,3 +1,4 @@
+import moment from 'moment'
 export default class Akt {
     "ActId"= "";
     "ActDoc"= {
@@ -18,6 +19,22 @@ export default class Akt {
         "Tin": "",
         "Products": []
     }
+}
+
+export const ConvertDataToForm = (data)=>{
+    let a ={};
+    const { ActDoc, ContractDoc } = data
+    a.actDate = moment(ActDoc?.ActDate);
+    a.actNo=ActDoc?.ActNo;
+    a.actText=ActDoc?.ActText;
+    a.buyerName=data?.BuyerName;
+    a.buyerTin=data?.BuyerTin
+    a.contractDate = moment(ContractDoc?.ContractDate);
+    a.contractNo=ContractDoc?.ContractNo
+    a.sellerName=data?.SellerName;
+    a.sellerTin=data?.SellerTin;
+
+    return a;
 }
 
 export const GetActDataToSign = (data, products, actId)=>{
