@@ -46,10 +46,10 @@ const ActView = ({ match, user }) => {
                     <ReactToPrint
                         trigger={() => <Button>{t("Chop etish")}</Button>}
                         content={() => printRef.current}
-                        documentTitle={`factura-${act?.FacturaId}`}
+                        documentTitle={`act-${act?.FacturaId}`}
                     />
                     <Button type="primary" onClick={handleSign}>{t("Jonatish")}</Button>
-                    <Link to={`/cabinet/factura/duplicate/${act?.FacturaId}`}>
+                    <Link to={`/cabinet/act/duplicate/${act?.ActId}`}>
                         <Button type="primary">{t("Duplikat")}</Button>
                     </Link>
                     <div className="factura-view-page-pdf-container" ref={printRef} >

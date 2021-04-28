@@ -51,7 +51,12 @@ const ActForm = ({ token, match, user })=> {
 
   useEffect(()=>{
     if(actId || duplicateId){
-      setNewActId(actId)
+      
+      if(duplicateId){
+        setNewDocId()
+      }else{
+        setNewActId(actId)
+      }
       //fetch fatura data
       axios({
         url: `act/view?ActId=${actId ?? duplicateId}&tin=${user.tin ?? user.username}`,
