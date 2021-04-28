@@ -14,7 +14,7 @@ const ProfileTabs = ({ match, location }) => {
         },
         {
             title: "Xabarnoma",
-            url: "/cabinet/settings/tab-1"
+            url: "/cabinet/settings/notify"
         },
         {
             title: "Maxsulotingiz",

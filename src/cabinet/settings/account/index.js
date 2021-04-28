@@ -46,7 +46,7 @@ function Account({userKey}) {
                     </Radio.Group>
                 </Form.Item>
 
-                <div className={'flexible'} style={{marginTop:'7%'}}>
+                <div className={'flexible'} style={{marginTop:'6%'}}>
                     <div style={{width:'47%'}}>
                         <Form.Item>
                             <Form.Item
@@ -60,7 +60,7 @@ function Account({userKey}) {
                             <span className="custom-input-label-1"><p className={'label'}>INN</p></span>
                         </Form.Item>
 
-                        <Form.Item style={{marginTop:'9%'}}>
+                        <Form.Item style={{marginTop:'7%'}}>
                             <Form.Item
                                 rules={[{required: true}]}
                                 name="address">
@@ -86,7 +86,7 @@ function Account({userKey}) {
                             </Form.Item>
                             <span className="custom-input-label-1"><p className="label">Director</p></span>
                         </Form.Item>
-                        <Form.Item style={{marginTop:'9%'}}>
+                        <Form.Item style={{marginTop:'7%'}}>
                             <Form.Item
                                 rules={[{required: true}]}
                                 // key="dyna-form-facutura-no"
@@ -99,7 +99,7 @@ function Account({userKey}) {
                         </Form.Item>
                     </div>
                 </div>
-                {/*{console.log('user',userKey)}*/}
+                {console.log('user',userKey)}
                 <div className={'flexible'}>
                     <Button className={st.save}><CheckCircleOutlined />Сохранить</Button>
                     <Button className={st.cancel}><PlusCircleOutlined className={`${st.delete_icon} `} />Cancel</Button>
