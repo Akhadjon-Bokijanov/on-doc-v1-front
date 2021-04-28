@@ -3,11 +3,20 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import axios from "axios";
-import {Button, message, Spin, Table} from "antd";
+import {Button, Col, message, Row, Spin, Table} from "antd";
 import ReactToPrint from "react-to-print";
 import {useTranslation} from "react-i18next";
 import st from './view.module.scss'
 import moment from "moment";
+import {DownloadOutlined,PrinterOutlined} from '@ant-design/icons';
+import MeasureViewer from "../../../components/data-sheet-custom-measure-selector/measure-viewer";
+import axiosInstance from "../../../sevices/api";
+import {empApi} from "../../../sevices/empService";
+import GetToken from "../../../sevices/getToken";
+import ViewHeader from "../../../components/viewHeader";
+import {ConvertEmpDataToForm} from "../../models/EmpowermentProduct";
+import {formats} from "../../../utils/main";
+import {Link} from "react-router-dom";
 
 const QRCode = require('qrcode.react');
 const EmpView = ({ match, user }) => {
@@ -15,30 +24,33 @@ const EmpView = ({ match, user }) => {
     const {empId} = match.params;
     const { t } = useTranslation();
     const[emp,setEmp]=useState();
+    const[emps,setEmps]=useState();
     const printRef = useRef();
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        getEmpoverment();
+        getEmpowerment();
     },[empId,user]);
-
-    const getEmpoverment = () =>{
-        axios({
-            url: `emp/view/?tin=${user.tin}&EmpId=${empId}`,
-            method: "GET",
-        }).then(res=>{
-            console.log("empRes",res.data.data[0])
-            setEmp(res.data.data[0]);
-            setLoading(false)
-        }).catch(err=>{
-            message.error("Error status 400 or 401")
-            setLoading(false)
-        })
+    const getEmpowerment = () => {
+        empApi.getEmp(user?.tin, empId)
+            .then(res => {
+                console.log("res", res);
+                setEmp(res.data.data[0]);
+                // setEmps(ConvertEmpDataToForm(res?.data.data[0]))
+                setEmps({
+                    number:res.data.data[0].EmpowermentDoc.EmpowermentNo,
+                    contractDate:(res.data.data[0].ContractDoc.ContractDate),
+                    sender:res.data.data[0].Seller.Name,
+                    date:res.data.data[0].EmpowermentDoc.EmpowermentDateOfExpire
+                })
+                setLoading(false);
+            })
     }
 
     return (
         <>
             <Spin spinning={loading}>
+                <ViewHeader doc={'Empowerment'} data={emps}/>
                 <div className="custom-section-wrapper">
                     <ReactToPrint
                         trigger={() => <Button>Chop etish</Button>}
@@ -46,13 +58,13 @@ const EmpView = ({ match, user }) => {
                         documentTitle={`emp-${emp?.empId}`}
                     />
                     <Button type="primary">{t("Jonatish")}</Button>
-                    <div className={st.factura_view_page_pdf_container}>
+                    <Link to={`/cabinet/empowerment/duplicate/${emp?.EmpowermentId}`}>
+                        <Button type="primary">{t("Duplikat")}</Button>
+                    </Link>
+                    <div className={st.factura_view_page_pdf_container} ref={printRef }>
                         <div style={{display: 'flex', justifyContent:'space-between'}}>
                             <div>
                                 <div><strong>ID:</strong>{emp?.EmpowermentId}</div>
-                                {
-                                    // OldEmp?
-                                }
                             </div>
                             <div style={{width: 300, textAlign:'center'}}>
                                 <h4>
@@ -64,9 +76,10 @@ const EmpView = ({ match, user }) => {
                                         })
                                     }
                                 </h4>
+                                <h2>Ishonchnoma</h2>
                             </div>
                             <div>
-                                <QRCode value={JSON.stringify({ID:emp?.EmpowermentId,Doc:"Empowerment"})}/>
+                                <QRCode value={JSON.stringify({ID:emp?.EmpowermentId,Doc:"Empowerment",title:"nma gaaaap"})}/>
                             </div>
                         </div>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -142,7 +155,7 @@ const EmpView = ({ match, user }) => {
                                             O'lchov birligi
                                         </th>
                                         <th>
-                                            Soni
+                                            Miqdor
                                         </th>
                                     </tr>
                                 </thead>
@@ -151,7 +164,9 @@ const EmpView = ({ match, user }) => {
                                     emp?.ProductList.Products.map((item,index)=><tr key={index}>
                                         <td align="center">{item.OrdNo}</td>
                                         <td>{item.Name}</td>
-                                        <td>{item.MeasureId}</td>
+                                        <td>
+                                            <MeasureViewer value={item.MeasureId}/>
+                                        </td>
                                         <td>{item.Count}</td>
                                     </tr>)
                                 }

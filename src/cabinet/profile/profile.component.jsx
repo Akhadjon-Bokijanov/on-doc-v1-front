@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
-import { Tabs } from 'antd';
-import AccountForm from '../account-form/account-form.component';
-import UserProducts from '../user-products/user-products.component';
-import PasswordChange from '../password-change/password-change.component';
 import { useTranslation } from 'react-i18next';
 import { Route } from 'react-router';
-import { Link } from 'react-router-dom';
 import ProfileTabs from './profile-tabs.component';
-
-const { TabPane } = Tabs
+import ProfileTabsRouter from './profile-tabs.router';
 
 const ProfileComponent = ({ match, location })=>{
 
     const { t } = useTranslation()
-
-    const handleChange = val=>{
-        console.log(val)
-    }
 
 
     return <div style={{ margin: 15 }}>
@@ -24,7 +14,7 @@ const ProfileComponent = ({ match, location })=>{
         <ProfileTabs />        
     <div className="factura-data-sheet-container" >
         <div style={{ paddingTop: 15 }}>
-            <Route match={`/cabinet/settings`} component={AccountForm} exact />
+                <Route match={`${match.path}`} component={ProfileTabsRouter} />
             
         </div>
         {/* <Tabs onChange={handleChange} type="card">

@@ -1,22 +1,31 @@
-import {useContext} from "react";
 import axios from 'axios'
-import {API_HOST} from "../env";
+import {message} from "antd";
 
-// const token = localStorage.getItem('bearer_token')
-//     const {token} = useContext(UserContext);
-const axiosInstance=axios.create({
-        baseURL:API_HOST
-    })
+const guidUrl='info/get-guid'
+export const generateId=()=>{
+    return axios.get(`${guidUrl}`)
+}
 
-
-const token = localStorage.getItem("bearer");
-axiosInstance.interceptors.request.use(
-    request => {
-        request.headers.Authorization =`Bearer ${token}`
-        return request;
+axios.interceptors.response.use(
+    response => {
+        return response;
     },
     error => {
-        return error;
-    }
+
+        try{
+            if(error.response.status === 400 ||error.response.status === 401 || error.response.status === 402){
+                //localStorage.removeItem("token");
+                //window.location.replace("/login");
+                message.error("Error status is started with 400")
+            }else if(error.response.status>499) {
+                message.error("Server Errrrror")
+            }
+        }catch(err){
+            return Promise.reject(error);
+        }
+
+        return Promise.reject(error);
+    },
 );
-export default axiosInstance;
+
+

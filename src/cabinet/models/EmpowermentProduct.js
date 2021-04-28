@@ -1,5 +1,7 @@
 import {useState} from "react";
 import SelectMeasureEditor from "../../components/data-sheet-custom-measure-selector/custom-selector.component";
+import MeasureViewer from "../../components/data-sheet-custom-measure-selector/measure-viewer";
+import moment from 'moment'
 
 export default class EmpowermentProduct{
     "OrdNo" = 1;
@@ -39,7 +41,7 @@ export const ConvertEmpProductToGrid=products=>{
     let res = products.map((item,index)=>[
         {value:item.OrdNo,readOnly:true},
         {value:item.Name},
-        { value: item.MeasureId, dataEditor: SelectMeasureEditor },
+        { value: item.MeasureId, dataEditor: SelectMeasureEditor,valueViewer: MeasureViewer },
         {value:item.Count}
     ])
     return res;
@@ -52,10 +54,8 @@ export const ConvertEmpDataToForm=(data)=>{
         ContractDoc,
         EmpowermentDoc,
         EmpowermentId,
-        // ProductList,
         Seller,
         SellerTin,
-
     } = data
 
     let emp = {
@@ -65,9 +65,9 @@ export const ConvertEmpDataToForm=(data)=>{
         buyerAddress:Buyer.Address,
         buyerTin:BuyerTin,
         contractNo:ContractDoc.ContractNo,
-        contarctDate:ContractDoc.ContractDate,
-        empowermentDateOfExpire:EmpowermentDoc.EmpowermentDateOfExpire,
-        empowermentDateOfIssue:EmpowermentDoc.EmpowermentDateOfIssue,
+        contractDate:(ContractDoc.ContractDate),
+        empowermentDateOfExpire:(EmpowermentDoc.EmpowermentDateOfExpire),
+        empowermentDateOfIssue:(EmpowermentDoc.EmpowermentDateOfIssue),
         empowermentNo:EmpowermentDoc.EmpowermentNo,
         empowermentId:EmpowermentId,
         sellerAccount:Seller.Account,
@@ -77,7 +77,7 @@ export const ConvertEmpDataToForm=(data)=>{
         sellerDirector:Seller.Director,
         sellerName:Seller.Name,
         sellerTin:SellerTin,
-        agentPassportDateOfIssue:Agent.Passport.DateOfIssue,
+        agentPassportDateOfIssue:(Agent.Passport.DateOfIssue),//shu yerdagi datani moment ichiga tiqib ketaman
         agentPassportNumber:Agent.Passport.Number,
         agentPassportIssuedBy:Agent.Passport.IssuedBy
     }

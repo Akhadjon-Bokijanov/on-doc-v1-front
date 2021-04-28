@@ -34,21 +34,27 @@ const ForAuthenticatedUsers=()=>{
     )
 };
 
+// axiosInstance.interceptors.request.use(
+//     request => {
+//         // const {token}=store.getState()
+//         request.headers.Authorization =`Bearer ${token}`
+//         return request;
+//     },
+//     error => {
+//         return error;
+//     }
+// );
 
 const App = ({ user, token, loadedKey, signOut })=> {
-
-    const [btoken,setBtoken]=useState('');
 
     moment.locale('uz-latn');
     moment.defaultFormat='MMMM Do YYYY'
     const { t } = useTranslation();
-    localStorage.setItem("bearer", JSON.stringify(token))
     axios.defaults.baseURL = API_HOST
     axios.defaults.headers.common['Authorization'] = "Bearer " + token;
 
     useEffect(()=>{
 
-        setBtoken(JSON.stringify(token))
         if (loadedKey?.time + 1000 * 60 * 30 < Date.now()){
             console.log("Hi")
             signOut()
@@ -61,15 +67,8 @@ const App = ({ user, token, loadedKey, signOut })=> {
     return (
         <div className="App">
             {
-                user?
-                    <UserContext.Provider value={{
-                        token:btoken
-                    }}>
-                        <ForAuthenticatedUsers/>
-                    </UserContext.Provider>
-                    :<Auth/>
+                user?<ForAuthenticatedUsers/>:<Auth/>
             }
-            
         </div>
     )
 }

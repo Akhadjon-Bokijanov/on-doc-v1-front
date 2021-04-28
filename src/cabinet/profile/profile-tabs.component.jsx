@@ -38,9 +38,11 @@ const ProfileTabs = ({ match, location }) => {
                 <div className="factura-home-list-tab-con">
                     {
                         tabs.map(item => <div
-                            onClick={() => setActiveTab(item.url)}
+                            
                             className={`status-tab-bar ${activeTab === item.url ? 'active-tab' : ""}`}>
-                            <Link to={item.url}>
+                            <Link 
+                                onClick={() => setActiveTab(item.url)}
+                            style={{display: 'block'}} to={item.url}>
                                 {t(item.title)}
                                 {console.log(match.url)}
                             </Link>

@@ -51,8 +51,11 @@ body {
     border: 1px solid #dadce0 !important;
     border-radius: 11px !important;
     height: 50px;
-    min-width: 200px;
+    //min-width: 100%;
 }
+// .ant-picker-large{
+//     max-width: 300px !important;
+// }
 
 .ant-radio-button-wrapper {
     height: 55px !important;
@@ -164,6 +167,7 @@ div.custom-section-wrapper{
 
 .factura-home-list-tabs {
             margin-top: 10px;
+            margin-bottom: 15px;
             .factura-home-list-tab-con {
                 display: flex;
                 justify-content: space-around;
