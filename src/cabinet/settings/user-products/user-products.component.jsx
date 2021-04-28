@@ -5,9 +5,9 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import ClasscodeAjaxSearch from '../../components/classcodes-ajax-search/classcodes-ajax-search.component'
-import { selectCurrentUser } from '../../redux/user/user.selector'
-import HomePage from '../common/home/home.component'
+import ClasscodeAjaxSearch from '../../../components/classcodes-ajax-search/classcodes-ajax-search.component'
+import { selectCurrentUser } from '../../../redux/user/user.selector'
+import HomePage from '../../common/home/home.component'
 
 const { Option } = Select;
 

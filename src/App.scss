@@ -162,6 +162,24 @@ div.custom-section-wrapper{
     border-radius: 8px;
 }
 
+.title{
+    margin: 0 4px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #303030;
+}
+.label{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 8px 0;
+    color: #333333;
+}
+.flexible{
+    display: flex;
+}
+
 .factura-home-list-tabs {
             margin-top: 10px;
             margin-bottom: 15px;
