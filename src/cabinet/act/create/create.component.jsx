@@ -10,7 +10,7 @@ import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
-import { selectCurrentUser, selectToken } from '../../../redux/user/user.selector';
+import { selectCurrentUser, selectLoadedKey, selectToken } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import { 
@@ -22,13 +22,14 @@ import TextArea from 'antd/lib/input/TextArea';
 import MeasureViewer from '../../../components/data-sheet-custom-measure-selector/measure-viewer';
 import { ConvertDataToGrid, ConvertGridToData } from '../../models/AktProduct';
 import { ConvertDataToForm, GetActDataToSign } from '../../models/Akt';
+import { SignDoc } from '../../../utils/doc-sign';
 
 export const setActClient = (seller, client) => {
   return `Биз қуйида имзо чекувчилар, "${seller ?? "___________"}" бир томондан,бундан кейин Пудратчи деб номланади ва "${client ?? '__________'}" бошқа томондан, бундан кейин Буюртмачи деб номланади, иш Буюртмачининг талабларига мувофиқ тўлиқ бажарилганлиги тўғрисида акт туздик.`;
 
 }
 
-const ActForm = ({ token, match, user })=> {
+const ActForm = ({ token, match, user, loadedKey })=> {
 
   const [form] = Form.useForm();
   const { actId, duplicateId } = match.params;
@@ -153,6 +154,20 @@ const ActForm = ({ token, match, user })=> {
 //#endregion
   
   //#region form methods
+
+  const handleSign = ()=>{
+    let values = form.getFieldsValue();
+    try{
+      SignDoc(
+        loadedKey.id, 
+        GetActDataToSign(values, ConvertGridToData(grid), newActId),
+        'act',
+        user.tin
+        )
+    }catch(ex){
+      console.log(ex)
+    }
+  }
 
   const handleSubmit = (values)=>{
     setIsloading(true);
@@ -385,6 +400,7 @@ const ActForm = ({ token, match, user })=> {
               </Col>
               <Col>
                 <Button 
+                  onClick={handleSign}
                   className="factra-action-btns sing-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
@@ -410,7 +426,9 @@ const ActForm = ({ token, match, user })=> {
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
-  user: selectCurrentUser
+  user: selectCurrentUser,
+  loadedKey: selectLoadedKey
 })
+
 
 export default connect(mapStateToProps)(ActForm);
