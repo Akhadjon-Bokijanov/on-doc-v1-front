@@ -4,8 +4,27 @@ import {Button} from "antd";
 import moment from 'moment'
 import {DownloadOutlined,ArrowUpOutlined, PrinterFilled,CheckCircleOutlined ,PlusCircleOutlined} from "@ant-design/icons";
 import {DateFormat} from "../../utils/DateFormat";
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser, selectLoadedKey} from "../../redux/user/user.selector";
+import {connect} from "react-redux";
+import {SignDoc} from "../../utils/doc-sign";
+import {GetEmpowermentDataToSign} from "../../cabinet/models/Empowerment";
+import {ConverEmpGridToData} from "../../cabinet/models/EmpowermentProduct";
 
-export default function ViewHeader({data,doc}) {
+function ViewHeader({signDoc,data,docTitle,values,loadedKey,user,empId,products}) {
+
+    const handleSign=()=>{
+        try {
+            SignDoc(
+                loadedKey.id,
+                GetEmpowermentDataToSign(values,ConverEmpGridToData(products),empId),
+                signDoc,
+                user.tin
+            )
+        }catch (ex){
+
+        }
+    }
 
     return(
         <>
@@ -13,7 +32,7 @@ export default function ViewHeader({data,doc}) {
                 <div className={`custom-section-wrapper ${st.flexible}`} style={{width:'65%'}}>
                     <div style={{width:'75%'}}>
                         <div>
-                            <p className={st.title}>{doc}</p>
+                            <p className={st.title}>{docTitle}</p>
                             <h4>№ {data?.number} от {DateFormat(data?.contractDate)}</h4>
                         </div>
                         <br/>
@@ -57,7 +76,7 @@ export default function ViewHeader({data,doc}) {
                         // </div>
                     }
                     <div className={st.flexible} style={{marginTop:'100px'}}>
-                        <Button className={st.sign}><CheckCircleOutlined />Подписать</Button>
+                        <Button className={st.sign} onClick={handleSign}><CheckCircleOutlined />Подписать</Button>
                         <Button className={st.delete}><PlusCircleOutlined className={`${st.delete_icon} `} />Удалить</Button>
                     </div>
                 </div>
@@ -66,3 +85,9 @@ export default function ViewHeader({data,doc}) {
         </>
     )
 }
+
+const mapStateToProps=createStructuredSelector({
+    user:selectCurrentUser,
+    loadedKey:selectLoadedKey
+})
+export default connect(mapStateToProps)(ViewHeader);

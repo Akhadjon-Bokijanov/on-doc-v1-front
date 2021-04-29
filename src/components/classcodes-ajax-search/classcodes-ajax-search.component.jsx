@@ -60,7 +60,7 @@ const ClasscodeAjaxSearch = ({ user })=>{
         <Select
             mode="multiple"
             value={selected}
-            
+            autoClearSearchValue={false}
             style={{padding: 10}}
             showSearch={true}
             showArrow={false}

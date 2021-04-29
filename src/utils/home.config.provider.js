@@ -104,8 +104,11 @@ export const get_home_config = doc => {
                 title: "Aktlar",
                 createTitle: "Akt yaratish",
                 createUrl: "/cabinet/act/create",
-                gridSourceUrl: "/api/v1/acts",
+                gridSourceUrl: "act/index",
                 gridConfig: {
+                    modelName: "AllDocumentsSearch",
+                    primaryKeyValue: "doc_id",
+                    primaryKeyName: "AktId",
                     deleteRequestPath: 'api/v1/atcs',
                     viewActionPath: '/cabinet/act/view',
                     editActionPath: '/cabinet/act/edit',
@@ -117,35 +120,24 @@ export const get_home_config = doc => {
                     },
                     allColumns: [{
                             title: "Akt №",
-                            dataIndex: 'actNo',
+                            dataIndex: 'doc_no',
                             isSearchable: true,
                         },
                         {
                             title: "Kontrkt №",
-                            dataIndex: 'contractNo',
+                            dataIndex: 'contract_no',
                             isSearchable: true,
                             width: 100
                         },
                         {
                             title: "Oluvchi",
-                            dataIndex: 'buyerName',
+                            dataIndex: 'contragent_name',
                             isSearchable: true,
                             width: 150
                         },
                         {
                             title: "Oluvchi STIR",
-                            dataIndex: "buyerTin",
-                            isSearchable: true,
-                        },
-                        {
-                            title: "Sotuvchi",
-                            dataIndex: 'sellerName',
-                            isSearchable: true,
-                            width: 150
-                        },
-                        {
-                            title: "Sotuvchi STIR",
-                            dataIndex: "sellerTin",
+                            dataIndex: "contragent_tin",
                             isSearchable: true,
                         },
                         {
@@ -164,7 +156,7 @@ export const get_home_config = doc => {
                         },
                         {
                             title: 'Yaratilgan sanasi',
-                            dataIndex: "created_at",
+                            dataIndex: "created_date",
                             dataType: 'date',
                         },
                     ]
