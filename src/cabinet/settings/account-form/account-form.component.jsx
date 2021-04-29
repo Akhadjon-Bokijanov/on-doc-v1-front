@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { setUser } from '../../redux/user/user.action';
-import { selectCurrentUser } from '../../redux/user/user.selector';
-import { TextInBracket } from '../../utils/utils';
+import { setUser } from '../../../redux/user/user.action';
+import { selectCurrentUser } from '../../../redux/user/user.selector';
+import { TextInBracket } from '../../../utils/utils';
 
 const { Option } = Select;
 

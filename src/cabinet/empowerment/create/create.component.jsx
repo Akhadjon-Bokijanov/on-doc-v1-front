@@ -186,7 +186,6 @@ const EmpowermentForm = ({ token, match, user })=> {
   
   //#region form methods
 
-
   const handleSubmit = (values)=>{
     console.log("data",GetEmpowermentDataToSign( values, products,newEmpId))
     setIsLoading(true)

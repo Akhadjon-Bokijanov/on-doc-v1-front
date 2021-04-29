@@ -1,0 +1,20 @@
+.delete_icon{
+  transform:rotate(45deg);
+}
+$green:#40DC75;
+$red:#EB5757;
+.save{
+  justify-content: center;
+  align-items: center;
+  background: $green;
+  border-radius: 8px;
+  color:#FFFFFF;
+}
+.cancel{
+  justify-content: center;
+  align-items: center;
+  background: $red;
+  border-radius: 8px;
+  color:#FFFFFF;
+  margin-left: 10px;
+}

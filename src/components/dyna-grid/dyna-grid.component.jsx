@@ -24,6 +24,7 @@ import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { useTranslation } from 'react-i18next';
+import {DateFormat} from "../../utils/DateFormat";
 
 const { Option } = Select;
 
@@ -441,12 +442,29 @@ const DynaGrid = ({
   
     setFilterQuery(query);
   }
+    const [date,setDate] = useState({begin_date:'',end_date:''});
+
+    const handlePicker=(e,id)=>{
+      const DATE={...date};
+      DATE[id]=DateFormat(e?._d);
+      setDate(DATE);
+    }
+
+  function disabledDateStarted(current) {
+      let max = new Date(date.end_date);
+      max.setDate(max.getDate()+1)
+      return current && current > moment(max, "YYYY-MM-DD");
+  }
+  function disabledDateEnded(current) {
+      let min = (date.begin_date);
+      return current && current < moment(min, "YYYY-MM-DD");
+  }
 
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
 
         <div className="dyna-grid-doc-filter-area">
-          <div className="sub-filter-area">
+          <div className="sub-filter-area">{console.log("date",date)}
             <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
             <Form
               onFinish={handleFilter}
@@ -507,12 +525,16 @@ const DynaGrid = ({
                 <Col span={3}>
                   <Form.Item>
                     <Form.Item
-                      key="dyna-form-facutura-no-old-5"
-                      name="begin_date">
+                        key="dyna-form-facutura-no-old-5"
+                        name="begin_date">
                       <DatePicker
-                        rules={[{ required: true }]}
-                        size="large"
-                        placeholder={t("Dan")} />
+                          id={'begin_date'}
+                          onChange={e=>handlePicker(e,'begin_date')}
+                          disabledDate={disabledDateStarted}
+                          // maxDate={date['end_date']}
+                          rules={[{ required: true }]}
+                          size="large"
+                          placeholder={t("Dan")} />
                     </Form.Item>
                     <span className="custom-input-label-1">{t("Dan")}</span>
                   </Form.Item>
@@ -523,7 +545,11 @@ const DynaGrid = ({
                       key="dyna-form-facutura-no-old-6"
                       name="end_date">
                       <DatePicker
-                        rules={[{ required: true }]}
+                          id={'end_date'}
+                          // minDate={date['begin_date']}
+                          disabledDate={disabledDateEnded}
+                          onChange={e=>handlePicker(e,'end_date')}
+                          rules={[{ required: true }]}
                         size="large"
                         placeholder={t("Gacha")} />
                     </Form.Item>

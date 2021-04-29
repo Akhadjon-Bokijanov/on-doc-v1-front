@@ -24,7 +24,7 @@ const EmpView = ({ match, user }) => {
     const {empId} = match.params;
     const { t } = useTranslation();
     const[emp,setEmp]=useState();
-    const[emps,setEmps]=useState();
+    const[headEmp,setHeadEmp]=useState();
     const printRef = useRef();
     const [loading, setLoading] = useState(true)
 
@@ -36,10 +36,9 @@ const EmpView = ({ match, user }) => {
             .then(res => {
                 console.log("res", res);
                 setEmp(res.data.data[0]);
-                // setEmps(ConvertEmpDataToForm(res?.data.data[0]))
-                setEmps({
+                setHeadEmp({
                     number:res.data.data[0].EmpowermentDoc.EmpowermentNo,
-                    contractDate:(res.data.data[0].ContractDoc.ContractDate),
+                    contractDate:res.data.data[0].ContractDoc.ContractDate,
                     sender:res.data.data[0].Seller.Name,
                     date:res.data.data[0].EmpowermentDoc.EmpowermentDateOfExpire
                 })
@@ -50,7 +49,7 @@ const EmpView = ({ match, user }) => {
     return (
         <>
             <Spin spinning={loading}>
-                <ViewHeader doc={'Empowerment'} data={emps}/>
+                <ViewHeader doc={'Empowerment'} data={headEmp}/>
                 <div className="custom-section-wrapper">
                     <ReactToPrint
                         trigger={() => <Button>Chop etish</Button>}
