@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker } from 'antd';
+import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,6 +25,10 @@ import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { useTranslation } from 'react-i18next';
 import {DateFormat} from "../../utils/DateFormat";
+
+const { Option } = Select;
+
+
 
 const DynaGrid = ({
   
@@ -429,7 +433,7 @@ const DynaGrid = ({
     let query="";
     for(let prop in values){
       if(values[prop]){
-        if(moment(values[prop]).isValid()){
+        if(prop==="begin_date"||prop==="end_date"){
           values[prop]=moment(values[prop]).format("YYYY-MM-DD")
         }
         query += `&${prop}=${values[prop]}`;
@@ -485,10 +489,22 @@ const DynaGrid = ({
                     <Form.Item
                       key="dyna-form-facutura-no-old-1"
                       name="AllDocumentsSearch[status]">
-                      <Input
-                        rules={[{ required: true }]}
+                      <Select
                         size="large"
-                        placeholder={t("Holati")} />
+                        placeholder={t("Holati")} 
+                        bordered={false}
+                        allowClear
+                        options={[
+                          { label: t("Saqlangan"), value: 1},
+                          { label: t("Imzo kutilmoqda"), value: 2 },
+                          { label: t("Jo'natilgan"), value: 3 },
+                          { label: t("Bekor qilingan"), value: 4 },
+                          { label: t("Qaytarib yuborilgan"), value: 5 },
+                          { label: t("Qabul qilingan"), value: 6 },
+                          { label: t("Muvaffaqiyatli"), value: 7 },
+                        ]}
+                        />
+                        
                     </Form.Item>
                     <span className="custom-input-label-1">{t("Holati")}</span>
                   </Form.Item>

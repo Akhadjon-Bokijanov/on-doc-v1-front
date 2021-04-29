@@ -10,7 +10,7 @@ import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
-import { selectCurrentUser, selectToken } from '../../../redux/user/user.selector';
+import { selectCurrentUser, selectLoadedKey, selectToken } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import { 
@@ -19,43 +19,64 @@ import {
   } from '@ant-design/icons';
 import { convertProductsToGrid, FIRST_ACT_GRID_ROW } from '../../../utils/main';
 import TextArea from 'antd/lib/input/TextArea';
+import MeasureViewer from '../../../components/data-sheet-custom-measure-selector/measure-viewer';
+import { ConvertDataToGrid, ConvertGridToData } from '../../models/AktProduct';
+import { ConvertDataToForm, GetActDataToSign } from '../../models/Akt';
+import { SignDoc } from '../../../utils/doc-sign';
 
 export const setActClient = (seller, client) => {
   return `Биз қуйида имзо чекувчилар, "${seller ?? "___________"}" бир томондан,бундан кейин Пудратчи деб номланади ва "${client ?? '__________'}" бошқа томондан, бундан кейин Буюртмачи деб номланади, иш Буюртмачининг талабларига мувофиқ тўлиқ бажарилганлиги тўғрисида акт туздик.`;
 
 }
 
-const ActForm = ({ token, match, user })=> {
+const ActForm = ({ token, match, user, loadedKey })=> {
 
   const [form] = Form.useForm();
-  const { actId } = match.params;
+  const { actId, duplicateId } = match.params;
   const [initialData, setInitialData] = useState({actText: setActClient(user.name)})
+  const [newActId, setNewActId] = useState();
   const [isLoading, setIsloading] = useState(false);
 
- 
+  const setNewDocId = () => {
+    axios({
+      url: "info/get-guid",
+      method: "get"
+    }).then(res => {
+      if (res.data.success) {
+        setNewActId(res.data.data)
+      }
+    }).catch(ex => {
+      console.log(ex)
+    })
+  }
 
   useEffect(()=>{
-    if(actId){
-
+    if(actId || duplicateId){
+      
+      if(duplicateId){
+        setNewDocId()
+      }else{
+        setNewActId(actId)
+      }
       //fetch fatura data
       axios({
-        url: `/api/v1/acts/${actId}`,
+        url: `act/view?ActId=${actId ?? duplicateId}&tin=${user.tin ?? user.username}`,
         method: "GET",
       }).then(res=>{
-        let data = res.data;
-        data.contractDate=moment(data.contractDate);
-        data.created_at=moment(data.created_at);
-        data.actDate=moment(data.actDate);
-        data.updated_at=moment(data.updated_at);
-        console.log(data);
-  
-        setInitialData(res.data);
+        
+        if(res.data?.success){
+          setInitialData(ConvertDataToForm(res.data?.data[0]));
+        }
         form.resetFields();
-        setGrid(convertProductsToGrid(res.data.act_products, 'act'));
+
+        setGrid([grid[0], ...ConvertDataToGrid(res.data?.data[0]?.ProductList.Products)]);
       }).catch(err=>{
         console.log(err);
       })
       //end fetch factura data;
+    }
+    else{
+      setNewDocId()
     }
   }, [])
   
@@ -80,7 +101,7 @@ const ActForm = ({ token, match, user })=> {
     [
       { readOnly: true, value: 1 },                           //0 ordNo
       { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: "", dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //2 measure
       { value: '' },                                          //3 amount
       { value: "", },                                         //4 price
       { value: '', readOnly: true,}                           //6 total
@@ -116,7 +137,7 @@ const ActForm = ({ token, match, user })=> {
     const sampleRow = [
         { readOnly: true, value: grid.length },                 //0 ordNo
         { value: "" },                                          //1 product name
-        { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: "", dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer  },        //2 measure
         { value: '' },                                          //3 amount
         { value: "", },                                         //4 price
         { value: '', readOnly: true,}                           //5 total
@@ -134,17 +155,31 @@ const ActForm = ({ token, match, user })=> {
   
   //#region form methods
 
+  const handleSign = ()=>{
+    let values = form.getFieldsValue();
+    try{
+      SignDoc(
+        loadedKey.id, 
+        GetActDataToSign(values, ConvertGridToData(grid), newActId),
+        'act',
+        user.tin
+        )
+    }catch(ex){
+      console.log(ex)
+    }
+  }
+
   const handleSubmit = (values)=>{
     setIsloading(true);
-    console.log(values)
+
     if(actId){
       axios({
-        url:`/api/v1/acts/${actId}`,
-        method: 'PATCH',
-        data: {act: values, products: grid}
+        url: `act/update?id=${actId}&tin=${user.tin ?? user.username}`,
+        method: 'post',
+        data: GetActDataToSign(values, ConvertGridToData(grid), newActId)
       }).then(res=>{
         setIsloading(false);
-        if(res.data.ok){
+        if(res.data.success){
           message.success("Akt yangilandi!");
         }
         else{
@@ -160,7 +195,7 @@ const ActForm = ({ token, match, user })=> {
       axios({
         url:'act/create',
         method: 'post',
-        data: {act: values, products: grid}
+        data: GetActDataToSign(values, ConvertGridToData(grid), newActId)
       }).then(res=>{
         setIsloading(false)
         if(res.data.success){
@@ -365,6 +400,7 @@ const ActForm = ({ token, match, user })=> {
               </Col>
               <Col>
                 <Button 
+                  onClick={handleSign}
                   className="factra-action-btns sing-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
@@ -390,7 +426,9 @@ const ActForm = ({ token, match, user })=> {
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
-  user: selectCurrentUser
+  user: selectCurrentUser,
+  loadedKey: selectLoadedKey
 })
+
 
 export default connect(mapStateToProps)(ActForm);
