@@ -378,9 +378,7 @@ const DynaGrid = ({
           {actions.edit 
           ? <Tooltip placement="left" title="O'zgartirish">
               {console.log("primaryKeyValue",primaryKeyValue)}
-              <Link 
-              
-                to={`${editActionPath}/${record[primaryKeyValue]}`}>
+              <Link to={`${editActionPath}/${record[primaryKeyValue]}`}>
                   <EditOutlined style={{color: 'blue'}}/>
               </Link>
             </Tooltip>
@@ -406,7 +404,7 @@ const DynaGrid = ({
           ? <Tooltip placement="bottom" title="Ko'rish" >
                 <Link to={`${ replaceInViewPath 
                   ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
-                  : viewActionPath}/${record[primaryKeyValue??'id']}`}><EyeOutlined /></Link>
+                  : viewActionPath}/${record[primaryKeyValue??'id']}`} ><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }

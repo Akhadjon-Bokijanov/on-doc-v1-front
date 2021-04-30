@@ -8,7 +8,7 @@ export const SignDoc = (key_id, data, doc_type, tin)=>{
     //facturas, emp, act
 
     let url = `${doc_type}/send?tin=${tin}`;
-
+    console.log(data)
     EIMZOClient.createPkcs7(
         key_id, JSON.stringify(data),
         null,
