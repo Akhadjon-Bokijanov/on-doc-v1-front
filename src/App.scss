@@ -49,9 +49,9 @@ body {
 .ant-input-password-large,
 .ant-select-lg {
     border: 1px solid #dadce0 !important;
-    border-radius: 11px !important;
-    height: 50px;
-    //min-width: 100%;
+    border-radius: 8px !important;
+    height: 48px;
+    min-width: 100%;
 }
 // .ant-picker-large{
 //     max-width: 300px !important;
@@ -135,13 +135,26 @@ body {
     margin-top: 5px;
 }
 
+.ant-form-item-label > label{
+    font-weight: bold;
+    font-size: 15px !important;
+
+
+}
+
+.ant-col-24.ant-form-item-label, .ant-col-xl-24.ant-form-item-label{
+    padding: 0 !important;
+}
+
 span.custom-input-label-1 {
-    font-size: 13px;
+    margin-top: 24px !important;
+    font-size: 16px;
+    font-weight: bold;
     padding: 0 0px;
     border-radius: 5px;
     /* background-color: #fff; */
     z-index: 99 !important;
-    position: absolute;
+    //position: absolute;
     bottom: 60px;
     /* left: 15px; */
 }

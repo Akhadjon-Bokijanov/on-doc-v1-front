@@ -216,21 +216,27 @@ const ActForm = ({ token, match, user, loadedKey })=> {
   }
 
   const handleImportExecl =(value)=>{
-    console.log("me fired")
-
     if(value.file.status==="done"){
       
       const { response } = value.file
-      console.log(response)
-      // response.excel.forEach((element, index)=>{
-      //   element[0].value = index + 1;
-      //   element[0].readOnly = true;
-      //   element[2].dataEditor = SelectEditor;
-      //   element[4].dataEditor = SelectMeasureEditor;
-      // })
+      let elements=[];
+      console.log(response.data)
+      if(Array.isArray(response.data)){
+        response.data.forEach((item, index)=>{
+          let i = [
+            { readOnly: true, value: index+1 },                 //0 ordNo
+            { value: item?.ProductName },                                          //1 product name
+            { value: item?.ProductMeasureId, dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //2 measure
+            { value: item?.ProductCount },                                          //3 amount
+            { value: item?.ProductSumma },                                         //4 price
+            { value: item?.ProductDeliverySum, readOnly: true, }                           //5 total
+          ]
+          elements.push(i);
+        })
+      }
 
-      // setGrid([grid[0], ...response.excel])
-      // console.log(response)
+      setGrid([grid[0], ...elements])
+    
     }
   }
 

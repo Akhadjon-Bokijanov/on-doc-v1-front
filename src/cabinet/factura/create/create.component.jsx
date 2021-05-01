@@ -24,7 +24,7 @@ const { Option } = Select;
 
 const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, drafts }) => {
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const { facturaId, duplicateId } = match.params;
   const [newFacturaId, setNewFacturaId]=useState(facturaId);
@@ -238,11 +238,14 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
   // }
 
   return (
-    <div style={{ padding: 15 }}>
-      
+    <div style={{ padding: 32 }}>
+      <h1 style={{fontWeight: 'bold'}}>{t("Dokument yaratish:")}{t("Faktura")}</h1>
       <Form
-        onValuesChange={(value, values)=>handleSaveDraft(values, products, newFacturaId)}
+        requiredMark={false}
+        //onValuesChange={(value, values)=>handleSaveDraft(values, products, newFacturaId)}
         initialValues={initialData}
+        colon={false}
+        labelCol={{span: 24}}
         form={form}
         name="factura"
         onFinish={handleSubmit}
@@ -251,13 +254,13 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
       >
 
         <div className="factura-data-sheet-container">
-          <h3>{t("Hujjat turi")}</h3>
           <Row justify="space-between">
             <Col md={11}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no"
                   name="facturaType"
+                  label={ t("Faktura turi") }
                 >
                   <Select
                     onChange={setFacturaType}
@@ -271,101 +274,108 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                     <Option value={FACTURA_TYPES["TUZATUVCHI"]}>{t("Tuzatuvchi")}</Option>
                   </Select>
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Faktura turi")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no-old"
+                  label={t("Eski faktura ID")}
                   name="oldFacturaId">
                   <Input
                     rules={[{ required: true }]}
                     size="large"
                     placeholder="Eski faktura ID" />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Eski faktura ID")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no-old"
+                  label={t("Eski faktura No")}
                   name="oldFacturaNo">
                   <Input
                     rules={[{ required: true }]}
                     size="large"
                     placeholder="Eski faktura No" />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Eski faktura No")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no-old"
+                label={t("Eski faktura Sanasi")}
                   name="oldFacturaDate">
                   <DatePicker
                     rules={[{ required: true }]}
                     size="large"
                     placeholder="Eski faktura Sanasi" />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Eski faktura Sanasi")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
           </Row>
           <Row justify="space-between">
             <Col md={11}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   rules={[{ required: true }]}
                   key="dyna-form-facutura-no"
+                  label={t("Faktura raqami")}
                   name="facturaNo">
                   <Input
                     size="large"
                     placeholder={t("Faktura raqami")} />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Faktura raqami")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-item-inn-date"
                   name="facturaDate"
+                label={t("Faktura sanasi")}
                   rules={[{ required: true }]}>
                   <DatePicker
                     size="large"
                     placeholder={t("Faktura sanasi")} />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Faktura sanasi")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   rules={[{ required: true }]}
                   key="dyna-form-item-contract-n0"
+                label={t("Shartnoma raqami")}
                   name="contractNo">
                   <Input
                     size="large"
                     placeholder={t("Shartnoma raqami")} />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Shartnoma raqami")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   rules={[{ required: true }]}
                   key="dyna-form-item-contract-date"
+                label={t("Shartnoma sanasi")}
                   name="contractDate">
                   <DatePicker
                     size="large"
                     placeholder={t("Shartnoma sanasi")} />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Shartnoma sanasi")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
           </Row>
         </div>
@@ -388,28 +398,30 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
 
           <Row justify="space-between">
             <Col md={5} >
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="empowerment-no"
+                label={t("Ishonchnoma raqami")}
                   name="empowermentNo">
                   <Input
                     size="large"
                     placeholder={t("Ishonchnoma raqami")} />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Ishonchnoma raqami")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={5}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
                   key="seler-account-empowerment-dateof-issue"
+                label={t("Ishonchnoma sanasi")}
                   name="empowermentDateOfIssue">
                   <DatePicker
                     size="large"
                     placeholder={t("Ishonchnoma sanasi")} />
                 </Form.Item>
-                <span className="custom-input-label-1">{t("Ishonchnoma sanasi")}</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={12}>
               <PersonFetch
