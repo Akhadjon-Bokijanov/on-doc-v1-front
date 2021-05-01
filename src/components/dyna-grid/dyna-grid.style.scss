@@ -47,3 +47,12 @@ table {
 .ant-table-tbody > tr > td, .ant-table tfoot > tr > td{
     text-align: center;
 }
+
+.dyna-grid-doc-filter-area{
+    border-radius: 8px;
+    background-color: #ffffff;
+    .sub-filter-area{
+        padding: 15px 0 0 15px;
+        margin-bottom: 15px;
+    }
+}

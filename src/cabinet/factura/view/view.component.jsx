@@ -12,6 +12,7 @@ import moment from 'moment';
 import { measures } from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
 import { EIMZOClient } from '../../../utils/e-imzo';
 import { Link } from 'react-router-dom';
+import ViewHeader from "../../../components/viewHeader";
 
 var QRCode = require('qrcode.react');
 
@@ -19,6 +20,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
 
     const printRef = useRef();
     const [factura, setFactura] = useState();
+    const [headFactura,setHeadFactura] = useState();
     const [loading, setLoading] = useState(true)
     const {facturaId} = match.params;
     const { t } = useTranslation();
@@ -31,6 +33,12 @@ const FacturaView = ({ match, user, loadedKey }) => {
         }).then(res => {
             if(res.data.success){
                 setFactura(res.data.data[0])
+                setHeadFactura({
+                    number:res.data.data[0].FacturaDoc.FacturaNo,
+                    contractDate:res.data.data[0].ContractDoc.ContractDate,
+                    sender:res.data.data[0].Seller.Name,
+                    date:res.data.data[0].FacturaDoc.FacturaDate
+                })
                 console.log(res.data.data[0])
             }
             setLoading(false)
@@ -67,8 +75,8 @@ const FacturaView = ({ match, user, loadedKey }) => {
 
     return (
         <Spin spinning={loading}>
-        <div className="custom-section-wrapper">
-
+            <ViewHeader doc={'Factura'} data={headFactura}/>
+            <div className="custom-section-wrapper">
                 <ReactToPrint
                     trigger={() => <Button>{t("Chop etish")}</Button>}
                     content={() => printRef.current}
@@ -102,7 +110,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
                                 ContractNo: factura?.ContractDoc.ContractNo
                                 })}
                             </h4>
-                            <h2 style={{textTransform: "uppercase", fontWeight: "bold"}}>{t("Ishonchnoma")}</h2>
+                            <h2 style={{textTransform: "uppercase", fontWeight: "bold"}}>{t("Faktura")}</h2>
                     </div>
                     <div>
                         <QRCode

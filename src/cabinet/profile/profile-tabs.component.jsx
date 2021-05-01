@@ -10,11 +10,11 @@ const ProfileTabs = ({ match, location }) => {
     const tabs = [
         {
             title: "Hisob",
-            url: "/cabinet/settings"
+            url: "/cabinet/settings/account"
         },
         {
             title: "Xabarnoma",
-            url: "/cabinet/settings/tab-1"
+            url: "/cabinet/settings/notify"
         },
         {
             title: "Maxsulotingiz",
@@ -22,7 +22,7 @@ const ProfileTabs = ({ match, location }) => {
         },
         {
             title: "Kompaniya ma'lumotlari",
-            url: "/cabinet/settings/tab-3"
+            url: "/cabinet/settings"
         },
         {
             title: "Hujjat formati",
@@ -38,9 +38,10 @@ const ProfileTabs = ({ match, location }) => {
                 <div className="factura-home-list-tab-con">
                     {
                         tabs.map(item => <div
-                            onClick={() => setActiveTab(item.url)}
                             className={`status-tab-bar ${activeTab === item.url ? 'active-tab' : ""}`}>
-                            <Link to={item.url}>
+                            <Link 
+                                onClick={() => setActiveTab(item.url)}
+                                style={{display: 'block'}} to={item.url}>
                                 {t(item.title)}
                                 {console.log(match.url)}
                             </Link>

@@ -133,7 +133,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
   const handleSign = ()=>{
     setSaveLoading(true)
     let values = form.getFieldsValue()
-    console.log(JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)));
+    //console.log(JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)));
     EIMZOClient.createPkcs7(
       loadedKey.id, 
       JSON.stringify(GetFacturaDataToSign(values, products, newFacturaId)),

@@ -136,7 +136,7 @@ export const GetEmpowermentDataToSign = (formData, products, empId)=>{
     return emp;
 }
 
-export const EmpowermentDataToForm=formData=>{
+const EmpowermentDataToForm=formData=>{
     let {
 
     } = formData;

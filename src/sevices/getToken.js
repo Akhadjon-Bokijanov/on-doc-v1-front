@@ -1,18 +1,21 @@
+import React from 'react';
 import {createStructuredSelector} from "reselect";
 import {selectToken} from "../redux/user/user.selector";
 import {connect} from "react-redux";
-import React from 'react';
 
 
-const getToken = ({token})=>{
-    let tok = token;
+const GetToken = ({token})=>{
+    // let tok = token;
     return (
-        console.log("token",tok)
-    )
+        <div>
+            {token}
+            {console.log("gettoken",token)}
+        </div>
+)
 
 }
 const mapStateToProps = createStructuredSelector({
     token:selectToken
 })
-export default connect(mapStateToProps)(getToken)
+export default connect(mapStateToProps)(GetToken)
 

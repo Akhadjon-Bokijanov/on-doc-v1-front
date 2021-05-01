@@ -9,7 +9,7 @@ import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
-import {selectCurrentUser, selectToken} from '../../../redux/user/user.selector';
+import {selectCurrentUser, selectLoadedKey, selectToken} from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import { 
@@ -25,11 +25,19 @@ import {
   ConvertEmpProductToGrid
 } from "../../models/EmpowermentProduct";
 import {ConvertGridToProduct, ConvertProductToGrid} from "../../models/FacturaProduct";
+import {ProductValueRendered} from "../../factura/create/product-grid.component";
+import MeasureViewer from "../../../components/data-sheet-custom-measure-selector/measure-viewer";
+import {empApi} from "../../../sevices/empService";
+import {generateId} from "../../../sevices/api";
+import {SignDoc} from "../../../utils/doc-sign";
+import { useHistory } from "react-router-dom";
 
-const EmpowermentForm = ({ token, match, user })=> {
+
+const EmpowermentForm = ({ token, match, user, loadedKey })=> {
+
 
   const [form] = Form.useForm();
-  const { empowermentId } = match.params;
+  const { empowermentId,duplicateId } = match.params;
   const [initialData, setInitialData] = useState()
   const [newEmpId,setNewEmpId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,47 +45,42 @@ const EmpowermentForm = ({ token, match, user })=> {
   const [gridInitialValues, setGridInitialValues] = useState([]);
   const [tin,setTin] = useState('');
 
+  const history = useHistory();
 
+  const editEmp=()=>{
+    empApi.getEmp(user?.tin,empowermentId??duplicateId)
+        .then(res=>{
+          let data = ConvertEmpDataToForm(res.data.data[0])
+          console.log(data);
+          data.contractDate=moment(data.contractDate);
+          data.created_at=moment(data.created_at);
+          data.empowermentDateOfExpire=moment(data.empowermentDateOfExpire);
+          data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
+          data.agentPassportDateOfIssue=moment(data.agentPassportDateOfIssue);
+          data.updated_at=moment(data.updated_at);
+          setInitialData(data);
+          form.resetFields();
+          setGridInitialValues(ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
+            if (duplicateId){
+                generateId().then(res=>{
+                    setNewEmpId(res.data.data)
+                })
+            }
+        })
+  }
   useEffect(()=>{
-    if(empowermentId){
+    if(empowermentId || duplicateId){
       setNewEmpId(empowermentId);
-      axios({
-        url: `emp/view/?tin=${user.tin}&EmpId=${empowermentId}`,
-        method: "GET",
-      }).then(res=>{
-        let data = ConvertEmpDataToForm(res.data.data[0])
-        console.log(data);
-        data.contractDate=moment(data.contractDate);
-        data.created_at=moment(data.created_at);
-        data.empowermentDateOfExpire=moment(data.empowermentDateOfExpire);
-        data.empowermentDateOfIssue=moment(data.empowermentDateOfIssue);
-        data.agentPassportDateOfIssue=moment(data.agentPassportDateOfIssue);
-        data.updated_at=moment(data.updated_at);
-
-        setInitialData(data);
-        form.resetFields();
-        setGridInitialValues(ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
-        console.log("grid",ConvertEmpProductToGrid(res.data.data[0]?.ProductList.Products))
-      }).catch(err=>{
-        console.log(err);
-      })
-      //end fetch factura data;
-    }else{
-      axios({
-        url: "info/get-guid",
-        method: "get"
-      }).then(res=>{
-        if(res.data.success){
-          setNewEmpId(res.data.data)
-        }
-      }).catch(ex=>{
-        console.log("err",ex)
-      })
+      editEmp();
+    } else {
+      generateId()
+        .then(res => {
+          setNewEmpId(res.data.data);
+        })
     }
   }, [])
 
   useEffect(()=>{
-    console.log("gridEdit",gridInitialValues)
     if (empowermentId){
       setGrid([
         grid[0],
@@ -107,7 +110,7 @@ const EmpowermentForm = ({ token, match, user })=> {
     [
       { readOnly: true, value: 1 },                           //0 ordNo
       { value: "" },                                          //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor },        //2 measure
+      { value: "", dataEditor:  SelectMeasureEditor,valueViewer: MeasureViewer },        //2 measure
       { value: '' },                                          //3 amount
     ],
   ])
@@ -172,7 +175,7 @@ const EmpowermentForm = ({ token, match, user })=> {
     const sampleRow = [
       { readOnly: true, value:    grid.length }, //0 ordNo
       { value: "" }, //1 product name
-      { value: "", dataEditor:  SelectMeasureEditor }, //4 measure
+      { value: "", dataEditor:  SelectMeasureEditor,valueViewer: MeasureViewer }, //4 measure
       { value: '' }, //5 amount
     ]
 
@@ -188,51 +191,45 @@ const EmpowermentForm = ({ token, match, user })=> {
   
   //#region form methods
 
-
-  const handleSubmit = (values)=>{
+  const handleSubmit=(values)=>{
     console.log("data",GetEmpowermentDataToSign( values, products,newEmpId))
     setIsLoading(true)
     if(empowermentId){
-      axios({
-        url:`/emp/update?id=${empowermentId}&tin=${user.tin??user.username}`,
-        method: 'post',
-        data:GetEmpowermentDataToSign( values, products,newEmpId)
-      }).then(res=>{
+          empApi
+              .editEmp(empowermentId,user,GetEmpowermentDataToSign( values, products,newEmpId))
+              .then(res=>{
         console.log(res)
         setIsLoading(false);
         if(res.data.success){
           message.success("Ishonchnoma ozgartirildi!")
+            history.push('/cabinet/empowerment');
         }
-        else{
-          message.error("Ishonchnoma o'zgartirishda xatolik!");
-        }
-      }).catch(err=>{
-        setIsLoading(false);
-        message.error("Ishonchnoma o'zgartirishda xatolik!");
-        console.log(err)
       })
     } else{
-      axios({
-        url:'emp/create',
-        method: 'post',
-        data: GetEmpowermentDataToSign( values, products,newEmpId)
-      }).then(res=>{
-        setIsLoading(false)
-        if(res.data?.success){
-          message.success("Ishonchnma yaratildi!");
-          console.log("res",res)
-        }else{
-          console.log("resErr",res)
-          message.error("Ishonchnoma yaratishda xatolikkk");
-        }
-
-        console.log("resp",res)
-      }).catch(err=>{
-        setIsLoading(false);
-        message.error("Ishonchnoma yaratishda xatolik");
-        console.log(err)
-      })
+      empApi.addEmp(GetEmpowermentDataToSign( values, products,newEmpId))
+              .then(res=>{
+                setIsLoading(false)
+                if(res.data?.success){
+                  message.success("Ishonchnma yaratildi!");
+                  history.push('/cabinet/empowerment');
+                }
+            }
+      )
     }
+  }
+
+  const handleSign=()=>{
+      let values = form.getFieldsValue();
+      try {
+          SignDoc(
+              loadedKey.id,
+              GetEmpowermentDataToSign(values,ConverEmpGridToData(grid),newEmpId),
+              'emp',
+              user.tin
+          )
+      }catch (ex){
+
+      }
   }
 
   function getProducts(){
@@ -248,15 +245,27 @@ const EmpowermentForm = ({ token, match, user })=> {
     if(value.file.status=="done"){
       
       const { response } = value.file
+        let collector=[];
+        console.log("responese",response)
+        if (response.success){
+            response.data.forEach((row,index)=>{
+                const {
+                    ProductName,
+                    ProductMeasureId,
+                    ProductCount
+                } = row
+                collector.push(
+                    [
+                        {value:index+1,readOnly:true},
+                        {value:ProductName},
+                        {value:ProductMeasureId},
+                        {value:ProductCount}
+                    ]
+                )
+            })
+        }
 
-      response.excel.forEach((element, index)=>{
-        element[0].value = index + 1;
-        element[0].readOnly = true;
-        element[4].dataEditor = SelectMeasureEditor;
-      })
-
-      setGrid([grid[0], ...response.excel])
-      console.log(response)
+      setGrid([grid[0], ...collector])
     }
   }
 
@@ -367,8 +376,10 @@ const EmpowermentForm = ({ token, match, user })=> {
                   Authorization: "Bearer " + token
                 }}
                 multiple={false}
-                action="http://127.0.0.1:8000/api/v1/factura-products/read-excel"
-                accept=".xlsx, .xls" 
+                action={`http://api.onlinefactura.uz/uz/emp/import-excel`}
+                accept=".xlsx, .xls"
+                name="Files[file]"
+                data={{tin: user.tin}}
                 onChange={handleImportExecl}>
                 
                   <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
@@ -430,7 +441,6 @@ const EmpowermentForm = ({ token, match, user })=> {
                   size="large"
                   placeholder="СТИР"
                   onChange={fetchAgent}
-
                   />
               </Form.Item>
                 <span className="custom-input-label-1">СТИР</span>
@@ -517,7 +527,8 @@ const EmpowermentForm = ({ token, match, user })=> {
                   </Button>
               </Col>
               <Col>
-                <Button 
+                <Button
+                    onClick={handleSign}
                   className="factra-action-btns sing-btn" 
                   size="large"
                   icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
@@ -554,7 +565,8 @@ const EmpowermentForm = ({ token, match, user })=> {
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
-  user: selectCurrentUser
+  user: selectCurrentUser,
+  loadedKey:selectLoadedKey
 })
 
 export default connect(mapStateToProps)(EmpowermentForm);

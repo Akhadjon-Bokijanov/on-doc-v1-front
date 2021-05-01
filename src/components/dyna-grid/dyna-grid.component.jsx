@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Table, Tooltip, Input, Button, Space, Popconfirm, message } from 'antd';
+import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,6 +23,12 @@ import {
 import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
+import { useTranslation } from 'react-i18next';
+import {DateFormat} from "../../utils/DateFormat";
+
+const { Option } = Select;
+
+
 
 const DynaGrid = ({
   
@@ -87,35 +93,38 @@ const DynaGrid = ({
   const [loadingSource, setLoadingResource] = useState(false);
   const [reRenderer, setRerenderer]=useState(reload??1);
   const [selectedRowKeys, setSelectedRowKeys] = useState();
+  const [filterQuery, setFilterQuery]=useState("");
 
   let searchInput = null;
-
+  const { t } = useTranslation(); 
   //#region PAGINATION PART
-  useEffect(()=>{
 
-    let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&${modelName}[${searchedColumn}]=${searchText}` : ''}`
-
-    console.log(url)
-    console.log("replace",url.replace(/[ ]+/g, ""))
-    setLoadingResource(true)
-
+  const loadDataAjax = (url)=>{
     axios({
       url: url,///url.replace(/[ ]+/g, ""),
       method: "GET"
-    }).then(res=>{
+    }).then(res => {
 
-      if (Array.isArray(res.data.data)){
+      if (Array.isArray(res.data.data)) {
         setAjaxDataSource(res.data.data);
         setTotalDataCount(res.data.pages?.total)
-      }else{
+      } else {
         console.log(res);
       }
       setLoadingResource(false)
-    }).catch(error=>{
+    }).catch(error => {
       console.log(error);
       setLoadingResource(false)
     })
-  }, [pagination, dataSourcePath, searchText, searchedColumn, reRenderer])
+  }
+  useEffect(()=>{
+
+    let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&${modelName}[${searchedColumn}]=${searchText}` : ''}${filterQuery}`
+
+    setLoadingResource(true)
+    loadDataAjax(url)
+    
+  }, [pagination, dataSourcePath, searchText, searchedColumn, reRenderer, modelName, filterQuery])
   //#endregion PAGINATION PART
 
   
@@ -369,9 +378,7 @@ const DynaGrid = ({
           {actions.edit 
           ? <Tooltip placement="left" title="O'zgartirish">
               {console.log("primaryKeyValue",primaryKeyValue)}
-              <Link 
-              
-                to={`${editActionPath}/${record[primaryKeyValue]}`}>
+              <Link to={`${editActionPath}/${record[primaryKeyValue]}`}>
                   <EditOutlined style={{color: 'blue'}}/>
               </Link>
             </Tooltip>
@@ -397,7 +404,7 @@ const DynaGrid = ({
           ? <Tooltip placement="bottom" title="Ko'rish" >
                 <Link to={`${ replaceInViewPath 
                   ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
-                  : viewActionPath}/${record[primaryKeyValue??'id']}`}><EyeOutlined /></Link>
+                  : viewActionPath}/${record[primaryKeyValue??'id']}`} ><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }
@@ -419,13 +426,154 @@ const DynaGrid = ({
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys)
   };
+
+  const handleFilter = values=>{
+    let query="";
+    for(let prop in values){
+      if(values[prop]){
+        if(prop==="begin_date"||prop==="end_date"){
+          values[prop]=moment(values[prop]).format("YYYY-MM-DD")
+        }
+        query += `&${prop}=${values[prop]}`;
+      }
+    }
+  
+    setFilterQuery(query);
+  }
+    const [date,setDate] = useState({begin_date:'',end_date:''});
+
+    const handlePicker=(e,id)=>{
+      const DATE={...date};
+      DATE[id]=DateFormat(e?._d);
+      setDate(DATE);
+    }
+
+  function disabledDateStarted(current) {
+      let max = new Date(date.end_date);
+      max.setDate(max.getDate()+1)
+      return current && current > moment(max, "YYYY-MM-DD");
+  }
+  function disabledDateEnded(current) {
+      let min = (date.begin_date);
+      return current && current < moment(min, "YYYY-MM-DD");
+  }
+
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
-      <div onDoubleClick={()=>toggleFullView(!isFulliew)} 
 
-        style={{marginTop: 40, marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
+        <div className="dyna-grid-doc-filter-area">
+          <div className="sub-filter-area">{console.log("date",date)}
+            <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
+            <Form
+              onFinish={handleFilter}
+              name="doc-filter"
+            >
+              <Row justify="space-between">
+               
+                <Col span={4}>
+                  <Form.Item>
+                    <Form.Item
+                      key="dyna-form-facutura-no-old-1"
+                      name="AllDocumentsSearch[doc_no]">
+                      <Input
+                        size="large"
+                        placeholder={t("Hujjat raqami")} />
+                    </Form.Item>
+                    <span className="custom-input-label-1">{t("Hujjat raqami")}</span>
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item>
+                    <Form.Item
+                      key="dyna-form-facutura-no-old-1"
+                      name="AllDocumentsSearch[status]">
+                      <Select
+                        size="large"
+                        placeholder={t("Holati")} 
+                        bordered={false}
+                        allowClear
+                        options={[
+                          { label: t("Saqlangan"), value: 1},
+                          { label: t("Imzo kutilmoqda"), value: 2 },
+                          { label: t("Jo'natilgan"), value: 3 },
+                          { label: t("Bekor qilingan"), value: 4 },
+                          { label: t("Qaytarib yuborilgan"), value: 5 },
+                          { label: t("Qabul qilingan"), value: 6 },
+                          { label: t("Muvaffaqiyatli"), value: 7 },
+                        ]}
+                        />
+                        
+                    </Form.Item>
+                    <span className="custom-input-label-1">{t("Holati")}</span>
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item>
+                    <Form.Item
+                      key="dyna-form-facutura-no-old-4"
+                      name="AllDocumentsSearch[contragent_name]">
+                      <Input
+                        rules={[{ required: true }]}
+                        size="large"
+                        placeholder={t("Kontragent")} />
+                    </Form.Item>
+                    <span className="custom-input-label-1">{t("Kontragent")}</span>
+                  </Form.Item>
+                </Col>
+                <Col span={3}>
+                  <Form.Item>
+                    <Form.Item
+                        key="dyna-form-facutura-no-old-5"
+                        name="begin_date">
+                      <DatePicker
+                          id={'begin_date'}
+                          onChange={e=>handlePicker(e,'begin_date')}
+                          disabledDate={disabledDateStarted}
+                          // maxDate={date['end_date']}
+                          rules={[{ required: true }]}
+                          size="large"
+                          placeholder={t("Dan")} />
+                    </Form.Item>
+                    <span className="custom-input-label-1">{t("Dan")}</span>
+                  </Form.Item>
+                </Col>
+                <Col span={3}>
+                  <Form.Item>
+                    <Form.Item
+                      key="dyna-form-facutura-no-old-6"
+                      name="end_date">
+                      <DatePicker
+                          id={'end_date'}
+                          // minDate={date['begin_date']}
+                          disabledDate={disabledDateEnded}
+                          onChange={e=>handlePicker(e,'end_date')}
+                          rules={[{ required: true }]}
+                        size="large"
+                        placeholder={t("Gacha")} />
+                    </Form.Item>
+                    <span className="custom-input-label-1">{t("Gacha")}</span>
+                  </Form.Item>
+                </Col>
+                <Col span={2}>
+                  <Form.Item>
+                    <Button
+                      htmlType="submit"
+                      size="large"
+                      style={{ backgroundColor: '#2B63C0', color: '#fff' }}
+                    >
+                      {t("Filter")}
+                    </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          </div>
+        </div>
+
+
+      <div 
+        style={{marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
         <Button 
-          
           onClick={()=>{toggleFullView(!isFulliew)}} 
           type="primary" 
           icon={isFulliew ? <FullscreenExitOutlined /> : <FullscreenOutlined />}>
@@ -435,6 +583,8 @@ const DynaGrid = ({
           <h3>{title}</h3>
         </div>
       </div>
+
+      
       <Table
         rowSelection={{
           selectedRowKeys,
@@ -443,12 +593,10 @@ const DynaGrid = ({
         loading={loadingSource}
         rowKey={primaryKeyValue ?? "id"}
         onChange={handleChange} 
-      
-        pagination={pagination}
         columns={columns} 
           dataSource={ajaxDataSource} 
         scroll={{ x: allColumns.length * 120, }}//y: window.innerHeight - window.innerHeight / 13 }} 
-        pagination={{position: ['bottomCenter'], total: totalDataCount}}
+        pagination={{position: ['bottomCenter'], ...pagination,total: totalDataCount}}
       />
     </div>);
   }
