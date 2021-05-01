@@ -94,6 +94,7 @@ const DynaGrid = ({
   const [reRenderer, setRerenderer]=useState(reload??1);
   const [selectedRowKeys, setSelectedRowKeys] = useState();
   const [filterQuery, setFilterQuery]=useState("");
+  const [st,setSt]=useState(0);
 
   let searchInput = null;
   const { t } = useTranslation(); 
@@ -107,6 +108,8 @@ const DynaGrid = ({
 
       if (Array.isArray(res.data.data)) {
         setAjaxDataSource(res.data.data);
+        setSt(res.data.data.status);
+        console.log("data",res.data.data)
         setTotalDataCount(res.data.pages?.total)
       } else {
         console.log(res);
@@ -402,9 +405,8 @@ const DynaGrid = ({
           
           {actions.view 
           ? <Tooltip placement="bottom" title="Ko'rish" >
-                <Link to={`${ replaceInViewPath 
-                  ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
-                  : viewActionPath}/${record[primaryKeyValue??'id']}`} ><EyeOutlined /></Link>
+                <Link to={`${ replaceInViewPath ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
+                  : viewActionPath}/${record[primaryKeyValue??'id']}/${record['status']}`} ><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }

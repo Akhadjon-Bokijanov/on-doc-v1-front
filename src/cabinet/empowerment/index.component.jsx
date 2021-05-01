@@ -19,7 +19,7 @@ const EmpowermentIndex = ({ match, user }) => {
             ]}/>} />
             <Route exact path={`${match.path}/create`} component={EmpowermentForm} />
             <Route exact path={`${match.path}/edit/:empowermentId`} component={EmpowermentForm} />
-            <Route exact path={`${match.path}/view/:empId`} component={EmpView} />
+            <Route exact path={`${match.path}/view/:empId/:status`} component={EmpView} />
             <Route exact path={`${match.path}/duplicate/:duplicateId`} component={EmpowermentForm} />
 
         </div>

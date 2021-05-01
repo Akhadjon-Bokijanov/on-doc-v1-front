@@ -28,12 +28,11 @@ const EmpView = ({ match, user,params }) => {
     const[headEmp,setHeadEmp]=useState();
     const printRef = useRef();
     const [loading, setLoading] = useState(true)
-
+    const {status}=match.params;
     const [form]=Form.useForm();
     useEffect(()=>{
-        console.log('params',params)
         const value = form.getFieldsValue();
-        console.log('val',value);
+        console.log('val',status);
         getEmpowerment();
     },[empId,user]);
 
@@ -56,7 +55,7 @@ const EmpView = ({ match, user,params }) => {
     return (
         <>
             <Spin spinning={loading}>
-                <ViewHeader signDoc={'emp'} docTitle={'Empowerment'} data={headEmp} empId={empId} values={emp} products={products}/>
+                <ViewHeader status={status} signDoc={'emp'} docTitle={'Empowerment'} data={headEmp} empId={empId} values={emp} products={products}/>
                 <div className="custom-section-wrapper">
                     <ReactToPrint
                         trigger={() => <Button>Chop etish</Button>}

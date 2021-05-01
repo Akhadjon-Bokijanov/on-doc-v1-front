@@ -11,7 +11,7 @@ import {SignDoc} from "../../utils/doc-sign";
 import {GetEmpowermentDataToSign} from "../../cabinet/models/Empowerment";
 import {ConverEmpGridToData} from "../../cabinet/models/EmpowermentProduct";
 
-function ViewHeader({signDoc,data,docTitle,values,loadedKey,user,empId,products}) {
+function ViewHeader({signDoc,data,docTitle,values,loadedKey,user,empId,products,status}) {
 
     const handleSign=()=>{
         try {
@@ -65,16 +65,16 @@ function ViewHeader({signDoc,data,docTitle,values,loadedKey,user,empId,products}
                         <p className={st.title} style={{width:'55%'}}>Статус: </p>
                         <p className={st.right_text} style={{width:'45%'}}><ArrowUpOutlined />Прикрепить файл</p>
                     </div>
-                    <p className={st.status_waiting}>
-                        ОЖИДАЕТ ВАШЕЙ ПОДПИСИ
-                    </p>
                     {
-                        //status strash b-da yoziladi
-                        // <div className={st.flexible}>
-                        //     <p className={st.title} style={{width:'55%'}}>Статус: </p>
-                        //     <p className={st.right_text} style={{width:'45%'}}><ArrowUpOutlined />Прикрепить файл</p>
-                        // </div>
+                        status==10&&
+                        <p className={st.status_waiting}>ОЖИДАЕТ ВАШЕЙ ПОДПИСИ</p>
                     }
+                    {
+                        status==15&&
+                        <p className={st.status_signed}>Podpisan</p>
+                    }
+
+
                     <div className={st.flexible} style={{marginTop:'100px'}}>
                         <Button className={st.sign} onClick={handleSign}><CheckCircleOutlined />Подписать</Button>
                         <Button className={st.delete}><PlusCircleOutlined className={`${st.delete_icon} `} />Удалить</Button>
