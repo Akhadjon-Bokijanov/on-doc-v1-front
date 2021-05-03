@@ -99,7 +99,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
   return (
     <div>
       
-      <h3>{t("Kontragent ma'lumotlari")}</h3>
+      <h3 style={{fontSize: 22, fontWeight: 700}}>{t("Kontragent ma'lumotlari")}</h3>
       {
         docType ==="contract"
         ? <PersonFetch 

@@ -40,7 +40,7 @@
 "Shartnoma yaratish": "Контракт",
 "Ishonchnoma yaratish": "Создание доверенности",
 "TTY yaratish": "Создать ТТН",
-"Saqlash": "Сохранять",
+"Saqlash": "Сохранить",
 "Imzolash": "Подпись",
 "Bekor qilish": "Отмена",
 "Qo'shish": "Добавлять",
@@ -133,5 +133,6 @@
 "Sessiya tugaydi": "Сессия истечет через",
 
 "Back": "назад",
-"Dokument yaratish:": "Dokument yaratish: "
+"Dokument yaratish:": "Dokument yaratish: ",
+"Total": "Итого"
 }

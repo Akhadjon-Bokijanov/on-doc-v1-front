@@ -395,7 +395,9 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
         <FacturaProductGrid initialValues={ gridInitialValue } getProducts={getProducts} form={form} />
 
         <div className="factura-data-sheet-container">
-
+          <div>
+            <h2 style={{ fontWeight: 700, fontSize: 28}}>{t("Ishonchnoma")}</h2>
+          </div>
           <Row justify="space-between">
             <Col md={5} >
               {/* <Form.Item> */}
@@ -438,40 +440,50 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
           </Row>
 
         </div>
-        <div className="factura-data-sheet-container">
-          <Row justify="space-around">
-            <Col >
+        {/* <div className="factura-data-sheet-container"> */}
+        <div>
+          <div style={{display: "flex", justifyContent: "space-between"}}>
+            <div >
+              <Button
+                icon={<FontAwesomeIcon icon="ban" className="factura-action-btn-icons" />}
+                danger
+                style={{marginRight: 24}}
+                className="custom-ant-primary-btn cancel-btn"
+              >
+                {t("Bekor qilish")}
+              </Button>
               <Button
                 loading={saveLoading}
                 primary
+                style={{ marginRight: 24 }}
                 htmlType="submit"
-                className="factra-action-btns save-btn"
-                size="large"
-                icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons" />}>
-                {t("Saqlash")}
+                className="custom-ant-primary-btn save-btn"//"factra-action-btns save-btn"
+                icon={<FontAwesomeIcon icon={["far", "check-circle"]} className="factura-action-btn-icons" />}>
+                {t("Hujjatni korish")}
               </Button>
-            </Col>
-            <Col>
+            </div>
+            <div>
+
+            <Button
+              loading={saveLoading}
+              primary
+              style={{marginRight: 24}}
+              htmlType="submit"
+              className="custom-ant-primary-btn save-btn"//"factra-action-btns save-btn"
+              icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons" />}>
+              {t("Saqlash")}
+            </Button>
               <Button
                 loading={saveLoading}
-                className="factra-action-btns sing-btn"
-                size="large"
+                className="custom-ant-primary-btn sign-btn"
                 onClick={handleSign}
                 icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
                 {t("Imzolash")}
               </Button>
-            </Col>
-            <Col>
-              <Button
-                icon={<FontAwesomeIcon icon="ban" className="factura-action-btn-icons" />}
-                danger
-                className="factra-action-btns"
-                size="large">
-                {t("Bekor qilish")}
-              </Button>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </div>
+        {/* </div> */}
         
 
       </Form>
