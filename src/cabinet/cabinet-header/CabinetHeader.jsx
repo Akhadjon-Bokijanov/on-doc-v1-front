@@ -16,7 +16,7 @@ const CabinetHeader = ({ user }) => {
     const { t } = useTranslation()
 
     return (
-        <div className="cabinet-header-main-con">
+        <div className="cabinet-header-main-con" style={{height:'88px'}}>
             <div className="ch-sub-container">
                 <div className="ch-user-info-con-1">
                     <div><strong>{user.name}</strong></div>

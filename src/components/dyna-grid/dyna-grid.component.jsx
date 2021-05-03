@@ -405,7 +405,8 @@ const DynaGrid = ({
           
           {actions.view 
           ? <Tooltip placement="bottom" title="Ko'rish" >
-                <Link to={`${ replaceInViewPath ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
+                <Link to={`${ replaceInViewPath 
+                  ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
                   : viewActionPath}/${record[primaryKeyValue??'id']}/${record['status']}`} ><EyeOutlined /></Link>
               </Tooltip>
           : null  
@@ -464,7 +465,7 @@ const DynaGrid = ({
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
 
         <div className="dyna-grid-doc-filter-area">
-          <div className="sub-filter-area">{console.log("date",date)}
+          <div className="sub-filter-area">
             <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
             <Form
               onFinish={handleFilter}

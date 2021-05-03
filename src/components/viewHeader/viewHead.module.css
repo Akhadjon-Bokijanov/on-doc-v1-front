@@ -56,6 +56,13 @@
     border-radius: 8px;
     color:#FFFFFF;
 }
+.copy{
+    justify-content: center;
+    align-items: center;
+    background: #2B63C0;
+    border-radius: 8px;
+    color:#FFFFFF;
+}
 .delete{
     justify-content: center;
     align-items: center;

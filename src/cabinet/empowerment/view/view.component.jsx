@@ -55,7 +55,7 @@ const EmpView = ({ match, user,params }) => {
     return (
         <>
             <Spin spinning={loading}>
-                <ViewHeader status={status} signDoc={'emp'} docTitle={'Empowerment'} data={headEmp} empId={empId} values={emp} products={products}/>
+                <ViewHeader status={status} signDoc={'emp'} docTitle={'Empowerment'} data={headEmp} docId={empId} values={emp} products={products}/>
                 <div className="custom-section-wrapper">
                     <ReactToPrint
                         trigger={() => <Button>Chop etish</Button>}

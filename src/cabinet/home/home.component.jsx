@@ -138,7 +138,7 @@ const CabinetHome = ({ cabinetData }) => {
             <div className="cabinet-home-sub-container">
                 <Row gutter={[16, 16]}>
                     {
-                        list_of_docs.map((data, index)=><Col onClick={()=>setActiveTab(index)} md={6}>
+                        list_of_docs.map((data, index)=><Col onClick={()=>setActiveTab(index)} md={6} >
                             <AdminCard data={data} />
                         </Col>)
                     }
