@@ -94,6 +94,7 @@ const DynaGrid = ({
   const [reRenderer, setRerenderer]=useState(reload??1);
   const [selectedRowKeys, setSelectedRowKeys] = useState();
   const [filterQuery, setFilterQuery]=useState("");
+  const [st,setSt]=useState(0);
 
   let searchInput = null;
   const { t } = useTranslation(); 
@@ -107,6 +108,8 @@ const DynaGrid = ({
 
       if (Array.isArray(res.data.data)) {
         setAjaxDataSource(res.data.data);
+        setSt(res.data.data.status);
+        console.log("data",res.data.data)
         setTotalDataCount(res.data.pages?.total)
       } else {
         console.log(res);
@@ -404,7 +407,7 @@ const DynaGrid = ({
           ? <Tooltip placement="bottom" title="Ko'rish" >
                 <Link to={`${ replaceInViewPath 
                   ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
-                  : viewActionPath}/${record[primaryKeyValue??'id']}`} ><EyeOutlined /></Link>
+                  : viewActionPath}/${record[primaryKeyValue??'id']}/${record['status']}`} ><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }
@@ -462,7 +465,7 @@ const DynaGrid = ({
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
 
         <div className="dyna-grid-doc-filter-area">
-          <div className="sub-filter-area">{console.log("date",date)}
+          <div className="sub-filter-area">
             <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
             <Form
               onFinish={handleFilter}

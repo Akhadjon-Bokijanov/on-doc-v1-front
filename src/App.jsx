@@ -20,16 +20,19 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Auth from "./pages/auth";
 import UserContext from "./context/UserContext";
+import SideNav from "./cabinet/right-sidebar";
 
 const ForAuthenticatedUsers=()=>{
     return(
         <>
-            <Switch>
-                <Route path="/home" render={()=> <FrontIndexRouter /> } />
-                <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
-                <Route path="/cabinet" render={()=> <CabinetIndex /> } />
-                {/*<Route render={() => <Redirect to="/home/choosecompany" />}></Route>*/}
-            </Switch>
+            {/*<SideNav>*/}
+                <Switch>
+                    <Route path="/home" render={()=> <FrontIndexRouter /> } />
+                    <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
+                    <Route path="/cabinet" render={()=> <CabinetIndex /> } />
+                    {/*<Route render={() => <Redirect to="/home/choosecompany" />}></Route>*/}
+                </Switch>
+            {/*</SideNav>*/}
         </>
     )
 };

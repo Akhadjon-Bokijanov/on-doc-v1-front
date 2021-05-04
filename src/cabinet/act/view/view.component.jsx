@@ -11,13 +11,16 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import moment from 'moment';
 import { measures } from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
+import ViewHeader from "../../../components/viewHeader";
 
 var QRCode = require('qrcode.react');
 
 const ActView = ({ match, user }) => {
 
-    const {actId} = match.params;
+    const {actId,status} = match.params;
     const [act, setAct] = useState();
+    const[products,setProducts]=useState();
+    const [headAct,setHeadAct] = useState();
     const [loading, setLoading] = useState(true)
     const printRef = useRef();
     const { t } = useTranslation();
@@ -27,8 +30,14 @@ const ActView = ({ match, user }) => {
             url: `act/view?ActId=${actId}&tin=${user.tin ?? user.username}`
         }).then(res=>{
             if (res.data.success) {
-                setAct(res.data.data[0])
-                console.log(res.data.data[0])
+                setAct(res.data.data[0]);
+                setProducts(res.data.data[0].ProductList.Products);
+                setHeadAct({
+                    number:res.data.data[0].ActDoc.ActNo,
+                    contractDate:res.data.data[0].ContractDoc.ContractDate,
+                    sender:res.data.data[0].Seller?.Name,
+                    date:res.data.data[0].ActDoc.ActDate
+                })
             }
             setLoading(false)
         })
@@ -41,8 +50,8 @@ const ActView = ({ match, user }) => {
     return (
         <div>
             <Spin spinning={loading}>
+                <ViewHeader data={headAct} status={status} signDoc={'act'} docId={actId} docTitle={'Akt'} products={products} values={act}/>
                 <div className="custom-section-wrapper">
-
                     <ReactToPrint
                         trigger={() => <Button>{t("Chop etish")}</Button>}
                         content={() => printRef.current}
