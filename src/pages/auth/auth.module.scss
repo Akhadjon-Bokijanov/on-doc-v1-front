@@ -2,6 +2,12 @@
   object-fit:cover!important;
   width: 70%!important;
   height: 100%!important;
+  background: url("../../assests/authImg.png");
+  background-repeat: no-repeat;
+}
+.bg{
+  background: url("../../assests/authImg.png");
+  background-repeat: no-repeat;
 }
 //@media (max-width:1600px) {
 //  .auth_img{

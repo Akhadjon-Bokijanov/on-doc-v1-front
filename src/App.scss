@@ -6,6 +6,15 @@ body {
     margin: 0;
     padding: 0;
 }
+.ant-menu-submenu-arrow::before{
+    color: rgba(213, 208, 208, 0.64);
+}
+.ant-menu-submenu-arrow::after{
+    color: rgba(213, 208, 208, 0.64);
+}
+.ant-menu-vertical{
+    border-right: none!important;
+}
 .side_text{
     font-weight: 500;
     font-size: 16px;
