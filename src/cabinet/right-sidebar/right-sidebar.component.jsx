@@ -61,6 +61,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             freeDoc: location.pathname.includes("/free-template"),
             notification: location.pathname.includes("/notification"),
             settings: location.pathname.includes("/settings"),
+            add: location.pathname.includes("/add"),
             exit: location.pathname.includes("/login")
         })
     }, [location.pathname])
@@ -87,24 +88,20 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
         })
     }, [])
 
-    const handleModal=()=>setShow(!show);
-
-    const menu = (
-        <Menu>
-            <Menu.ItemGroup title="Group title">
-                <Menu.Item>1st menu item</Menu.Item>
-                <Menu.Item>2nd menu item</Menu.Item>
-            </Menu.ItemGroup>
-            <SubMenu title="sub menu">
-                <Menu.Item>3rd menu item</Menu.Item>
-                <Menu.Item>4th menu item</Menu.Item>
-            </SubMenu>
-            <SubMenu title="disabled sub menu" disabled>
-                <Menu.Item>5d menu item</Menu.Item>
-                <Menu.Item>6th menu item</Menu.Item>
-            </SubMenu>
-        </Menu>
-    );
+    const handleOut=()=>{
+        let elem = document.getElementById("add");
+        if(elem.classList.contains('act')){
+            elem.classList.remove('act');
+            elem.classList.add("before_act");
+        }
+    }
+    const handleOver=()=>{
+        let elem = document.getElementById("add");
+        if(elem.classList.contains('before_act')){
+            elem.classList.remove('before_act');
+            elem.classList.add('act');
+        }
+    }
 
     return (
         <div className="cabiner-right-sidebar-cmain-container" >
@@ -143,32 +140,35 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     <div>
                         <hr className={"line"}/>
                     </div>
-                    <div>
-                        <Menu mode="vertical" style={{backgroundColor:'#0C2556',marginLeft:'-4px',height:'48px',color:'#fff'}}>
-                            <SubMenu className={'side_text'}  title={<span><img src={add} className={'side_icon'} alt=""/><span>Add</span></span>}>
-                                <Menu.Item style={{width:'254px'}} key="1"><p className={'menu_item'}>Договор</p></Menu.Item>
-                                <hr/>
-                                <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
-                                <hr/>
-                                <Menu.Item key="3"><p className={'menu_item'}>Счет-фактура</p></Menu.Item>
-                                <hr/>
-                                <Menu.Item key="4"><p className={'menu_item'}>Акт</p></Menu.Item>
-                                <hr/>
-                                <Menu.Item key="5"><p className={'menu_item'}>ТТН</p></Menu.Item>
-                            </SubMenu>
-                        </Menu>
-                    </div>
+                    <Link to={'/cabinet/add'}>
+                        <div className={`flexible`}>
+                            <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
+                                <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-5px'}} className={'side_icon'} alt=""/><span>Add</span></span>}>
+                                    <Menu.Item style={{width:'254px'}} key="1"><p className={'menu_item'}>Договор</p></Menu.Item>
+                                    <hr/>
+                                    <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
+                                    <hr/>
+                                    <Menu.Item key="3"><p className={'menu_item'}>Счетфактура</p></Menu.Item>
+                                    <hr/>
+                                    <Menu.Item key="4"><p className={'menu_item'}>Акт</p></Menu.Item>
+                                    <hr/>
+                                    <Menu.Item key="5"><p className={'menu_item'}>ТТН</p></Menu.Item>
+                                </SubMenu>
+                            </Menu>
+                        </div>
+
+                    </Link>
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''} side_text`}>
                             <img src={home} className={'side_icon'} alt=""/> {t("Bosh sahifa")}
                         </div>
                     </Link>
                     <Link to="/cabinet/factura">
-                            <div className={`action-bloks ${active.factura ? 'active' : ''} side_text flexible`}>
-                                <img src={down} className={'side_icon_updown'} alt=""/>
-                                <p>{t("Faktura")} (4)</p>
-                                {/*<Badge style={{marginLeft: 10}} count={10} />*/}
-                            </div>
+                        <div className={`action-bloks ${active.factura ? 'active' : ''} side_text flexible`}>
+                            <img src={down} className={'side_icon_updown'} alt=""/>
+                            <p>{t("Faktura")} (4)</p>
+                            {/*<Badge style={{marginLeft: 10}} count={10} />*/}
+                        </div>
                     </Link>
                     <Link to="/cabinet/contract">
                         <div className={`action-bloks ${active.contract ? 'active' : ''} side_text flexible`}>
