@@ -79,6 +79,13 @@ $sidebarColor:#0C2556;
 .side_icon{
     margin-right: 14px;
     height: 20px;
+    width: 20px;
+}
+.side_icon_updown{
+    //margin-right: 14px;
+    height: 20px;
+    margin-right: 20px;
+    //width: 20px;
 }
 .menu_item{
     align-items: center;
@@ -93,4 +100,5 @@ $sidebarColor:#0C2556;
     background: #0FBE7B;
     box-shadow: 0 4px 10px rgba(15, 190, 123, 0.4);
     border-radius: 8px;
+    outline: none;
 }

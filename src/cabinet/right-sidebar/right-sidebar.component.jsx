@@ -150,20 +150,13 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                                 <hr/>
                                 <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
                                 <hr/>
-                                <Menu.Item key="3"><p className={'menu_item'}>Счетфактура</p></Menu.Item>
+                                <Menu.Item key="3"><p className={'menu_item'}>Счет-фактура</p></Menu.Item>
                                 <hr/>
                                 <Menu.Item key="4"><p className={'menu_item'}>Акт</p></Menu.Item>
                                 <hr/>
                                 <Menu.Item key="5"><p className={'menu_item'}>ТТН</p></Menu.Item>
                             </SubMenu>
                         </Menu>
-
-                        {/*<Dropdown overlay={menu} placement={"topRight"} className={`action-bloks  side_text flexible`} >*/}
-                        {/*    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>*/}
-                        {/*        <img className={'side_icon'} src={add}  alt=""/> {t("Add")}*/}
-                        {/*        <RightOutlined style={{marginLeft:'53%'}}/>*/}
-                        {/*    </a>*/}
-                        {/*</Dropdown>*/}
                     </div>
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''} side_text`}>
@@ -172,14 +165,14 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     </Link>
                     <Link to="/cabinet/factura">
                             <div className={`action-bloks ${active.factura ? 'active' : ''} side_text flexible`}>
-                                <img src={down} className={'side_icon'} alt=""/>
+                                <img src={down} className={'side_icon_updown'} alt=""/>
                                 <p>{t("Faktura")} (4)</p>
                                 {/*<Badge style={{marginLeft: 10}} count={10} />*/}
                             </div>
                     </Link>
                     <Link to="/cabinet/contract">
                         <div className={`action-bloks ${active.contract ? 'active' : ''} side_text flexible`}>
-                            <img src={up} className={'side_icon'} alt=""/>
+                            <img src={up} className={'side_icon_updown'} alt=""/>
                             <p>{t("Shartnoma")} (2)</p>
                         </div>
                     </Link>
