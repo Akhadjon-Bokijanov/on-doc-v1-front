@@ -13,15 +13,30 @@ import { createStructuredSelector } from 'reselect';
 import { selectLoadedKey } from '../../redux/user/user.selector';
 import AfertaPopup from '../aferta-popup/aferta-popup.component';
 import BindroumingPopup from '../bindrouming-popup/bindrouming-popup.component';
-
 import logo from '../../assests/logo_new.png'
+import {RightOutlined} from '@ant-design/icons';
+import add from '../../assests/sidebar/add.png'
+import archived from '../../assests/sidebar/archived.png'
+import down from '../../assests/sidebar/down.png'
+import exit from '../../assests/sidebar/exit.png'
+import home from '../../assests/sidebar/home.png'
+import news from '../../assests/sidebar/news.png'
+import saved from '../../assests/sidebar/saved.png'
+import settings from '../../assests/sidebar/settings.png'
+import up from '../../assests/sidebar/up.png'
+import consultant from '../../assests/sidebar/consultant.png'
+
+import { Menu, Dropdown, Icon } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 const { Countdown } = Statistic;
 
 const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
     const { t } = useTranslation();
 
-   
 
 
     const [active, setActive] = useState({})
@@ -74,10 +89,27 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
     const handleModal=()=>setShow(!show);
 
+    const menu = (
+        <Menu>
+            <Menu.ItemGroup title="Group title">
+                <Menu.Item>1st menu item</Menu.Item>
+                <Menu.Item>2nd menu item</Menu.Item>
+            </Menu.ItemGroup>
+            <SubMenu title="sub menu">
+                <Menu.Item>3rd menu item</Menu.Item>
+                <Menu.Item>4th menu item</Menu.Item>
+            </SubMenu>
+            <SubMenu title="disabled sub menu" disabled>
+                <Menu.Item>5d menu item</Menu.Item>
+                <Menu.Item>6th menu item</Menu.Item>
+            </SubMenu>
+        </Menu>
+    );
+
     return (
-        <div className="cabiner-right-sidebar-cmain-container">
-            {/*<AfertaPopup />*/}
-            {/*<BindroumingPopup />*/}
+        <div className="cabiner-right-sidebar-cmain-container" >
+            <AfertaPopup />
+            <BindroumingPopup />
             <Modal 
             bodyStyle={{width: '70wv'}}
             title="Notifications"
@@ -104,52 +136,81 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             
 
             <div className="cabiner-right-sidebar-sub-container">
-                <div className="cabinet-documents-action-containers-bloks">
-                    <div style={{marginBottom:"25px",marginLeft:'20px'}}>
+                <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'26px'}}>
+                    <div style={{marginBottom:"8px",marginLeft:'20px'}}>
                         <img src={logo} alt=""/>
                     </div>
                     <div>
                         <hr className={"line"}/>
                     </div>
+                    <div>
+                        <Menu mode="vertical" style={{backgroundColor:'#0C2556',marginLeft:'-4px',height:'48px',color:'#fff'}}>
+                            <SubMenu className={'side_text'}  title={<span><img src={add} className={'side_icon'} alt=""/><span>Add</span></span>}>
+                                <Menu.Item style={{width:'254px'}} key="1"><p className={'menu_item'}>Договор</p></Menu.Item>
+                                <hr/>
+                                <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
+                                <hr/>
+                                <Menu.Item key="3"><p className={'menu_item'}>Счетфактура</p></Menu.Item>
+                                <hr/>
+                                <Menu.Item key="4"><p className={'menu_item'}>Акт</p></Menu.Item>
+                                <hr/>
+                                <Menu.Item key="5"><p className={'menu_item'}>ТТН</p></Menu.Item>
+                            </SubMenu>
+                        </Menu>
+
+                        {/*<Dropdown overlay={menu} placement={"topRight"} className={`action-bloks  side_text flexible`} >*/}
+                        {/*    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>*/}
+                        {/*        <img className={'side_icon'} src={add}  alt=""/> {t("Add")}*/}
+                        {/*        <RightOutlined style={{marginLeft:'53%'}}/>*/}
+                        {/*    </a>*/}
+                        {/*</Dropdown>*/}
+                    </div>
                     <Link to="/cabinet">
-                        <div className={`action-bloks ${active.cabinet ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="home" /> {t("Bosh sahifa")}
+                        <div className={`action-bloks ${active.cabinet ? 'active' : ''} side_text`}>
+                            <img src={home} className={'side_icon'} alt=""/> {t("Bosh sahifa")}
                         </div>
                     </Link>
                     <Link to="/cabinet/factura">
-                            <div className={`action-bloks ${active.factura ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="file-invoice" className="action-icon" /> {t("Faktura")}
-                                <Badge style={{marginLeft: 10}} count={badgeCount.factura_awaiting} />
+                            <div className={`action-bloks ${active.factura ? 'active' : ''} side_text flexible`}>
+                                <img src={down} className={'side_icon'} alt=""/>
+                                <p>{t("Faktura")} (4)</p>
+                                {/*<Badge style={{marginLeft: 10}} count={10} />*/}
                             </div>
                     </Link>
                     <Link to="/cabinet/contract">
-                        <div className={`action-bloks ${active.contract ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Shartnoma")}
-                            <Badge style={{marginLeft: 10}} count={badgeCount.contract_awaiting} />
+                        <div className={`action-bloks ${active.contract ? 'active' : ''} side_text flexible`}>
+                            <img src={up} className={'side_icon'} alt=""/>
+                            <p>{t("Shartnoma")} (2)</p>
                         </div>
                     </Link>
                     <Link to="/cabinet/act">
-                        <div className={`action-bloks ${active.act ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon={["far", "file-alt"]} className="action-icon"/> {t("Akt")}
-                            <Badge style={{marginLeft: 10}} count={badgeCount.act_awaiting} />
+                        <div className={`action-bloks ${active.act ? 'active' : ''} side_text flexible`}>
+                            <img src={saved} className={'side_icon'} alt=""/>
+                            <p>{t("Akt")} (0)</p>
                         </div>
                     </Link>
                     <Link to="/cabinet/empowerment">
-                        <div className={`action-bloks ${active.empowerment ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="file-signature" className="action-icon"/>{t("Ishonchnoma")}
-                            <Badge style={{marginLeft: 10}} count={badgeCount.emp_awating} />
+                        <div className={`action-bloks ${active.empowerment ? 'active' : ''} side_text flexible`}>
+                            <img src={archived} className={'side_icon'} alt=""/>
+                            <p>{t("Ishonchnoma")} (0)</p>
                         </div>
                     </Link>
                     <Link to="/cabinet/tty">
-                        <div className={`action-bloks ${active.tty ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon={["far", "file-archive"]} className="action-icon"/> {t("TTY")}
+                        <div className={`action-bloks ${active.tty ? 'active' : ''} side_text`}>
+                            <img src={news} className={'side_icon'} alt=""/>{t("TTY")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.tty_awaiting} />
+                        </div>
+                    </Link>
+                    <Link to="/cabinet/settings">
+                        <div className={`action-bloks ${active.settings ? 'active' : ''} side_text`}>
+                            <img src={settings} className={'side_icon'} alt=""/>{t("Settings")}
+                            <Badge style={{marginLeft: 10}}  />
                         </div>
                     </Link>
                     {
                         admin 
                         ? <Link to="/admin/notification">
-                            <div className={`action-bloks ${active.notification ? 'active' : ''}`}>
+                            <div className={`action-bloks ${active.notification ? 'active' : ''} side_text`}>
                                 <FontAwesomeIcon icon={["far", "bell"]}  className="action-icon"/> Notification
                                 <Badge style={{marginLeft: 10}} count={3} />
                             </div>
@@ -157,27 +218,26 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         : null
                     }
 
-                    {
-                        loadedKey ?
-                            <div className="action-bloks">
-                            <Countdown
-                                valueStyle={{fontSize: 15, color: '#fff'}}
-                                value={loadedKey.time + 1000 * 60 * 30}
-                                title={<span style={{color: '#fff'}}>{t("Sessiya tugaydi")}</span>}
-                                onFinish={uOut} />
-                            </div>
-                            : null
-                    }
+                    {/*{*/}
+                    {/*    loadedKey ?*/}
+                    {/*        <div className="action-bloks">*/}
+                    {/*        <Countdown*/}
+                    {/*            valueStyle={{fontSize: 15, color: '#fff'}}*/}
+                    {/*            value={loadedKey.time + 1000 * 60 * 30}*/}
+                    {/*            title={<span style={{color: '#fff'}}>{t("Sessiya tugaydi")}</span>}*/}
+                    {/*            onFinish={uOut} />*/}
+                    {/*        </div>*/}
+                    {/*        : null*/}
+                    {/*}*/}
 
 
 
-                    <div style={{marginTop:"100px"}}>
-                        <Link to="/cabinet/settings">
-                            <div className={`action-bloks ${active.settings ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="cog" className="action-icon" /> {t("Settings")}
-                                <Badge style={{marginLeft: 10}}  />
-                            </div>
-                        </Link>
+                    <div style={{}}>
+                        <div className=" bottom1">
+                            <button className={`consultant`}>
+                                <img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}
+                            </button>
+                        </div>
                         <Popconfirm
                         onConfirm={()=>uOut()}
                         okText={t("Chiqish")}
@@ -186,9 +246,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         >
                             <div 
                                 style={{cursor: 'pointer'}} 
-                                className={`action-bloks ${active.exit ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="sign-out-alt" className="action-icon"/> {t("Exit")}
-                                <Badge style={{marginLeft: 10}} />
+                                className={`action-bloks ${active.exit ? 'active' : ''} bottom2 side_text`}>
+                                <img src={exit} className={'side_icon'} alt=""/>{t("Exit")}
                             </div>
                         </Popconfirm>
                     </div>
@@ -203,6 +262,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
         </div>
     )
 }
+
 
 const mapStateToProps = createStructuredSelector({
     loadedKey: selectLoadedKey

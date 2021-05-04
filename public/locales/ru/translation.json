@@ -3,7 +3,7 @@
 "Tizimdan chiqish": "Выход",
 "Tizimga kirish": "Авторизоваться",
 "Call center": "Центр помощи",
-"Bosh sahifa": "Дома",
+"Bosh sahifa": "Главная",
 "Notifications": "Уведомления",
 "Kabinet": "Кабинет",
 "FAQ": "ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ",
@@ -40,7 +40,7 @@
 "Shartnoma yaratish": "Контракт",
 "Ishonchnoma yaratish": "Создание доверенности",
 "TTY yaratish": "Создать ТТН",
-"Saqlash": "Сохранять",
+"Saqlash": "Сохранить",
 "Imzolash": "Подпись",
 "Bekor qilish": "Отмена",
 "Qo'shish": "Добавлять",
@@ -132,5 +132,7 @@
 "Amal qilish muddati": "Срок годности",
 "Sessiya tugaydi": "Сессия истечет через",
 
-"Back": "назад"
+"Back": "назад",
+"Dokument yaratish:": "Dokument yaratish: ",
+"Total": "Итого"
 }

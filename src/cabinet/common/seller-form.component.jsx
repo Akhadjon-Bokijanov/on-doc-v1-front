@@ -15,7 +15,7 @@ const SellerForm = ({ user, docType, form }) => {
   return (
     <div>
 
-      <h3>{t("Sizning ma'lumotlaringiz")}</h3>
+      <h3 style={{ fontSize: 22, fontWeight: 700 }}>{t("Sizning ma'lumotlaringiz")}</h3>
 
       {
         docType=="contract" ?
@@ -32,10 +32,11 @@ const SellerForm = ({ user, docType, form }) => {
       }
       
 
-      <Form.Item>
+      {/* <Form.Item> */}
         <Form.Item
           key="dyna-form-item-inn-seller"
           name="sellerTin"
+          label={t("STIR")}
           rules={[{ required: true }]}
           initialValue={tin}>
           <Input
@@ -43,120 +44,124 @@ const SellerForm = ({ user, docType, form }) => {
             size="large"
             placeholder={t("STIR")} />
         </Form.Item>
-        <span className="custom-input-label-1">{t("STIR")}</span>
-      </Form.Item>
-      {
-        docType !== "contract" ?
-          <h3>{t("Tashkilot")}</h3>
-          : null
-      }
-      <Form.Item>
+        {/* <span className="custom-input-label-1"></span> */}
+      {/* </Form.Item> */}
+     
+      {/* <Form.Item> */}
         <Form.Item
           key="seller-name-1-sellerName"
           rules={[{ required: true }]}
           name="sellerName"
+        label={t("Sotuvchi nomi")}
           initialValue={name ?? fullName}>
           <Input
 
             size="large"
             placeholder={t("Sotuvchi nomi")} />
         </Form.Item>
-        <span className="custom-input-label-1">{t("Sotuvchi nomi")}</span>
-      </Form.Item>
+        {/* <span className="custom-input-label-1"></span> */}
+      {/* </Form.Item> */}
       {
         docType !== "act" ?
           <Fragment>
             {
               docType === "contract" || docType === "empowerment"
                 ? null
-                : <Form.Item>
-                  <Form.Item
+                // : <Form.Item>
+                  :<Form.Item
                     key="seler-account-vatreg"
                     name="sellerVatRegCode"
+                    label={t("QQS tolovchi registratsiya raqami")}
                     initialValue={regCode}>
                     <Input
                       size="large"
                       placeholder={t("QQS tolovchi registratsiya raqami")} />
                   </Form.Item>
-                  <span className="custom-input-label-1">{t("QQS tolovchi registratsiya raqami")}</span>
-                </Form.Item>
+                  // <span className="custom-input-label-1"></span>
+                // </Form.Item>
             }
 
             <Row justify="space-between">
               <Col md={11} >
-                <Form.Item>
+                {/* <Form.Item> */}
                   <Form.Item
                     key="seler-account"
                     name="sellerAccount"
+                  label={t("Hisob raqami")}
                     initialValue={bank_account}>
                     <Input
                       size="large"
                       placeholder={t("Hisob raqami")} />
                   </Form.Item>
-                  <span className="custom-input-label-1">{t("Hisob raqami")}</span>
-                </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+                {/* </Form.Item> */}
               </Col>
               <Col md={11}>
                 {
                   docType === "contract"
-                    ? <Form.Item>
-                      <Form.Item
+                    // ? <Form.Item>
+                      ?<Form.Item
                         key="seler-account"
+                        label={t("Telfon raqam")}
                         name="sellerMobilePhone"
                         initialValue={phone}>
                         <Input
                           size="large"
                           placeholder={t("Telfon raqam")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">{t("Telfon raqam")}</span>
-                    </Form.Item>
-                    : <Form.Item>
-                      <Form.Item
+                      // <span className="custom-input-label-1"></span>
+                    // </Form.Item>
+                    // : <Form.Item>
+                      :<Form.Item
                         key="seler-account"
                         name="sellerMfo"
+                        label={t("MFO")}
                         initialValue={mfo}>
                         <Input
                           size="large"
                           placeholder={t("MFO")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">{t("MFO")}</span>
-                    </Form.Item>
+                      // <span className="custom-input-label-1"></span>
+                    // </Form.Item>
                 }
 
               </Col>
             </Row>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item
                 key="seler-account"
                 name="sellerAddress"
+              label={t("Manzil")}
                 initialValue={address}>
                 <Input
                   rules={[{ required: true }]}
                   size="large"
                   placeholder={t("Manzil")} />
               </Form.Item>
-              <span className="custom-input-label-1">{t("Manzil")}</span>
-            </Form.Item>
+              <span className="custom-input-label-1"></span>
+            {/* </Form.Item> */}
             <Row justify="space-between">
               <Col md={11} >
-                <Form.Item>
+                {/* <Form.Item> */}
                   <Form.Item
                     key="seler-account"
                     name="sellerDirector"
+                  label={t("Direktor")}
                     initialValue={director_fio}>
                     <Input
                       size="large"
                       placeholder={t("Direktor")} />
                   </Form.Item>
-                  <span className="custom-input-label-1">{t("Direktor")}</span>
-                </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+                {/* </Form.Item> */}
               </Col>
               <Col md={11}>
                 {
                   docType === "contract"
                     ? 
-                    <Form.Item>
+                    // <Form.Item>
                       <Form.Item
+                        label={t("Direktor")+ " " +t("STIR")}
                         key="seler-account"
                         name="sellerDirectorTin"
                         initialValue={director_tin}>
@@ -164,19 +169,20 @@ const SellerForm = ({ user, docType, form }) => {
                           size="large"
                           placeholder={t("Direktor") + " " + t("STIR")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">{t("Direktor")+ " " +t("STIR")}</span>
-                    </Form.Item>
-                    : <Form.Item>
-                      <Form.Item
+                      // <span className="custom-input-label-1"></span>
+                    // </Form.Item>
+                    // : <Form.Item>
+                      :<Form.Item
                         key="seler-account"
                         name="sellerAccountant"
+                        label={t("Bosh hisobchi")}
                         initialValue={accountant}>
                         <Input
                           size="large"
                           placeholder={t("Bosh hisobchi")} />
                       </Form.Item>
-                      <span className="custom-input-label-1">{t("Bosh hisobchi")}</span>
-                    </Form.Item>
+                      // <span className="custom-input-label-1"></span>
+                    // </Form.Item>
                 }
               </Col>
             </Row>

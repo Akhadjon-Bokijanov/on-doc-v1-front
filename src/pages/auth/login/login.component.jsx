@@ -24,6 +24,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
     const [isKeyLoading, setKeyIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState(0);
     const [notFound, setNotFound] = useState(false);
+    const [keyNotFound,setKeyNotFound] = useState(false);
 
 
     useEffect(() => {
@@ -33,6 +34,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
             return itemId;
         }, function (itemId, v) {
             eKeys.push({ value: itemId, text: v })
+            setKeyNotFound(false)
             setEKeys([...eKeys])
             //return uiCreateItem(itemId, v);
         }, function (items, firstId) {
@@ -44,6 +46,14 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
             message.error(t("E-Imzo xatosi. Sizda E-Imzo programmasi yoki E-Imzo browseri mavjud emas!"))
         });
     }, [])
+
+    useEffect(()=>{
+        if(eKeys.length==0){
+            setKeyNotFound(true)
+        }else {
+            setKeyNotFound(false)
+        }
+    },[eKeys])
 
     const validateMessages = {
         required: 'Bu maydon majburiy!',
@@ -158,9 +168,10 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                                     </Radio.Group>
                                                 </Form.Item>
                                             </div>
-
-
-
+                                        {
+                                            keyNotFound&&
+                                                <p>key not found,Please configurate </p>
+                                        }
                                     </div>
                                         <Form.Item>
                                             <Button

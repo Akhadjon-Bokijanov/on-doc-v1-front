@@ -21,8 +21,9 @@ const FacturaView = ({ match, user, loadedKey }) => {
     const printRef = useRef();
     const [factura, setFactura] = useState();
     const [headFactura,setHeadFactura] = useState();
-    const [loading, setLoading] = useState(true)
-    const {facturaId} = match.params;
+    const [loading, setLoading] = useState(true);
+    const [products,setProducts] = useState();
+    const {facturaId,status} = match.params;
     const { t } = useTranslation();
 
     useEffect(()=>{
@@ -33,6 +34,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
         }).then(res => {
             if(res.data.success){
                 setFactura(res.data.data[0])
+                setProducts(res.data.data[0].ProductList.Products)
                 setHeadFactura({
                     number:res.data.data[0].FacturaDoc.FacturaNo,
                     contractDate:res.data.data[0].ContractDoc.ContractDate,
@@ -75,7 +77,7 @@ const FacturaView = ({ match, user, loadedKey }) => {
 
     return (
         <Spin spinning={loading}>
-            <ViewHeader doc={'Factura'} data={headFactura}/>
+            <ViewHeader status={status} signDoc={'factura'} docTitle={'Factura'} data={headFactura} values={factura} docId={facturaId} products={products}/>
             <div className="custom-section-wrapper">
                 <ReactToPrint
                     trigger={() => <Button>{t("Chop etish")}</Button>}
