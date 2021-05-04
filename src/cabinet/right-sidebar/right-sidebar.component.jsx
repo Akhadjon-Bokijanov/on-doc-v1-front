@@ -140,7 +140,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     <div>
                         <hr className={"line"}/>
                     </div>
-                    <Link to={'/cabinet/add'}>
+                    {/*<Link to={'/cabinet/add'}>*/}
                         <div className={`flexible`}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
                                 <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-5px'}} className={'side_icon'} alt=""/><span>Add</span></span>}>
@@ -157,7 +157,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                             </Menu>
                         </div>
 
-                    </Link>
+                    {/*</Link>*/}
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''} side_text`}>
                             <img src={home} className={'side_icon'} alt=""/> {t("Bosh sahifa")}
