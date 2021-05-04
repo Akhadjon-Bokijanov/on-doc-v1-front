@@ -405,7 +405,7 @@ const ConractCreateForm = ({ token, match }) => {
                 <Button style={{ marginRight: 10 }}>Exceldan yuklash</Button>
 
               </Upload>
-              <a target="_blank" href="../../../excels/on_doc_contract_products.xlsx" download>
+              <a target="_blank" href="../../../excels/contract_products.xlsx" download>
                 <Button >
                   Shablon yuklash
                 </Button>

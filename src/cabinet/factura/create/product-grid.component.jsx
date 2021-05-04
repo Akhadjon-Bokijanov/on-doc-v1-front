@@ -16,6 +16,9 @@ import { selectCurrentUser, selectToken } from '../../../redux/user/user.selecto
 import { connect } from 'react-redux';
 import axios from 'axios';
 import MeasureViewer from '../../../components/data-sheet-custom-measure-selector/measure-viewer';
+import download from "../../../images/download.svg";
+import delete_icon from "../../../images/delete-icon.svg";
+import add_icon from "../../../images/add-icon.svg";
 
 export const ProductValueRendered = prop => {
 
@@ -45,9 +48,13 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
         })
     }, [])
 
+    
+    
+
     const { t } = useTranslation();
 
     const [fullView, toglleFullView] = useState(false)
+    const [totalSumm, setTotalSumm] = useState(0);
     const [grid, setGrid] = useState([
         [
             { readOnly: true, value: '', width: 50 },
@@ -81,11 +88,21 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
         ]
     ])
 
-    
+    useEffect(() => {
+        let total = 0;
+        grid.forEach((row, index) => {
+            if (index !== 0) {
+                if (parseFloat(row[row.length - 1].value) > 0) {
+                    total += parseFloat(row[row.length - 1].value)
+                }
+            }
+        })
+        setTotalSumm(total);
+    }, [grid])
 
     const handleRemoveRow = (rowId) => {
         console.log(rowId)
-
+        
         grid.splice(rowId, 1)
         setGrid([...grid])
         getProducts([...grid])
@@ -144,7 +161,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                 })
             }
             setGrid([grid[0], ...collector]);
-            console.log(response)
+            
         }
     }
 
@@ -177,9 +194,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
         setGrid([...grid]);
 
         grid.shift()
-
         getProducts(grid)
-
     };
 
    
@@ -226,21 +241,25 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                         name="Files[file]"
                         data={{tin: user.tin}}
                         onChange={handleImportExecl}>
-                        <Button style={{ marginRight: 10 }}>{t("Exceldan yuklash")}</Button>
+                        <span style={{ cursor: 'pointer',marginRight: 10 }}>
+                            <img src={download} alt="download" style={{ marginRight: 9 }} />
+                            {t("Exceldan yuklash")}
+                        </span>
 
                     </Upload>
-                    <a target="_blank" href="../../../excels/factura_products.xlsx" download>
-                        <Button >
+                    <a style={{ color: '#303030', marginLeft: 28 }} target="_blank" href="../../../excels/factura_products.xlsx" download>
+                        <span >
+                            <img src={download} alt="download" style={{marginRight: 9}}/>
                             {t("Shablonni yuklash")}
-                        </Button>
+                        </span>
                     </a>
                 </div>
-                <Button
+                {/* <Button
                     type="primary"
                     icon={fullView ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
                     onClick={() => toglleFullView(!fullView)}>
                     {fullView ? t("Kichraytirish") : t("Kengaytirish")}
-                </Button>
+                </Button> */}
             </div>
 
             <div style={{ overflowX: 'auto' }} >
@@ -252,8 +271,26 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                         onCellsChanged={onCellsChanged}
                     />
                 </div>
+                
             </div>
-            <Button
+            <div style={{marginTop: 16, display: 'flex', justifyContent: 'space-between'}}>
+                <h3>{t("Total")}: {totalSumm}</h3>
+                <div>
+                    <span  
+                        onClick={() => { if (grid.length > 1) { handleRemoveRow(grid.length - 1) } }}
+                        style={{ color: '#2B63C0', fontSize: 16, cursor: 'pointer' }}>
+                        <img src={delete_icon} alt="" style={{ marginRight: 10 }}/>
+                        {t("Oxirgi qatorni o'chirish")}
+                    </span>
+                    <span
+                        onClick={handleAddRow}
+                        style={{ color: '#2B63C0', fontSize: 16, cursor: 'pointer' }}>
+                        <img src={add_icon} alt="" style={{ marginRight: 10, marginLeft: 34 }} />
+                        {t("Qo'shish")}
+                    </span>
+                </div>
+            </div>
+            {/* <Button
                 size="large"
                 style={{ marginTop: 20, marginRight: 7, width: 220 }}
                 type="primary"
@@ -270,7 +307,7 @@ const FacturaProductGrid = ({ token, loadProducts, user, getProducts, initialVal
                 icon={<FontAwesomeIcon
                     style={{ marginRight: 7 }}
                     icon={["far", "trash-alt"]} />}
-                onClick={() => { if (grid.length > 1) { handleRemoveRow(grid.length - 1) } }}>{t("Oxirgi qatorni o'chirish")}</Button>
+                onClick={() => { if (grid.length > 1) { handleRemoveRow(grid.length - 1) } }}>{t("Oxirgi qatorni o'chirish")}</Button> */}
         </div>
     )
 }

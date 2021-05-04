@@ -1,6 +1,6 @@
 .factura-data-sheet-container {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 24px !important;
     border-radius: 11px;
     margin-bottom: 30px;
     &.grid-full-view {
@@ -16,9 +16,7 @@
 }
 
 .factra-action-btns {
-    width: 200px;
-    height: 60px !important;
-    font-weight: bold;
+    font-weight: 400;
     &.sing-btn {
         border-color: #47bf33 !important;
         color: #47bf33;
@@ -28,15 +26,12 @@
         }
     }
     &.save-btn {
-        border-color: #096dd9;
-        color: #1890ff;
+        background-color: #2B63C0;
+        color: #ffffff !important;
     }
 }
 
-.factura-action-btn-icons {
-    margin-right: 10px;
-    font-size: 20px;
-}
+
 
 .factur-settins-menu{
     position: fixed;
@@ -70,4 +65,29 @@
         border-top-left-radius: 20%;
         outline: none;
     }
+}
+
+
+.custom-ant-primary-btn{
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    height: 48px;
+    padding: 12px 24px;
+    
+    &.save-btn{
+        background-color: #2B63C0;
+    }
+
+    &.sign-btn{
+        background-color: #0FBE7B;
+    }
+    &.cancel-btn{
+        background-color: #FE346E;
+    }
+
+    .factura-action-btn-icons {
+    margin-right: 10px;
+    font-size: 18px !important;
+}
 }
