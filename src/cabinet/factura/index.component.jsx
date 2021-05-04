@@ -19,7 +19,7 @@ const FacturaIndex = ({ match, user }) => {
             ]} />} />
             <Route exact path={`${match.path}/excel-type-create`} component={CreateExcelType} />
             <Route exact path={`${match.path}/create`} component={FacturaCreateForm} />
-            <Route exact path={`${match.path}/view/:facturaId`} component={FacturaView} />
+            <Route exact path={`${match.path}/view/:facturaId/:status`} component={FacturaView} />
             <Route exact path={`${match.path}/edit/:facturaId`} component={FacturaCreateForm} />
             <Route exact path={`${match.path}/duplicate/:duplicateId`} component={FacturaCreateForm} />
 

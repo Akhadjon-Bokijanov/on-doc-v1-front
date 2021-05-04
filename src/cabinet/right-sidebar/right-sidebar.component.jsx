@@ -75,9 +75,9 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
     const handleModal=()=>setShow(!show);
 
     return (
-        <div className="cabiner-right-sidebar-cmain-container">
-            {/*<AfertaPopup />*/}
-            {/*<BindroumingPopup />*/}
+        <div className="cabiner-right-sidebar-cmain-container" >
+            <AfertaPopup />
+            <BindroumingPopup />
             <Modal 
             bodyStyle={{width: '70wv'}}
             title="Notifications"
@@ -104,7 +104,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             
 
             <div className="cabiner-right-sidebar-sub-container">
-                <div className="cabinet-documents-action-containers-bloks">
+                <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'26px'}}>
                     <div style={{marginBottom:"25px",marginLeft:'20px'}}>
                         <img src={logo} alt=""/>
                     </div>
@@ -112,44 +112,44 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         <hr className={"line"}/>
                     </div>
                     <Link to="/cabinet">
-                        <div className={`action-bloks ${active.cabinet ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="home" /> {t("Bosh sahifa")}
+                        <div className={`action-bloks ${active.cabinet ? 'active' : ''} side_text`}>
+                            <FontAwesomeIcon icon="home" className={'action-icon'}/> {t("Bosh sahifa")}
                         </div>
                     </Link>
                     <Link to="/cabinet/factura">
-                            <div className={`action-bloks ${active.factura ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="file-invoice" className="action-icon" /> {t("Faktura")}
+                            <div className={`action-bloks ${active.factura ? 'active' : ''} side_text`}>
+                                <FontAwesomeIcon icon="file-invoice" className="action-icon" />{t("Faktura")}
                                 <Badge style={{marginLeft: 10}} count={badgeCount.factura_awaiting} />
                             </div>
                     </Link>
                     <Link to="/cabinet/contract">
-                        <div className={`action-bloks ${active.contract ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon="file-contract" className="action-icon"/> {t("Shartnoma")}
+                        <div className={`action-bloks ${active.contract ? 'active' : ''} side_text`}>
+                            <FontAwesomeIcon icon="file-contract" className="action-icon"/>{t("Shartnoma")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.contract_awaiting} />
                         </div>
                     </Link>
                     <Link to="/cabinet/act">
-                        <div className={`action-bloks ${active.act ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon={["far", "file-alt"]} className="action-icon"/> {t("Akt")}
+                        <div className={`action-bloks ${active.act ? 'active' : ''} side_text`}>
+                            <FontAwesomeIcon icon={["far", "file-alt"]} className="action-icon"/>{t("Akt")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.act_awaiting} />
                         </div>
                     </Link>
                     <Link to="/cabinet/empowerment">
-                        <div className={`action-bloks ${active.empowerment ? 'active' : ''}`}>
+                        <div className={`action-bloks ${active.empowerment ? 'active' : ''} side_text`}>
                             <FontAwesomeIcon icon="file-signature" className="action-icon"/>{t("Ishonchnoma")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.emp_awating} />
                         </div>
                     </Link>
                     <Link to="/cabinet/tty">
-                        <div className={`action-bloks ${active.tty ? 'active' : ''}`}>
-                            <FontAwesomeIcon icon={["far", "file-archive"]} className="action-icon"/> {t("TTY")}
+                        <div className={`action-bloks ${active.tty ? 'active' : ''} side_text`}>
+                            <FontAwesomeIcon icon={["far", "file-archive"]} className="action-icon"/>{t("TTY")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.tty_awaiting} />
                         </div>
                     </Link>
                     {
                         admin 
                         ? <Link to="/admin/notification">
-                            <div className={`action-bloks ${active.notification ? 'active' : ''}`}>
+                            <div className={`action-bloks ${active.notification ? 'active' : ''} side_text`}>
                                 <FontAwesomeIcon icon={["far", "bell"]}  className="action-icon"/> Notification
                                 <Badge style={{marginLeft: 10}} count={3} />
                             </div>
@@ -171,10 +171,10 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
 
 
-                    <div style={{marginTop:"100px"}}>
+                    <div style={{}}>
                         <Link to="/cabinet/settings">
-                            <div className={`action-bloks ${active.settings ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="cog" className="action-icon" /> {t("Settings")}
+                            <div className={`action-bloks ${active.settings ? 'active' : ''} bottom1 side_text`}>
+                                <FontAwesomeIcon icon="cog" className="action-icon" />{t("Settings")}
                                 <Badge style={{marginLeft: 10}}  />
                             </div>
                         </Link>
@@ -186,8 +186,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         >
                             <div 
                                 style={{cursor: 'pointer'}} 
-                                className={`action-bloks ${active.exit ? 'active' : ''}`}>
-                                <FontAwesomeIcon icon="sign-out-alt" className="action-icon"/> {t("Exit")}
+                                className={`action-bloks ${active.exit ? 'active' : ''} bottom2 side_text`}>
+                                <FontAwesomeIcon icon="sign-out-alt" className="action-icon"/>{t("Exit")}
                                 <Badge style={{marginLeft: 10}} />
                             </div>
                         </Popconfirm>
@@ -203,6 +203,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
         </div>
     )
 }
+
 
 const mapStateToProps = createStructuredSelector({
     loadedKey: selectLoadedKey
