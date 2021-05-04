@@ -2,7 +2,7 @@ $sidebarColor:#0C2556;
 .cabiner-right-sidebar-cmain-container {
     height: 100vh !important;
     //height: 80vh !important;
-    margin-left: -30px;
+    margin-left: -27px;
     position: sticky;
     //margin-left: 0;
     //background: inherit;
@@ -46,7 +46,7 @@ $sidebarColor:#0C2556;
                         content: '';
                         background-color: #FFFFFF;
                         position: absolute;
-                        left: 0px;
+                        left: -4px;
                         top: 0;
                         width: 6px;
                         height: 100%;
@@ -75,4 +75,22 @@ $sidebarColor:#0C2556;
     bottom: 0;
     list-style-type: none;
     //padding-bottom:5em;
+}
+.side_icon{
+    margin-right: 14px;
+    height: 20px;
+}
+.menu_item{
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+}
+.consultant{
+    width: 140px;
+    height: 40px;
+    left: 12px;
+    color:#FFFFFF;
+    background: #0FBE7B;
+    box-shadow: 0 4px 10px rgba(15, 190, 123, 0.4);
+    border-radius: 8px;
 }
