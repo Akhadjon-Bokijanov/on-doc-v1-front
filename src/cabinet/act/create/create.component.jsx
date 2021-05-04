@@ -216,21 +216,27 @@ const ActForm = ({ token, match, user, loadedKey })=> {
   }
 
   const handleImportExecl =(value)=>{
-    console.log("me fired")
-
-    if(value.file.status=="done"){
+    if(value.file.status==="done"){
       
       const { response } = value.file
+      let elements=[];
+      console.log(response.data)
+      if(Array.isArray(response.data)){
+        response.data.forEach((item, index)=>{
+          let i = [
+            { readOnly: true, value: index+1 },                 //0 ordNo
+            { value: item?.ProductName },                                          //1 product name
+            { value: item?.ProductMeasureId, dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //2 measure
+            { value: item?.ProductCount },                                          //3 amount
+            { value: item?.ProductSumma },                                         //4 price
+            { value: item?.ProductDeliverySum, readOnly: true, }                           //5 total
+          ]
+          elements.push(i);
+        })
+      }
 
-      response.excel.forEach((element, index)=>{
-        element[0].value = index + 1;
-        element[0].readOnly = true;
-        element[2].dataEditor = SelectEditor;
-        element[4].dataEditor = SelectMeasureEditor;
-      })
-
-      setGrid([grid[0], ...response.excel])
-      console.log(response)
+      setGrid([grid[0], ...elements])
+    
     }
   }
 
@@ -334,14 +340,16 @@ const ActForm = ({ token, match, user, loadedKey })=> {
                   Authorization: "Bearer " + token
                 }}
                 multiple={false}
-                action="http://127.0.0.1:8000/api/v1/factura-products/read-excel"
+                action={`http://api.onlinefactura.uz/uz/act/import-excel`}
                 accept=".xlsx, .xls" 
+                name="Files[file]"
+                data={{ tin: user.tin }}
                 onChange={handleImportExecl}>
                 
                   <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
                
               </Upload>
-              <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
+              <a target="_blank" href="../../../excels/akt_products.xlsx" download>
                 <Button >
                   Shablon yuklash
                 </Button>

@@ -99,7 +99,7 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
   return (
     <div>
       
-      <h3>{t("Kontragent ma'lumotlari")}</h3>
+      <h3 style={{fontSize: 22, fontWeight: 700}}>{t("Kontragent ma'lumotlari")}</h3>
       {
         docType ==="contract"
         ? <PersonFetch 
@@ -112,8 +112,9 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
       
       <Row justify="space-between">
         <Col md={docType !== "factura" ? 24 : 11}>
-          <Form.Item>
+          {/* <Form.Item> */}
             <Form.Item
+            label={t("STIR")}
               key={fieldList ? `dyna-form-item-inn-Buyer-${fieldList.key}` : "dyna-form-item-inn-Buyer"}
               name={fieldList ? [fieldList.name,"buyerTin"] : "buyerTin"}
               
@@ -123,8 +124,8 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                 size="large"
                 placeholder={t("STIR")} />
             </Form.Item>
-            <span className="custom-input-label-1">{t("STIR")}</span>
-          </Form.Item>
+            {/* <span className="custom-input-label-1"></span> */}
+          {/* </Form.Item> */}
         </Col>
         <Col md={docType !== "factura" ? 0 : 11}>
           <h4>{t("Bir tomonlama fakturami?")}</h4>
@@ -140,12 +141,13 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
         isFacturaSingleSided ?
           <div>
             <h3>{t("Turi")}</h3>
-            <Form.Item
+            {/* <Form.Item
               key="sigle-sided-factura-type-1"
               
-              >
+              > */}
               <Form.Item
                 name={fieldList ? [fieldList.name, "singleSidedType"] : "singleSidedType"}
+                label={t("Kontragent turi")}
               >
                 <Select bordered={false} size="large">
                   <Option value={1}>На физ. лицо</Option>
@@ -156,8 +158,8 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                 </Select>
 
               </Form.Item>
-              <span className="custom-input-label-1">{t("Kontragent turi")}</span>
-            </Form.Item>
+              {/* <span className="custom-input-label-1"></span> */}
+            {/* </Form.Item> */}
           </div>
           : null
       }
@@ -165,12 +167,12 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
       {
         !isFacturaSingleSided ?
           <div>
-            { docType=="contract" ? null : <h3>{t("Hamkor korxonasi")}</h3> }
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item
                 rules={[{ required: true }]}
                 key="buyer-name-1-BuyerName"
                 name={fieldList ? [fieldList.name,"buyerName"] : "buyerName"}
+              label={t("Hamkor korxonasi")}
               >
                 <Input
                   onChange={val=>{
@@ -181,16 +183,17 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                   size="large"
                   placeholder={t("Nomi")} />
               </Form.Item>
-              <span className="custom-input-label-1">{t("Nomi")}</span>
-            </Form.Item>
+              {/* <span className="custom-input-label-1"></span> */}
+            {/* </Form.Item> */}
             {
               docType !== "act" ?
                 <Fragment>
                   {
                     docType === "contract" || docType === "empowerment"
                       ? null
-                      : <Form.Item>
-                        <Form.Item
+                      // : <Form.Item>
+                        :<Form.Item
+                        label={t("QQS tolovchi registratsiya raqami")}
                           key="seler-account-vatreg"
                           name={fieldList ? [fieldList.name, "buyerVatRegCode"] : "buyerVatRegCode"}
                         >
@@ -199,32 +202,33 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                             placeholder={t("QQS tolovchi registratsiya raqami")}
                           />
                         </Form.Item>
-                        <span className="custom-input-label-1">{t("QQS tolovchi registratsiya raqami")}</span>
-                      </Form.Item>
+                        // <span className="custom-input-label-1"></span>
+                      // </Form.Item>
                   }
 
                   <Row justify="space-between">
                     <Col md={11} >
-                      <Form.Item>
+                      {/* <Form.Item> */}
                         <Form.Item
                           key="seler-account"
-
+                        label={t("Hisob raqami")}
                           name={fieldList ? [fieldList.name,"buyerAccount"] : "buyerAccount"}
                           >
                           <Input
                             size="large"
                             placeholder={t("Hisob raqami")} />
                         </Form.Item>
-                        <span className="custom-input-label-1">{t("Hisob raqami")}</span>
-                      </Form.Item>
+                        {/* <span className="custom-input-label-1"></span> */}
+                      {/* </Form.Item> */}
                     </Col>
 
                     <Col md={11}>
                       {
-                        docType === "contract"
-                          ? <Form.Item>
+                        docType === "contract"?
+                          // ? <Form.Item>
                           <Form.Item
                             key="seler-account"
+                            label={t("Telfon raqam")}
                             name={fieldList ? [fieldList.name,"buyerMobilePhone"] : "buyerMobilePhone"}
                           >
                             <Input
@@ -232,11 +236,13 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                               placeholder={t("Telfon raqam")}
                             />
                           </Form.Item>
-                          <span className="custom-input-label-1">{t("Telfon raqam")}</span>
-                        </Form.Item>
-                          : <Form.Item>
+                          
+                        // </Form.Item>
+                          // : <Form.Item>
+                          :
                             <Form.Item
                               key="seler-account"
+                              label={t("MFO")}
                               name={fieldList ? [fieldList.name,"buyerMfo"] : "buyerMfo"}
                             >
                               <Input
@@ -244,29 +250,29 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                                 placeholder={t("MFO")}
                               />
                             </Form.Item>
-                            <span className="custom-input-label-1">{t("MFO")}</span>
-                          </Form.Item>
+                          // </Form.Item>
                       }
                     </Col>
                   </Row>
 
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       rules={[{ required: true }]}
                       key="seler-account"
+                      label={t("Manzil")}
                       name={fieldList ? [fieldList.name,"buyerAddress"] : "buyerAddress"}
                     >
                       <Input
                         size="large"
                         placeholder={t("Manzil")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Manzil")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                     
                   {
                       docType==="contract"?
                       <Col md={24} >
-                      <Form.Item>
+                      {/* <Form.Item> */}
                         <Form.Item
                           key="seler-account"
                           name={fieldList ? [fieldList.name,"buyerBranch"] : "buyerBranch"}
@@ -280,24 +286,25 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                           </Select>
                         </Form.Item>
                         <span className="custom-input-label-1">{t("Filiali")}</span>
-                      </Form.Item>
+                      {/* </Form.Item> */}
                     </Col>
                     :null
                     }
 
                   <Row justify="space-between" align="stretch">
                     <Col md={11} >
-                      <Form.Item>
+                      {/* <Form.Item> */}
                         <Form.Item
                           key="seler-account"
                           name={fieldList ? [fieldList.name,"buyerDirector"] : "buyerDirector"}
+                        label={t("Direktor")}
                         >
                           <Input
                             size="large"
                             placeholder={t("Direktor")}  />
                         </Form.Item>
-                        <span className="custom-input-label-1">{t("Direktor")}</span>
-                      </Form.Item>
+                        {/* <span className="custom-input-label-1"></span> */}
+                      {/* </Form.Item> */}
                     </Col>
                     <Col md={11} >
                       {
@@ -311,17 +318,18 @@ const BuyerForm = ({ form, docType, remove, fieldList }) => {
                                 Olib tashlash
                                 </Button> 
                                 : null ) 
-                          : <Form.Item>
-                            <Form.Item
+                          // : <Form.Item>
+                            :<Form.Item
                               key="seler-account"
+                              label={t("Bosh hisobchi")}
                               name={fieldList ? [fieldList.name,"buyerAccountant"] : "buyerAccountant"}
                             >
                               <Input
                                 size="large"
                                 placeholder={t("Bosh hisobchi")} />
                             </Form.Item>
-                            <span className="custom-input-label-1">{t("Bosh hisobchi")}</span>
-                          </Form.Item>
+                            // <span className="custom-input-label-1"></span>
+                          // </Form.Item>
                       }
 
                     </Col>

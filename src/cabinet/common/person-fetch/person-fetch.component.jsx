@@ -41,27 +41,28 @@ const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form, tinCol, nameCol }
         <div>
             <Row justify="space-between">
                 <Col md={tinCol ?? 24}>
-                    <Form.Item>
+                    {/* <Form.Item> */}
                         <Form.Item
-
+                        label={tinLabel}
                             name={pTin}
                             key={`${pTin}-tin-name`}
                         >
-                            <Input size="large" onChange={handleChange} />
+                            <Input size="large" onChange={handleChange} placeholder={tinLabel}/>
                         </Form.Item>
-                        <span className="custom-input-label-1">{tinLabel}</span>
-                    </Form.Item>
+                        {/* <span className="custom-input-label-1"></span> */}
+                    {/* </Form.Item> */}
                 </Col>
                 <Col md={nameCol ?? 24}>
-                    <Form.Item>
+                    {/* <Form.Item> */}
                         <Form.Item
                             name={pName}
                             key={`${pName}-tin-name`}
+                        label={nameLabel}
                         >
-                            <Input size="large" />
+                            <Input size="large" placeholder={nameLabel}/>
                         </Form.Item>
-                        <span className="custom-input-label-1">{nameLabel}</span>
-                    </Form.Item>
+                        {/* <span className="custom-input-label-1"></span> */}
+                    {/* </Form.Item> */}
                 </Col>
             </Row>
         </div>
