@@ -31,6 +31,10 @@ import {empApi} from "../../../sevices/empService";
 import {generateId} from "../../../sevices/api";
 import {SignDoc} from "../../../utils/doc-sign";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import download from "../../../images/download.svg";
+import delete_icon from "../../../images/delete-icon.svg";
+import add_icon from "../../../images/add-icon.svg";
 
 
 const EmpowermentForm = ({ token, match, user, loadedKey })=> {
@@ -170,6 +174,18 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
      setGrid([...grid]);
   };
 
+  const [totalSumm, setTotalSumm] = useState(0);
+  useEffect(() => {
+    let total = 0;
+    grid.forEach((row, index) => {
+      if (index !== 0) {
+        if (parseFloat(row[row.length - 1].value) > 0) {
+          total += parseFloat(row[row.length - 1].value)
+        }
+      }
+    })
+    setTotalSumm(total);
+  }, [grid])
   const handleAddRow = ()=>{
     
     const sampleRow = [
@@ -268,12 +284,14 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
       setGrid([grid[0], ...collector])
     }
   }
-
+  const { t } = useTranslation()
   //#endregion
   
   return (
-    <div style={{padding: 15}}>
+    <div style={{padding: 32}}>
       <Form
+        requiredMark={false}
+        labelCol={{span: 24}}
         initialValues={initialData}
         form={form}
         name="factura"
@@ -281,77 +299,81 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
         scrollToFirstError
         validateMessages={validateMessages}
       >
-
+        <h1 style={{fontWeight: 'bold'}}>{t("Dokument yaratish:")}{t("Ishonchnoma")}</h1>
       <div className="factura-data-sheet-container">
-      <h3>Ishonchnoma</h3>
       
       <Row justify="space-between">
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-facutura-no"
+                label={t("Inshonchnoma raqami")}
                 name="empowermentNo">
                   <Input
                     size="large"
                     placeholder="Inshonchnoma raqami" />
               </Form.Item>
-                  <span className="custom-input-label-1">Inshonchnoma raqami</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             
             <Col md={11}>
               <div style={{display: 'flex', justifyContent: "space-between"}}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 key="dyna-form-item-inn-date"
                 name="empowermentDateOfIssue"
+                label={t("Berilgan sanasi")}
                 rules={[{required: true}]}>
                   <DatePicker                
                     size="large"
                     placeholder="Berilgan sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Berilgan sanasi</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
           
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 key="dyna-form-item-inn-date-expire"
                 name="empowermentDateOfExpire"
+                  label={t("Amal qilish sanasi")}
                 rules={[{required: true}]}>
                   <DatePicker                
                     size="large"
                     placeholder="Amal qilish sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Amal qilish sanasi</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
               </div>
             </Col>
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-item-contract-n0"
+                label={t("Shartnoma raqami")}
                 name="contractNo">
                   <Input
                     size="large"
                     placeholder="Shartnoma raqami" />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma raqami</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-item-contract-date"
+                label={t("Shartnoma sanasi")}
                 name="contractDate">
                   <DatePicker
                     size="large"
                     placeholder="Shartnoma sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma sanasi</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
           </Row>
       </div>
@@ -382,21 +404,26 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
                 data={{tin: user.tin}}
                 onChange={handleImportExecl}>
                 
-                  <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
+                <span style={{ cursor: 'pointer', marginRight: 10 }}>
+                  <img src={download} alt="download" style={{ marginRight: 9 }} />
+                  {t("Exceldan yuklash")}
+                </span>
                
               </Upload>
-              <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
-                <Button >
-                  Shablon yuklash
-                </Button>
+              <a style={{ color: '#303030', marginLeft: 28 }} target="_blank" href="../../../excels/empowerment_products.xlsx" download>
+                <span >
+                  <img src={download} alt="download" style={{ marginRight: 9 }} />
+                  {t("Shablonni yuklash")}
+                </span>
               </a>
+              
             </div>
-            <Button
+            {/* <Button
               type="primary"
               icon={fullView ? <FullscreenExitOutlined /> : <FullscreenOutlined />} 
               onClick={()=>toglleFullView(!fullView)}>
                 { fullView ? "Kichraytirish" : "Kengaytirish" }
-            </Button>
+            </Button> */}
         </div>
         
       <div style={{overflowX: 'auto'}} >
@@ -409,7 +436,24 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
           />
         </div>
       </div>
-      <Button 
+          <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between' }}>
+            <h3>{t("Total")}: {totalSumm}</h3>
+            <div>
+              <span
+                onClick={() => { if (grid.length > 1) { handleRemoveRow(grid.length - 1) } }}
+                style={{ color: '#2B63C0', fontSize: 16, cursor: 'pointer' }}>
+                <img src={delete_icon} alt="" style={{ marginRight: 10 }} />
+                {t("Oxirgi qatorni o'chirish")}
+              </span>
+              <span
+                onClick={handleAddRow}
+                style={{ color: '#2B63C0', fontSize: 16, cursor: 'pointer' }}>
+                <img src={add_icon} alt="" style={{ marginRight: 10, marginLeft: 34 }} />
+                {t("Qo'shish")}
+              </span>
+            </div>
+          </div>
+      {/* <Button 
         size="large" 
         style={{marginTop: 20, marginRight: 7, width: 220}} 
         type="primary" 
@@ -426,16 +470,17 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
           icon={["far", "trash-alt"]} />} 
-        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
+        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button> */}
       </div>
           
         <div className="factura-data-sheet-container">
 
           <Row justify="space-between">
           <Col md={7}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item 
               key="seler-account-tyin-inn"
+              label={t("STIR")}
               name="agentTin">
                 <Input
                   size="large"
@@ -443,121 +488,124 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
                   onChange={fetchAgent}
                   />
               </Form.Item>
-                <span className="custom-input-label-1">СТИР</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1">СТИР</span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={7} >
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item 
               key="agentFio-no"
+              label={t("FIO")}
               name="agentFio">
                 <Input
                   size="large"
                   placeholder="ФИШ" />
               </Form.Item>
-                <span className="custom-input-label-1">ФИШ</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1">ФИШ</span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={7}>
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item 
+                label={t("Mansab")}
               key="seler-account-empowerment-dateof-issue-agentJobTittle"
               name="agentJobTittle">
                 <Input
                   size="large"
                   placeholder="Мансаб" />
               </Form.Item>
-                <span className="custom-input-label-1">Мансаб</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             
             <Col md={7}>
           
-                <Form.Item>
+                {/* <Form.Item> */}
                   <Form.Item 
                 key="seler-account-agent-fioe"
+                label={t("Passport seriya va raqami")}
                 name="agentPassportNumber">
                   <Input
                     size="large"
                     placeholder="Паспорт серия ва рақами" />
                 </Form.Item>
-                  <span className="custom-input-label-1">Паспорт серия ва рақами</span>
-                </Form.Item>
+                  {/* <span className="custom-input-label-1">Паспорт серия ва рақами</span> */}
+                {/* </Form.Item> */}
             
             </Col>
 
             <Col md={7} >
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
               key="selenote-field"
+              label={t("Kim tomonidan berilgan")}
               name="agentPassportIssuedBy">
                 <Input
                   size="large"
                   placeholder="Ким томонидан берилган" />
               </Form.Item>
-                <span className="custom-input-label-1">Ким томонидан берилган</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1">Ким томонидан берилган</span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={7} >
-              <Form.Item>
+              {/* <Form.Item> */}
                 <Form.Item
               key="selenote-field"
+              label={t("Passport berilgan sana")}
               name="agentPassportDateOfIssue">
                 <DatePicker
                   size="large"
                   placeholder="Паспорт берилган сана" />
               </Form.Item>
-                <span className="custom-input-label-1">Паспорт берилган сана</span>
-              </Form.Item>
+                {/* <span className="custom-input-label-1">Паспорт берилган сана</span> */}
+              {/* </Form.Item> */}
             </Col>
 
           </Row>
           </div>
-          <div className="factura-data-sheet-container">
-            <Row justify="space-around">
-              <Col >
-                <Button 
-                  loading={isLoading}
-                  primary
-                  htmlType="submit"
-                  className="factra-action-btns save-btn" 
-                  size="large"
-                  icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons"  />}>
-                    Сақлаб қолиш
-                  </Button>
-              </Col>
-              <Col>
-                <Button
-                    onClick={handleSign}
-                  className="factra-action-btns sing-btn" 
-                  size="large"
-                  icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
-                    Имзолаш
-                  </Button>
-              </Col>
-              <Col>
-                <Button 
-                  icon={<FontAwesomeIcon icon="ban" className="factura-action-btn-icons" />} 
-                  danger 
-                  className="factra-action-btns" 
-                  size="large">
-                    Бекор қилиш
-                  </Button>
-              </Col>
-            </Row>
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div >
+              <Button
+                icon={<FontAwesomeIcon icon="ban" className="factura-action-btn-icons" />}
+                danger
+                style={{ marginRight: 24 }}
+                className="custom-ant-primary-btn cancel-btn"
+              >
+                {t("Bekor qilish")}
+              </Button>
+              <Button
+                loading={isLoading}
+                primary
+                style={{ marginRight: 24 }}
+                htmlType="submit"
+                className="custom-ant-primary-btn save-btn"//"factra-action-btns save-btn"
+                icon={<FontAwesomeIcon icon={["far", "check-circle"]} className="factura-action-btn-icons" />}>
+                {t("Hujjatni korish")}
+              </Button>
+            </div>
+            <div>
+
+              <Button
+                loading={isLoading}
+                primary
+                style={{ marginRight: 24 }}
+                htmlType="submit"
+                className="custom-ant-primary-btn save-btn"//"factra-action-btns save-btn"
+                icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons" />}>
+                {t("Saqlash")}
+              </Button>
+              <Button
+                loading={isLoading}
+                className="custom-ant-primary-btn sign-btn"
+                onClick={handleSign}
+                icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
+                {t("Imzolash")}
+              </Button>
+            </div>
           </div>
-          <Form.Item
-            name="empowermentId"
-            key="empowermemt-id"
-          >
-            <Input type="hidden" />
-          </Form.Item>
-          <Form.Item
-            name="empowermentProductId"
-            key="empowermemt-product-id"
-          >
-            <Input type="hidden" />
-          </Form.Item>
+        </div>
+          
       </Form>
     </div>
   );
