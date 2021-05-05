@@ -25,6 +25,7 @@ import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { useTranslation } from 'react-i18next';
 import {DateFormat} from "../../utils/DateFormat";
+import eye_icon from "../../images/eye.svg";
 
 const { Option } = Select;
 
@@ -475,53 +476,65 @@ const DynaGrid = ({
             :
           
           <div className="sub-filter-area">
-            <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
+            <div style={{display: 'flex', alignItems: 'center', marginBottom: 15}}>
+                  <div style={{ fontSize: 22, fontWeight: 700, marginRight: 24 }}>{t("Filter")}
+                  </div>
+                  <div style={{display: "flex", alignItems: "center"}}>
+                    <img src={eye_icon} alt="eye icon" style={{ width: 20, height: 14, marginRight: 10 }} />
+                    <span style={{ color: "#2B63C0", fontSize: 14}}>
+                      {t("Filterni yashirish")}
+                    </span>
+                  </div>
+            </div>
+            
             <Form
+              labelCol={{span: 24}}
               onFinish={handleFilter}
               name="doc-filter"
             >
-              <Row justify="space-between">
+              <Row justify="space-between" align="bottom">
                
                 <Col span={4}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-1"
+                          label={t("Hujjat raqami")}
                       name="AllDocumentsSearch[doc_no]">
                       <Input
                         size="large"
                         placeholder={t("Hujjat raqami")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Hujjat raqami")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={4}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-1"
+                          label={t("Hujjat turi")}
                       name="AllDocumentsSearch[status]">
                       <Select
                         size="large"
-                        placeholder={t("Holati")} 
+                        placeholder={t("Hujjat turi")} 
                         bordered={false}
                         allowClear
                         options={[
-                          { label: t("Saqlangan"), value: 1},
-                          { label: t("Imzo kutilmoqda"), value: 2 },
-                          { label: t("Jo'natilgan"), value: 3 },
-                          { label: t("Bekor qilingan"), value: 4 },
-                          { label: t("Qaytarib yuborilgan"), value: 5 },
-                          { label: t("Qabul qilingan"), value: 6 },
-                          { label: t("Muvaffaqiyatli"), value: 7 },
+                          { label: t("Faktura"), value: 1},
+                          { label: t("Akt"), value: 2 },
+                          { label: t("Shartnoma"), value: 3 },
+                          { label: t("Ishonchnoma"), value: 4 },
+                          { label: t("TTY"), value: 5 },
                         ]}
                         />
                         
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Holati")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={4}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
+                        label={t("Kontragent")}
                       key="dyna-form-facutura-no-old-4"
                       name="AllDocumentsSearch[contragent_name]">
                       <Input
@@ -529,13 +542,14 @@ const DynaGrid = ({
                         size="large"
                         placeholder={t("Kontragent")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Kontragent")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={3}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                         key="dyna-form-facutura-no-old-5"
+                        label={t("Dan")}
                         name="begin_date">
                       <DatePicker
                           id={'begin_date'}
@@ -546,13 +560,14 @@ const DynaGrid = ({
                           size="large"
                           placeholder={t("Dan")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Dan")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={3}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-6"
+                        label={t("Gacha")}
                       name="end_date">
                       <DatePicker
                           id={'end_date'}
@@ -563,8 +578,8 @@ const DynaGrid = ({
                         size="large"
                         placeholder={t("Gacha")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Gacha")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={2}>
                   <Form.Item>
