@@ -16,6 +16,7 @@ import pending_icon from "../../images/pending-icon.svg";
 import signed_icon from "../../images/signed-icon.svg";
 import cancelled_icon from "../../images/cancelled-icon.svg";
 import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
+import HomeNewsCard from '../../components/home-news-card/HomeNewsCard';
 
 const CabinetHome = ({ cabinetData }) => {
 
@@ -149,7 +150,37 @@ const CabinetHome = ({ cabinetData }) => {
                     }
                     
                 </Row>
+
+                <HomeNewsCard />
+
                 <DynaGrid
+                    tableAttachedTabs={[
+                        {
+                            title: t("Bacha hujjatlar"),
+                            color: ""
+                        },
+                        {
+                            title: t("Faktura"),
+                            color: "#FE346E"
+                        },
+                        {
+                            title: t("Kontrakt"),
+                            color: "#0FBE7B"
+                        },
+                        {
+                            title: t("Ishonchnoma"),
+                            color: "#FF0000"
+                        },
+                        {
+                            title: t("TTY"),
+                            color: "yellow"
+                        },
+                        {
+                            title: t("Akt"),
+                            color: "purple"
+                        }
+                    ]}
+                    hideFilter
                     title={TabList[activeTab]}
                     config={dyna_config}
                 />

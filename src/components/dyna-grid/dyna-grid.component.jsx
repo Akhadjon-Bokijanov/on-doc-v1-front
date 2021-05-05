@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select } from 'antd';
+import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select, Badge } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -31,7 +31,8 @@ const { Option } = Select;
 
 
 const DynaGrid = ({
-  
+  tableAttachedTabs,      //Attached tabs to the table       
+  hideFilter,             //to hide filters of griid
   reload,
   loading,                //loading state of table
   currentUser,            //Provided by the comonent
@@ -461,10 +462,18 @@ const DynaGrid = ({
       return current && current < moment(min, "YYYY-MM-DD");
   }
 
+  const [activTabIndex, setActiveTabIndex] = useState(0);
+  const handleAttachedTabClick = index=>{
+    setActiveTabIndex(index);
+  }
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
 
         <div className="dyna-grid-doc-filter-area">
+          {
+            hideFilter ? null
+            :
+          
           <div className="sub-filter-area">
             <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
             <Form
@@ -571,9 +580,10 @@ const DynaGrid = ({
               </Row>
             </Form>
           </div>
+          }
         </div>
 
-
+{/* 
       <div 
         style={{marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
         <Button 
@@ -585,9 +595,29 @@ const DynaGrid = ({
         <div>
           <h3>{title}</h3>
         </div>
-      </div>
+      </div> */}
 
       
+      {
+        Array.isArray(tableAttachedTabs)&&tableAttachedTabs?.length>0?
+            <div style={{
+              marginTop: 24,
+              //height: 33,
+              display: 'flex'
+              //backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            }}
+              
+            >
+              {tableAttachedTabs.map((item, index) =>{
+                return <div 
+                  onClick={()=>handleAttachedTabClick(index)} 
+                  className={`table-attached-tab ${index===0?' first-item ':''} ${index===tableAttachedTabs.length-1?' last-item ':''} ${activTabIndex===index? 'att-active':''}`}>
+                    <Badge color={item.color} />  {item.title}
+                </div>
+              })}
+            </div>
+            :null
+      }
       <Table
         rowSelection={{
           selectedRowKeys,
