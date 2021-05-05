@@ -9,14 +9,13 @@ const ProfileComponent = ({ match, location })=>{
     const { t } = useTranslation()
 
 
-    return <div style={{ margin: 15 }}>
+    return <div style={{margin: 15}}>
         <h3>{t("Sozlamalar")}</h3>
-        <ProfileTabs />        
-    <div className="factura-data-sheet-container" >
-        <div style={{ paddingTop: 15 }}>
-                <Route match={`${match.path}`} component={ProfileTabsRouter} />
-            
-        </div>
+        <ProfileTabs/>
+        <div className="factura-data-sheet-container">
+            <div style={{paddingTop: 15}}>
+                <Route match={`${match.path}`} component={ProfileTabsRouter}/>
+            </div>
         {/* <Tabs onChange={handleChange} type="card">
             <TabPane tab={t("Kompaniya ma'lumotlari")} key="1">
                 <AccountForm />

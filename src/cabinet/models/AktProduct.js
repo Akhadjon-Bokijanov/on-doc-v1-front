@@ -14,7 +14,7 @@ export const ConvertDataToGrid = data=>{
     let res = [];
     if(Array.isArray(data)){
         data.forEach(row=>{
-            console.log(row)
+            //console.log(row)
             let item = 
             [
                 { value: row.OrdNo, readOnly: true},

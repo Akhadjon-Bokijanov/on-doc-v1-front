@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select } from 'antd';
+import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select, Badge } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,13 +24,15 @@ import RichTextParser from '../rich-text-parser/rich-text-parser.component';
 import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { useTranslation } from 'react-i18next';
+import {DateFormat} from "../../utils/DateFormat";
 
 const { Option } = Select;
 
 
 
 const DynaGrid = ({
-  
+  tableAttachedTabs,      //Attached tabs to the table       
+  hideFilter,             //to hide filters of griid
   reload,
   loading,                //loading state of table
   currentUser,            //Provided by the comonent
@@ -93,6 +95,7 @@ const DynaGrid = ({
   const [reRenderer, setRerenderer]=useState(reload??1);
   const [selectedRowKeys, setSelectedRowKeys] = useState();
   const [filterQuery, setFilterQuery]=useState("");
+  const [st,setSt]=useState(0);
 
   let searchInput = null;
   const { t } = useTranslation(); 
@@ -106,6 +109,8 @@ const DynaGrid = ({
 
       if (Array.isArray(res.data.data)) {
         setAjaxDataSource(res.data.data);
+        setSt(res.data.data.status);
+        console.log("data",res.data.data)
         setTotalDataCount(res.data.pages?.total)
       } else {
         console.log(res);
@@ -377,9 +382,7 @@ const DynaGrid = ({
           {actions.edit 
           ? <Tooltip placement="left" title="O'zgartirish">
               {console.log("primaryKeyValue",primaryKeyValue)}
-              <Link 
-              
-                to={`${editActionPath}/${record[primaryKeyValue]}`}>
+              <Link to={`${editActionPath}/${record[primaryKeyValue]}`}>
                   <EditOutlined style={{color: 'blue'}}/>
               </Link>
             </Tooltip>
@@ -405,7 +408,7 @@ const DynaGrid = ({
           ? <Tooltip placement="bottom" title="Ko'rish" >
                 <Link to={`${ replaceInViewPath 
                   ? viewActionPath.replace(`{${replaceInViewPath}}`, record[replaceInViewPath]) 
-                  : viewActionPath}/${record[primaryKeyValue??'id']}`}><EyeOutlined /></Link>
+                  : viewActionPath}/${record[primaryKeyValue??'id']}/${record['status']}`} ><EyeOutlined /></Link>
               </Tooltip>
           : null  
           }
@@ -441,11 +444,36 @@ const DynaGrid = ({
   
     setFilterQuery(query);
   }
+    const [date,setDate] = useState({begin_date:'',end_date:''});
 
+    const handlePicker=(e,id)=>{
+      const DATE={...date};
+      DATE[id]=DateFormat(e?._d);
+      setDate(DATE);
+    }
+
+  function disabledDateStarted(current) {
+      let max = new Date(date.end_date);
+      max.setDate(max.getDate()+1)
+      return current && current > moment(max, "YYYY-MM-DD");
+  }
+  function disabledDateEnded(current) {
+      let min = (date.begin_date);
+      return current && current < moment(min, "YYYY-MM-DD");
+  }
+
+  const [activTabIndex, setActiveTabIndex] = useState(0);
+  const handleAttachedTabClick = index=>{
+    setActiveTabIndex(index);
+  }
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
 
         <div className="dyna-grid-doc-filter-area">
+          {
+            hideFilter ? null
+            :
+          
           <div className="sub-filter-area">
             <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
             <Form
@@ -507,12 +535,16 @@ const DynaGrid = ({
                 <Col span={3}>
                   <Form.Item>
                     <Form.Item
-                      key="dyna-form-facutura-no-old-5"
-                      name="begin_date">
+                        key="dyna-form-facutura-no-old-5"
+                        name="begin_date">
                       <DatePicker
-                        rules={[{ required: true }]}
-                        size="large"
-                        placeholder={t("Dan")} />
+                          id={'begin_date'}
+                          onChange={e=>handlePicker(e,'begin_date')}
+                          disabledDate={disabledDateStarted}
+                          // maxDate={date['end_date']}
+                          rules={[{ required: true }]}
+                          size="large"
+                          placeholder={t("Dan")} />
                     </Form.Item>
                     <span className="custom-input-label-1">{t("Dan")}</span>
                   </Form.Item>
@@ -523,7 +555,11 @@ const DynaGrid = ({
                       key="dyna-form-facutura-no-old-6"
                       name="end_date">
                       <DatePicker
-                        rules={[{ required: true }]}
+                          id={'end_date'}
+                          // minDate={date['begin_date']}
+                          disabledDate={disabledDateEnded}
+                          onChange={e=>handlePicker(e,'end_date')}
+                          rules={[{ required: true }]}
                         size="large"
                         placeholder={t("Gacha")} />
                     </Form.Item>
@@ -544,9 +580,10 @@ const DynaGrid = ({
               </Row>
             </Form>
           </div>
+          }
         </div>
 
-
+{/* 
       <div 
         style={{marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
         <Button 
@@ -558,9 +595,29 @@ const DynaGrid = ({
         <div>
           <h3>{title}</h3>
         </div>
-      </div>
+      </div> */}
 
       
+      {
+        Array.isArray(tableAttachedTabs)&&tableAttachedTabs?.length>0?
+            <div style={{
+              marginTop: 24,
+              //height: 33,
+              display: 'flex'
+              //backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            }}
+              
+            >
+              {tableAttachedTabs.map((item, index) =>{
+                return <div 
+                  onClick={()=>handleAttachedTabClick(index)} 
+                  className={`table-attached-tab ${index===0?' first-item ':''} ${index===tableAttachedTabs.length-1?' last-item ':''} ${activTabIndex===index? 'att-active':''}`}>
+                    <Badge color={item.color} />  {item.title}
+                </div>
+              })}
+            </div>
+            :null
+      }
       <Table
         rowSelection={{
           selectedRowKeys,

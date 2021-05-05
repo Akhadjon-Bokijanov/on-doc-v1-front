@@ -20,7 +20,7 @@ const ActIndexRouter = ({ match, user }) => {
             />} />
             <Route exact path={`${match.path}/create`} component={ ActForm } />
             <Route exact path={`${match.path}/edit/:actId`} component={ ActForm } />
-            <Route exact path={`${match.path}/view/:actId`} component={ ActView } />
+            <Route exact path={`${match.path}/view/:actId/:status`} component={ ActView } />
             <Route exact path={`${match.path}/duplicate/:duplicateId`} component={ActForm}/>
         </div>
     )

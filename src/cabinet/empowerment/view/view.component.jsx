@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../../redux/user/user.selector';
 import axios from "axios";
-import {Button, Col, message, Row, Spin, Table} from "antd";
+import {Button, Col, Form, message, Row, Spin, Table} from "antd";
 import ReactToPrint from "react-to-print";
 import {useTranslation} from "react-i18next";
 import st from './view.module.scss'
@@ -19,27 +19,32 @@ import {formats} from "../../../utils/main";
 import {Link} from "react-router-dom";
 
 const QRCode = require('qrcode.react');
-const EmpView = ({ match, user }) => {
+const EmpView = ({ match, user,params }) => {
     // const {token} = useContext(UserContext);
     const {empId} = match.params;
     const { t } = useTranslation();
     const[emp,setEmp]=useState();
-    const[emps,setEmps]=useState();
+    const[products,setProducts]=useState();
+    const[headEmp,setHeadEmp]=useState();
     const printRef = useRef();
     const [loading, setLoading] = useState(true)
-
+    const {status}=match.params;
+    const [form]=Form.useForm();
     useEffect(()=>{
+        const value = form.getFieldsValue();
+        console.log('val',status);
         getEmpowerment();
     },[empId,user]);
+
     const getEmpowerment = () => {
         empApi.getEmp(user?.tin, empId)
             .then(res => {
-                console.log("res", res);
+                console.log("res", res.data.data[0]);
                 setEmp(res.data.data[0]);
-                // setEmps(ConvertEmpDataToForm(res?.data.data[0]))
-                setEmps({
+                setProducts(res.data.data[0].ProductList.Products);
+                setHeadEmp({
                     number:res.data.data[0].EmpowermentDoc.EmpowermentNo,
-                    contractDate:(res.data.data[0].ContractDoc.ContractDate),
+                    contractDate:res.data.data[0].ContractDoc.ContractDate,
                     sender:res.data.data[0].Seller.Name,
                     date:res.data.data[0].EmpowermentDoc.EmpowermentDateOfExpire
                 })
@@ -50,12 +55,12 @@ const EmpView = ({ match, user }) => {
     return (
         <>
             <Spin spinning={loading}>
-                <ViewHeader doc={'Empowerment'} data={emps}/>
+                <ViewHeader status={status} signDoc={'emp'} docTitle={'Empowerment'} data={headEmp} docId={empId} values={emp} products={products}/>
                 <div className="custom-section-wrapper">
                     <ReactToPrint
                         trigger={() => <Button>Chop etish</Button>}
                         content={() => printRef.current}
-                        documentTitle={`emp-${emp?.empId}`}
+                        documentTitle={`emp-${emp?.EmpowermentId}`}
                     />
                     <Button type="primary">{t("Jonatish")}</Button>
                     <Link to={`/cabinet/empowerment/duplicate/${emp?.EmpowermentId}`}>

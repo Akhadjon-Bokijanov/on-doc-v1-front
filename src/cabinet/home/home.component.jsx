@@ -11,6 +11,12 @@ import DynaGrid from '../../components/dyna-grid/dyna-grid.component';
 import { selectCabinetData } from '../../redux/user/user.selector';
 import './home.component.scss';
 import {useTranslation} from "react-i18next";
+import clock_icon from "../../images/clock-icon.svg";
+import pending_icon from "../../images/pending-icon.svg";
+import signed_icon from "../../images/signed-icon.svg";
+import cancelled_icon from "../../images/cancelled-icon.svg";
+import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
+import HomeNewsCard from '../../components/home-news-card/HomeNewsCard';
 
 const CabinetHome = ({ cabinetData }) => {
 
@@ -27,36 +33,36 @@ const CabinetHome = ({ cabinetData }) => {
 
     const list_of_docs = [
         {
-            title: t("Kiruvchi"),
+            title: t("Imzo kutilmoqda"),
             count: income,
-            icon: "cloud-download-alt",
-            color: "purple",
+            img: clock_icon,
+            color: "blue",
             footer: "Faktura yaratish",
-            create_url: "/cabinet/documents/waiting"
+            link: "/cabinet/documents/waiting"
         },
-        {
-            title: t("Chiquvchi"),
-            count: outcome,
-            icon: "cloud-upload-alt",
-            color: "green",
-            footer: "Shartnoma yaratish",
-            create_url: "/cabinet/documents/signed"
-        },
+        // {
+        //     title: t("Chiquvchi"),
+        //     count: pending_icon,
+        //     img: "cloud-upload-alt",
+        //     color: "orange",
+        //     footer: "Shartnoma yaratish",
+        //     link: "/cabinet/documents/signed"
+        // },
         {
             title: t("Rad etilgan"),
             count: rejected,
-            icon: "ban",
-            color: "pink",
+            img: signed_icon,
+            color: "green",
             footer: "Akt yaratish",
-            create_url: "/cabinet/documents/rejected"
+            link: "/cabinet/documents/rejected"
         },
         {
             title: t("Saqlangan"),
             count: saved,
-            icon: ["far", "bookmark"],
-            color: "orange",
+            img: cancelled_icon,
+            color: "pink",
             footer: "Ishonchnoma yaratish",
-            create_url: "/cabinet/documents/saved"
+            link: "/cabinet/documents/saved"
         },
     
     ]
@@ -138,13 +144,43 @@ const CabinetHome = ({ cabinetData }) => {
             <div className="cabinet-home-sub-container">
                 <Row gutter={[16, 16]}>
                     {
-                        list_of_docs.map((data, index)=><Col onClick={()=>setActiveTab(index)} md={6}>
-                            <AdminCard data={data} />
+                        list_of_docs.map((data, index)=><Col onClick={()=>setActiveTab(index)} md={6} >
+                            <HomeTabCard data={data} />
                         </Col>)
                     }
                     
                 </Row>
+
+                <HomeNewsCard />
+
                 <DynaGrid
+                    tableAttachedTabs={[
+                        {
+                            title: t("Bacha hujjatlar"),
+                            color: ""
+                        },
+                        {
+                            title: t("Faktura"),
+                            color: "#FE346E"
+                        },
+                        {
+                            title: t("Kontrakt"),
+                            color: "#0FBE7B"
+                        },
+                        {
+                            title: t("Ishonchnoma"),
+                            color: "#FF0000"
+                        },
+                        {
+                            title: t("TTY"),
+                            color: "yellow"
+                        },
+                        {
+                            title: t("Akt"),
+                            color: "purple"
+                        }
+                    ]}
+                    hideFilter
                     title={TabList[activeTab]}
                     config={dyna_config}
                 />

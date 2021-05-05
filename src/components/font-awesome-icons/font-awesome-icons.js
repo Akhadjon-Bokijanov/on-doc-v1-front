@@ -22,7 +22,8 @@ import {
     faArrowCircleLeft,
     faSyncAlt,
     faCog,
-    faSignOutAlt
+    faSignOutAlt,
+    faTools
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -41,6 +42,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
+    faTools,
     faBan,
     faHome,
     faNewspaper,
@@ -74,5 +76,6 @@ library.add(
     faArrowCircleLeft,
     faSyncAlt,
     faCog,
-    faSignOutAlt
+    faSignOutAlt,
+    faCheckCircle
 )

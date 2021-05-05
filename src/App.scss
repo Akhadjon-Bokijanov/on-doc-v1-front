@@ -6,7 +6,58 @@ body {
     margin: 0;
     padding: 0;
 }
+.ant-menu-submenu-arrow::before{
+    color: rgba(213, 208, 208, 0.64);
+    //padding-left: 100px;
+}
+.ant-menu-submenu-arrow::after{
+    color: rgba(213, 208, 208, 0.64);
+    //padding-left: 100px;
+}
+.ant-menu-vertical{
+    border-right: none!important;
+}
+.side_text{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+}
 
+
+@media (max-width: 1024px) {
+    .side_text{
+        font-size:12px!important;
+        line-height: 20px;
+    }
+}
+@media (max-width: 1366px) {
+    .side_text{
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+@media (min-width: 1650px) {
+    .side_text{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 22px;
+    }
+}
+@media (min-width: 1850px) {
+    .side_text{
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 23px;
+    }
+}
+@media (min-width: 2050px) {
+    .side_text{
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 25px;
+    }
+}
 /* a {
     color: #3a3939;
 } */
@@ -49,9 +100,9 @@ body {
 .ant-input-password-large,
 .ant-select-lg {
     border: 1px solid #dadce0 !important;
-    border-radius: 11px !important;
-    height: 50px;
-    //min-width: 100%;
+    border-radius: 8px !important;
+    height: 48px;
+    min-width: 100%;
 }
 // .ant-picker-large{
 //     max-width: 300px !important;
@@ -95,6 +146,11 @@ body {
     /*margin-bottom: 7px !important;*/
 }
 
+.ant-badge-status-dot{
+    width: 12px !important;
+    height: 12px !important;
+}
+
 .ant-radio {
     padding: 10px !important;
 }
@@ -135,13 +191,26 @@ body {
     margin-top: 5px;
 }
 
+.ant-form-item-label > label{
+    font-weight: bold;
+    font-size: 15px !important;
+
+
+}
+
+.ant-col-24.ant-form-item-label, .ant-col-xl-24.ant-form-item-label{
+    padding: 0 !important;
+}
+
 span.custom-input-label-1 {
-    font-size: 13px;
+    margin-top: 24px !important;
+    font-size: 16px;
+    font-weight: bold;
     padding: 0 0px;
     border-radius: 5px;
     /* background-color: #fff; */
     z-index: 99 !important;
-    position: absolute;
+    //position: absolute;
     bottom: 60px;
     /* left: 15px; */
 }
@@ -163,6 +232,24 @@ div.custom-section-wrapper{
     color: #fff;
     padding: 10px;
     border-radius: 8px;
+}
+
+.title{
+    margin: 0 4px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #303030;
+}
+.label{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 8px 0;
+    color: #333333;
+}
+.flexible{
+    display: flex;
 }
 
 .factura-home-list-tabs {

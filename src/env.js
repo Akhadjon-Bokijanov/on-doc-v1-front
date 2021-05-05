@@ -1,4 +1,5 @@
 //ENVIRONMENT VARIABLES
+// @Co%nD$a2Oems^+
 export const API_HOST = process.env.NODE_ENV === "development" ?
     "http://api.onlinefactura.uz/uz" :
     "http://api.onlinefactura.uz/uz";

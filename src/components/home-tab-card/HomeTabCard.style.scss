@@ -1,0 +1,67 @@
+.home-tab-card-container{
+    border-radius: 8px;
+    background-color: #fff;
+
+    .home-tab-sub-con{
+        padding: 16px;
+
+        .bottom-link{
+            background-color: #2B63C0;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 12px;
+            height: 30px;
+            width: 88px;
+            text-align: center;
+            padding-top: 6px;
+        }
+
+        .top-row-con{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 17px;
+
+            .home-card-img{
+                border-radius: 8px;
+                padding: 7px;
+                height: 30px;
+                width: 30px;
+                margin-right: 8px;
+
+                &.img-orange{
+                    background-color: lighten($color: #FFA41D, $amount: 50deg);
+                }
+
+                &.img-blue{
+                    background-color: lighten($color: #2B63C0, $amount: 50deg);
+                    
+                }
+                &.img-green{
+                    background-color: lighten($color: #0FBE7B, $amount: 50deg);
+                }
+                &.img-pink{
+                    background-color: #ffe6ed;//lighten($color: #FE346E, $amount: 100deg);
+                }
+            }
+
+            .text-title{
+                font-weight: 500;
+                font-size: 18;
+                color: #303030;
+            }
+            .color-blue{
+                color: #2B63C0;
+            }
+            .color-orange{
+                color: #FFA41D;
+            }
+            .color-green{
+                color: #0FBE7B;
+            }
+            .color-pink{
+                color: #FE346E;
+            }
+        }
+    }
+}

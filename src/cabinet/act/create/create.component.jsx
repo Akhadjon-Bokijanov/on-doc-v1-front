@@ -10,7 +10,7 @@ import axios from 'axios';
 import BuyerForm from '../../common/buyer-form.component';
 import SellerForm from '../../common/seller-form.component';
 import { connect } from 'react-redux';
-import { selectCurrentUser, selectToken } from '../../../redux/user/user.selector';
+import { selectCurrentUser, selectLoadedKey, selectToken } from '../../../redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 import moment from 'moment';
 import { 
@@ -22,14 +22,20 @@ import TextArea from 'antd/lib/input/TextArea';
 import MeasureViewer from '../../../components/data-sheet-custom-measure-selector/measure-viewer';
 import { ConvertDataToGrid, ConvertGridToData } from '../../models/AktProduct';
 import { ConvertDataToForm, GetActDataToSign } from '../../models/Akt';
+import { SignDoc } from '../../../utils/doc-sign';
+import { useTranslation } from 'react-i18next';
+import download from "../../../images/download.svg";
+import delete_icon from "../../../images/delete-icon.svg";
+import add_icon from "../../../images/add-icon.svg";
 
 export const setActClient = (seller, client) => {
   return `Биз қуйида имзо чекувчилар, "${seller ?? "___________"}" бир томондан,бундан кейин Пудратчи деб номланади ва "${client ?? '__________'}" бошқа томондан, бундан кейин Буюртмачи деб номланади, иш Буюртмачининг талабларига мувофиқ тўлиқ бажарилганлиги тўғрисида акт туздик.`;
 
 }
 
-const ActForm = ({ token, match, user })=> {
+const ActForm = ({ token, match, user, loadedKey })=> {
 
+  const { t } = useTranslation()
   const [form] = Form.useForm();
   const { actId, duplicateId } = match.params;
   const [initialData, setInitialData] = useState({actText: setActClient(user.name)})
@@ -93,7 +99,7 @@ const ActForm = ({ token, match, user })=> {
   };
 
   const [fullView, toglleFullView] = useState(false)
-
+  const [totalSumm, setTotalSumm] = useState(0);
 
   const [grid, setGrid] = useState([
     FIRST_ACT_GRID_ROW,
@@ -107,6 +113,17 @@ const ActForm = ({ token, match, user })=> {
     ] 
   ])
 
+  useEffect(() => {
+    let total = 0;
+    grid.forEach((row, index) => {
+      if (index !== 0) {
+        if (parseFloat(row[row.length - 1].value) > 0) {
+          total += parseFloat(row[row.length - 1].value)
+        }
+      }
+    })
+    setTotalSumm(total);
+  }, [grid])
 
 
   //#region data-sheet methods
@@ -153,6 +170,20 @@ const ActForm = ({ token, match, user })=> {
 //#endregion
   
   //#region form methods
+
+  const handleSign = ()=>{
+    let values = form.getFieldsValue();
+    try{
+      SignDoc(
+        loadedKey.id, 
+        GetActDataToSign(values, ConvertGridToData(grid), newActId),
+        'act',
+        user.tin
+        )
+    }catch(ex){
+      console.log(ex)
+    }
+  }
 
   const handleSubmit = (values)=>{
     setIsloading(true);
@@ -201,31 +232,40 @@ const ActForm = ({ token, match, user })=> {
   }
 
   const handleImportExecl =(value)=>{
-    console.log("me fired")
-
-    if(value.file.status=="done"){
+    if(value.file.status==="done"){
       
       const { response } = value.file
+      let elements=[];
+      console.log(response.data)
+      if(Array.isArray(response.data)){
+        response.data.forEach((item, index)=>{
+          let i = [
+            { readOnly: true, value: index+1 },                 //0 ordNo
+            { value: item?.ProductName },                                          //1 product name
+            { value: item?.ProductMeasureId, dataEditor: SelectMeasureEditor, valueViewer: MeasureViewer },        //2 measure
+            { value: item?.ProductCount },                                          //3 amount
+            { value: item?.ProductSumma },                                         //4 price
+            { value: item?.ProductDeliverySum, readOnly: true, }                           //5 total
+          ]
+          elements.push(i);
+        })
+      }
 
-      response.excel.forEach((element, index)=>{
-        element[0].value = index + 1;
-        element[0].readOnly = true;
-        element[2].dataEditor = SelectEditor;
-        element[4].dataEditor = SelectMeasureEditor;
-      })
-
-      setGrid([grid[0], ...response.excel])
-      console.log(response)
+      setGrid([grid[0], ...elements])
+    
     }
   }
 
   //#endregion
   
   return (
-    <div style={{padding: 15}}>
+    <div style={{padding: 32}}>
+      <h1 style={{ fontWeight: 'bold' }}>{t("Dokument yaratish:")}{t("Akt")}</h1>
       <Form
+        requiredMark={false}
         initialValues={initialData}
         form={form}
+        labelCol={{span: 24}}
         name="factura"
         onFinish = {handleSubmit}
         scrollToFirstError
@@ -233,60 +273,63 @@ const ActForm = ({ token, match, user })=> {
       >
 
       <div className="factura-data-sheet-container">
-      <h3>Akt yaratish</h3>
        
       <Row justify="space-between">
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
+                label={t("Akt raqami")}
                 key="dyna-form-facutura-no"
                 name="actNo">
                   <Input
                     size="large"
                     placeholder="Akt raqami" />
               </Form.Item>
-                  <span className="custom-input-label-1">Akt raqami</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 key="dyna-form-item-inn-date"
                 name="actDate"
+                label={t("Akt sanasi")}
                 rules={[{required: true}]}>
                   <DatePicker                
                     size="large"
                     placeholder="Akt sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Akt sanasi</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-item-contract-n0"
+                label={t("Shartnoma raqami")}
                 name="contractNo">
                   <Input
                     size="large"
                     placeholder="Shartnoma raqami" />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma raqami</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
             <Col md={11}>
-            <Form.Item>
+            {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
                 key="dyna-form-item-contract-date"
+                label={t("Shartnoma sanasi")}
                 name="contractDate">
                   <DatePicker
                     size="large"
                     placeholder="Shartnoma sanasi" />
               </Form.Item>
-                  <span className="custom-input-label-1">Shartnoma sanasi</span>
-              </Form.Item>
+                  {/* <span className="custom-input-label-1"></span> */}
+              {/* </Form.Item> */}
             </Col>
           </Row>
       </div>
@@ -305,7 +348,7 @@ const ActForm = ({ token, match, user })=> {
       </div>
       
       <div className="factura-data-sheet-container">
-            <h3>Akt mazmuni</h3>
+          <h3>{t("Akt mazmuni") }</h3>
               <Form.Item name="actText">
                 <TextArea size="large" rows={4} />
               </Form.Item>
@@ -319,25 +362,32 @@ const ActForm = ({ token, match, user })=> {
                   Authorization: "Bearer " + token
                 }}
                 multiple={false}
-                action="http://127.0.0.1:8000/api/v1/factura-products/read-excel"
+                action={`http://api.onlinefactura.uz/uz/act/import-excel`}
                 accept=".xlsx, .xls" 
+                name="Files[file]"
+                data={{ tin: user.tin }}
                 onChange={handleImportExecl}>
                 
-                  <Button style={{marginRight: 10}}>Exceldan yuklash</Button>
+                <span style={{ cursor: 'pointer', marginRight: 10 }}>
+                  <img src={download} alt="download" style={{ marginRight: 9 }} />
+                  {t("Exceldan yuklash")}
+                </span>
                
               </Upload>
-              <a target="_blank" href="../../../excels/on_doc_factura_products.xlsx" download>
-                <Button >
-                  Shablon yuklash
-                </Button>
+              <a style={{ color: '#303030', marginLeft: 28 }} target="_blank" href="../../../excels/akt_products.xlsx" download>
+                <span >
+                  <img src={download} alt="download" style={{ marginRight: 9 }} />
+                  {t("Shablonni yuklash")}
+                </span>
               </a>
+              
             </div>
-            <Button
+            {/* <Button
               type="primary"
               icon={fullView ? <FullscreenExitOutlined /> : <FullscreenOutlined />} 
               onClick={()=>toglleFullView(!fullView)}>
                 { fullView ? "Kichraytirish" : "Kengaytirish" }
-            </Button>
+            </Button> */}
         </div>
         
       <div style={{overflowX: 'auto'}} >
@@ -350,16 +400,33 @@ const ActForm = ({ token, match, user })=> {
           />
         </div>
       </div>
-      <Button 
+          <div style={{ marginTop: 16, display: 'flex', justifyContent: 'space-between' }}>
+            <h3>{t("Total")}: {totalSumm}</h3>
+            <div>
+              <span
+                onClick={() => { if (grid.length > 1) { handleRemoveRow(grid.length - 1) } }}
+                style={{ color: '#2B63C0', fontSize: 16, cursor: 'pointer' }}>
+                <img src={delete_icon} alt="" style={{ marginRight: 10 }} />
+                {t("Oxirgi qatorni o'chirish")}
+              </span>
+              <span
+                onClick={handleAddRow}
+                style={{ color: '#2B63C0', fontSize: 16, cursor: 'pointer' }}>
+                <img src={add_icon} alt="" style={{ marginRight: 10, marginLeft: 34 }} />
+                {t("Qo'shish")}
+              </span>
+            </div>
+          </div>
+      {/* <Button 
         size="large" 
         style={{marginTop: 20, marginRight: 7, width: 220}} 
         type="primary" 
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
           icon={["far", "plus-square"]} />} 
-        onClick={  handleAddRow }>Qo'shish</Button>
+        onClick={  handleAddRow }>Qo'shish</Button> */}
       
-      <Button 
+      {/* <Button 
         size="large" 
         style={{marginTop: 20, width: 220 }} 
         danger
@@ -367,41 +434,50 @@ const ActForm = ({ token, match, user })=> {
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
           icon={["far", "trash-alt"]} />} 
-        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button>
+        onClick={ ()=>{ if(grid.length>1){ handleRemoveRow(grid.length-1) }}  }>Oxirgi qatorni o'chirish</Button> */}
       </div>
-          
-          <div className="factura-data-sheet-container">
-            <Row justify="space-around">
-              <Col >
-                <Button 
-                  loading={isLoading}
-                  primary
-                  htmlType="submit"
-                  className="factra-action-btns save-btn" 
-                  size="large"
-                  icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons"  />}>
-                    Сақлаб қолиш
-                  </Button>
-              </Col>
-              <Col>
-                <Button 
-                  className="factra-action-btns sing-btn" 
-                  size="large"
-                  icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
-                    Имзолаш
-                  </Button>
-              </Col>
-              <Col>
-                <Button 
-                  icon={<FontAwesomeIcon icon="ban" className="factura-action-btn-icons" />} 
-                  danger 
-                  className="factra-action-btns" 
-                  size="large">
-                    Бекор қилиш
-                  </Button>
-              </Col>
-            </Row>
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div >
+              <Button
+                icon={<FontAwesomeIcon icon="ban" className="factura-action-btn-icons" />}
+                danger
+                style={{ marginRight: 24 }}
+                className="custom-ant-primary-btn cancel-btn"
+              >
+                {t("Bekor qilish")}
+              </Button>
+              <Button
+                loading={isLoading}
+                primary
+                style={{ marginRight: 24 }}
+                htmlType="submit"
+                className="custom-ant-primary-btn save-btn"//"factra-action-btns save-btn"
+                icon={<FontAwesomeIcon icon={["far", "check-circle"]} className="factura-action-btn-icons" />}>
+                {t("Hujjatni korish")}
+              </Button>
+            </div>
+            <div>
+
+              <Button
+                loading={isLoading}
+                primary
+                style={{ marginRight: 24 }}
+                htmlType="submit"
+                className="custom-ant-primary-btn save-btn"//"factra-action-btns save-btn"
+                icon={<FontAwesomeIcon icon="save" className="factura-action-btn-icons" />}>
+                {t("Saqlash")}
+              </Button>
+              <Button
+                loading={isLoading}
+                className="custom-ant-primary-btn sign-btn"
+                onClick={handleSign}
+                icon={<FontAwesomeIcon icon="signature" className="factura-action-btn-icons" />}>
+                {t("Imzolash")}
+              </Button>
+            </div>
           </div>
+        </div>
 
       </Form>
     </div>
@@ -410,7 +486,9 @@ const ActForm = ({ token, match, user })=> {
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
-  user: selectCurrentUser
+  user: selectCurrentUser,
+  loadedKey: selectLoadedKey
 })
+
 
 export default connect(mapStateToProps)(ActForm);

@@ -12,6 +12,7 @@ import moment from 'moment';
 import { measures } from '../../../components/data-sheet-custom-measure-selector/custom-selector.component';
 import { EIMZOClient } from '../../../utils/e-imzo';
 import { Link } from 'react-router-dom';
+import ViewHeader from "../../../components/viewHeader";
 
 var QRCode = require('qrcode.react');
 
@@ -19,8 +20,10 @@ const FacturaView = ({ match, user, loadedKey }) => {
 
     const printRef = useRef();
     const [factura, setFactura] = useState();
-    const [loading, setLoading] = useState(true)
-    const {facturaId} = match.params;
+    const [headFactura,setHeadFactura] = useState();
+    const [loading, setLoading] = useState(true);
+    const [products,setProducts] = useState();
+    const {facturaId,status} = match.params;
     const { t } = useTranslation();
 
     useEffect(()=>{
@@ -31,6 +34,13 @@ const FacturaView = ({ match, user, loadedKey }) => {
         }).then(res => {
             if(res.data.success){
                 setFactura(res.data.data[0])
+                setProducts(res.data.data[0].ProductList.Products)
+                setHeadFactura({
+                    number:res.data.data[0].FacturaDoc.FacturaNo,
+                    contractDate:res.data.data[0].ContractDoc.ContractDate,
+                    sender:res.data.data[0].Seller.Name,
+                    date:res.data.data[0].FacturaDoc.FacturaDate
+                })
                 console.log(res.data.data[0])
             }
             setLoading(false)
@@ -67,8 +77,8 @@ const FacturaView = ({ match, user, loadedKey }) => {
 
     return (
         <Spin spinning={loading}>
-        <div className="custom-section-wrapper">
-
+            <ViewHeader status={status} signDoc={'factura'} docTitle={'Factura'} data={headFactura} values={factura} docId={facturaId} products={products}/>
+            <div className="custom-section-wrapper">
                 <ReactToPrint
                     trigger={() => <Button>{t("Chop etish")}</Button>}
                     content={() => printRef.current}
