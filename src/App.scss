@@ -22,6 +22,14 @@ body {
     font-size: 16px;
     line-height: 20px;
 }
+
+
+@media (max-width: 1024px) {
+    .side_text{
+        font-size:12px!important;
+        line-height: 20px;
+    }
+}
 @media (max-width: 1366px) {
     .side_text{
         font-weight: 500;

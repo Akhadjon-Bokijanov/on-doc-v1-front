@@ -26,11 +26,9 @@ import settings from '../../assests/sidebar/settings.png'
 import up from '../../assests/sidebar/up.png'
 import consultant from '../../assests/sidebar/consultant.png'
 
-import { Menu, Dropdown, Icon } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu} from 'antd';
 
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 const { Countdown } = Statistic;
 
 const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
@@ -140,7 +138,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     <div>
                         <hr className={"line"}/>
                     </div>
-                    <Link to={'/cabinet/add'}>
+                    {/*<Link to={'/cabinet/add'}>*/}
                         <div className={`flexible`}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
                                 <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-5px'}} className={'side_icon'} alt=""/><span>Add</span></span>}>
@@ -157,7 +155,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                             </Menu>
                         </div>
 
-                    </Link>
+                    {/*</Link>*/}
                     <Link to="/cabinet">
                         <div className={`action-bloks ${active.cabinet ? 'active' : ''} side_text`}>
                             <img src={home} className={'side_icon'} alt=""/> {t("Bosh sahifa")}
@@ -227,8 +225,8 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     <div style={{}}>
                         <div className=" bottom1">
-                            <button className={`consultant`} style={{cursor:'pointer'}}>
-                                <img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}
+                            <button className={`consultant`}>
+                                <h3 className={'side_text'} style={{color:'#fff',marginBottom:'0'}}><img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}</h3>
                             </button>
                         </div>
                         <Popconfirm
