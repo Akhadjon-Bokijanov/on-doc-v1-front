@@ -26,11 +26,9 @@ import settings from '../../assests/sidebar/settings.png'
 import up from '../../assests/sidebar/up.png'
 import consultant from '../../assests/sidebar/consultant.png'
 
-import { Menu, Dropdown, Icon } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu} from 'antd';
 
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 const { Countdown } = Statistic;
 
 const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {

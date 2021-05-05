@@ -2,7 +2,7 @@ $sidebarColor:#0C2556;
 .cabiner-right-sidebar-cmain-container {
     height: 100vh !important;
     //height: 80vh !important;
-    margin-left: -27px;
+    margin-left: -26px;
     position: sticky;
     //margin-left: 0;
     //background: inherit;
@@ -34,6 +34,78 @@ $sidebarColor:#0C2556;
                 font-weight: 500;
                 transition: all ease-in-out 0.0001s 0.0001s;
                 //margin-left: -25px;
+                @media (min-width: 1024px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 7px;
+                        height: 38px;
+                        //font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 1200px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 8px;
+                        height: 43px;
+                        font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 1367px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 12px;
+                        height: 50px;
+                        font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 1650px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 14px;
+                        height: 63px;
+                        font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 1850px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 16px;
+                        height: 75px;
+                        font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 2050px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 20px;
+                        height: 90px;
+                        font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 2300px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 30px;
+                        height: 105px;
+                        font-weight: 500;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
+                @media (min-width: 2530px) {
+                    &{
+                        color: #FFFFFF;
+                        padding: 50px;
+                        height: 127px;
+                        font-weight: 600;
+                        transition: all ease-in-out 0.0001s 0.0001s;
+                    }
+                }
                 &.active {
                     background: rgba(255, 255, 255, 0.1);
                      margin-right: -4px;
@@ -60,33 +132,7 @@ $sidebarColor:#0C2556;
         }
     }
 }
-.bottom1{
-    height: 48px;
-    position: absolute;
-    width: 100%;
-    bottom: 48px;
-    list-style-type: none;
-    //padding-bottom:5.5em;
-}
-.bottom2{
-    height: 48px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    list-style-type: none;
-    //padding-bottom:5em;
-}
-.side_icon{
-    margin-right: 14px;
-    height: 20px;
-    width: 20px;
-}
-.side_icon_updown{
-    //margin-right: 14px;
-    height: 20px;
-    margin-right: 20px;
-    //width: 20px;
-}
+
 .menu_item{
     align-items: center;
     font-weight: 500;
@@ -117,4 +163,95 @@ $sidebarColor:#0C2556;
     width: 100%;
     height:48px;
     color:#fff;
+}
+.bottom1{
+    height: 48px;
+    position: absolute;
+    width: 100%;
+    bottom: 48px;
+}
+.bottom2{
+    height: 48px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+.side_icon{
+    margin-right: 14px;
+    height: 20px;
+    width: 20px;
+}
+.side_icon_updown{
+    //margin-right: 14px;
+    height: 20px;
+    margin-right: 20px;
+    //width: 20px;
+}
+@media only screen and (min-width: 1024px) {
+    .side_icon{
+        margin-right: 12px;
+        height: 17px;
+        width: 16px;
+    }
+    .side_icon_updown{
+        //margin-right: 14px;
+        height: 19px;
+        margin-right: 17px;
+        //width: 20px;
+    }
+    .bottom1{
+        height: 40px;
+        position: absolute;
+        width: 100%;
+        bottom: 48px;
+        margin-left:4%;
+    }
+    .bottom2{
+        height: 40px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+}
+@media only screen and (min-width: 1367px) {
+    .side_icon{
+        margin-right: 14px;
+        height: 23px;
+        width: 23px;
+    }
+    .side_icon_updown{
+        //margin-right: 14px;
+        height: 23px;
+        margin-right: 20px;
+        //width: 20px;
+    }
+    .bottom1{
+        height: 62px;
+        position: absolute;
+        width: 100%;
+        bottom: 48px;
+        margin-left:4%;
+    }
+    .bottom2{
+        height: 62px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+}
+@media only screen and (min-width: 1650px) {
+    .bottom1{
+        height: 80px;
+        position: absolute;
+        width: 100%;
+        bottom: 48px;
+        margin-left:4%;
+        margin-bottom: 10px;
+    }
+    .bottom2{
+        height: 80px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
 }
