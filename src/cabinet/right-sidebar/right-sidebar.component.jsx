@@ -225,7 +225,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     <div style={{}}>
                         <div className=" bottom1">
-                            <button className={`consultant`} style={{cursor:'pointer',width:'66%',height:'80%'}}>
+                            <button className={`consultant`}>
                                 <h3 className={'side_text'} style={{color:'#fff',marginBottom:'0'}}><img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}</h3>
                             </button>
                         </div>
