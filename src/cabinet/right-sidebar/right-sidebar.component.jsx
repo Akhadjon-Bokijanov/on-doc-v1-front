@@ -131,17 +131,17 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             
 
             <div className="cabiner-right-sidebar-sub-container">
-                <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'26px'}}>
-                    <div style={{marginBottom:"8px",marginLeft:'20px'}}>
+                <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'27px'}}>
+                    <div style={{marginBottom:"28px",marginLeft:'-3px'}}>
                         <img src={logo} alt=""/>
                     </div>
-                    <div>
+                    {/*<div>*/}
                         <hr className={"line"}/>
-                    </div>
+                    {/*</div>*/}
                     {/*<Link to={'/cabinet/add'}>*/}
                         <div className={`flexible`}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
-                                <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-5px'}} className={'side_icon'} alt=""/><span>Add</span></span>}>
+                                <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-2px'}} className={'side_icon'} alt=""/><span>Add</span></span>}>
                                     <Menu.Item style={{width:'254px'}} key="1"><p className={'menu_item'}>Договор</p></Menu.Item>
                                     <hr/>
                                     <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
@@ -182,7 +182,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     </Link>
                     <Link to="/cabinet/empowerment">
                         <div className={`action-bloks ${active.empowerment ? 'active' : ''} side_text flexible`}>
-                            <img src={archived} className={'side_icon'} alt=""/>
+                            <img src={archived} style={{width:'16px',height:'20px',marginRight:'14px'}} alt=""/>
                             <p>{t("Ishonchnoma")} (0)</p>
                         </div>
                     </Link>
@@ -224,7 +224,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
 
                     <div style={{}}>
-                        <div className=" bottom1">
+                        <div className="bottom1">
                             <button className={`consultant`}>
                                 <h3 className={'side_text'} style={{color:'#fff',marginBottom:'0'}}><img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}</h3>
                             </button>
