@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select } from 'antd';
+import { Table, Tooltip, Input, Button, Space, Popconfirm, message, Form, Row, Col, DatePicker, Select, Badge } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,13 +25,15 @@ import { useEffect } from 'react';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { useTranslation } from 'react-i18next';
 import {DateFormat} from "../../utils/DateFormat";
+import eye_icon from "../../images/eye.svg";
 
 const { Option } = Select;
 
 
 
 const DynaGrid = ({
-  
+  tableAttachedTabs,      //Attached tabs to the table       
+  hideFilter,             //to hide filters of griid
   reload,
   loading,                //loading state of table
   currentUser,            //Provided by the comonent
@@ -461,58 +463,78 @@ const DynaGrid = ({
       return current && current < moment(min, "YYYY-MM-DD");
   }
 
+  const [activTabIndex, setActiveTabIndex] = useState(0);
+  const handleAttachedTabClick = index=>{
+    setActiveTabIndex(index);
+  }
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
 
         <div className="dyna-grid-doc-filter-area">
+          {
+            hideFilter ? null
+            :
+          
           <div className="sub-filter-area">
-            <h3 style={{ marginBottom: 15 }}>{t("Filter")}</h3>
+            <div style={{display: 'flex', alignItems: 'center', marginBottom: 15}}>
+                  <div style={{ fontSize: 22, fontWeight: 700, marginRight: 24 }}>{t("Filter")}
+                  </div>
+                  <div style={{display: "flex", alignItems: "center"}}>
+                    <img src={eye_icon} alt="eye icon" style={{ width: 20, height: 14, marginRight: 10 }} />
+                    <span style={{ color: "#2B63C0", fontSize: 14}}>
+                      {t("Filterni yashirish")}
+                    </span>
+                  </div>
+            </div>
+            
             <Form
+              labelCol={{span: 24}}
               onFinish={handleFilter}
               name="doc-filter"
             >
-              <Row justify="space-between">
+              <Row justify="space-between" align="bottom">
                
                 <Col span={4}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-1"
+                          label={t("Hujjat raqami")}
                       name="AllDocumentsSearch[doc_no]">
                       <Input
                         size="large"
                         placeholder={t("Hujjat raqami")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Hujjat raqami")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={4}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-1"
+                          label={t("Hujjat turi")}
                       name="AllDocumentsSearch[status]">
                       <Select
                         size="large"
-                        placeholder={t("Holati")} 
+                        placeholder={t("Hujjat turi")} 
                         bordered={false}
                         allowClear
                         options={[
-                          { label: t("Saqlangan"), value: 1},
-                          { label: t("Imzo kutilmoqda"), value: 2 },
-                          { label: t("Jo'natilgan"), value: 3 },
-                          { label: t("Bekor qilingan"), value: 4 },
-                          { label: t("Qaytarib yuborilgan"), value: 5 },
-                          { label: t("Qabul qilingan"), value: 6 },
-                          { label: t("Muvaffaqiyatli"), value: 7 },
+                          { label: t("Faktura"), value: 1},
+                          { label: t("Akt"), value: 2 },
+                          { label: t("Shartnoma"), value: 3 },
+                          { label: t("Ishonchnoma"), value: 4 },
+                          { label: t("TTY"), value: 5 },
                         ]}
                         />
                         
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Holati")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={4}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
+                        label={t("Kontragent")}
                       key="dyna-form-facutura-no-old-4"
                       name="AllDocumentsSearch[contragent_name]">
                       <Input
@@ -520,13 +542,14 @@ const DynaGrid = ({
                         size="large"
                         placeholder={t("Kontragent")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Kontragent")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={3}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                         key="dyna-form-facutura-no-old-5"
+                        label={t("Dan")}
                         name="begin_date">
                       <DatePicker
                           id={'begin_date'}
@@ -537,13 +560,14 @@ const DynaGrid = ({
                           size="large"
                           placeholder={t("Dan")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Dan")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={3}>
-                  <Form.Item>
+                  {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-6"
+                        label={t("Gacha")}
                       name="end_date">
                       <DatePicker
                           id={'end_date'}
@@ -554,8 +578,8 @@ const DynaGrid = ({
                         size="large"
                         placeholder={t("Gacha")} />
                     </Form.Item>
-                    <span className="custom-input-label-1">{t("Gacha")}</span>
-                  </Form.Item>
+                    {/* <span className="custom-input-label-1"></span> */}
+                  {/* </Form.Item> */}
                 </Col>
                 <Col span={2}>
                   <Form.Item>
@@ -571,9 +595,10 @@ const DynaGrid = ({
               </Row>
             </Form>
           </div>
+          }
         </div>
 
-
+{/* 
       <div 
         style={{marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
         <Button 
@@ -585,9 +610,29 @@ const DynaGrid = ({
         <div>
           <h3>{title}</h3>
         </div>
-      </div>
+      </div> */}
 
       
+      {
+        Array.isArray(tableAttachedTabs)&&tableAttachedTabs?.length>0?
+            <div style={{
+              marginTop: 24,
+              //height: 33,
+              display: 'flex'
+              //backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            }}
+              
+            >
+              {tableAttachedTabs.map((item, index) =>{
+                return <div 
+                  onClick={()=>handleAttachedTabClick(index)} 
+                  className={`table-attached-tab ${index===0?' first-item ':''} ${index===tableAttachedTabs.length-1?' last-item ':''} ${activTabIndex===index? 'att-active':''}`}>
+                    <Badge color={item.color} />  {item.title}
+                </div>
+              })}
+            </div>
+            :null
+      }
       <Table
         rowSelection={{
           selectedRowKeys,

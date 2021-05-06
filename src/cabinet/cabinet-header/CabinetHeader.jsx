@@ -6,17 +6,17 @@ import './cabinet-header.style.scss';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import wallet from "../../images/wallet.svg"
-import settings from "../../images/settings.svg";
-import question_mark from "../../images/question_mark.svg";
-import chat from "../../images/chat.svg";
+import question_mark from "../../images/green-question-mark.svg";
+import chat from "../../images/bell-icon.svg";
 import LanguagesDropdown from '../../components/language-dropdown/locale-dropdown';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CabinetHeader = ({ user }) => {
 
     const { t } = useTranslation()
 
     return (
-        <div className="cabinet-header-main-con" style={{height:'88px'}}>
+        <div className="cabinet-header-main-con">
             <div className="ch-sub-container">
                 <div className="ch-user-info-con-1">
                     <div><strong>{user.name}</strong></div>
@@ -49,7 +49,7 @@ const CabinetHeader = ({ user }) => {
                         <img src={question_mark} alt=""/>
                     </div>
                     <div className="ch-action-container">
-                        <img src={settings} alt=""/>
+                        <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
                     </div>
                 </div>
             </div>

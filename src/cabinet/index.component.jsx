@@ -13,7 +13,7 @@ import Notifications from './notifications/notifications.component';
 import ProfileComponent from './profile/profile.component';
 import CabinetHeader from './cabinet-header/CabinetHeader';
 import LeftSideBar from "./right-sidebar";
-
+//1024
 const CabinetIndex = ({ match }) => {
     const {url} = match;
     return (

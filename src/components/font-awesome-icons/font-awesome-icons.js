@@ -23,7 +23,7 @@ import {
     faSyncAlt,
     faCog,
     faSignOutAlt,
-    
+    faTools
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -42,6 +42,7 @@ import {
 } from '@fortawesome/free-regular-svg-icons'
 
 library.add(
+    faTools,
     faBan,
     faHome,
     faNewspaper,

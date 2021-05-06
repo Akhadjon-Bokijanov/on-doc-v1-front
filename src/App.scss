@@ -1,5 +1,5 @@
 body {
-    background-color: #F8FAFC!important;
+    background-color: #F0F2F4!important;
 }
 
 *{
@@ -8,9 +8,11 @@ body {
 }
 .ant-menu-submenu-arrow::before{
     color: rgba(213, 208, 208, 0.64);
+    //padding-left: 100px;
 }
 .ant-menu-submenu-arrow::after{
     color: rgba(213, 208, 208, 0.64);
+    //padding-left: 100px;
 }
 .ant-menu-vertical{
     border-right: none!important;
@@ -19,6 +21,14 @@ body {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
+}
+
+
+@media (max-width: 1024px) {
+    .side_text{
+        font-size:12px!important;
+        line-height: 20px;
+    }
 }
 @media (max-width: 1366px) {
     .side_text{
@@ -134,6 +144,11 @@ body {
     width: 100%;
     border-radius: 8px;
     /*margin-bottom: 7px !important;*/
+}
+
+.ant-badge-status-dot{
+    width: 12px !important;
+    height: 12px !important;
 }
 
 .ant-radio {

@@ -9,7 +9,9 @@ const AdminCard = ({ data })=>{
     const {title, icon, color, count} = data
     return(
     <Card className="admin-card-container" >
-        <div className={`admin-card-icon-field admin-card-${color}`} ><FontAwesomeIcon icon={icon} className="admin-card-icon"/></div>
+        <div className={`admin-card-icon-field admin-card-${color}`} >
+            <FontAwesomeIcon icon={icon} className="admin-card-icon"/>
+        </div>
         <div className="admin-card-title">{title}</div>
         <div className="admin-card-content">{count}</div>
         
