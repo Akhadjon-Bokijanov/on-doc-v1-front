@@ -132,7 +132,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
             <div className="cabiner-right-sidebar-sub-container">
                 <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'27px'}}>
-                    <div style={{marginBottom:"28px",marginLeft:'-3px'}}>
+                    <div style={{marginBottom:"28px",marginTop:'19px',marginLeft:'-3px'}}>
                         <img src={logo} alt=""/>
                     </div>
                     {/*<div>*/}
@@ -141,7 +141,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     {/*<Link to={'/cabinet/add'}>*/}
                         <div className={`flexible`}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
-                                <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-2px'}} className={'side_icon'} alt=""/><span>Add</span></span>}>
+                                <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-2px'}} className={'side_icon'} alt=""/><span>Yaratish</span></span>}>
                                     <Menu.Item style={{width:'254px'}} key="1"><p className={'menu_item'}>Договор</p></Menu.Item>
                                     <hr/>
                                     <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
@@ -225,7 +225,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     <div style={{}}>
                         <div className="bottom1">
-                            <button className={`consultant`}>
+                            <button className={`consultant`} style={{marginLeft:'-15px'}}>
                                 <h3 className={'side_text'} style={{color:'#fff',marginBottom:'0'}}><img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}</h3>
                             </button>
                         </div>
