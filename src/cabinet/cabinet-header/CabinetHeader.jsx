@@ -30,8 +30,8 @@ const CabinetHeader = ({ user }) => {
                         <div style={{ display: 'flex' }}>
                             <img className="wallet-img" src={wallet} alt=""/>
                             <div>
-                                <div><strong>{t("Balansingiz")}</strong></div>
-                                {45000}
+                                <div style={{fontSize: 14}} >{t("Balansingiz")}</div>
+                                <div style={{ fontSize: 18, color: "#2B63C0", fontWeight: "bold"}}>{45000}</div>
                             </div>
                         </div>
                     </div>

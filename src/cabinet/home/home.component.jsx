@@ -12,7 +12,7 @@ import { selectCabinetData } from '../../redux/user/user.selector';
 import './home.component.scss';
 import {useTranslation} from "react-i18next";
 import clock_icon from "../../images/clock-icon.svg";
-import pending_icon from "../../images/pending-icon.svg";
+import pending from "../../images/pending.svg";
 import signed_icon from "../../images/signed-icon.svg";
 import cancelled_icon from "../../images/cancelled-icon.svg";
 import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
@@ -40,14 +40,14 @@ const CabinetHome = ({ cabinetData }) => {
             footer: "Faktura yaratish",
             link: "/cabinet/documents/waiting"
         },
-        // {
-        //     title: t("Chiquvchi"),
-        //     count: pending_icon,
-        //     img: "cloud-upload-alt",
-        //     color: "orange",
-        //     footer: "Shartnoma yaratish",
-        //     link: "/cabinet/documents/signed"
-        // },
+        {
+            title: t("Chiquvchi"),
+            count: outcome,
+            img: pending,
+            color: "orange",
+            footer: "Shartnoma yaratish",
+            link: "/cabinet/documents/signed"
+        },
         {
             title: t("Rad etilgan"),
             count: rejected,
@@ -142,6 +142,7 @@ const CabinetHome = ({ cabinetData }) => {
     return (
         <div className="cabinet-home-main-container">
             <div className="cabinet-home-sub-container">
+                <div style={{fontSize: 32, fontWeight: 700, marginBottom: 8}}>{t("Bosh sahifa")}</div>
                 <Row gutter={[16, 16]}>
                     {
                         list_of_docs.map((data, index)=><Col onClick={()=>setActiveTab(index)} md={6} >
@@ -164,7 +165,7 @@ const CabinetHome = ({ cabinetData }) => {
                             color: "#FE346E"
                         },
                         {
-                            title: t("Kontrakt"),
+                            title: t("Shartnoma"),
                             color: "#0FBE7B"
                         },
                         {
