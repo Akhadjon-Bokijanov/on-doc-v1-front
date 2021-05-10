@@ -80,6 +80,20 @@ const CabinetHome = ({ cabinetData }) => {
         },
         allColumns: [
             {
+                title: t("Holati"),
+                dataIndex: "status",
+                //isFilterable: true,
+                width: 70,
+                // filters: [
+                //     {value: 1, text: "1-Saqlangan"}, 
+                //     {value: 2, text: "2-Imzo kutilmoqda"}, 
+                //     {value: 3, text: "3-Jo'natilgan"}, 
+                //     {value: 4, text: "4-Xatolik yuzbergan"},
+                //     {value: 5, text: "5-Qaytarib yuborilgan"}, 
+                //     {value: 6, text: "6-Qabul qilingan"}, 
+                //     {value: 7, text: "7-Muaffaqiyatli"}]
+            },
+            {
                 title: t("Hujjat №"),
                 dataIndex: 'docNo',
                 isSearchable: true,
@@ -106,31 +120,7 @@ const CabinetHome = ({ cabinetData }) => {
                 dataIndex: "sellerTin",
                 isSearchable: true,
             },
-            {
-                title: "Oluvchi",
-                dataIndex: 'buyerName',
-                isSearchable: true,
-                width: 150
-            },
-            {
-                title: "Oluvchi STIR",
-                dataIndex: "buyerTin",
-                isSearchable: true,
-            },
-            {
-                title: t("Holati"),
-                dataIndex: "status",
-                isFilterable: true,
-                width: 70,
-                filters: [
-                    {value: 1, text: "1-Saqlangan"}, 
-                    {value: 2, text: "2-Imzo kutilmoqda"}, 
-                    {value: 3, text: "3-Jo'natilgan"}, 
-                    {value: 4, text: "4-Xatolik yuzbergan"},
-                    {value: 5, text: "5-Qaytarib yuborilgan"}, 
-                    {value: 6, text: "6-Qabul qilingan"}, 
-                    {value: 7, text: "7-Muaffaqiyatli"}]
-            },
+            
             {
                 title: t('Yaratilgan sana'),
                 dataIndex: "created_at",
