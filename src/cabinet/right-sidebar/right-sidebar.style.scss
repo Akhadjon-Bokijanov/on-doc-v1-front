@@ -29,6 +29,17 @@ $sidebarColor:#0C2556;
                 width: 111%;
                 margin-left: -30px;
             }
+            @media (min-width: 1950px){
+                &{
+                    border-left-style: none;
+                    border-right-style: none;
+                    border-bottom-style: none;
+                    border-top-color: rgba(200, 194, 194, 0.34) !important;
+                    //height: 20px;
+                    width: 90%;
+                    //margin-left: -30px;
+                }
+            }
             .action-bloks {
                 color: #FFFFFF;
                 padding: 12px;
