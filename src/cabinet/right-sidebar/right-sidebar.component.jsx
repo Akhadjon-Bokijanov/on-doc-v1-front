@@ -55,7 +55,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             contract: location.pathname.includes("/contract"),
             empowerment: location.pathname.includes("/empowerment"),
             act: location.pathname.includes("/act"),
-            tty: location.pathname.includes("/tty"),
+            news: location.pathname.includes("/news"),
             freeDoc: location.pathname.includes("/free-template"),
             notification: location.pathname.includes("/notification"),
             settings: location.pathname.includes("/settings"),
@@ -186,9 +186,9 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                             <p>{t("Ishonchnoma")} (0)</p>
                         </div>
                     </Link>
-                    <Link to="/cabinet/tty">
-                        <div className={`action-bloks ${active.tty ? 'active' : ''} side_text`}>
-                            <img src={news} className={'side_icon'} alt=""/>{t("TTY")}
+                    <Link to="/cabinet/news">
+                        <div className={`action-bloks ${active.news ? 'active' : ''} side_text`}>
+                            <img src={news} className={'side_icon'} alt=""/>{t("Yangiliklar")}
                             <Badge style={{marginLeft: 10}} count={badgeCount.tty_awaiting} />
                         </div>
                     </Link>

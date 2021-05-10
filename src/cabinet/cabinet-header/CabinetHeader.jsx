@@ -11,7 +11,7 @@ import chat from "../../images/bell-icon.svg";
 import LanguagesDropdown from '../../components/language-dropdown/locale-dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const CabinetHeader = ({ user }) => {
+const CabinetHeader = ({ user,match }) => {
 
     const { t } = useTranslation()
 
@@ -27,18 +27,21 @@ const CabinetHeader = ({ user }) => {
                         <LanguagesDropdown />
                     </div>
                     <div className="ch-action-container">
-                        <div style={{ display: 'flex' }}>
-                            <img className="wallet-img" src={wallet} alt=""/>
-                            <div>
-                                <div><strong>{t("Balansingiz")}</strong></div>
-                                {45000}
+                        <Link to='/cabinet/balance'>
+                             <div className="flexible">
+                                <img className="wallet-img" src={wallet} alt=""/>
+                                <div>
+                                    <div><span style={{fontSize:'14px',color:'black'}}>{t("Balansingiz")}</span></div>
+                                    <strong style={{fontSize:'18px'}}>150000</strong>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
+
                     </div>
                     <div className="ch-action-container">
                         <div>
-                            <Link to="/home/tarrifs">
-                                <button className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
+                            <Link to="/cabinet/tariffs">
+                                <button style={{cursor:'pointer'}} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
                             </Link>
                         </div>
                     </div>
