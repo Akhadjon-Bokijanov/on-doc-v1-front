@@ -12,7 +12,7 @@ const ProfileComponent = ({ match, location })=>{
     return <div style={{margin: 15}}>
         <h3>{t("Sozlamalar")}</h3>
         <ProfileTabs/>
-        <div className="factura-data-sheet-container">
+        <div className="">
             <div style={{paddingTop: 15}}>
                 <Route match={`${match.path}`} component={ProfileTabsRouter}/>
             </div>

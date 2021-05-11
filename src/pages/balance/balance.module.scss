@@ -1,0 +1,73 @@
+.block{
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  border-radius: 8px;
+  Input{
+    width: 215%;
+    height: 48px;
+    padding: 12px;
+  }
+  .main_title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 24px;
+    color: #333333
+  }
+  .label{
+    height: 24px;
+    margin-bottom: 8px!important;
+    margin-top: 16px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+  }
+  .num_title{
+    height: 24px;
+    margin-bottom: 26px!important;
+    margin-top: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+  }
+  .send{
+    width: 128px;
+    height: 48px;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: center;
+    background: #2B63C0;
+    border-radius: 8px;
+    color:#FFFFFF;
+    margin-bottom: 30px;
+  }
+  .card{
+    width: 88%;
+    height: 80px;
+    padding: 12px;
+    margin-bottom: 32px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    cursor: pointer;
+    &:hover{
+      background: rgba(217, 217, 217, 0.18);
+    }
+  }
+  .payment{
+    height: 18px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #303030;
+  }
+  .payment_icon{
+    float: right!important;
+  }
+}

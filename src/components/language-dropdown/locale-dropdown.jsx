@@ -6,6 +6,8 @@ import React, { useState, useEffect } from 'react';
 import { Dropdown, Menu } from 'antd';
 import { useTranslation } from 'react-i18next';
 import i18next from "i18next";
+import expand_icon from "../../images/expand-icon.svg";
+
 
 const LanguagesDropdown = ({ locale, changeLocale }) => {
     const { i18n } = useTranslation();
@@ -45,10 +47,24 @@ const LanguagesDropdown = ({ locale, changeLocale }) => {
         </Menu>
     )
 
-    return (<span className="trigger text-float-right">
-        <Dropdown overlay={languagesMenu}>
-            <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src={`/images/${activeLang==="uz-Cyrl"?"uz": activeLang}.png`} />
-        </Dropdown>
+    const langs = {
+        uz: "O'zbek",
+        ru: "Русский",
+        "uz-Cyrl": "Ўзбек",
+        en: "English"
+    }
+
+    return (<span className="trigger text-float-right" >
+        {/* <Dropdown overlay={languagesMenu} placement="bottomRight" trigger={["click"]}> */}
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingLeft: 4}}>
+                <div>
+                    <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src={`/images/${activeLang === "uz-Cyrl" ? "uz" : activeLang}.png`} /> {langs[activeLang]}
+                </div>
+                <div>
+                    <img src={expand_icon} alt="" />
+                </div>
+            </div>
+        {/* </Dropdown> */}
     </span>)
 }
 

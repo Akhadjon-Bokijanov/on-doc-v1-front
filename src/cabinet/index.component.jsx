@@ -12,8 +12,13 @@ import './create.style.scss';
 import Notifications from './notifications/notifications.component';
 import ProfileComponent from './profile/profile.component';
 import CabinetHeader from './cabinet-header/CabinetHeader';
-import LeftSideBar from "./right-sidebar";
-//1024
+import NewsPage from "../pages/news";
+import EmpowermentForm from "./empowerment/create/create.component";
+import Deatil from "../components/news/Deatil";
+import Balance from "../pages/balance";
+import Tariff from "../pages/tariff";
+import CurrentTariff from "../components/tariffs/CurrentTariff";
+
 const CabinetIndex = ({ match }) => {
     const {url} = match;
     return (
@@ -21,7 +26,6 @@ const CabinetIndex = ({ match }) => {
             <Row justify="space-around">
                <Col md={10} lg={4} style={{width:'256px'}}>
                     <RightSidebar />
-                   {/*<LeftSideBar/>*/}
                </Col>
                <Col md={14} lg={20} style={{width:'1184px'}}>
                     <CabinetHeader/>
@@ -33,6 +37,15 @@ const CabinetIndex = ({ match }) => {
                     <Route path={`${url}/tty`} component={ TTYIndexRouter } />
                     <Route path={`${url}/notifications`} component={ Notifications } />
                     <Route path={`${url}/settings`} component={ ProfileComponent } />
+
+                    <Route exact path={`${url}/news`} component={NewsPage} />
+                   <Route path={`${url}/news/:id`} component={Deatil}/>
+
+                   <Route exact path={`${url}/balance`} component={Balance} />
+
+                   <Route exact path={`${url}/tariffs`} component={Tariff} />
+                   <Route path={`${url}/tariffs/:id`} component={CurrentTariff} />
+
                </Col>
             </Row>
         </div>

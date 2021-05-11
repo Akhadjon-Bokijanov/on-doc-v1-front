@@ -30,6 +30,7 @@ const ForAuthenticatedUsers=()=>{
                     <Route path="/home" render={()=> <FrontIndexRouter /> } />
                     <Route path="/admin" render={()=> <AdminIndexRouter /> }/>
                     <Route path="/cabinet" render={()=> <CabinetIndex /> } />
+                    {/*<Route path="/news" render={()=> <News /> } />*/}
                     {/*<Route render={() => <Redirect to="/home/choosecompany" />}></Route>*/}
                 </Switch>
             {/*</SideNav>*/}

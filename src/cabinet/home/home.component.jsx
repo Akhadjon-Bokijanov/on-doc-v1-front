@@ -12,7 +12,7 @@ import { selectCabinetData } from '../../redux/user/user.selector';
 import './home.component.scss';
 import {useTranslation} from "react-i18next";
 import clock_icon from "../../images/clock-icon.svg";
-import pending_icon from "../../images/pending-icon.svg";
+import pending from "../../images/pending.svg";
 import signed_icon from "../../images/signed-icon.svg";
 import cancelled_icon from "../../images/cancelled-icon.svg";
 import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
@@ -40,14 +40,14 @@ const CabinetHome = ({ cabinetData }) => {
             footer: "Faktura yaratish",
             link: "/cabinet/documents/waiting"
         },
-        // {
-        //     title: t("Chiquvchi"),
-        //     count: pending_icon,
-        //     img: "cloud-upload-alt",
-        //     color: "orange",
-        //     footer: "Shartnoma yaratish",
-        //     link: "/cabinet/documents/signed"
-        // },
+        {
+            title: t("Chiquvchi"),
+            count: outcome,
+            img: pending,
+            color: "orange",
+            footer: "Shartnoma yaratish",
+            link: "/cabinet/documents/signed"
+        },
         {
             title: t("Rad etilgan"),
             count: rejected,
@@ -80,6 +80,20 @@ const CabinetHome = ({ cabinetData }) => {
         },
         allColumns: [
             {
+                title: t("Holati"),
+                dataIndex: "status",
+                //isFilterable: true,
+                width: 70,
+                // filters: [
+                //     {value: 1, text: "1-Saqlangan"}, 
+                //     {value: 2, text: "2-Imzo kutilmoqda"}, 
+                //     {value: 3, text: "3-Jo'natilgan"}, 
+                //     {value: 4, text: "4-Xatolik yuzbergan"},
+                //     {value: 5, text: "5-Qaytarib yuborilgan"}, 
+                //     {value: 6, text: "6-Qabul qilingan"}, 
+                //     {value: 7, text: "7-Muaffaqiyatli"}]
+            },
+            {
                 title: t("Hujjat №"),
                 dataIndex: 'docNo',
                 isSearchable: true,
@@ -106,31 +120,7 @@ const CabinetHome = ({ cabinetData }) => {
                 dataIndex: "sellerTin",
                 isSearchable: true,
             },
-            {
-                title: "Oluvchi",
-                dataIndex: 'buyerName',
-                isSearchable: true,
-                width: 150
-            },
-            {
-                title: "Oluvchi STIR",
-                dataIndex: "buyerTin",
-                isSearchable: true,
-            },
-            {
-                title: t("Holati"),
-                dataIndex: "status",
-                isFilterable: true,
-                width: 70,
-                filters: [
-                    {value: 1, text: "1-Saqlangan"}, 
-                    {value: 2, text: "2-Imzo kutilmoqda"}, 
-                    {value: 3, text: "3-Jo'natilgan"}, 
-                    {value: 4, text: "4-Xatolik yuzbergan"},
-                    {value: 5, text: "5-Qaytarib yuborilgan"}, 
-                    {value: 6, text: "6-Qabul qilingan"}, 
-                    {value: 7, text: "7-Muaffaqiyatli"}]
-            },
+            
             {
                 title: t('Yaratilgan sana'),
                 dataIndex: "created_at",
@@ -142,6 +132,7 @@ const CabinetHome = ({ cabinetData }) => {
     return (
         <div className="cabinet-home-main-container">
             <div className="cabinet-home-sub-container">
+                <div style={{fontSize: 32, fontWeight: 700, marginBottom: 8}}>{t("Bosh sahifa")}</div>
                 <Row gutter={[16, 16]}>
                     {
                         list_of_docs.map((data, index)=><Col onClick={()=>setActiveTab(index)} md={6} >
@@ -164,7 +155,7 @@ const CabinetHome = ({ cabinetData }) => {
                             color: "#FE346E"
                         },
                         {
-                            title: t("Kontrakt"),
+                            title: t("Shartnoma"),
                             color: "#0FBE7B"
                         },
                         {
