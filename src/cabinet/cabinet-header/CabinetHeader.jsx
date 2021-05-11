@@ -10,10 +10,48 @@ import question_mark from "../../images/green-question-mark.svg";
 import chat from "../../images/bell-icon.svg";
 import LanguagesDropdown from '../../components/language-dropdown/locale-dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Menu, Dropdown } from 'antd';
+
+const { SubMenu } = Menu;
 
 const CabinetHeader = ({ user,match }) => {
 
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
+
+    
+
+    const settings_menu = (
+        <Menu style={{width: 288, right: -32, top: 30}}>
+            <SubMenu title={<LanguagesDropdown />} icon={null}>
+                <Menu.Item onClick={() => {
+                        //changeLocale('uz'); 
+                        i18n.changeLanguage('uz')
+                    }}>
+                        <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src="/images/uz.png" /> O'zb
+                </Menu.Item>
+                <Menu.Item onClick={() => {
+                        //changeLocale('uz');
+                        i18n.changeLanguage('uz-Cyrl')
+                    }}>
+                        <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src="/images/uz.png" /> Ўзб
+                </Menu.Item>
+                    <Menu.Item onClick={() => {
+                        //changeLocale('ru'); 
+                        i18n.changeLanguage('ru')
+                    }}>
+                        <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src="/images/ru.png" /> Pyc
+                </Menu.Item>
+                    <Menu.Item onClick={() => {
+                        //changeLocale('en'); 
+                        i18n.changeLanguage('en')
+                    }}>
+                        <img style={{ width: 25, borderRadius: '50%' }} alt="languange" src="/images/en.png" /> Eng
+                </Menu.Item>
+            </SubMenu>
+            
+        </Menu>
+    )
+
 
     return (
         <div className="cabinet-header-main-con">
@@ -52,7 +90,9 @@ const CabinetHeader = ({ user,match }) => {
                         <img src={question_mark} alt=""/>
                     </div>
                     <div className="ch-action-container">
-                        <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
+                        <Dropdown overlay={settings_menu} trigger={["click"]}>
+                            <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
+                        </Dropdown>
                     </div>
                 </div>
             </div>
