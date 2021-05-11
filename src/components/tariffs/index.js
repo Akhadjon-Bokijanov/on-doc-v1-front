@@ -5,58 +5,7 @@ import {Link} from "react-router-dom";
 import count from '../../assests/tariff/count.png'
 import date from '../../assests/tariff/date.png'
 import vertical from '../../assests/tariff/vertical.png'
-const tariffs = [
-    {
-        id:'1',
-        name:'2500',
-        price:'2 000 000',
-        count:'2500',
-        date:'2'
-    },
-    {
-        id:'2',
-        name:'3000',
-        price:'2 500 000',
-        count:'3000',
-        date:'3'
-    },
-    {
-        id:'3',
-        name:'2500',
-        price:'2 000 000',
-        count:'2500',
-        date:'2'
-    },
-    {
-        id:'4',
-        name:'2500',
-        price:'2 000 000',
-        count:'2500',
-        date:'2'
-    },
-    {
-        id:'5',
-        name:'3000',
-        price:'2 500 000',
-        count:'3000',
-        date:'3'
-    },
-    {
-        id:'6',
-        name:'2500',
-        price:'2 000 000',
-        count:'2500',
-        date:'2'
-    },
-    {
-        id:'7',
-        name:'3000',
-        price:'2 500 000',
-        count:'3000',
-        date:'3'
-    }
-]
-function Tariffs() {
+function Tariffs({data}) {
     return(
         <>
             <div>
@@ -66,7 +15,7 @@ function Tariffs() {
                 <Row gutter={[16,16]} style={{marginRight:'0'}}>
 
                     {
-                        tariffs.map((item,index)=>(
+                        data?.map((item,index)=>(
                             <Col className={st.block} md={7}>
                                 <div className={'flexible'}>
                                     <p className={`${st.name}`} style={{width:'52%'}}>Тарифы {item.name}</p>
@@ -86,7 +35,9 @@ function Tariffs() {
                                         <p className={st.count_and_time_values}>{item.date} Месяц</p>
                                     </div>
                                 </div>
-                                <Button className={st.more_btn}><p>Подробнее</p></Button>
+                                <Button className={st.more_btn}>
+                                    <Link to={`/cabinet/tariffs/${item?.id}`}><p>Подробнее</p></Link>
+                                </Button>
                             </Col>
                         ))
                     }

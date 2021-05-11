@@ -16,7 +16,8 @@ import NewsPage from "../pages/news";
 import EmpowermentForm from "./empowerment/create/create.component";
 import Deatil from "../components/news/Deatil";
 import Balance from "../pages/balance";
-import Tariffs from "../pages/tariffs";
+import Tariff from "../pages/tariff";
+import CurrentTariff from "../components/tariffs/CurrentTariff";
 
 const CabinetIndex = ({ match }) => {
     const {url} = match;
@@ -42,7 +43,8 @@ const CabinetIndex = ({ match }) => {
 
                    <Route exact path={`${url}/balance`} component={Balance} />
 
-                   <Route path={`${url}/tariffs`} component={Tariffs} />
+                   <Route exact path={`${url}/tariffs`} component={Tariff} />
+                   <Route path={`${url}/tariffs/:id`} component={CurrentTariff} />
 
                </Col>
             </Row>
