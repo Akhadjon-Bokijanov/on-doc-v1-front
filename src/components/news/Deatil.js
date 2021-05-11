@@ -20,7 +20,7 @@ export default function Deatil({data,match}) {
                 <Col md={1}></Col>
                 <Col md={22} className={st.block}>
                     <p className={st.title}>Заголовок новости   {id}</p>
-                    <div className={'flexible'} style={{marginLeft:'26px'}}>
+                    <div className={'flexible'}>
                         <p className={st.times}>26 Апреля | Понедельник </p>
                         <p className={`${st.times}`} style={{marginLeft:'80px'}}>13:00</p>
                     </div>

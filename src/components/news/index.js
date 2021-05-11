@@ -19,7 +19,7 @@ export default function News({data}) {
                                     <p className={st.title} style={{width:'88%'}}>{item.title}</p>
                                     <p className={`${st.title}`} style={{width:'12%'}}>{item.time}</p>
                                 </div>
-                                <p>{item.content.length<=115?item.content:item.content.substr(0,113)+'...'}</p>
+                                <p>{item.content.length<=110?item.content:item.content.substr(0,110)+'...'}</p>
                                 <Button className={st.btn}>
                                     <Link to={`/cabinet/news/${item.id}`}><p className={st.text}>Читать</p></Link>
                                 </Button>
