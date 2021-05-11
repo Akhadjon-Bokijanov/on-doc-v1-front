@@ -13,18 +13,18 @@ import { createStructuredSelector } from 'reselect';
 import { selectLoadedKey } from '../../redux/user/user.selector';
 import AfertaPopup from '../aferta-popup/aferta-popup.component';
 import BindroumingPopup from '../bindrouming-popup/bindrouming-popup.component';
-import logo from '../../assests/logo_new.png'
+import logo from '../../assests/logo_new.svg'
 import {RightOutlined} from '@ant-design/icons';
-import add from '../../assests/sidebar/add.png'
-import archived from '../../assests/sidebar/archived.png'
-import down from '../../assests/sidebar/down.png'
-import exit from '../../assests/sidebar/exit.png'
-import home from '../../assests/sidebar/home.png'
-import news from '../../assests/sidebar/news.png'
-import saved from '../../assests/sidebar/saved.png'
-import settings from '../../assests/sidebar/settings.png'
-import up from '../../assests/sidebar/up.png'
-import consultant from '../../assests/sidebar/consultant.png'
+import add from '../../assests/sidebar/add.svg'
+import archived from '../../assests/sidebar/archived.svg'
+import down from '../../assests/sidebar/down.svg'
+import exit from '../../assests/sidebar/exit.svg'
+import home from '../../assests/sidebar/home.svg'
+import news from '../../assests/sidebar/news.svg'
+import saved from '../../assests/sidebar/saved.svg'
+import settings from '../../assests/sidebar/settings.svg'
+import up from '../../assests/sidebar/up.svg'
+import consultant from '../../assests/sidebar/consultant.svg'
 
 import { Menu} from 'antd';
 
@@ -182,7 +182,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     </Link>
                     <Link to="/cabinet/empowerment">
                         <div className={`action-bloks ${active.empowerment ? 'active' : ''} side_text flexible`}>
-                            <img src={archived} style={{width:'16px',height:'20px',marginRight:'14px'}} alt=""/>
+                            <img src={archived} className='side_icon' alt=""/>
                             <p>{t("Ishonchnoma")} (0)</p>
                         </div>
                     </Link>
