@@ -28,12 +28,12 @@ const CabinetHeader = ({ user,match }) => {
                     </div>
                     <div className="ch-action-container">
                         <Link to='/cabinet/balance'>
-                             <div className="flexible">
-                                <img className="wallet-img" src={wallet} alt=""/>
-                                <div>
-                                    <div><span style={{fontSize:'14px',color:'black'}}>{t("Balansingiz")}</span></div>
-                                    <strong style={{fontSize:'18px'}}>150000</strong>
-                                </div>
+                        <div style={{ display: 'flex' }}>
+                            <img className="wallet-img" src={wallet} alt=""/>
+                            <div>
+                                    <div style={{ fontSize: 14, color: "#303030"}} >{t("Balansingiz")}</div>
+                                <div style={{ fontSize: 18, color: "#2B63C0", fontWeight: "bold"}}>{45000}</div>
+                            </div>
                             </div>
                         </Link>
 

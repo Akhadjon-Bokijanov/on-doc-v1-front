@@ -24,6 +24,7 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
     return (
         <div className="factura-home-page-container">
             <div className="factura-home-sub-con">
+                
                 <div className="factura-home-title">
                     <div style={{fontSize: 32, fontWeight: "bold"}}>{ t(title) }</div>
                     {/* {
@@ -56,6 +57,21 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                 
                 <div>
                     <DynaGrid   
+                        tableAttachedTabs={[
+                            {
+                                title: t("Imzo kutilmoqda"),
+                                color: ""
+                            },
+                            {
+                                title: t("Imzolangan"),
+                                color: "#0FBE7B"
+                            },
+                            {
+                                title: t("Bekor qilingan"),
+                                color: "#FE346E"
+                            }
+                            
+                        ]}
                         config={{ ...gridConfig, dataSourcePath: `${gridSourceUrl}?${tabs[activeTab].map(text=>'AllDocumentsSearch[write_type]='+text+'&')}${addParams ? addParams.map(p=>`${p.name}=${p.value}`): ""}`}}
                     />
                 </div>

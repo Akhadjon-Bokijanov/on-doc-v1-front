@@ -17,13 +17,11 @@
                 display: flex;
                 margin-left: 45px;
                 .wallet-img{
-                    width: 43px;
-                    height: 43px;
-                    padding: 8px;
+                    padding: 5px 10px;
+                    margin: 5px 10px;
                     border-radius: 7px;
-                    margin: 5px;
                     background-color: rgba(24, 144, 255, 0.1);
-
+                    //margin-right: 10px;
                 }
             }
         }
