@@ -17,6 +17,7 @@ import signed_icon from "../../images/signed-icon.svg";
 import cancelled_icon from "../../images/cancelled-icon.svg";
 import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
 import HomeNewsCard from '../../components/home-news-card/HomeNewsCard';
+import FirebaseSmsAuth from '../../components/firebase-sms-auth/FirebaseSmsAuth';
 
 const CabinetHome = ({ cabinetData }) => {
 
@@ -132,6 +133,9 @@ const CabinetHome = ({ cabinetData }) => {
     return (
         <div className="cabinet-home-main-container">
             <div className="cabinet-home-sub-container">
+
+                <FirebaseSmsAuth />
+
                 <div style={{fontSize: 32, fontWeight: 700, marginBottom: 8}}>{t("Bosh sahifa")}</div>
                 <Row gutter={[16, 16]}>
                     {
