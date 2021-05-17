@@ -13,6 +13,8 @@ const FirebaseSmsAuth = () => {
         });
     }
 
+    
+
     // useEffect(()=>{
     //     setUpRecaptcha();
     // },[])
