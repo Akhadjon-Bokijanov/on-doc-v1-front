@@ -121,8 +121,8 @@ $sidebarColor:#0C2556;
                 //}
                 &.active {
                     background: rgba(255, 255, 255, 0.1);
-                     margin-right: -4px;
-                    margin-left: -25px;
+                    // margin-right: -4px;
+                    //margin-left: -25px;
                     //padding-left: 30px;
                     position: relative;
                     color: #FFFFFF;
@@ -166,8 +166,8 @@ $sidebarColor:#0C2556;
 }
 .side_icon{
     margin-right: 14px;
-    height: 18px;
-    width: 20px;
+    //height: 18px;
+    //width: 20px;
 }
 .side_icon_updown{
     //margin-right: 14px;
