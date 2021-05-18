@@ -1,0 +1,49 @@
+.block{
+  padding: 24px!important;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  border-radius: 12px;
+  .title{
+    height: 24px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+  }
+  Select{
+    padding: 12px!important;
+    background: #FFFFFF!important;
+    border: 0.5px solid #D9D9D9!important;
+    box-sizing: border-box!important;
+    border-radius: 8px!important;
+  }
+  tbody{
+    tr{
+      height: 27px;
+      background: #FFFFFF;
+      border: 0.5px solid rgba(0, 0, 0, 0.04);
+      td{
+        padding: 11px 16px!important;
+      }
+      .td_action{
+        width:15%;
+        float:right;
+        display:flex;
+        color:#FE346E;
+        cursor: pointer;
+      }
+    }
+  }
+  //td{
+  //  height: 16px;
+  //  font-style: normal;
+  //  font-weight: normal;
+  //  font-size: 14px;
+  //  line-height: 16px;
+  //  align-items: center;
+  //  letter-spacing: 0.01em;
+  //  color: #303030;
+  //}
+}

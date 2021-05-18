@@ -57,7 +57,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             act: location.pathname.includes("/act"),
             news: location.pathname.includes("/news"),
             freeDoc: location.pathname.includes("/free-template"),
-            notification: location.pathname.includes("/notification"),
+            notification: location.pathname.includes("/accoount"),
             settings: location.pathname.includes("/settings"),
             add: location.pathname.includes("/add"),
             exit: location.pathname.includes("/login")

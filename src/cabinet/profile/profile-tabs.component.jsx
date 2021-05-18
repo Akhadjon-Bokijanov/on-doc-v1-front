@@ -17,16 +17,12 @@ const ProfileTabs = ({ match, location }) => {
             url: "/cabinet/settings/notify"
         },
         {
-            title: "Maxsulotingiz",
-            url: "/cabinet/settings/tab-2"
-        },
-        {
             title: "Kompaniya ma'lumotlari",
-            url: "/cabinet/settings"
+            url: "/cabinet/settings/company_info"
         },
         {
             title: "Hujjat formati",
-            url: "/cabinet/settings/tab-4"
+            url: "/cabinet/settings/docFormat"
         }
     ]
 
