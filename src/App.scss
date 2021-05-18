@@ -109,12 +109,15 @@ body {
 }
 
 .ant-input-password-large input[type="password"] {
-    border: none !important;
-    height: auto;
+    border-radius: 12px !important;
+    height: 120%!important;
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    //right: 0;
+    //top: 0;
+    //bottom: 0;
 }
-// .ant-picker-large{
-//     max-width: 300px !important;
-// }
 
 .ant-radio-button-wrapper {
     height: 55px !important;
@@ -220,6 +223,10 @@ body {
     padding: 0 !important;
 }
 
+.ant-switch-checked{
+    background-color: #2B63C0 !important;
+}
+
 span.custom-input-label-1 {
     margin-top: 24px !important;
     font-size: 16px;
@@ -272,7 +279,7 @@ div.custom-section-wrapper{
 
 .factura-home-list-tabs {
             margin-top: 10px;
-            margin-bottom: 15px;
+            //margin-bottom: 15px;
             .factura-home-list-tab-con {
                 display: flex;
                 justify-content: space-around;

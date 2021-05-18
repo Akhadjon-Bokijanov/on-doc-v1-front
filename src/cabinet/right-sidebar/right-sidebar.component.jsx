@@ -142,23 +142,27 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         <div className={`flexible`}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
                                 <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-2px'}} className={'side_icon'} alt=""/><span>Yaratish</span></span>}>
-                                    <Menu.Item style={{width:'254px'}} key="1">
-                                        <Link to={'/cabinet/contract'}><p className={'menu_item'}>Договор</p></Link>
-                                    </Menu.Item>
+                                    {/* <Menu.Item style={{width:'254px'}} key="1">
+                                        <Link to={'/cabinet/contract/create'}><p className={'menu_item'}>Договор</p></Link>
+                                    </Menu.Item> */}
                                     <hr/>
                                     <Menu.Item key="2">
-                                        <Link to={'/cabinet/empowerment'}><p className={'menu_item'}>Доверенность</p></Link>
+                                        <Link to={'/cabinet/empowerment/create'}><p className={'menu_item'}>Доверенность</p></Link>
                                     </Menu.Item>
                                     <hr/>
                                     <Menu.Item key="3">
-                                        <Link to={'/cabinet/factura'}><p className={'menu_item'}>Счетфактура</p></Link>
+                                        <Link to={'/cabinet/factura/create'}><p className={'menu_item'}>Счетфактура</p></Link>
                                     </Menu.Item>
                                     <hr/>
                                     <Menu.Item key="4">
-                                        <Link to={'/cabinet/act'}><p className={'menu_item'}>Акт</p></Link>
+                                        <Link to={'/cabinet/act/create'}><p className={'menu_item'}>Акт</p></Link>
                                     </Menu.Item>
                                     <hr/>
-                                    <Menu.Item key="5"><p className={'menu_item'}>ТТН</p></Menu.Item>
+                                    <Menu.Item key="5">
+                                        <Link to={'/cabinet/tty/create'}>
+                                        <p className={'menu_item'}>ТТН</p>
+                                        </Link>
+                                    </Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </div>

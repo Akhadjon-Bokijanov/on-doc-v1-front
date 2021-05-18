@@ -51,6 +51,14 @@
     line-height: 24px;
     color: #8C8C8C;
   }
+
+  .psw{
+    input[type="text"]{
+      border: none!important;
+      height: auto!important;
+      -webkit-appearance: none;
+    }
+  }
 }
 .btn_save{
 

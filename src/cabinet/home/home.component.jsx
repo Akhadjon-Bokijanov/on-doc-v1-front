@@ -134,7 +134,7 @@ const CabinetHome = ({ cabinetData }) => {
         <div className="cabinet-home-main-container">
             <div className="cabinet-home-sub-container">
 
-                <FirebaseSmsAuth />
+                {/* <FirebaseSmsAuth /> */}
 
                 <div style={{fontSize: 32, fontWeight: 700, marginBottom: 8}}>{t("Bosh sahifa")}</div>
                 <Row gutter={[16, 16]}>

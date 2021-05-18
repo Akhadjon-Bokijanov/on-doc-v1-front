@@ -29,7 +29,9 @@ const ProfileTabs = ({ match, location }) => {
     const [activeTab, setActiveTab] = useState(location.pathname)
 
     return (
-        <div style={{ marginBottom: 20 }}>
+        <div 
+        //style={{ marginBottom: 20 }}
+        >
             <div className="factura-home-list-tabs">
                 <div className="factura-home-list-tab-con">
                     {

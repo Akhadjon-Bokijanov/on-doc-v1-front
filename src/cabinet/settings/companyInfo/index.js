@@ -12,7 +12,6 @@ import cancel from '../../../assests/settings/cancel.svg'
 function CompInfo({userKey}) {
     return(
         <>
-            <h2>Сведение:</h2>
             <Form
                 name="e-key"
                 // onFinish={handleKeySubmit}
@@ -22,7 +21,7 @@ function CompInfo({userKey}) {
                     <Form.Item name='u_key'>
                         <Radio.Group style={{width:'65%'}}>
                             <Radio >
-                                <div>
+                                <div style={{padding: 24}}>
                                     <div className='flexible'>
                                         <div>
                                             <div className={'flexible'}>
@@ -31,7 +30,7 @@ function CompInfo({userKey}) {
                                             </div>
                                             <div className={'flexible'}>
                                                 <p className={'title'}>Organization:</p>
-                                                <p>{userKey.username}</p>
+                                                <p style={{margin: 0}}>{userKey.username}</p>
                                             </div>
                                         </div>
                                         <div style={{marginLeft:'40px'}}>
