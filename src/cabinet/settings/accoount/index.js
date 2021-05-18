@@ -6,9 +6,6 @@ function Account() {
     const [switch1,setSwitch1]=useState(true);
     const [switch2,setSwitch2]=useState(true);
 
-    const handleSwitch1=(e)=>{
-        console.log("E",e)
-    }
     return(
         <>
             <div className={`${st.block} flexible`}>
