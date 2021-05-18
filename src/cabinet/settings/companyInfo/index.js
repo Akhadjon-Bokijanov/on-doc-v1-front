@@ -40,7 +40,7 @@ function CompInfo({userKey}) {
                                             </div>
                                             <div className={'flexible'}>
                                                 <p className={'title'}>Amal qilish muddati</p>
-                                                <p>2222.22.22</p>
+                                                <p style={{marginBottom:'0'}}>2222.22.22</p>
                                             </div>
                                         </div>
                                     </div>
