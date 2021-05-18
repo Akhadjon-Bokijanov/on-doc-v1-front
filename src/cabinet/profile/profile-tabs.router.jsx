@@ -11,7 +11,7 @@ import DocFormat from "../settings/documentFormat";
 const ProfileTabsRouter = ({ match }) => {
     return (
         <div>
-            <Route path={`${match.path}/account`} exact component={Account} />
+            <Route path={`${match.path}`} exact component={Account} />
             {/*<Route path={match.path} exact component={AccountForm} />*/}
             <Route path={`${match.path}/company_info`} exact component={CompInfo} />
             <Route path={`${match.path}/notify`} component={UserProducts} exact/>

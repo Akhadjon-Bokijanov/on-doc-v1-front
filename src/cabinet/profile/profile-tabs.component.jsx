@@ -10,7 +10,7 @@ const ProfileTabs = ({ match, location }) => {
     const tabs = [
         {
             title: "Hisob",
-            url: "/cabinet/settings/account"
+            url: "/cabinet/settings"
         },
         {
             title: "Xabarnoma",
