@@ -1,10 +1,10 @@
 import React from "react";
-import {Button, Form, Input} from "antd";
-import st from './notify.module.scss'
+import {Button, Form, Input, Switch} from "antd";
+import st from './account.module.scss'
 import firebase from "../../../utils/firebase";
 import { useTranslation } from "react-i18next";
 
-function Notify() {
+function Account() {
 
     const { t } = useTranslation();
     
@@ -82,8 +82,15 @@ function Notify() {
                             <Form.Item
                                 label={t("Parolni qayta kiriting")}
                                 rules={[{required: true}]}
-                                name="number">
-                                <Input size="large" placeholder="Введите новый пароль" />
+                            >
+                                <div className="flexible">
+                                    <Switch name={'switch1'}/>
+                                    <p className={st.desc}>Получать уведомление на номер телефона</p>
+                                </div>
+                                <div className="flexible">
+                                    <Switch name={'switch2'} />
+                                    <p className={st.desc}>Комфортный режим</p>
+                                </div>
                             </Form.Item>
                         {/* </Form.Item> */}
                         <Button size={"large"} className={st.podkluchit}>Подключить</Button>
@@ -104,9 +111,9 @@ function Notify() {
                             <Form.Item
                                 label={t("Telefon raqamni kiriting")}
                                 rules={[{required: true}]}
-                                // key="dyna-form-facutura-no"
+                                style={{width:'61.5%'}}
                                 name="number">
-                                <Input
+                                <Input.Password
                                     size="large"
                                     placeholder="+998xx xxx xx xx" />
                             </Form.Item>
@@ -135,4 +142,4 @@ function Notify() {
     )
 }
 
-export default Notify
+export default Account;

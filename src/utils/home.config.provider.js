@@ -47,13 +47,13 @@ export const get_home_config = doc => {
             return {
                 title: "Notifications",
                 createTitle: "Notification yaratish",
-                createUrl: "/admin/notification/create",
+                createUrl: "/admin/accoount/create",
                 gridSourceUrl: "/api/v1/notifications",
                 gridConfig: {
                     deleteRequestPath: 'api/v1/notifications',
-                    viewActionPath: '/admin/notification/view',
-                    editActionPath: '/admin/notification/edit',
-                    deleteConfirmText: "Shu notification ochirilsinmi?",
+                    viewActionPath: '/admin/accoount/view',
+                    editActionPath: '/admin/accoount/edit',
+                    deleteConfirmText: "Shu accoount ochirilsinmi?",
                     actions: {
                         edit: true,
                         delete: true,

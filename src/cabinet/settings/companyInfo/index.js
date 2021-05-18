@@ -5,11 +5,11 @@ import {selectKeyUser} from "../../../redux/user/user.selector";
 import {connect} from "react-redux";
 import {Button, Form, Input, Radio} from "antd";
 import {CheckCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
-import st from './acc.module.scss'
+import st from './comp_info.module.scss'
 import save from '../../../assests/settings/save.svg'
 import cancel from '../../../assests/settings/cancel.svg'
 
-function Account({userKey}) {
+function CompInfo({userKey}) {
     return(
         <>
             <Form
@@ -154,4 +154,4 @@ function Account({userKey}) {
 const mapStateToProps = createStructuredSelector({
     userKey:selectKeyUser
 })
-export default connect(mapStateToProps)(Account)
+export default connect(mapStateToProps)(CompInfo)
