@@ -209,6 +209,10 @@ body {
     padding: 0 !important;
 }
 
+.ant-switch-checked{
+    background-color: #2B63C0 !important;
+}
+
 span.custom-input-label-1 {
     margin-top: 24px !important;
     font-size: 16px;
@@ -261,7 +265,7 @@ div.custom-section-wrapper{
 
 .factura-home-list-tabs {
             margin-top: 10px;
-            margin-bottom: 15px;
+            //margin-bottom: 15px;
             .factura-home-list-tab-con {
                 display: flex;
                 justify-content: space-around;

@@ -9,11 +9,11 @@ const ProfileComponent = ({ match, location })=>{
     const { t } = useTranslation()
 
 
-    return <div style={{margin: 15}}>
-        <h3>{t("Sozlamalar")}</h3>
+    return <div style={{margin: 32}}>
+        <h3 style={{fontSize: 32, fontWeight:'bold'}}>{t("Sozlamalar")}</h3>
         <ProfileTabs/>
         <div className="">
-            <div style={{paddingTop: 15}}>
+            <div style={{paddingTop: 16}}>
                 <Route match={`${match.path}`} component={ProfileTabsRouter}/>
             </div>
         {/* <Tabs onChange={handleChange} type="card">

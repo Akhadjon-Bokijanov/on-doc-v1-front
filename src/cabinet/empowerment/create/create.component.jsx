@@ -319,33 +319,39 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
             </Col>
             
             <Col md={11}>
-              <div style={{display: 'flex', justifyContent: "space-between"}}>
-            {/* <Form.Item> */}
-              <Form.Item 
-                key="dyna-form-item-inn-date"
-                name="empowermentDateOfIssue"
-                label={t("Berilgan sanasi")}
-                rules={[{required: true}]}>
-                  <DatePicker                
-                    size="large"
-                    placeholder="Berilgan sanasi" />
-              </Form.Item>
+
+              <Row justify="space-between">
+                <Col md={11}>
+                  {/* <Form.Item> */}
+                  <Form.Item
+
+                    key="dyna-form-item-inn-date"
+                    name="empowermentDateOfIssue"
+                    label={t("Berilgan sanasi")}
+                    rules={[{ required: true }]}>
+                    <DatePicker
+                      size="large"
+                      placeholder="Berilgan sanasi" />
+                  </Form.Item>
                   {/* <span className="custom-input-label-1"></span> */}
-              {/* </Form.Item> */}
-          
-            {/* <Form.Item> */}
-              <Form.Item 
-                key="dyna-form-item-inn-date-expire"
-                name="empowermentDateOfExpire"
-                  label={t("Amal qilish sanasi")}
-                rules={[{required: true}]}>
-                  <DatePicker                
-                    size="large"
-                    placeholder="Amal qilish sanasi" />
-              </Form.Item>
+                  {/* </Form.Item> */}
+                </Col>
+                <Col md={11}>
+                  {/* <Form.Item> */}
+                  <Form.Item
+                    key="dyna-form-item-inn-date-expire"
+                    name="empowermentDateOfExpire"
+                    label={t("Amal qilish sanasi")}
+                    rules={[{ required: true }]}>
+                    <DatePicker
+                      size="large"
+                      placeholder="Amal qilish sanasi" />
+                  </Form.Item>
                   {/* <span className="custom-input-label-1"></span> */}
-              {/* </Form.Item> */}
-              </div>
+                  {/* </Form.Item> */}
+                </Col>
+              </Row>
+              
             </Col>
             <Col md={11}>
             {/* <Form.Item> */}
