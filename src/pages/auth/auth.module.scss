@@ -1,16 +1,21 @@
-.auth_img{
-  object-fit:fill!important;
-  width: 70%!important;
-  height: 100%!important;
+//.auth_img{
+//  object-fit:fill!important;
+//  width: 70%!important;
+//  height: 100%!important;
+//  background: url("../../assests/authImg.png");
+//  background-repeat: no-repeat;
+//}
+.auth_img_target{
   background: url("../../assests/authImg.png");
   background-repeat: no-repeat;
-
-
+  background-position: left;
+  background-size: cover ;
+  height: 100vh;
 }
-.bg{
-  background: url("../../assests/authImg.png");
-  background-repeat: no-repeat;
-}
+//.bg{
+//  background: url("../../assests/authImg.png");
+//  background-repeat: no-repeat;
+//}
 //@media (max-width:1600px) {
 //  .auth_img{
 //    object-fit:cover!important;
