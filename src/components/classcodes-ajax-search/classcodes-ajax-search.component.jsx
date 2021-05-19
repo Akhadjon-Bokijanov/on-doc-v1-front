@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import './classcodes-ajax-search.scss';
 
 const { Option } = Select;
 
@@ -54,21 +55,21 @@ const ClasscodeAjaxSearch = ({ user })=>{
 
     const optionstag = options.map(d => <Option value={d.classCode} key={d.classCode}>{d.className}</Option>);
 
-    return <div>
-        <label>{t("Maxsulot qidirish")}</label>
-        <br />
+    return <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 8}}>  
+        
+        {/* <br /> */}
         <Select
+            placeholder="Введите код или название товара "
             mode="multiple"
             value={selected}
             autoClearSearchValue={false}
-            style={{padding: 10}}
             showSearch={true}
             showArrow={false}
             defaultActiveFirstOption={false}
             filterOption={false}
             onSearch={handleOptionSearch}
             onChange={setSelected}
-            style={{width: '50%'}}
+            style={{ width: 957, marginRight: 8}}
             loading={loading}
             notFoundContent={null}
         >
@@ -78,10 +79,11 @@ const ClasscodeAjaxSearch = ({ user })=>{
         </Select>
         
         <Button 
+            className="product-add-button"
             type="primary" 
-            style={{marginTop: 10}} 
+            //style={{marginTop: 10}} 
             onClick={handleAttach}>
-                Ozingizga yuklash
+                Qo'shish
         </Button>
     </div>
 }

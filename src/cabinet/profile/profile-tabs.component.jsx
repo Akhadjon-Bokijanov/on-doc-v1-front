@@ -13,7 +13,7 @@ const ProfileTabs = ({ match, location }) => {
             url: "/cabinet/settings"
         },
         {
-            title: "Xabarnoma",
+            title: "Коды товаров и услуг",
             url: "/cabinet/settings/notify"
         },
         {
