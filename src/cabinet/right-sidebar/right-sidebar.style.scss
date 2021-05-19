@@ -145,6 +145,38 @@ $sidebarColor:#0C2556;
         }
     }
 }
+.ant-menu-sub{
+    background: #FFFFFF!important;
+    border: 0.5px solid rgba(0, 0, 0, 0.04)!important;
+    box-sizing: border-box!important;
+    border-radius: 8px!important;
+}
+.ant-menu-item{
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.04)!important;
+    padding: 8px 70px 19px 16px!important;
+    width: 254px!important;
+    height: 56px!important;
+}
+@media (min-width: 1996px){
+    .one_side{
+        width: 103%!important;
+    }
+}
+@media (min-width: 2200px){
+    .one_side{
+        width: 102%!important;
+    }
+}
+@media (min-width: 2500px){
+    .one_side{
+        width: 104%!important;
+    }
+}
+@media (min-width: 2750px){
+    .one_side{
+        width: 108%!important;
+    }
+}
 
 .bottom1{
     height: 48px;

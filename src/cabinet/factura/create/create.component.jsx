@@ -264,8 +264,9 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 >
                   <Select
                     onChange={setFacturaType}
-                    bordered={false}
+                    // bordered={false}
                     size="large"
+                    allowClear
                     placeholder="Faktura turi">
                     <Option value={FACTURA_TYPES["STANDARD"]}>{t("Standard")}</Option>
                     <Option value={FACTURA_TYPES["QOSHIMCHA"]}>{t("Qo'shimcha")}</Option>
