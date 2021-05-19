@@ -54,7 +54,7 @@ const UserProducts = ({ user }) => {
                             Если в Классификаторе отсутствует нужный Вам товар/услуга, Вы можете воспользоваться опцией «Добавить новый товар или услугу» здесь: <a href="https://tasnif.soliq.uz/classifier/">https://tasnif.soliq.uz/classifier/</a>
                         </p>
                         <DynaGrid
-                            gridSourceUrl={gridSourceUrl}
+                            
                             hideFilter
                             config={{...gridConfig, dataSourcePath: gridSourceUrl+`?tin=${user.tin}`}}
                         />
