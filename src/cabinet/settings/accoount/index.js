@@ -3,7 +3,8 @@ import {Button, Form, Input, Switch} from "antd";
 import st from './account.module.scss'
 import firebase from "../../../utils/firebase";
 import { useTranslation } from "react-i18next";
-
+import save from '../../../assests/settings/save.svg'
+import cancel from '../../../assests/settings/cancel.svg'
 function Account() {
 
     const { t } = useTranslation();
@@ -51,38 +52,32 @@ function Account() {
 
     return(
         <>
-            <div className={`${st.block} flexible`}>
+            <Form
+                // labelCol={{span: 24}}
+                requiredMark={false}
+            >
+                <div className={`${st.block} flexible`}>
+
                 <div style={{width:'48%'}}>
-                    <p className={st.main_title}>Подключить телеграм бот:</p>
-                    <Form
-                    labelCol={{span: 24}}
-                    requiredMark={false}
-                    >
-                        {/* <Form.Item>
-                            <span className="custom-input-label-1"><p className="label"></p></span> */}
+                    <p className={st.main_title}>Данные для входа</p>
+
+
                             <Form.Item
-                                label={t("Eski parolni kiriting")}
+                                // label={t("Eski parolni kiriting")}
                                 rules={[{required: true}]}
                                 name="number">
-                            <Input size="large" placeholder={t("Eski parolni kiriting")}/>
+                                <span className={st.label}>Логин/Почта</span>
+                            <Input size="large" placeholder="Логин/Почта"/>
                             </Form.Item>
-                        {/* </Form.Item> */}
-                        {/* <Form.Item>
-                            <span className="custom-input-label-1"><p className="label"></p></span> */}
-                            <Form.Item
-                                label={t("Yangi parolni kiriting")}
+                             <Form.Item
                                 rules={[{required: true}]}
                                 name="code">
-                            <Input size="large" placeholder={t("Yangi parolni kiriting")} />
+                                 <span className={st.label}>Номер телефона</span>
+                            <Input size="large" placeholder="Номер телефона" />
                             </Form.Item>
-                        {/* </Form.Item> */}
 
-                        {/* <Form.Item>
-                            <span className="custom-input-label-1"><p className="label">Введите новый пароль, еще раз:</p></span> */}
-                            <Form.Item
-                                label={t("Parolni qayta kiriting")}
-                                rules={[{required: true}]}
-                            >
+                            <Form.Item rules={[{required: true}]}>
+
                                 <div className="flexible">
                                     <Switch name={'switch1'}/>
                                     <p className={st.desc}>Получать уведомление на номер телефона</p>
@@ -92,70 +87,48 @@ function Account() {
                                     <p className={st.desc}>Комфортный режим</p>
                                 </div>
                             </Form.Item>
-                        {/* </Form.Item> */}
-                        <Button size={"large"} className={st.podkluchit}>Подключить</Button>
-                    </Form>
+                    {/*</Form>*/}
                 </div>
                 <div style={{width:'4%'}}></div>
                 <div style={{width:'48%'}}>
-                    <p className={st.main_title}>Получайте уведомления через телефонный номер:</p>
-                    <Form
-                    labelCol={{span: 24}}
-                    requiredMark={false}
-                        onFinish={onSignInSubmit}
-                        name="sms-varifiaction"
-                    >
-                        {/* <Form.Item style={{marginTop:'9%'}}>
-                            <span className="custom-input-label-1"><p className="label"></p></span> */}
-
+                    <p className={st.main_title}>Изменение пароля:</p>
+                    {/*<Form*/}
+                    {/*labelCol={{span: 24}}*/}
+                    {/*requiredMark={false}*/}
+                    {/*    onFinish={onSignInSubmit}*/}
+                    {/*    name="sms-varifiaction">*/}
                             <Form.Item
-                                label={t("Telefon raqamni kiriting")}
                                 rules={[{required: true}]}
                                 style={{width:'61.5%'}}
                                 name="number">
+                                <span className={st.label}>Введите старый пароль: <span className={'red_color'}>*</span></span>
                                 <div className={st.psw}>
-                                    <Input.Password
-                                        size="large"
-                                        placeholder="+998xx xxx xx xx" />
+                                    <Input.Password size="large" placeholder="+998xx xxx xx xx" />
                                 </div>
                             </Form.Item>
-                        {/* </Form.Item> */}
                         <div id="recaptcha-container">
                             
                         </div>
-                        {/* <Form.Item> */}
-                            <Form.Item
-                                // rules={[{required: true}]}
-                                // key="dyna-form-facutura-no"
-                                name="code" 
-                                label="Введите новый пароль:"
-                                >
-                                {/* <span className="custom-input-label-1"><p className="label"></p></span> */}
+                            <Form.Item name="code">
+                                <span className={st.label}>Введите новый пароль:</span>
                                 <div className={st.psw}>
-                                    <Input.Password
-                                        size="large"
-                                        placeholder="XXX-XXX" />
+                                    <Input.Password size="large" placeholder="XXX-XXX" />
                                 </div>
                             </Form.Item>
-                        <Form.Item
-                                // rules={[{required: true}]}
-                                // key="dyna-form-facutura-no"
-                                name="code"
-                                label="Введите новый пароль, еще раз:"
-                                >
-                                {/* <span className="custom-input-label-1"><p className="label"></p></span> */}
+                        <Form.Item name="code">
+                                <span className={st.label}>Введите новый пароль, еще раз:</span>
                                 <div className={st.psw}>
-                                    <Input.Password
-                                        size="large"
-                                        placeholder="XXX-XXX" />
+                                    <Input.Password size="large" placeholder="XXX-XXX"/>
                                 </div>
-                            </Form.Item>
-
-                        {/* </Form.Item> */}
-                        <Button size={"large"} htmlType="submit" className={st.podkluchit}>Подключитьd</Button>
-                    </Form>
+                        </Form.Item>
                 </div>
-            </div>
+                </div>
+                <div className="flexible" style={{marginTop:'10px'}}>
+                    <button className={st.btn_save}> <img src={save} alt=""/> <span className={st.txt}>Save</span></button>
+                    <button className={st.btn_cancel}><img src={cancel} alt=""/> <span className={st.txt}>Cancel</span></button>
+                </div>
+            </Form>
+
         </>
     )
 }
