@@ -10,7 +10,7 @@ import ClasscodeAjaxSearch from '../../../components/classcodes-ajax-search/clas
 import DynaGrid from '../../../components/dyna-grid/dyna-grid.component'
 import { selectCurrentUser } from '../../../redux/user/user.selector'
 import { get_home_config } from '../../../utils/home.config.provider'
-import HomePage from '../../common/home/home.component'
+//import HomePage from '../../common/home/home.component'
 import green_excell from "../../../images/green-excell.svg";
 
 const { Option } = Select;
@@ -20,18 +20,6 @@ const UserProducts = ({ user }) => {
     const { t } = useTranslation();
     const [spinning, setSpinning] = useState(false);    
     
-    const handleFetchTasnifSoliq = ()=>{
-        setSpinning(true)
-        axios({
-            url: `classifications/reload?tin=${user.tin??user.username}`,
-            method: "GET"
-        }).then(res=>{
-            setSpinning(false)
-            //window.location.reload()
-        }).catch(ex=>{
-            setSpinning(false)
-        })
-    }
     const { title, createTitle, createUrl, gridSourceUrl, gridConfig } = get_home_config("user-products");
     return (
         <div>
@@ -61,22 +49,7 @@ const UserProducts = ({ user }) => {
                     </div>
                     
                 </div>
-                {/* <ClasscodeAjaxSearch /> */}
-                
-            {/* <HomePage 
-            
-            hideTabs
-                customButton={<div 
-                    style={{ cursor: "pointer" }}
-                    onClick={handleFetchTasnifSoliq}><span><FontAwesomeIcon icon="sync-alt" /> {t("Synxronizatsiya")}</span></div>}
-            doc="user-products"
-            addParams={[
-                {
-                    name: "tin",
-                    value: user.tin ?? user.username
-                }
-            ]}
-            /> */}
+
             </Spin>
         </div>
     )

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 import { Button, Select, Spin } from 'antd';
-import { useState } from 'react/cjs/react.development';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 import { connect } from 'react-redux';
