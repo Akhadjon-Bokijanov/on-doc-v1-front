@@ -399,7 +399,7 @@ const DynaGrid = ({
                 okText="Ha"
                 cancelText="Yo'q"
               >
-              <DeleteOutlined style={{color: 'red'}} />
+              <DeleteOutlined style={{color: '#FE346E'}} />
             </Popconfirm>
           </Tooltip>
           : null
