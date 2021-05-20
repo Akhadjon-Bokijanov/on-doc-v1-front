@@ -152,7 +152,7 @@ function Account() {
                             </Form.Item>
 
                         {/* </Form.Item> */}
-                        <Button size={"large"} htmlType="submit" className={st.podkluchit}>Подключить</Button>
+                        <Button size={"large"} htmlType="submit" className={st.podkluchit}>Подключитьd</Button>
                     </Form>
                 </div>
             </div>
