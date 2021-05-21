@@ -96,11 +96,11 @@ const CabinetHeader = ({ user,match }) => {
                     </div> */}
                         <div className="ch-action-container">
                             <Link to='/cabinet/balance'>
-                                <div style={{ display: 'flex',padding:'12px' }}>
+                                <div style={{ display: 'flex' }}>
                                     <img className="wallet-img" src={wallet} alt=""/>
                                     <div>
                                         <div><span className={'balance'}>Balansingiz:</span></div>
-                                        <div className={'balance_value'}>{'150000sum'}</div>
+                                        <div className={'balance_value'}>{'150.000 sum'}</div>
                                     </div>
                                 </div>
                             </Link>

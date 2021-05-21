@@ -24,7 +24,7 @@ const CabinetIndex = ({ match }) => {
     return (
         <div>
             <Row justify="space-around">
-               <Col md={10} lg={4} style={{width:'256px'}}>
+               <Col md={7} lg={4} style={{width:'256px'}}>
                     <RightSidebar />
                </Col>
                <Col md={14} lg={20} style={{width:'1184px'}}>
