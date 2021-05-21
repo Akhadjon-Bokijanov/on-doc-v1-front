@@ -95,11 +95,16 @@ const CabinetHeader = ({ user,match }) => {
                     </div> */}
                     <div className="ch-action-container">
                         <Link to='/cabinet/balance'>
-                        <div style={{ display: 'flex' }}>
-                            <img className="wallet-img" src={wallet} alt=""/>
+                        <div style={{ display: 'flex', alignItems: 'center'}}>
+                            <div style={{marginRight: 10}}>
+                                <img className="wallet-img" src={wallet} alt=""/>
+                            </div>
                             <div>
-                                    <div style={{ fontSize: 14, color: "#303030"}} >{t("Balansingiz")}</div>
-                                <div style={{ fontSize: 18, color: "#2B63C0", fontWeight: "bold"}}>{45000}</div>
+                                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 7}}>
+                                    <div style={{ height: 16,fontSize: 14, color: "#303030"}} >{t("Balansingiz")}</div>
+                                    <div style={{ height: 20,fontSize: 18, color: "#2B63C0", fontWeight: "bold"}}>{45000}</div>
+                                </div>
+
                             </div>
                             </div>
                         </Link>

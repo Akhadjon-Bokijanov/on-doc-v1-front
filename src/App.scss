@@ -98,7 +98,7 @@ body {
     border-bottom-right-radius: 0px !important;
 }
 
-.ant-input-lg,
+input.ant-input-lg,
 .ant-picker-large,
 .ant-input-password-large,
 .ant-select-lg {
@@ -107,6 +107,11 @@ body {
     height: 48px!important;
     //min-width: 100%;
 }
+
+textarea.ant-input-lg{
+    border-radius: 12px !important;
+}
+
 .ant-picker-large{
     min-width: 100%;
 }
@@ -265,7 +270,7 @@ div.custom-section-wrapper{
     outline: none;
     background-color: #2B63C0;
     color: #fff;
-    padding: 10px;
+    padding: 6px 21px;
     border-radius: 8px;
 }
 

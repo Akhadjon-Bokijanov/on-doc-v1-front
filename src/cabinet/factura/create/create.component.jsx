@@ -254,8 +254,8 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
       >
 
         <div className="factura-data-sheet-container">
-          <Row justify="space-between">
-            <Col md={11}>
+          <Row justify="space-between" gutter={[32, 0]}>
+            <Col md={12}>
               {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no"
@@ -278,7 +278,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
+            <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 12 : 0}>
               {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no-old"
@@ -292,7 +292,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
+            <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 12 : 0}>
               {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no-old"
@@ -306,7 +306,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 11 : 0}>
+            <Col md={facturaType === FACTURA_TYPES["QOSHIMCHA"] || facturaType === FACTURA_TYPES["TUZATUVCHI"] ? 12 : 0}>
               {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-facutura-no-old"
@@ -321,8 +321,8 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
               {/* </Form.Item> */}
             </Col>
           </Row>
-          <Row justify="space-between">
-            <Col md={11}>
+          <Row justify="space-between" gutter={[32, 0]}>
+            <Col md={12}>
               {/* <Form.Item> */}
                 <Form.Item
                   rules={[{ required: true }]}
@@ -336,7 +336,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
               {/* <Form.Item> */}
                 <Form.Item
                   key="dyna-form-item-inn-date"
@@ -350,7 +350,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
               {/* <Form.Item> */}
                 <Form.Item
                   rules={[{ required: true }]}
@@ -364,7 +364,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
               {/* <Form.Item> */}
                 <Form.Item
                   rules={[{ required: true }]}
@@ -383,12 +383,12 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
 
         <div className="factura-data-sheet-container">
 
-          <Row justify="space-between">
-            <Col md={11}>
+          <Row justify="space-between" gutter={[32, 0]}>
+            <Col md={12}>
               <SellerForm form={form} />
             </Col>
 
-            <Col md={11}>
+            <Col md={12}>
               <BuyerForm form={form} docType="factura" />
             </Col>
           </Row>
@@ -399,8 +399,8 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
           <div>
             <h2 style={{ fontWeight: 700, fontSize: 28}}>{t("Ishonchnoma")}</h2>
           </div>
-          <Row justify="space-between">
-            <Col md={5} >
+          <Row justify="space-between" gutter={[24, 0]}>
+            <Col md={6} >
               {/* <Form.Item> */}
                 <Form.Item
                   key="empowerment-no"
@@ -413,7 +413,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={5}>
+            <Col md={6}>
               {/* <Form.Item> */}
                 <Form.Item
                   key="seler-account-empowerment-dateof-issue"
@@ -432,8 +432,8 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
                 pTin="agentTin"
                 nameLabel={t("Ma'sul shaxs FIO")}
                 tinLabel={t("STIR")}
-                tinCol={11}
-                nameCol={11}
+                tinCol={12}
+                nameCol={12}
                 form={form}
               />
             </Col>
