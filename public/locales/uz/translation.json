@@ -138,5 +138,9 @@
     "ID: ": "ID: ",
     "ContractDate dagi EmpowermentNo sonli shartnomaga EmpowermentDateOfIssue dagi": "{{ContractDate}} dagi {{EmpowermentNo}} sonli shartnomaga \n {{EmpowermentDateOfIssue}} dagi",
     "Dokument yaratish:": "Dokument yaratish: ",
-    "Введите код отправленный через SMS:": "SMS orqali yuborilgan kodni kiriting"
+    "Введите код отправленный через SMS:": "SMS orqali yuborilgan kodni kiriting",
+    "Yaratish": "Yaratish",
+    "Sozlamalar": "Sozlamalar",
+    "Konsultant":"Konsultant",
+    "Yangiliklar": "Yangiliklar"
 }
