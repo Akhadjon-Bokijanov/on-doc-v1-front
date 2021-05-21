@@ -23,11 +23,13 @@ const CabinetIndex = ({ match }) => {
     const {url} = match;
     return (
         <div>
-            <Row justify="space-around">
-               <Col md={7} lg={4} style={{width:'256px'}}>
-                    <RightSidebar />
-               </Col>
-               <Col md={14} lg={20} style={{width:'1184px'}}>
+            <div style={{display: 'flex'}}>
+
+                   <RightSidebar />
+
+
+               <div style={{width: window.innerWidth-256}}>
+               {/*<Col md={14} lg={20} style={{width:'1184px'}}>*/}
                    <div style={{boxShadow:'inset 0px -1px 0px rgba(0, 0, 0, 0.08)'}}>
                        <CabinetHeader/>
                    </div>
@@ -47,9 +49,10 @@ const CabinetIndex = ({ match }) => {
 
                    <Route exact path={`${url}/tariffs`} component={Tariff} />
                    <Route path={`${url}/tariffs/:id`} component={CurrentTariff} />
+               </div>
 
-               </Col>
-            </Row>
+               {/*</Col>*/}
+            </div>
         </div>
     );
 };

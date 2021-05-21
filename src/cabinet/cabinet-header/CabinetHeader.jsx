@@ -94,25 +94,30 @@ const CabinetHeader = ({ user,match }) => {
                         {/* <div>
                         <LanguagesDropdown />
                     </div> */}
-                        <div className="ch-action-container">
-                            <Link to='/cabinet/balance'>
-                                <div style={{ display: 'flex' }}>
-                                    <img className="wallet-img" src={wallet} alt=""/>
-                                    <div>
-                                        <div><span className={'balance'}>Balansingiz:</span></div>
-                                        <div className={'balance_value'}>{'150.000 sum'}</div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                        </div>
-                        <div className="ch-action-container">
-                            <div>
-                                <Link to="/cabinet/tariffs">
-                                    <button style={{cursor:'pointer'}} className="custom-primary-btn"><span className={'txt'}>{t("Tarif aktivlashtiring")}</span></button>
-                                </Link>
+                    <div className="ch-action-container">
+                        <Link to='/cabinet/balance'>
+                        <div style={{ display: 'flex', alignItems: 'center'}}>
+                            <div style={{marginRight: 10}}>
+                                <img className="wallet-img" src={wallet} alt=""/>
                             </div>
+                            <div>
+                                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 7}}>
+                                    <div style={{ height: 16,fontSize: 14, color: "#303030"}} >{t("Balansingiz")}</div>
+                                    <div style={{ height: 20,fontSize: 18, color: "#2B63C0", fontWeight: "bold"}}>{45000}</div>
+                                </div>
+
+                            </div>
+                            
                         </div>
+                        </Link>
+                    </div>
+                    <div className="ch-action-container">
+                        <div>
+                            <Link to="/cabinet/tariffs">
+                                <button style={{ cursor: 'pointer' }} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
+                            </Link>
+                        </div>
+                    </div>
                         <div className="ch-action-container">
                             <img src={chat} alt=""/>
                         </div>
@@ -124,10 +129,10 @@ const CabinetHeader = ({ user,match }) => {
                                 <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
                             </Dropdown>
                         </div>
-                    </div>
+                    
                 </div>
             </div>
-        // </div>
+        </div>
     )
 }
 

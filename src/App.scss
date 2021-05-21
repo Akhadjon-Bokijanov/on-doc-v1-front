@@ -98,18 +98,28 @@ body {
     border-bottom-right-radius: 0px !important;
 }
 
-.ant-input-lg,
+input.ant-input-lg,
 .ant-picker-large,
 .ant-input-password-large,
 .ant-select-lg {
     //border: 1px solid #dadce0 !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
+    padding: 12px;
+    font-size: 16px !important;
     height: 48px!important;
+    //min-width: 100%;
+}
+
+textarea.ant-input-lg{
+    border-radius: 12px !important;
+}
+
+.ant-picker-large{
     min-width: 100%;
 }
 
 .ant-input-password-large input[type="password"] {
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     height: 100%!important;
     position: relative;
     //z-index: 100;
@@ -259,12 +269,10 @@ div.custom-section-wrapper{
 
 .custom-primary-btn{
     border: none;
+    outline: none;
+    background-color: #2B63C0;
+    color: #fff;
     padding: 6px 21px;
-    //width: 160px;
-    height: 36px;
-    left: 800px;
-    top: 27px;
-    background: #2B63C0;
     border-radius: 8px;
     .txt{
         font-size: 12px;

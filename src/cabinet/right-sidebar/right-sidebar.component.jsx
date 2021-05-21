@@ -102,7 +102,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
     }
 
     return (
-        <div className="cabiner-right-sidebar-cmain-container" >
+        <div className="cabiner-right-sidebar-cmain-container" style={{width: 256}} >
             <AfertaPopup />
             <BindroumingPopup />
             <Modal 

@@ -274,8 +274,8 @@ const ActForm = ({ token, match, user, loadedKey })=> {
 
       <div className="factura-data-sheet-container">
        
-      <Row justify="space-between">
-            <Col md={11}>
+      <Row justify="space-between" gutter={[32, 0]}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
@@ -289,7 +289,7 @@ const ActForm = ({ token, match, user, loadedKey })=> {
                   {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 key="dyna-form-item-inn-date"
@@ -303,7 +303,7 @@ const ActForm = ({ token, match, user, loadedKey })=> {
                   {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
@@ -317,7 +317,7 @@ const ActForm = ({ token, match, user, loadedKey })=> {
                   {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
@@ -336,12 +336,12 @@ const ActForm = ({ token, match, user, loadedKey })=> {
 
       <div className="factura-data-sheet-container">
         
-        <Row justify="space-between">
-        <Col md={11}>  
+        <Row justify="space-between" gutter={[32, 0]}>
+        <Col md={12}>  
           <SellerForm form={form} docType="act" />
         </Col>
 
-        <Col md={11}>
+        <Col md={12}>
           <BuyerForm form={ form } docType="act" />
         </Col>
       </Row>
@@ -350,7 +350,7 @@ const ActForm = ({ token, match, user, loadedKey })=> {
       <div className="factura-data-sheet-container">
           <h3>{t("Akt mazmuni") }</h3>
               <Form.Item name="actText">
-                <TextArea size="large" rows={4} />
+                <TextArea size="large" rows={5} />
               </Form.Item>
           </div>
 

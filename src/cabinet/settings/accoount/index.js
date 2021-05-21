@@ -58,7 +58,8 @@ function Account() {
             >
                 <div className={`${st.block} flexible`}>
 
-                <div style={{width:'49%'}}>
+
+                <div style={{width: (window.innerWidth-32)/2}}>
                     <p className={st.main_title}>Данные для входа</p>
 
 
@@ -89,8 +90,9 @@ function Account() {
                             </Form.Item>
                     {/*</Form>*/}
                 </div>
-                <div style={{width:'2%'}}></div>
-                <div style={{width:'49%'}}>
+
+                <div style={{width: 32}}></div>
+                <div style={{width: (window.innerWidth-32)/2}}>
                     <p className={st.main_title}>Изменение пароля:</p>
                     {/*<Form*/}
                     {/*labelCol={{span: 24}}*/}

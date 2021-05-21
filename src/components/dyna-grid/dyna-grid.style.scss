@@ -48,6 +48,14 @@ table {
     text-align: center;
 }
 
+.ant-table-tbody > tr:nth-child(even){
+    background-color: #F8FAFC !important;
+
+    .ant-table-cell-fix-right{
+        background-color: #F8FAFC !important;
+    }
+}
+
 .dyna-grid-doc-filter-area{
     border-radius: 8px;
     background-color: #ffffff;
