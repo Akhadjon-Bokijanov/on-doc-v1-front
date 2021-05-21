@@ -39,7 +39,7 @@ const PersonFetch = ({ pTin, tinLabel, pName, nameLabel, form, tinCol, nameCol }
 
     return (
         <div>
-            <Row justify="space-between">
+            <Row justify="space-between" gutter={[24, 0]}>
                 <Col md={tinCol ?? 24}>
                     {/* <Form.Item> */}
                         <Form.Item

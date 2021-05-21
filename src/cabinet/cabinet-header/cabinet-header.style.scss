@@ -17,11 +17,33 @@
                 display: flex;
                 margin-left: 45px;
                 .wallet-img{
-                    padding: 5px 10px;
-                    margin: 5px 10px;
+                    padding: 11px;
+                    //margin: 5px 10px;
                     border-radius: 7px;
                     background-color: rgba(24, 144, 255, 0.1);
-                    //margin-right: 10px;
+                    margin-top: 0!important;
+                    margin-bottom: 0!important;
+                }
+                .balance{
+                    //top: calc(50% - 17px/2 - 11px);
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 16px;
+                    display: flex;
+                    align-items: center;
+                    text-align: center;
+                    color: #303030;
+                }
+                .balance_value{
+                    font-family: Roboto;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 18px;
+                    line-height: 21px;
+                    display: flex;
+                    align-items: center;
+                    color: #2B63C0;
                 }
             }
         }
@@ -30,4 +52,7 @@
 .ant-layout-header{
     padding:0;
     line-height: 20px;
+}
+.ant-dropdown-menu-submenu-title{
+    padding: 12px 18px;
 }

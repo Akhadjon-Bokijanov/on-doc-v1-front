@@ -96,7 +96,7 @@ const DynaForm = ({
     triggerActionOnly,              //This is provided by the comoponent itself
     triggerActionWithRes,           //This is provided by the comoponent itself
     currentUser,                    //This is provided by the comoponent itself
-    sendNotif,                      //Send notification service
+    sendNotif,                      //Send accoount service
     setScore,                       //Sets the solved exercise score
     setAnswers,                     //Sets the values of form to user exercise answers
     history,                        //This is provided by the comoponent itself

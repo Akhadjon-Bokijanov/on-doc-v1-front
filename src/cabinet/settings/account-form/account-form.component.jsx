@@ -80,8 +80,8 @@ const AccountForm = ({user, setUserOnly}) => {
                 onFinish={onSubmit}
                 form={form}
             >
-                <Row justify="space-between">
-                    <Col md={11}>
+                <Row justify="space-between" gutter={[32, 0]}>
+                    <Col md={12}>
                     
                         <Form.Item>
                             <Form.Item
@@ -99,7 +99,7 @@ const AccountForm = ({user, setUserOnly}) => {
                         </Form.Item>
                     </Col>
                     {
-                        fields.map(field => <Col md={11}>
+                        fields.map(field => <Col md={12}>
                             <Form.Item>
                                 <Form.Item
                                     key={`dyna-form-facutura-no-old-${field.name}`}
@@ -114,7 +114,7 @@ const AccountForm = ({user, setUserOnly}) => {
                             </Form.Item>
                         </Col>)
                     }
-                    <Col md={11}>
+                    <Col md={12}>
                         <Form.Item>
                             <Form.Item
                                 key={`dyna-form-facutura-no-old-tin-vil`}
@@ -135,7 +135,7 @@ const AccountForm = ({user, setUserOnly}) => {
                             <span className="custom-input-label-1">{t("Viloyat")}</span>
                         </Form.Item>
                     </Col>
-                   <Col md={11}>
+                   <Col md={12}>
                         <Button
                             htmlType="submit"
                             loading={loading}

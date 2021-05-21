@@ -98,30 +98,52 @@ body {
     border-bottom-right-radius: 0px !important;
 }
 
-.ant-input-lg,
+input.ant-input-lg,
 .ant-picker-large,
 .ant-input-password-large,
-.ant-select-lg {
-    border: 1px solid #dadce0 !important;
+{
+    //border: 1px solid #dadce0 !important;
     border-radius: 8px !important;
-    height: 48px;
+    padding: 12px;
+    font-size: 16px !important;
+    height: 48px!important;
+    //min-width: 100%;
+}
+
+.ant-select-lg{
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    height: 48px!important;
+}
+
+textarea.ant-input-lg{
+    border-radius: 12px !important;
+}
+
+.ant-picker-large{
     min-width: 100%;
 }
-// .ant-picker-large{
-//     max-width: 300px !important;
-// }
+
+.ant-input-password-large input[type="password"] {
+    border-radius: 8px !important;
+    height: 100%!important;
+    position: relative;
+    //z-index: 100;
+    width: 100%;
+    //z-index: 100;
+
+    //right: 0;
+    //top: 0;
+    //bottom: 0;
+}
 
 .ant-radio-button-wrapper {
     height: 55px !important;
-    padding: 10px !important;
+    padding: 10px 7px!important;
     width: 50%;
     text-align: center;
 }
 
-.ant-input-password-large input[type="password"] {
-    border: none !important;
-    height: auto;
-}
 
 .ant-form-item-explain-success {
     display: none !important;
@@ -129,9 +151,15 @@ body {
 
 .ant-form-item-has-error .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) .ant-select-selector {
     height: 55px !important;
-    border-radius: 11px;
+    border-radius: 12px;
 }
-
+.ant-select-selector{
+    height: 48px!important;
+    background: #FFFFFF!important;
+    border: 0.5px solid #D9D9D9!important;
+    box-sizing: border-box!important;
+    border-radius: 8px!important;
+}
 .ant-form-item-explain.ant-form-item-explain-error {
     font-size: 11px;
     position: absolute !important;
@@ -139,6 +167,10 @@ body {
     left: 10px;
     transition: none !important;
 }
+.red_color{
+    color:#FE346E;
+}
+
 
 .ant-radio-wrapper {
     display: flex !important;
@@ -155,7 +187,12 @@ body {
 }
 
 .ant-radio {
-    padding: 10px !important;
+    width: 26px;
+    height: 26px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: center;
+    //padding: 5px 5px!important;
 }
 
 .ant-radio-group {
@@ -209,6 +246,10 @@ body {
     padding: 0 !important;
 }
 
+.ant-switch-checked{
+    background-color: #2B63C0 !important;
+}
+
 span.custom-input-label-1 {
     margin-top: 24px !important;
     font-size: 16px;
@@ -237,8 +278,13 @@ div.custom-section-wrapper{
     outline: none;
     background-color: #2B63C0;
     color: #fff;
-    padding: 10px;
+    padding: 6px 21px;
     border-radius: 8px;
+    .txt{
+        font-size: 12px;
+        line-height: 24px;
+        color: #FFFFFF;
+    }
 }
 
 .title{
@@ -261,7 +307,7 @@ div.custom-section-wrapper{
 
 .factura-home-list-tabs {
             margin-top: 10px;
-            margin-bottom: 15px;
+            //margin-bottom: 15px;
             .factura-home-list-tab-con {
                 display: flex;
                 justify-content: space-around;

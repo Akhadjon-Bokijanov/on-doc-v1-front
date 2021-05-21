@@ -1,0 +1,71 @@
+.delete_icon{
+  transform:rotate(45deg);
+}
+$green:#0FBE7B;
+$red:#FE346E;
+
+.block{
+  padding:24px 24px 78px 24px;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  border-radius: 12px;
+  .title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #303030;
+  }
+  .title_value{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #303030;
+  }
+  .label{
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 0!important;
+    margin-bottom:8px!important;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333333;
+  }
+  Input{
+    padding: 12px!important;
+  }
+}
+
+
+.save{
+  justify-content: center;
+  align-items: center;
+  background: $green;
+  border-radius: 8px;
+  color:#FFFFFF;
+  width: 160px;
+  height: 50px;
+  img{
+    margin-right: 10px;
+  }
+}
+.cancel{
+  justify-content: center;
+  align-items: center;
+  background: $red;
+  border-radius: 8px;
+  color:#FFFFFF;
+  margin-left: 10px;
+  width: 160px;
+  height: 50px;
+  img{
+    margin-right: 10px;
+  }
+}

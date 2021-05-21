@@ -137,5 +137,10 @@
     "ContractDate dagi ContractNo sonli shartnomaga FacturaDate dagi FacturaNo sonli": "{{ContractDate}} dagi {{ContractNo}} sonli shartnomaga \n {{FacturaDate}} dagi {{FacturaNo}} sonli",
     "ID: ": "ID: ",
     "ContractDate dagi EmpowermentNo sonli shartnomaga EmpowermentDateOfIssue dagi": "{{ContractDate}} dagi {{EmpowermentNo}} sonli shartnomaga \n {{EmpowermentDateOfIssue}} dagi",
-    "Dokument yaratish:": "Dokument yaratish: "
+    "Dokument yaratish:": "Dokument yaratish: ",
+    "Введите код отправленный через SMS:": "SMS orqali yuborilgan kodni kiriting",
+    "Yaratish": "Yaratish",
+    "Sozlamalar": "Sozlamalar",
+    "Konsultant":"Konsultant",
+    "Yangiliklar": "Yangiliklar"
 }

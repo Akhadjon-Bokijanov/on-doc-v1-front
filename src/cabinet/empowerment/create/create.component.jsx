@@ -302,8 +302,8 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
         <h1 style={{fontWeight: 'bold'}}>{t("Dokument yaratish:")}{t("Ishonchnoma")}</h1>
       <div className="factura-data-sheet-container">
       
-      <Row justify="space-between">
-            <Col md={11}>
+      <Row justify="space-between" gutter={[32,0]}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
@@ -318,36 +318,42 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
               {/* </Form.Item> */}
             </Col>
             
-            <Col md={11}>
-              <div style={{display: 'flex', justifyContent: "space-between"}}>
-            {/* <Form.Item> */}
-              <Form.Item 
-                key="dyna-form-item-inn-date"
-                name="empowermentDateOfIssue"
-                label={t("Berilgan sanasi")}
-                rules={[{required: true}]}>
-                  <DatePicker                
-                    size="large"
-                    placeholder="Berilgan sanasi" />
-              </Form.Item>
+            <Col md={12}>
+
+              <Row justify="space-between" gutter={[32, 0]}>
+                <Col md={12}>
+                  {/* <Form.Item> */}
+                  <Form.Item
+
+                    key="dyna-form-item-inn-date"
+                    name="empowermentDateOfIssue"
+                    label={t("Berilgan sanasi")}
+                    rules={[{ required: true }]}>
+                    <DatePicker
+                      size="large"
+                      placeholder="Berilgan sanasi" />
+                  </Form.Item>
                   {/* <span className="custom-input-label-1"></span> */}
-              {/* </Form.Item> */}
-          
-            {/* <Form.Item> */}
-              <Form.Item 
-                key="dyna-form-item-inn-date-expire"
-                name="empowermentDateOfExpire"
-                  label={t("Amal qilish sanasi")}
-                rules={[{required: true}]}>
-                  <DatePicker                
-                    size="large"
-                    placeholder="Amal qilish sanasi" />
-              </Form.Item>
+                  {/* </Form.Item> */}
+                </Col>
+                <Col md={12}>
+                  {/* <Form.Item> */}
+                  <Form.Item
+                    key="dyna-form-item-inn-date-expire"
+                    name="empowermentDateOfExpire"
+                    label={t("Amal qilish sanasi")}
+                    rules={[{ required: true }]}>
+                    <DatePicker
+                      size="large"
+                      placeholder="Amal qilish sanasi" />
+                  </Form.Item>
                   {/* <span className="custom-input-label-1"></span> */}
-              {/* </Form.Item> */}
-              </div>
+                  {/* </Form.Item> */}
+                </Col>
+              </Row>
+              
             </Col>
-            <Col md={11}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
@@ -361,7 +367,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
                   {/* <span className="custom-input-label-1"></span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={11}>
+            <Col md={12}>
             {/* <Form.Item> */}
               <Form.Item 
                 rules={[{required: true}]}
@@ -380,12 +386,12 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
 
       <div className="factura-data-sheet-container">
         
-        <Row justify="space-between">
-        <Col md={11}>  
+        <Row justify="space-between" gutter={[32, 0]}>
+        <Col md={12}>  
           <SellerForm docType="empowerment"/>
         </Col>
 
-        <Col md={11}>
+        <Col md={12}>
           <BuyerForm form={ form } docType="empowerment"/>
         </Col>
       </Row>
@@ -455,7 +461,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
           </div>
       {/* <Button 
         size="large" 
-        style={{marginTop: 20, marginRight: 7, width: 220}} 
+        style={{marginTop: 20, marginRight: 8, width: 220}} 
         type="primary" 
         icon={<FontAwesomeIcon 
           style={{marginRight: 7}} 
@@ -475,8 +481,8 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
           
         <div className="factura-data-sheet-container">
 
-          <Row justify="space-between">
-          <Col md={7}>
+          <Row justify="space-between" gutter={[32, 0]}>
+          <Col md={8}>
               {/* <Form.Item> */}
                 <Form.Item 
               key="seler-account-tyin-inn"
@@ -491,7 +497,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
                 {/* <span className="custom-input-label-1">СТИР</span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={7} >
+            <Col md={8} >
               {/* <Form.Item> */}
                 <Form.Item 
               key="agentFio-no"
@@ -504,7 +510,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
                 {/* <span className="custom-input-label-1">ФИШ</span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={7}>
+            <Col md={8}>
               {/* <Form.Item> */}
                 <Form.Item 
                 label={t("Mansab")}
@@ -518,7 +524,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
               {/* </Form.Item> */}
             </Col>
             
-            <Col md={7}>
+            <Col md={8}>
           
                 {/* <Form.Item> */}
                   <Form.Item 
@@ -534,7 +540,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
             
             </Col>
 
-            <Col md={7} >
+            <Col md={8} >
               {/* <Form.Item> */}
                 <Form.Item
               key="selenote-field"
@@ -547,7 +553,7 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
                 {/* <span className="custom-input-label-1">Ким томонидан берилган</span> */}
               {/* </Form.Item> */}
             </Col>
-            <Col md={7} >
+            <Col md={8} >
               {/* <Form.Item> */}
                 <Form.Item
               key="selenote-field"

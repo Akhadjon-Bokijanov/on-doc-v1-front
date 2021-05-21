@@ -10,30 +10,28 @@ const ProfileTabs = ({ match, location }) => {
     const tabs = [
         {
             title: "Hisob",
-            url: "/cabinet/settings/account"
-        },
-        {
-            title: "Xabarnoma",
-            url: "/cabinet/settings/notify"
-        },
-        {
-            title: "Maxsulotingiz",
-            url: "/cabinet/settings/tab-2"
-        },
-        {
-            title: "Kompaniya ma'lumotlari",
             url: "/cabinet/settings"
         },
         {
+            title: "Коды товаров и услуг",
+            url: "/cabinet/settings/notify"
+        },
+        {
+            title: "Kompaniya ma'lumotlari",
+            url: "/cabinet/settings/company_info"
+        },
+        {
             title: "Hujjat formati",
-            url: "/cabinet/settings/tab-4"
+            url: "/cabinet/settings/docFormat"
         }
     ]
 
     const [activeTab, setActiveTab] = useState(location.pathname)
 
     return (
-        <div style={{ marginBottom: 20 }}>
+        <div 
+        //style={{ marginBottom: 20 }}
+        >
             <div className="factura-home-list-tabs">
                 <div className="factura-home-list-tab-con">
                     {

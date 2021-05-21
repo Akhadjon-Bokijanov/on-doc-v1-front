@@ -147,14 +147,16 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                     >
                                     <div style={{maxHeight:"380px",overflowY:'auto'}}>
 
-                                            <div>
+                                            <div >
                                                 <Form.Item
+
                                                     className={st.login_form_container}
                                                     name="key">
                                                     <Radio.Group
+
                                                         size="large">
                                                         {
-                                                            eKeys.map(data => <Radio key={data.value} value={data}>
+                                                            eKeys.map(data => <Radio  key={data.value} value={data}>
                                                                 <div className={`${st.client_availbale_key}`}>
                                                                     <div>{t("FIO")}: {data.text.CN} </div>
                                                                     <div>{t("STIR")}: {data.text.TIN}</div>

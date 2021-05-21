@@ -13,18 +13,18 @@ import { createStructuredSelector } from 'reselect';
 import { selectLoadedKey } from '../../redux/user/user.selector';
 import AfertaPopup from '../aferta-popup/aferta-popup.component';
 import BindroumingPopup from '../bindrouming-popup/bindrouming-popup.component';
-import logo from '../../assests/logo_new.png'
+import logo from '../../assests/logo_new.svg'
 import {RightOutlined} from '@ant-design/icons';
-import add from '../../assests/sidebar/add.png'
-import archived from '../../assests/sidebar/archived.png'
-import down from '../../assests/sidebar/down.png'
-import exit from '../../assests/sidebar/exit.png'
-import home from '../../assests/sidebar/home.png'
-import news from '../../assests/sidebar/news.png'
-import saved from '../../assests/sidebar/saved.png'
-import settings from '../../assests/sidebar/settings.png'
-import up from '../../assests/sidebar/up.png'
-import consultant from '../../assests/sidebar/consultant.png'
+import add from '../../assests/sidebar/add.svg'
+import archived from '../../assests/sidebar/archived.svg'
+import down from '../../assests/sidebar/down.svg'
+import exit from '../../assests/sidebar/exit.svg'
+import home from '../../assests/sidebar/home.svg'
+import news from '../../assests/sidebar/news.svg'
+import saved from '../../assests/sidebar/saved.svg'
+import settings from '../../assests/sidebar/settings.svg'
+import up from '../../assests/sidebar/up.svg'
+import consultant from '../../assests/sidebar/consultant.svg'
 
 import { Menu} from 'antd';
 
@@ -57,7 +57,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             act: location.pathname.includes("/act"),
             news: location.pathname.includes("/news"),
             freeDoc: location.pathname.includes("/free-template"),
-            notification: location.pathname.includes("/notification"),
+            notification: location.pathname.includes("/accoount"),
             settings: location.pathname.includes("/settings"),
             add: location.pathname.includes("/add"),
             exit: location.pathname.includes("/login")
@@ -102,7 +102,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
     }
 
     return (
-        <div className="cabiner-right-sidebar-cmain-container" >
+        <div className="cabiner-right-sidebar-cmain-container" style={{width: 256}} >
             <AfertaPopup />
             <BindroumingPopup />
             <Modal 
@@ -131,26 +131,38 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             
 
             <div className="cabiner-right-sidebar-sub-container">
-                <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'27px'}}>
-                    <div style={{marginBottom:"28px",marginTop:'19px',marginLeft:'-3px'}}>
+                <div className="cabinet-documents-action-containers-bloks">
+                    <div style={{marginBottom:"28px",marginTop:'19px', marginLeft: 24}}>
                         <img src={logo} alt=""/>
                     </div>
                     {/*<div>*/}
                         <hr className={"line"}/>
                     {/*</div>*/}
                     {/*<Link to={'/cabinet/add'}>*/}
-                        <div className={`flexible`}>
+                        <div className={`flexible one_side`} style={{marginLeft: 38}}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
-                                <SubMenu className={'side_text'}  title={<span><img src={add} style={{marginLeft:'-2px'}} className={'side_icon'} alt=""/><span>Yaratish</span></span>}>
-                                    <Menu.Item style={{width:'254px'}} key="1"><p className={'menu_item'}>Договор</p></Menu.Item>
-                                    <hr/>
-                                    <Menu.Item key="2"><p className={'menu_item'}>Доверенность</p></Menu.Item>
-                                    <hr/>
-                                    <Menu.Item key="3"><p className={'menu_item'}>Счетфактура</p></Menu.Item>
-                                    <hr/>
-                                    <Menu.Item key="4"><p className={'menu_item'}>Акт</p></Menu.Item>
-                                    <hr/>
-                                    <Menu.Item key="5"><p className={'menu_item'}>ТТН</p></Menu.Item>
+                            <SubMenu className={'side_text sub_men'} title={<span><img src={add} className={'side_icon'} alt="" /><span style={{ color: '#fff' }}>{t("Yaratish")}</span></span>}>
+                                    {/* <Menu.Item style={{width:'254px'}} key="1">
+                                        <Link to={'/cabinet/contract/create'}><p className={'menu_item'}>Договор</p></Link>
+                                    </Menu.Item> */}
+                                    {/*<hr/>*/}
+                                    <Menu.Item key="2">
+                                        <Link to={'/cabinet/empowerment/create'}><p className={'menu_item'}>Доверенность</p></Link>
+                                    </Menu.Item>
+                                    {/*<hr/>*/}
+                                    <Menu.Item key="3">
+                                        <Link to={'/cabinet/factura/create'}><p className={'menu_item'}>Счетфактура</p></Link>
+                                    </Menu.Item>
+                                    {/*<hr/>*/}
+                                    <Menu.Item key="4">
+                                        <Link to={'/cabinet/act/create'}><p className={'menu_item'}>Акт</p></Link>
+                                    </Menu.Item>
+                                    {/*<hr/>*/}
+                                    <Menu.Item key="5">
+                                        <Link to={'/cabinet/tty/create'}>
+                                        <p className={'menu_item'}>ТТН</p>
+                                        </Link>
+                                    </Menu.Item>
                                 </SubMenu>
                             </Menu>
                         </div>
@@ -182,7 +194,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     </Link>
                     <Link to="/cabinet/empowerment">
                         <div className={`action-bloks ${active.empowerment ? 'active' : ''} side_text flexible`}>
-                            <img src={archived} style={{width:'16px',height:'20px',marginRight:'14px'}} alt=""/>
+                            <img src={archived} className='side_icon' alt=""/>
                             <p>{t("Ishonchnoma")} (0)</p>
                         </div>
                     </Link>
@@ -194,7 +206,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     </Link>
                     <Link to="/cabinet/settings">
                         <div className={`action-bloks ${active.settings ? 'active' : ''} side_text`}>
-                            <img src={settings} className={'side_icon'} alt=""/>{t("Settings")}
+                            <img src={settings} className={'side_icon'} alt=""/>{t("Sozlamalar")}
                             <Badge style={{marginLeft: 10}}  />
                         </div>
                     </Link>
@@ -225,7 +237,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     <div style={{}}>
                         <div className="bottom1">
-                            <button className={`consultant`} style={{marginLeft:'-15px'}}>
+                            <button className={`consultant`} style={{marginLeft:'24px'}}>
                                 <h3 className={'side_text'} style={{color:'#fff',marginBottom:'0'}}><img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}</h3>
                             </button>
                         </div>

@@ -8,11 +8,11 @@ export default function Auth() {
 
     return(
         <>
-            <Row justify="space-between" align="top">
-                <Col span={14}>
-                    <img src={authImg} className={st.auth_img} alt=""/>
+            <Row justify="space-between" align="top" >
+                <Col span={12} className={st.auth_img_target} >
+
                 </Col>
-                <Col span={10}>
+                <Col span={12} style={{paddingLeft: 50}}>
                     <Route path = '/login'><Login/></Route>
                     <Route render={() => <Redirect to="/login" />}></Route>
                 </Col>
