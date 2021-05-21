@@ -259,11 +259,18 @@ div.custom-section-wrapper{
 
 .custom-primary-btn{
     border: none;
-    outline: none;
-    background-color: #2B63C0;
-    color: #fff;
-    padding: 10px;
+    padding: 6px 21px;
+    //width: 160px;
+    height: 36px;
+    left: 800px;
+    top: 27px;
+    background: #2B63C0;
     border-radius: 8px;
+    .txt{
+        font-size: 12px;
+        line-height: 24px;
+        color: #FFFFFF;
+    }
 }
 
 .title{

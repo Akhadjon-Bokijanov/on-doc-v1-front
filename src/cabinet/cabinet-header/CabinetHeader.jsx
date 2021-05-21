@@ -83,49 +83,51 @@ const CabinetHeader = ({ user,match }) => {
 
 
     return (
-        <div className="cabinet-header-main-con">
-            <div className="ch-sub-container">
-                <div className="ch-user-info-con-1">
-                    <div><strong>{user.name}</strong></div>
-                    <div>{user.tin}</div>
-                </div>
-                <div className="ch-user-info-con-2">
-                    {/* <div>
+        // <div className="block">
+            <div className="cabinet-header-main-con">
+                <div className="ch-sub-container">
+                    <div className="ch-user-info-con-1">
+                        <div><strong>{user.name}</strong></div>
+                        <div>{user.tin}</div>
+                    </div>
+                    <div className="ch-user-info-con-2">
+                        {/* <div>
                         <LanguagesDropdown />
                     </div> */}
-                    <div className="ch-action-container">
-                        <Link to='/cabinet/balance'>
-                        <div style={{ display: 'flex' }}>
-                            <img className="wallet-img" src={wallet} alt=""/>
-                            <div>
-                                    <div style={{ fontSize: 14, color: "#303030"}} >{t("Balansingiz")}</div>
-                                <div style={{ fontSize: 18, color: "#2B63C0", fontWeight: "bold"}}>{45000}</div>
-                            </div>
-                            </div>
-                        </Link>
-
-                    </div>
-                    <div className="ch-action-container">
-                        <div>
-                            <Link to="/cabinet/tariffs">
-                                <button style={{cursor:'pointer'}} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
+                        <div className="ch-action-container">
+                            <Link to='/cabinet/balance'>
+                                <div style={{ display: 'flex',padding:'12px' }}>
+                                    <img className="wallet-img" src={wallet} alt=""/>
+                                    <div>
+                                        <div><span className={'balance'}>Balansingiz:</span></div>
+                                        <div className={'balance_value'}>{'150000sum'}</div>
+                                    </div>
+                                </div>
                             </Link>
+
                         </div>
-                    </div>
-                    <div className="ch-action-container">
-                        <img src={chat} alt=""/>
-                    </div>
-                    <div className="ch-action-container">
-                        <img src={question_mark} alt=""/>
-                    </div>
-                    <div className="ch-action-container">
-                        <Dropdown overlay={settings_menu} trigger={["click"]}>
-                            <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
-                        </Dropdown>
+                        <div className="ch-action-container">
+                            <div>
+                                <Link to="/cabinet/tariffs">
+                                    <button style={{cursor:'pointer'}} className="custom-primary-btn"><span className={'txt'}>{t("Tarif aktivlashtiring")}</span></button>
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="ch-action-container">
+                            <img src={chat} alt=""/>
+                        </div>
+                        <div className="ch-action-container">
+                            <img src={question_mark} alt=""/>
+                        </div>
+                        <div className="ch-action-container">
+                            <Dropdown overlay={settings_menu} trigger={["click"]}>
+                                <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
+                            </Dropdown>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

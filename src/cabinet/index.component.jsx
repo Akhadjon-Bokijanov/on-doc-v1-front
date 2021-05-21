@@ -28,7 +28,9 @@ const CabinetIndex = ({ match }) => {
                     <RightSidebar />
                </Col>
                <Col md={14} lg={20} style={{width:'1184px'}}>
-                    <CabinetHeader/>
+                   <div style={{boxShadow:'inset 0px -1px 0px rgba(0, 0, 0, 0.08)'}}>
+                       <CabinetHeader/>
+                   </div>
                     <Route  exact path={match.path} component={ CabinetHome } />
                     <Route path={`${url}/factura`} component={ FacturaIndex } />
                     <Route path={`${url}/empowerment`} component={ EmpowermentIndex } />
