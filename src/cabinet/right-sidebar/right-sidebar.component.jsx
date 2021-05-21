@@ -131,17 +131,17 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
             
 
             <div className="cabiner-right-sidebar-sub-container">
-                <div className="cabinet-documents-action-containers-bloks" style={{marginLeft:'27px'}}>
-                    <div style={{marginBottom:"28px",marginTop:'19px',marginLeft:'-3px'}}>
+                <div className="cabinet-documents-action-containers-bloks">
+                    <div style={{marginBottom:"28px",marginTop:'19px', marginLeft: 24}}>
                         <img src={logo} alt=""/>
                     </div>
                     {/*<div>*/}
                         <hr className={"line"}/>
                     {/*</div>*/}
                     {/*<Link to={'/cabinet/add'}>*/}
-                        <div className={`flexible one_side`}>
+                        <div className={`flexible one_side`} style={{marginLeft: 38}}>
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
-                                <SubMenu className={'side_text sub_men'}  title={<span><img src={add} style={{marginLeft:'-2px'}} className={'side_icon'} alt=""/><span>Yaratish</span></span>}>
+                            <SubMenu className={'side_text sub_men'} title={<span><img src={add} className={'side_icon'} alt="" /><span style={{ color: '#fff' }}>{t("Yaratish")}</span></span>}>
                                     {/* <Menu.Item style={{width:'254px'}} key="1">
                                         <Link to={'/cabinet/contract/create'}><p className={'menu_item'}>Договор</p></Link>
                                     </Menu.Item> */}
@@ -206,7 +206,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                     </Link>
                     <Link to="/cabinet/settings">
                         <div className={`action-bloks ${active.settings ? 'active' : ''} side_text`}>
-                            <img src={settings} className={'side_icon'} alt=""/>{t("Settings")}
+                            <img src={settings} className={'side_icon'} alt=""/>{t("Sozlamalar")}
                             <Badge style={{marginLeft: 10}}  />
                         </div>
                     </Link>
@@ -237,7 +237,7 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
 
                     <div style={{}}>
                         <div className="bottom1">
-                            <button className={`consultant`} style={{marginLeft:'-15px'}}>
+                            <button className={`consultant`} style={{marginLeft:'24px'}}>
                                 <h3 className={'side_text'} style={{color:'#fff',marginBottom:'0'}}><img src={consultant} className={'side_icon'} alt=""/>{t("Konsultant")}</h3>
                             </button>
                         </div>
