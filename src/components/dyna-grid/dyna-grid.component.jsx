@@ -516,7 +516,7 @@ const DynaGrid = ({
                       <Select
                         size="large"
                         placeholder={t("Hujjat turi")} 
-                        bordered={false}
+                        //bordered={false}
                         allowClear
                         options={[
                           { label: t("Faktura"), value: 1},

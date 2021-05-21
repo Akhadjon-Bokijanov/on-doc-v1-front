@@ -83,14 +83,15 @@ const CabinetHeader = ({ user,match }) => {
 
 
     return (
-        <div className="cabinet-header-main-con">
-            <div className="ch-sub-container">
-                <div className="ch-user-info-con-1">
-                    <div><strong>{user.name}</strong></div>
-                    <div>{user.tin}</div>
-                </div>
-                <div className="ch-user-info-con-2">
-                    {/* <div>
+        // <div className="block">
+            <div className="cabinet-header-main-con">
+                <div className="ch-sub-container">
+                    <div className="ch-user-info-con-1">
+                        <div><strong>{user.name}</strong></div>
+                        <div>{user.tin}</div>
+                    </div>
+                    <div className="ch-user-info-con-2">
+                        {/* <div>
                         <LanguagesDropdown />
                     </div> */}
                     <div className="ch-action-container">
@@ -106,28 +107,29 @@ const CabinetHeader = ({ user,match }) => {
                                 </div>
 
                             </div>
-                            </div>
+                            
+                        </div>
                         </Link>
-
                     </div>
                     <div className="ch-action-container">
                         <div>
                             <Link to="/cabinet/tariffs">
-                                <button style={{cursor:'pointer'}} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
+                                <button style={{ cursor: 'pointer' }} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
                             </Link>
                         </div>
                     </div>
-                    <div className="ch-action-container">
-                        <img src={chat} alt=""/>
-                    </div>
-                    <div className="ch-action-container">
-                        <img src={question_mark} alt=""/>
-                    </div>
-                    <div className="ch-action-container">
-                        <Dropdown overlay={settings_menu} trigger={["click"]}>
-                            <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
-                        </Dropdown>
-                    </div>
+                        <div className="ch-action-container">
+                            <img src={chat} alt=""/>
+                        </div>
+                        <div className="ch-action-container">
+                            <img src={question_mark} alt=""/>
+                        </div>
+                        <div className="ch-action-container">
+                            <Dropdown overlay={settings_menu} trigger={["click"]}>
+                                <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
+                            </Dropdown>
+                        </div>
+                    
                 </div>
             </div>
         </div>

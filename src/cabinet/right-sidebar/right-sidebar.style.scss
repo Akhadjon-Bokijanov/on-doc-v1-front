@@ -2,8 +2,9 @@ $sidebarColor:#0C2556;
 .cabiner-right-sidebar-cmain-container {
     height: 100vh !important;
     //height: 80vh !important;
-    margin-left: -26px;
+    //margin-left: -26px;
     position: sticky;
+    margin: 0px !important;
     //margin-left: 0;
     //background: inherit;
     background: $sidebarColor;
@@ -44,6 +45,7 @@ $sidebarColor:#0C2556;
                 color: #FFFFFF;
                 padding: 14px;//12 edi 14 qildim
                 height: 48px;
+                width: 116%;
                 font-weight: 500;
                 transition: all ease-in-out 0.0001s 0.0001s;
                 margin-left: -25px;
@@ -156,6 +158,8 @@ $sidebarColor:#0C2556;
     padding: 8px 70px 19px 16px!important;
     width: 254px!important;
     height: 56px!important;
+    margin-top: 0!important;
+    margin-bottom: 0!important;
 }
 @media (min-width: 1996px){
     .one_side{
