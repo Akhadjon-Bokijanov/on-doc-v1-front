@@ -101,13 +101,19 @@ body {
 input.ant-input-lg,
 .ant-picker-large,
 .ant-input-password-large,
-.ant-select-lg {
+{
     //border: 1px solid #dadce0 !important;
     border-radius: 8px !important;
     padding: 12px;
     font-size: 16px !important;
     height: 48px!important;
     //min-width: 100%;
+}
+
+.ant-select-lg{
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    height: 48px!important;
 }
 
 textarea.ant-input-lg{
