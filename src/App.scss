@@ -133,12 +133,58 @@ textarea.ant-input-lg{
 
 .ant-radio-button-wrapper {
     height: 55px !important;
-    padding: 10px 7px!important;
+    padding-top:23px!important;
+    padding-left:23px!important;
+    padding-bottom:16px!important;
+    //padding: 0px 0px!important;
     width: 50%;
     text-align: center;
 }
 
+.ant-radio {
+    width: 26px;
+    height: 26px;
+    //padding: 10px;
+    text-align: center;
+    vertical-align: center;
+    margin-left: 22px!important;
+    //padding: 5px 5px!important;
+}
+//.ant-radio{
+//    margin-left: 22px!important;
+//}
+.ant-radio-input{
+    padding-top: 0!important;
+    margin-top: 0!important;
+}
+.ant-radio-checked{
+    padding-top:0!important;
+    margin-top: 0!important;
+    .ant-radio-inner{
 
+        //margin-top: 0!important;
+        //margin-right: 0!important;
+    }
+}
+.ant-radio-group {
+    display: block !important;
+}
+.ant-radio-wrapper {
+    display: flex !important;
+    align-items: center;
+    //background:red!important;
+    border: 1px solid #dbd9d9;
+    width: 100%;
+    border-radius: 8px;
+
+    /*margin-bottom: 7px !important;*/
+}
+.ant-radio-inner{
+    //background:red!important;
+    margin-top: 6px!important;
+    margin-left: 5px!important;
+    padding-left: 7px!important;
+}
 .ant-form-item-explain-success {
     display: none !important;
 }
@@ -166,32 +212,12 @@ textarea.ant-input-lg{
 }
 
 
-.ant-radio-wrapper {
-    display: flex !important;
-    align-items: center;
-    border: 1px solid #dbd9d9;
-    width: 100%;
-    border-radius: 8px;
-    /*margin-bottom: 7px !important;*/
-}
 
 .ant-badge-status-dot{
     width: 12px !important;
-    height: 12px !important;
+    height: 12px!important;
 }
 
-.ant-radio {
-    width: 26px;
-    height: 26px;
-    padding: 10px;
-    text-align: center;
-    vertical-align: center;
-    //padding: 5px 5px!important;
-}
-
-.ant-radio-group {
-    display: block !important;
-}
 
 .show-help-leave,
 .show-help-leave-active {
@@ -263,9 +289,7 @@ div.custom-section-wrapper{
     margin: 15px;
     background-color: #fff;
 }
-.ant-radio-inner{
-    margin-bottom: -10px;
-}
+
 
 .custom-primary-btn{
     border: none;

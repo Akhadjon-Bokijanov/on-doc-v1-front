@@ -129,7 +129,8 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
     return (
         <div className={st.login_main_container} style={{
             marginTop:"70px",
-            marginRight:"100px"}}>
+            marginRight:"100px"
+        }}>
             <Row justify="space-around">
                 {
                     !notFound&&
@@ -146,17 +147,14 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                         validateMessages={validateMessages}
                                     >
                                     <div style={{maxHeight:"380px",overflowY:'auto'}}>
-
                                             <div >
                                                 <Form.Item
-
                                                     className={st.login_form_container}
                                                     name="key">
                                                     <Radio.Group
-
                                                         size="large">
                                                         {
-                                                            eKeys.map(data => <Radio  key={data.value} value={data}>
+                                                            eKeys.map(data => <Radio key={data.value} value={data}>
                                                                 <div className={`${st.client_availbale_key}`}>
                                                                     <div>{t("FIO")}: {data.text.CN} </div>
                                                                     <div>{t("STIR")}: {data.text.TIN}</div>
@@ -167,6 +165,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                                                 </div>
                                                             </Radio>)
                                                         }
+                                                        <Radio/>
                                                     </Radio.Group>
                                                 </Form.Item>
                                             </div>
