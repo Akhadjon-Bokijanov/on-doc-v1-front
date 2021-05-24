@@ -158,10 +158,10 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                                         {
                                                             eKeys.map(data => <Radio  key={data.value} value={data}>
                                                                 <div className={`${st.client_availbale_key}`}>
-                                                                    <div>{t("FIO")}: {data.text.CN} </div>
-                                                                    <div>{t("STIR")}: {data.text.TIN}</div>
-                                                                    <div>{t("Tashkilot")}: {data.text.O}</div>
-                                                                    <div>{t("Amal qilish muddati")}:
+                                                                    <div><strong style={{marginRight: 4}}>{t("FIO")}:</strong>{data.text.CN}</div>
+                                                                    <div><strong style={{ marginRight: 4 }}>{t("STIR")}: </strong>{data.text.TIN}</div>
+                                                                    <div><strong style={{ marginRight: 4 }}>{t("Tashkilot")}: </strong>{data.text.O}</div>
+                                                                    <div><strong style={{ marginRight: 4 }}>{t("Amal qilish muddati")}:</strong>
                                                                         {moment(data.text.validTo).format("MMMM Do YYYY, H:mm:ss")}
                                                                     </div>
                                                                 </div>
