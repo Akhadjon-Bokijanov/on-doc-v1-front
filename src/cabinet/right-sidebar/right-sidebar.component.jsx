@@ -143,7 +143,14 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         //style={{marginLeft: 13, width: 218}}
                         >
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
-                            <SubMenu className={'side_text sub_men'} title={<span style={{marginLeft: 15}}><img src={add} className={'side_icon'} alt="" /><span style={{ color: '#fff' }}>{t("Yaratish")}</span></span>}>
+                            <SubMenu 
+                                className={'side_text sub_men'} 
+                                title={<span style={{marginLeft: 15}}>
+                                <img src={add} className={'side_icon'} alt="" />
+                                <span style={{ color: '#fff' }}>
+                                    {t("Yaratish")}
+                                </span>
+                            </span>}>
                                     {/* <Menu.Item style={{width:'254px'}} key="1">
                                         <Link to={'/cabinet/contract/create'}><p className={'menu_item'}>Договор</p></Link>
                                     </Menu.Item> */}
