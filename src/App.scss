@@ -100,7 +100,7 @@ body {
 
 input.ant-input-lg,
 .ant-picker-large,
-.ant-input-password-large,
+.ant-input-password-large
 {
     //border: 1px solid #dadce0 !important;
     border-radius: 8px !important;
@@ -200,7 +200,7 @@ textarea.ant-input-lg{
     border-radius: 12px;
 }
 .ant-select-selector{
-    height: 48px!important;
+    min-height: 48px!important;
     background: #FFFFFF!important;
     border: 0.5px solid #D9D9D9!important;
     box-sizing: border-box!important;

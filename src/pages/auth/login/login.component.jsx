@@ -139,7 +139,9 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                         activeTab === 0 ?
                             <div>
                                 <div>
-                                    <h2>Welcome</h2>
+                                    {
+                                        keyNotFound ? null : <div style={{fontSize: 32, fontWeight: 700}}>{t("Welcome")}</div>
+                                    }
                                     <Form
                                         name="e-key"
                                         onFinish={handleKeySubmit}
@@ -171,10 +173,11 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                             </div>
                                         {
                                             keyNotFound&&
-                                                <p>key not found,Please configurate </p>
+                                                    <div style={{ fontWeight: 700, fontSize: 32, color: '#303030', marginBottom: 32, height: 32}}>Сертификаты не найдены</div>
                                         }
                                     </div>
-                                        <Form.Item>
+                                        <div>
+                                        <Form.Item style={{marginTop: 14}}>
                                             <Button
                                                 loading={isKeyLoading}
                                                 style={{display: 'block', width: '55%'}}
@@ -185,6 +188,7 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                                 {t("Kirish")}
                                             </Button>
                                         </Form.Item>
+                                        </div>
                                     </Form>
                                 </div>
 
