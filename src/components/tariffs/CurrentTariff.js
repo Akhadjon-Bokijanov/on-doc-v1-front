@@ -45,8 +45,6 @@ function CurrentTariff({match}) {
                             </div>
                         </Modal>
 
-
-
                     </Col>
                 </Row>
                 <Row gutter={[16,16]} style={{marginRight:'0'}}>

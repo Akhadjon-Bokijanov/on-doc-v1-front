@@ -4,12 +4,13 @@
   margin-left: 32px!important;
   margin-bottom: 16px;
   padding: 24px 16px 19px 16px!important;//qayta  korib chiqaman
-  height: 240px;
+  height: auto;//240 qip quyaman
   background: #FFFFFF;
   border: 0.5px solid rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   border-radius: 8px;
   .name{
+    //height: 23px;
     margin-bottom: 0;
     font-style: normal;
     font-weight: bold;
@@ -36,7 +37,7 @@
   .count_and_time{
     margin-top: 5px;
     margin-bottom: 0;
-    height: 24px;
+    height: auto;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
