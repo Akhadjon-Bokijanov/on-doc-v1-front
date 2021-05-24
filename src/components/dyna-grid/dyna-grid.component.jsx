@@ -26,6 +26,7 @@ import { selectCurrentUser } from '../../redux/user/user.selector';
 import { useTranslation } from 'react-i18next';
 import {DateFormat} from "../../utils/DateFormat";
 import eye_icon from "../../images/eye.svg";
+import PaginationRenderer from './PaginationRenderer';
 
 const { Option } = Select;
 
@@ -644,7 +645,12 @@ const DynaGrid = ({
         columns={columns} 
           dataSource={ajaxDataSource} 
         scroll={{ x: allColumns.length * 120, }}//y: window.innerHeight - window.innerHeight / 13 }} 
-        pagination={{position: ['bottomCenter'], ...pagination,total: totalDataCount}}
+        pagination={{
+          locale: {items_per_page: ' ta'},
+          position: ['bottomRight'], 
+          itemRender: PaginationRenderer,
+          ...pagination,
+          total: 1000, }}
       />
     </div>);
   }
