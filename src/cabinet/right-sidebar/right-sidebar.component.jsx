@@ -87,18 +87,18 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
     }, [])
 
     const handleOut=()=>{
-        let elem = document.getElementById("add");
-        if(elem.classList.contains('act')){
-            elem.classList.remove('act');
-            elem.classList.add("before_act");
-        }
+        // let elem = document.getElementById("add");
+        // if(elem.classList.contains('act')){
+        //     elem.classList.remove('act');
+        //     elem.classList.add("before_act");
+        // }
     }
     const handleOver=()=>{
-        let elem = document.getElementById("add");
-        if(elem.classList.contains('before_act')){
-            elem.classList.remove('before_act');
-            elem.classList.add('act');
-        }
+        // let elem = document.getElementById("add");
+        // if(elem.classList.contains('before_act')){
+        //     elem.classList.remove('before_act');
+        //     elem.classList.add('act');
+        // }
     }
 
     return (
@@ -139,9 +139,18 @@ const RightSidebar = ({ location, admin, setData, loadedKey, uOut }) => {
                         <hr className={"line"}/>
                     {/*</div>*/}
                     {/*<Link to={'/cabinet/add'}>*/}
-                        <div className={`flexible one_side`} style={{marginLeft: 38}}>
+                        <div className={`flexible one_side`} 
+                        //style={{marginLeft: 13, width: 218}}
+                        >
                             <Menu mode="vertical" id={'add'} onMouseOver={handleOver} onMouseOut={handleOut} className={'before_act'}>
-                            <SubMenu className={'side_text sub_men'} title={<span><img src={add} className={'side_icon'} alt="" /><span style={{ color: '#fff' }}>{t("Yaratish")}</span></span>}>
+                            <SubMenu 
+                                className={'side_text sub_men'} 
+                                title={<span style={{marginLeft: 15}}>
+                                <img src={add} className={'side_icon'} alt="" />
+                                <span style={{ color: '#fff' }}>
+                                    {t("Yaratish")}
+                                </span>
+                            </span>}>
                                     {/* <Menu.Item style={{width:'254px'}} key="1">
                                         <Link to={'/cabinet/contract/create'}><p className={'menu_item'}>Договор</p></Link>
                                     </Menu.Item> */}
