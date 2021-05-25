@@ -2,7 +2,7 @@ $sidebarColor:#0C2556;
 .cabiner-right-sidebar-cmain-container {
     height: 100vh !important;
     //height: 80vh !important;
-    margin-left: -26px;
+    //margin-left: -26px;
     position: sticky;
     margin: 0px !important;
     //margin-left: 0;
@@ -49,6 +49,9 @@ $sidebarColor:#0C2556;
                 //width: 116%;
                 font-weight: 500;
                 transition: all ease-in-out 0.0001s 0.0001s;
+                &:hover{
+                    background: rgba(255, 255, 255, 0.1);
+                }
                 //margin-left: -25px;
                 //@media (min-width: 1024px) {
                 //    &{
@@ -129,6 +132,7 @@ $sidebarColor:#0C2556;
                     //padding-left: 30px;
                     position: relative;
                     color: #FFFFFF;
+                    width: 110%!important;
                     //border-left: #1890ff 3px solid;
                     &::after {
                         content: '';
@@ -243,7 +247,7 @@ $sidebarColor:#0C2556;
 }
 .act{
     background: rgba(191, 182, 182, 0.18) !important;
-    width: 140%;
+    width: 131%;
     //margin-right: -15px;
     margin-left: -69px;
     //right: -20px;
@@ -251,11 +255,16 @@ $sidebarColor:#0C2556;
     position: relative;
     color: #FFFFFF;
 }
+
+
 .before_act{
     background: #0c2556;
     width: 100%;
     height:48px;
     color:#fff;
+    &:hover{
+        background: rgba(255, 255, 255, 0.1);
+    }
     //margin-left: -25px;
 }
 .bottom1{

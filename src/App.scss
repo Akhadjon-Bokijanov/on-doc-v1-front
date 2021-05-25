@@ -97,7 +97,9 @@ body {
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
-
+.font-size-changer-buttons{
+    border: none!important;
+}
 input.ant-input-lg,
 .ant-picker-large,
 .ant-input-password-large
@@ -148,8 +150,8 @@ textarea.ant-input-lg{
 }
 
 .ant-radio {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 22px;
     //padding: 10px;
     text-align: center;
     vertical-align: center;

@@ -18,37 +18,42 @@ import Deatil from "../components/news/Deatil";
 import Balance from "../pages/balance";
 import Tariff from "../pages/tariff";
 import CurrentTariff from "../components/tariffs/CurrentTariff";
+import FontSizeChanger from 'react-font-size-changer';
+
 
 const CabinetIndex = ({ match }) => {
     const {url} = match;
     return (
         <div>
+
             <div style={{display: 'flex'}}>
 
                    <RightSidebar />
 
 
-               <div style={{width: window.innerWidth-256}}>
+               <div style={{width: window.innerWidth-256}} id={'target'}>
                {/*<Col md={14} lg={20} style={{width:'1184px'}}>*/}
-                   <div style={{boxShadow:'inset 0px -1px 0px rgba(0, 0, 0, 0.08)'}}>
-                       <CabinetHeader/>
+                   <div className={'resizer'}>
+                       <div style={{boxShadow:'inset 0px -1px 0px rgba(0, 0, 0, 0.08)'}}>
+                           <CabinetHeader/>
+                       </div>
+                       <Route  exact path={match.path} component={ CabinetHome } />
+                       <Route path={`${url}/factura`} component={ FacturaIndex } />
+                       <Route path={`${url}/empowerment`} component={ EmpowermentIndex } />
+                       <Route path={`${url}/act`} component={ ActIndexRouter } />
+                       <Route path={`${url}/contract`} component={ ContractIndexRouter } />
+                       <Route path={`${url}/tty`} component={ TTYIndexRouter } />
+                       <Route path={`${url}/notifications`} component={ Notifications } />
+                       <Route path={`${url}/settings`} component={ ProfileComponent } />
+
+                       <Route exact path={`${url}/news`} component={NewsPage} />
+                       <Route path={`${url}/news/:id`} component={Deatil}/>
+
+                       <Route exact path={`${url}/balance`} component={Balance} />
+
+                       <Route exact path={`${url}/tariffs`} component={Tariff} />
+                       <Route path={`${url}/tariffs/:id`} component={CurrentTariff} />
                    </div>
-                    <Route  exact path={match.path} component={ CabinetHome } />
-                    <Route path={`${url}/factura`} component={ FacturaIndex } />
-                    <Route path={`${url}/empowerment`} component={ EmpowermentIndex } />
-                    <Route path={`${url}/act`} component={ ActIndexRouter } />
-                    <Route path={`${url}/contract`} component={ ContractIndexRouter } />
-                    <Route path={`${url}/tty`} component={ TTYIndexRouter } />
-                    <Route path={`${url}/notifications`} component={ Notifications } />
-                    <Route path={`${url}/settings`} component={ ProfileComponent } />
-
-                    <Route exact path={`${url}/news`} component={NewsPage} />
-                   <Route path={`${url}/news/:id`} component={Deatil}/>
-
-                   <Route exact path={`${url}/balance`} component={Balance} />
-
-                   <Route exact path={`${url}/tariffs`} component={Tariff} />
-                   <Route path={`${url}/tariffs/:id`} component={CurrentTariff} />
                </div>
 
                {/*</Col>*/}

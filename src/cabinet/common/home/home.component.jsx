@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { get_home_config } from '../../../utils/home.config.provider';
 import {useTranslation} from "react-i18next";
+import {Spin} from "antd";
 
 const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
 
@@ -24,7 +25,7 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
     return (
         <div className="factura-home-page-container">
             <div className="factura-home-sub-con">
-                
+                <Spin spinning={true}/>
                 <div className="factura-home-title">
                     <div style={{fontSize: 32, fontWeight: "bold"}}>{ t(title) }</div>
                     {/* {
