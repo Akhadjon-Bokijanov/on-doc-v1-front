@@ -24,9 +24,9 @@ import FontSizeChanger from 'react-font-size-changer';
 const CabinetIndex = ({ match }) => {
     const {url} = match;
     return (
-        <div>
-
-            <div style={{display: 'flex'}}>
+        <div id={'target'}>
+            <div className={'resizer'}>
+            <div style={{ display: 'flex' }} >
 
                    <RightSidebar />
 
@@ -34,6 +34,7 @@ const CabinetIndex = ({ match }) => {
                <div style={{width: window.innerWidth-256}}>
                {/*<Col md={14} lg={20} style={{width:'1184px'}}>*/}
                    <div >
+
                        <div style={{boxShadow:'inset 0px -1px 0px rgba(0, 0, 0, 0.08)'}}>
                            <CabinetHeader/>
                        </div>
@@ -60,7 +61,7 @@ const CabinetIndex = ({ match }) => {
                    </div>
                </div>
 
-               {/*</Col>*/}
+            </div>
             </div>
         </div>
     );
