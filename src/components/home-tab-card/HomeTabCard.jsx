@@ -10,7 +10,7 @@ const HomeTabCard = ({ data }) => {
                 <div className="top-row-con">
                     <div>
                         <img src={img} alt="img-not found" className={`home-card-img img-${color}`}/>
-                        <span className="text-title">{title}</span>
+                        <span className="text-title" style={{fontSize: 18}}>{title}</span>
                     </div>
                     <div className={`color-${color}`} style={{fontSize: 24}}>
                         {count??0}

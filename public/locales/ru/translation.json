@@ -92,7 +92,7 @@
 "Shart sarlavhasi": "Условное название",
 "Shart matni": "Условный текст",
 "Maydon qo'shish": "Добавить поле",
-"Imzo kutilmoqda": "Подпись ожидается",
+"Imzo kutilmoqda": "Нужно подписать",
 "Jo'natilgan": "Отправленный",
 "Bekor qilingan": "Отменено",
 "Qaytarib yuborilgan": "Возвращено",
@@ -138,5 +138,8 @@
 "Yaratish": "Создать",
 "Sozlamalar": "Настройки",
 "Konsultant": "Консультация",
-"Yangiliklar": "Новости"
+"Yangiliklar": "Новости",
+"Sign": "Подписать",
+"Cancel": "Отменить",
+"Save": "Сохранить"
 }

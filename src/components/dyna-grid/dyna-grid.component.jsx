@@ -27,6 +27,8 @@ import { useTranslation } from 'react-i18next';
 import {DateFormat} from "../../utils/DateFormat";
 import eye_icon from "../../images/eye.svg";
 import PaginationRenderer from './PaginationRenderer';
+import SignBtn from '../Btns/SignBtn';
+import CancelBtn from "../Btns/CancelBtn";
 
 const { Option } = Select;
 
@@ -604,20 +606,6 @@ const DynaGrid = ({
           }
         </div>
 
-{/* 
-      <div 
-        style={{marginBottom: 10, display: "flex", justifyContent: "space-between"}}>
-        <Button 
-          onClick={()=>{toggleFullView(!isFulliew)}} 
-          type="primary" 
-          icon={isFulliew ? <FullscreenExitOutlined /> : <FullscreenOutlined />}>
-            { isFulliew ? "Kichraytirish" : "Kengaytirish" }
-          </Button>
-        <div>
-          <h3>{title}</h3>
-        </div>
-      </div> */}
-
       
       {
         Array.isArray(tableAttachedTabs)&&tableAttachedTabs?.length>0?
@@ -657,6 +645,12 @@ const DynaGrid = ({
           ...pagination,
           total: 1000, }}
       />
+      <div style={{display: 'flex'}}>
+          <SignBtn 
+            onClick={ ()=>console.log(selectedRowKeys) } 
+          />
+          <CancelBtn />
+      </div>
     </div>);
   }
 

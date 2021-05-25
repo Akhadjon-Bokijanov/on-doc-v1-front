@@ -139,7 +139,7 @@ const CabinetHeader = ({ user,match }) => {
                     <div className="ch-action-container">
                         <div>
                             <Link to="/cabinet/tariffs">
-                                <button style={{ cursor: 'pointer' }} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
+                                <button style={{ cursor: 'pointer', fontSize: 12 }} className="custom-primary-btn">{t("Tarif aktivlashtiring")}</button>
                             </Link>
                         </div>
                     </div>
