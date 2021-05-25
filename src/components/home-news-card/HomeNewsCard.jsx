@@ -8,7 +8,13 @@ import { Link } from 'react-router-dom';
 const HomeNewsCard = () => {
 
     const { t } = useTranslation();
-
+    const style={
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize:'16px',
+    lineHeight: '24px',
+    color: '#303030'
+    }
     return (
         <div style={{backgroundColor: "#fff", borderRadius: 8}}>
             <div style={{padding: 24}}>
@@ -30,9 +36,9 @@ const HomeNewsCard = () => {
                     </span>
                 </div>
 
-                <Paragraph ellipsis={{rows: 2 }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus cras felis ac aliquet consectetur dignissim. Arcu id vitae lectus iaculis.  Рellentesque ultricies nullam donec at sit. Malesuada enim lectus turpis massa massa nulla tincidunt a a. Nibh venenatis ac, ac eget feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus cras felis ac aliquet consectetur dignissim. Arcu id vitae lectus iaculis.  Рellentesque ultricies nullam donec at sit. Malesuada enim lectus turpis massa massa nulla tincidunt a a. Nibh venenatis ac, ac eget feugiat.
-                </Paragraph>
+            <Paragraph ellipsis={{rows: 2 }}>
+                <span style={style}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus cras felis ac aliquet consectetur dignissim. Arcu id vitae lectus iaculis.  Рellentesque ultricies nullam donec at sit. Malesuada enim lectus turpis massa massa nulla tincidunt a a. Nibh venenatis ac, ac eget feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus cras felis ac aliquet consectetur dignissim. Arcu id vitae lectus iaculis.  Рellentesque ultricies nullam donec at sit. Malesuada enim lectus turpis massa massa nulla tincidunt a a. Nibh venenatis ac, ac eget feugiat.</span>
+            </Paragraph>
 
                 <div style={{ textAlign: "right", }} >
                     <Link to="/home/news/{news_id}" style={{ color: "#2B63C0", fontSize: 15}} >

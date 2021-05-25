@@ -2,7 +2,7 @@ $sidebarColor:#0C2556;
 .cabiner-right-sidebar-cmain-container {
     height: 100vh !important;
     //height: 80vh !important;
-    margin-left: -26px;
+    //margin-left: -26px;
     position: sticky;
     margin: 0px !important;
     //margin-left: 0;
@@ -129,6 +129,7 @@ $sidebarColor:#0C2556;
                     //padding-left: 30px;
                     position: relative;
                     color: #FFFFFF;
+                    width: 110%!important;
                     //border-left: #1890ff 3px solid;
                     &::after {
                         content: '';
@@ -234,7 +235,7 @@ $sidebarColor:#0C2556;
 }
 .act{
     background: rgba(191, 182, 182, 0.18) !important;
-    width: 140%;
+    width: 131%;
     //margin-right: -15px;
     margin-left: -69px;
     //right: -20px;
@@ -242,6 +243,19 @@ $sidebarColor:#0C2556;
     position: relative;
     color: #FFFFFF;
 }
+//@media (max-width: 1996px) {
+.act{
+    background: rgba(191, 182, 182, 0.18) !important;
+    width: 125%;
+    //margin-right: -15px;
+    margin-left: -69px;
+    //right: -20px;
+    padding-left: 44px;
+    position: relative;
+    color: #FFFFFF;
+}
+//}
+
 .before_act{
     background: #0c2556;
     width: 100%;

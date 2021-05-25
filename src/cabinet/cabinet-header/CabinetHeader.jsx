@@ -13,14 +13,19 @@ import left_text from "../../images/left_align-text.svg"
 import LanguagesDropdown from '../../components/language-dropdown/locale-dropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, Dropdown, Switch } from 'antd';
+import FontSizeChanger from "react-font-size-changer";
 
 const { SubMenu } = Menu;
+
 
 const CabinetHeader = ({ user,match }) => {
 
     const { t, i18n } = useTranslation()
 
-    
+    const handleResizer=()=>{
+        let elem = document.getElementById('chances');
+        elem.classList.add('resizer')
+    }
 
     const settings_menu = (
         <Menu style={{width: 288, right: -32, top: 30}}>
@@ -64,17 +69,27 @@ const CabinetHeader = ({ user,match }) => {
                 </div>
             </Menu.Item>
             <Menu.Item style={{ padding: '12px 18px' }}>
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                <div id={'chances'} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <img src={left_text} alt="text" style={{ marginRight: 10 }} />
                         <div>
                             {t("Text size")}
                         </div>
                     </div>
-                    
+
                     <div>
-                        <strong style={{marginLeft: 12, fontSize: 20}}>-</strong>
-                        <strong style={{ marginLeft: 12, fontSize: 20 }}>+</strong>
+                        <FontSizeChanger
+                            targets={['#target .resizer']}
+                            options={{
+                                stepSize: 1,
+                                range: 10
+                            }}
+                            customButtons={{
+                                up:<strong style={{marginLeft: 12, fontSize: 20,border:'none'}}>+</strong>,
+                                down:<strong style={{ marginLeft: 12, fontSize: 20 }}>-</strong>,
+                                // buttonsMargin: 10
+                            }}
+                        />
                     </div>
                 </div>
             </Menu.Item>
@@ -82,13 +97,15 @@ const CabinetHeader = ({ user,match }) => {
     )
 
 
+
+
     return (
         // <div className="block">
             <div className="cabinet-header-main-con">
                 <div className="ch-sub-container">
                     <div className="ch-user-info-con-1">
-                        <div><strong>{user.name}</strong></div>
-                        <div>{user.tin}</div>
+                        <div><span className={'username'}>{user.name}</span></div>
+                        <div><span className={'tin'}>{user.tin}</span> </div>
                     </div>
                     <div className="ch-user-info-con-2">
                         {/* <div>
