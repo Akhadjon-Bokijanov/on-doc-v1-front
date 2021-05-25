@@ -1,0 +1,73 @@
+.btn_save{
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 24px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background: #0FBE7B;
+  border-radius: 8px;
+  margin-right: 12px!important;
+  border: none!important;
+  .txt{
+    margin-left: 10px!important;
+    width: 80px;
+    height: 24px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+  }
+}
+
+
+.sign_btn_custom{
+  cursor: pointer;
+  padding: 12px 24px;
+  width: 158px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2B63C0;
+  border-radius: 8px;
+  margin-right: 12px!important;
+  border: none!important;
+  .txt{
+    margin-left: 10px!important;
+    width: 80px;
+    height: 24px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+  }
+}
+
+
+.btn_cancel{
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  width: 154px;
+  height: 48px;
+  background: #FE346E;
+  border-radius: 8px;
+  border: none!important;
+  .txt{
+    margin-left: 10px!important;
+    height: 24px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+  }
+}
+

@@ -3,8 +3,10 @@ import {Button, Form, Input, Switch} from "antd";
 import st from './account.module.scss'
 import firebase from "../../../utils/firebase";
 import { useTranslation } from "react-i18next";
-import save from '../../../assests/settings/save.svg'
-import cancel from '../../../assests/settings/cancel.svg'
+
+
+import SaveBtn from "../../../components/Btns/SaveBtn";
+import CancelBtn from "../../../components/Btns/CancelBtn";
 function Account() {
 
     const { t } = useTranslation();
@@ -126,8 +128,8 @@ function Account() {
                 </div>
                 </div>
                 <div className="flexible" style={{marginTop:'10px'}}>
-                    <button className={st.btn_save}> <img src={save} alt=""/> <span className={st.txt}>Save</span></button>
-                    <button className={st.btn_cancel}><img src={cancel} alt=""/> <span className={st.txt}>Cancel</span></button>
+                    <SaveBtn />
+                    <CancelBtn />
                 </div>
             </Form>
 
