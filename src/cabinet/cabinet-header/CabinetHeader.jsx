@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selector';
@@ -21,11 +21,8 @@ const { SubMenu } = Menu;
 const CabinetHeader = ({ user,match }) => {
 
     const { t, i18n } = useTranslation()
-
-    const handleResizer=()=>{
-        let elem = document.getElementById('chances');
-        elem.classList.add('resizer')
-    }
+    const [dropDownVisible, setDropDownVisible] = useState(false)
+    
 
     const settings_menu = (
         <Menu style={{width: 288, right: -32, top: 30}}>
@@ -79,15 +76,26 @@ const CabinetHeader = ({ user,match }) => {
 
                     <div>
                         <FontSizeChanger
+                            
                             targets={['#target .resizer']}
                             options={{
                                 stepSize: 1,
                                 range: 10
                             }}
                             customButtons={{
-                                up:<strong style={{marginLeft: 12, fontSize: 20,border:'none'}}>+</strong>,
-                                down:<strong style={{ marginLeft: 12, fontSize: 20 }}>-</strong>,
-                                // buttonsMargin: 10
+                                down:<div>-</div>,
+                                up: <div>+</div>,
+                                style: {
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                    border: 'none',
+                                    height: 22,
+                                    width: 30,
+                                    marginLeft: 25,
+                                    display: 'flex',
+                                    alignItems: 'center'
+                                     
+                                }
                             }}
                         />
                     </div>
@@ -142,7 +150,12 @@ const CabinetHeader = ({ user,match }) => {
                             <img src={question_mark} alt=""/>
                         </div>
                         <div className="ch-action-container">
-                            <Dropdown overlay={settings_menu} trigger={["click"]}>
+                            <Dropdown 
+                            overlay={settings_menu} 
+                            trigger={["click"]}
+                            onVisibleChange={setDropDownVisible}
+                            visible={dropDownVisible}
+                            >
                                 <FontAwesomeIcon icon="tools" style={{fontSize: 18}} />
                             </Dropdown>
                         </div>

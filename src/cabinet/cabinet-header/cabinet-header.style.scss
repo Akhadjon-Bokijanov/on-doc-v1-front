@@ -78,3 +78,19 @@
 .ant-dropdown-menu-submenu-title{
     padding: 12px 18px;
 }
+
+.font-size-changer .font-size-changer-buttons > div{
+    line-height: normal;
+    height: 22px;
+
+    .font-size-changer-buttons{
+        height: auto !important;
+        min-width: 40px;
+        min-height: 20px;
+    }
+}
+
+.font-size-changer{
+    display: flex !important;
+    align-items: center;
+}
