@@ -477,14 +477,19 @@ const DynaGrid = ({
             :
           
           <div className="sub-filter-area">
-            <div style={{display: 'flex', alignItems: 'center', marginBottom: 15}}>
-                  <div style={{ fontSize: 22, fontWeight: 700, marginRight: 24 }}>{t("Filter")}
-                  </div>
-                  <div style={{display: "flex", alignItems: "center"}}>
-                    <img src={eye_icon} alt="eye icon" style={{ width: 20, height: 14, marginRight: 10 }} />
-                    <span style={{ color: "#2B63C0", fontSize: 14}}>
-                      {t("Filterni yashirish")}
-                    </span>
+            <div style={{display: 'flex', alignItems: 'center', marginBottom: 15, justifyContent: 'space-between'}}>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div style={{ fontSize: 22, fontWeight: 700, marginRight: 24 }}>{t("Filter")}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <img src={eye_icon} alt="eye icon" style={{ width: 20, height: 14, marginRight: 10 }} />
+                      <span style={{ color: "#2B63C0", fontSize: 14, cursor: 'pointer' }}>
+                        {t("Filterni yashirish")}
+                      </span>
+                    </div>
+                </div>
+                  <div>
+                    <span style={{ fontSize: 14, color: '#2B63C0', cursor: 'pointer'}}>{t("Сбросить фильтр") }</span>
                   </div>
             </div>
             
@@ -493,7 +498,7 @@ const DynaGrid = ({
               onFinish={handleFilter}
               name="doc-filter"
             >
-              <Row justify="space-between" align="bottom">
+              <Row justify="space-between" align="bottom" gutter={[12, 0]}>
                
                 <Col span={4}>
                   {/* <Form.Item> */}
@@ -508,7 +513,7 @@ const DynaGrid = ({
                     {/* <span className="custom-input-label-1"></span> */}
                   {/* </Form.Item> */}
                 </Col>
-                <Col span={4}>
+                <Col span={5}>
                   {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-1"
@@ -532,7 +537,7 @@ const DynaGrid = ({
                     {/* <span className="custom-input-label-1"></span> */}
                   {/* </Form.Item> */}
                 </Col>
-                <Col span={4}>
+                <Col span={5}>
                   {/* <Form.Item> */}
                     <Form.Item
                         label={t("Kontragent")}
@@ -546,7 +551,7 @@ const DynaGrid = ({
                     {/* <span className="custom-input-label-1"></span> */}
                   {/* </Form.Item> */}
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                   {/* <Form.Item> */}
                     <Form.Item
                         key="dyna-form-facutura-no-old-5"
@@ -564,7 +569,7 @@ const DynaGrid = ({
                     {/* <span className="custom-input-label-1"></span> */}
                   {/* </Form.Item> */}
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                   {/* <Form.Item> */}
                     <Form.Item
                       key="dyna-form-facutura-no-old-6"
@@ -587,7 +592,7 @@ const DynaGrid = ({
                     <Button
                       htmlType="submit"
                       size="large"
-                      style={{ backgroundColor: '#2B63C0', color: '#fff' }}
+                      style={{ backgroundColor: '#2B63C0', color: '#fff', width: '100%' }}
                     >
                       {t("Filter")}
                     </Button>
