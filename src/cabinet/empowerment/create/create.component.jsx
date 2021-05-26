@@ -35,8 +35,6 @@ import { useTranslation } from 'react-i18next';
 import download from "../../../images/download.svg";
 import delete_icon from "../../../images/delete-icon.svg";
 import add_icon from "../../../images/add-icon.svg";
-
-
 const EmpowermentForm = ({ token, match, user, loadedKey })=> {
 
 
@@ -200,6 +198,15 @@ const EmpowermentForm = ({ token, match, user, loadedKey })=> {
      setGrid(newgrid)
   }
 
+    useEffect(()=>{
+        const handleEsc=(e)=>{
+            if (e.keyCode===27||e.keyCode===8){
+                history.push('/cabinet/empowerment')
+            }
+        };
+        window.addEventListener('keydown',handleEsc);
+        return ()=>window.removeEventListener('keydown',handleEsc)
+    },[])
 
 
   const onContextMenu = (e, cell, i, j) => cell.readOnly ? e.preventDefault() : null;

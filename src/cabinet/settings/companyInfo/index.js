@@ -3,15 +3,28 @@ import '../../../App.scss'
 import {createStructuredSelector} from "reselect";
 import {selectKeyUser} from "../../../redux/user/user.selector";
 import {connect} from "react-redux";
-import {Button, Form, Input, Radio} from "antd";
+import {Button, Form, Input, Radio, Select} from "antd";
 import {CheckCircleOutlined, PlusCircleOutlined} from "@ant-design/icons";
 import st from './comp_info.module.scss'
 import save from '../../../assests/settings/save.svg'
 import cancel from '../../../assests/settings/cancel.svg'
-
+const optionsList=[
+    {
+        value:1,
+        label:'andijan'
+    },
+    {
+        value:2,
+        label:'namangan'
+    },
+    {
+        value:3,
+        label:'nukus'
+    }
+]
 function CompInfo({userKey}) {
     return(
-        <>
+        <>{console.log("user",userKey)}
             <Form
                 name="e-key"
                 // onFinish={handleKeySubmit}
@@ -65,8 +78,9 @@ function CompInfo({userKey}) {
                                 <span className="custom-input-label-1"><p className={st.label}>Viloyat</p></span>
                                 <Form.Item
                                     rules={[{required: true}]}
-                                    name="address">
-                                    <Input
+                                    name="region">
+                                    <Select
+                                        options={optionsList}
                                         size="large"
                                         placeholder="Viloyat" />
                                 </Form.Item>
@@ -75,20 +89,20 @@ function CompInfo({userKey}) {
                                 <span className="custom-input-label-1"><p className={st.label}>OKED</p></span>
                                 <Form.Item
                                     rules={[{required: true}]}
-                                    name="inn">
+                                    name="oked">
                                     <Input
                                         size="large"
-                                        placeholder="INN" />
+                                        placeholder="OKED" />
                                 </Form.Item>
                             </Form.Item>
                             <Form.Item>
                                 <span className="custom-input-label-1"><p className={st.label}>MFO</p></span>
                                 <Form.Item
                                     rules={[{required: true}]}
-                                    name="address">
+                                    name="mfo">
                                     <Input
                                         size="large"
-                                        placeholder="Address" />
+                                        placeholder="MFO" />
                                 </Form.Item>
                             </Form.Item>
                         </div>
@@ -111,17 +125,17 @@ function CompInfo({userKey}) {
                                 <span className="custom-input-label-1"><p className={st.label}>Hisob raqam</p></span>
                                 <Form.Item
                                     rules={[{required: true}]}
-                                    name="number">
+                                    name="account_number">
                                     <Input
                                         size="large"
                                         placeholder="Hisob raqam" />
                                 </Form.Item>
                             </Form.Item>
                             <Form.Item>
-                                <span className="custom-input-label-1"><p className={st.label}>Nomi</p></span>
+                                <span className="custom-input-label-1"><p className={st.label}>Director</p></span>
                                 <Form.Item
                                     rules={[{required: true}]}
-                                    name="director">
+                                    name="name">
                                     <Input
                                         size="large"
                                         placeholder="Director" />
@@ -133,7 +147,7 @@ function CompInfo({userKey}) {
                                 <Form.Item
                                     rules={[{required: true}]}
                                     // key="dyna-form-facutura-no"
-                                    name="number">
+                                    name="accountant">
                                     <Input
                                         size="large"
                                         placeholder="Account number" />

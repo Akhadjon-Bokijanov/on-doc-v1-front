@@ -11,7 +11,7 @@ import FacturaView from "./view/view.component";
 const FacturaIndex = ({ match, user }) => {
     return (
         <div>
-            <Route exact path={`${match.path}`} render={()=><HomePage addParams={[
+            <Route exact path={`${match.path}`} render={()=><HomePage doc={'factura'} addParams={[
                 {
                     name: "tin",
                     value: user.tin ?? user.username

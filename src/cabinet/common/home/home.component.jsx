@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './home.style.scss';
 import DynaGrid from '../../../components/dyna-grid/dyna-grid.component';
 import axios from 'axios';
@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 import { get_home_config } from '../../../utils/home.config.provider';
 import {useTranslation} from "react-i18next";
 import {Spin} from "antd";
+import {render} from "@testing-library/react";
+import {keyframes} from "styled-components";
+import { useHistory } from "react-router-dom";
+
 
 const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
 
@@ -18,14 +22,33 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
         4: [0, 1, 2, 3]
     }
 
+    const history = useHistory();
     const { title, createTitle, createUrl, gridSourceUrl, gridConfig } = get_home_config(doc);
 
     const [activeTab, setActiveTab] = useState(1);
 
+    // useEffect(()=>{
+    //     function onKeyPress(e) {
+    //         console.log("E",e.key);
+    //     }
+    //     window.addEventListener('keypress', onKeyPress);
+    // },[])
+
+    useEffect(() => {
+        const handleEsc = (e) => {
+            if (e.keyCode === 27 || e.keyCode===8) {
+                history.push('/cabinet');
+            }
+        };
+        window.addEventListener('keydown', handleEsc);
+        return () => {
+            window.removeEventListener('keydown', handleEsc);
+        };
+    }, []);
+
     return (
         <div className="factura-home-page-container">
             <div className="factura-home-sub-con">
-                <Spin spinning={true}/>
                 <div className="factura-home-title">
                     <div style={{fontSize: 32, fontWeight: "bold"}}>{ t(title) }</div>
                     {/* {

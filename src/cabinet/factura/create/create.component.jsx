@@ -19,7 +19,7 @@ import { EIMZOClient } from '../../../utils/e-imzo';
 import { setLoadedKeyId } from '../../../redux/user/user.action';
 import { saveFacturaDraft } from '../../../redux/factura-draft/factura-draft.action';
 import { selectDrafts } from '../../../redux/factura-draft/factura-draft.selector';
-
+import {useHistory} from 'react-router-dom'
 const { Option } = Select;
 
 const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, drafts }) => {
@@ -33,6 +33,7 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
   const [saveLoading, setSaveLoading] = useState(false);
   const [products, setProducts] = useState();
   const [gridInitialValue, setGridInitialValue] = useState();
+  const history = useHistory();
 
   const setNewDocId = ()=>{
     axios({
@@ -221,13 +222,21 @@ const FacturaCreateForm = ({ match, user, loadedKey, setTimer, setDraftFactura, 
         setSaveLoading(false);
       })
     }
-
-
   }
 
   const handleSaveDraft = (formValues, products)=>{
     //setDraftFactura(GetFacturaDataToSign((formValues, products, newFacturaId)), newFacturaId)
   }
+
+  useEffect(()=>{
+    const handleEsc=(e)=>{
+      if (e.keyCode===27||e.keyCode===8){
+        history.push('/cabinet/factura')
+      }
+    };
+    window.addEventListener('keydown',handleEsc);
+    return ()=>window.removeEventListener('keydown',handleEsc)
+  },[])
 
   //#endregion
 
