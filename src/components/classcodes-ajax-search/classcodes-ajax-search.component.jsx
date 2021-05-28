@@ -64,6 +64,7 @@ const ClasscodeAjaxSearch = ({ user })=>{
             autoClearSearchValue={false}
             showSearch={true}
             showArrow={false}
+            size="large"
             defaultActiveFirstOption={false}
             filterOption={false}
             onSearch={handleOptionSearch}

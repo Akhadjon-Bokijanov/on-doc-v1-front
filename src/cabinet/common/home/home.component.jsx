@@ -25,7 +25,7 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
     return (
         <div className="factura-home-page-container">
             <div className="factura-home-sub-con">
-                <Spin spinning={true}/>
+                {/* <Spin spinning={true}/> */}
                 <div className="factura-home-title">
                     <div style={{fontSize: 32, fontWeight: "bold"}}>{ t(title) }</div>
                     {/* {

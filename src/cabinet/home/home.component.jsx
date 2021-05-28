@@ -156,15 +156,18 @@ const CabinetHome = ({ cabinetData }) => {
                         },
                         {
                             title: t("Faktura"),
-                            color: "#FE346E"
+                            color: "#FE346E",
+                            url: "facturas/index"
                         },
                         {
                             title: t("Shartnoma"),
-                            color: "#0FBE7B"
+                            color: "#0FBE7B",
+                            url: "contract/index"
                         },
                         {
                             title: t("Ishonchnoma"),
-                            color: "#FF0000"
+                            color: "#FF0000",
+                            url: "emp/index"
                         },
                         {
                             title: t("TTY"),
