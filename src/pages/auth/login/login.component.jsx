@@ -167,17 +167,17 @@ const Login = ({ setCurrentUser, history, setEspUser, setKeyId }) => {
                                                                 </div>
                                                             </Radio>)
                                                         }
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
-                                                        {/*<Radio/>*/}
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
+                                                        <Radio/>
                                                     </Radio.Group>
                                                 </Form.Item>
                                             </div>

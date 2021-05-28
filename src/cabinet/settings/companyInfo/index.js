@@ -24,7 +24,8 @@ const optionsList=[
 ]
 function CompInfo({userKey}) {
     return(
-        <>{console.log("user",userKey)}
+        <>
+            {console.log("user",userKey)}
             <Form
                 name="e-key"
                 // onFinish={handleKeySubmit}

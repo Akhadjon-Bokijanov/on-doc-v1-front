@@ -36,6 +36,7 @@ const AccountForm = ({user, setUserOnly}) => {
             console.log(err)
         })
     }
+
     const fields = [
         {
             name: "name",
