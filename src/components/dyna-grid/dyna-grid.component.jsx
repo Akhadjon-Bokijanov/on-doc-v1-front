@@ -35,6 +35,8 @@ const { Option } = Select;
 
 
 const DynaGrid = ({
+  showCancelDoc, 
+  showSignDoc,
   tableAttachedTabs,      //Attached tabs to the table       
   hideFilter,             //to hide filters of griid
   reload,
@@ -125,6 +127,8 @@ const DynaGrid = ({
       setLoadingResource(false)
     })
   }
+  
+  
   useEffect(()=>{
 
     let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&${modelName}[${searchedColumn}]=${searchText}` : ''}${filterQuery}`
@@ -246,7 +250,7 @@ const DynaGrid = ({
   };
 
   const handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+    //console.log('Various parameters', pagination, filters, sorter);
     setPagination(pagination)
     setFilteredInfo(filters);
     //setSortedInfo(sorter);
@@ -431,7 +435,6 @@ const DynaGrid = ({
     })
 
   const onSelectChange = selectedRowKeys => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(selectedRowKeys)
   };
 
@@ -646,10 +649,19 @@ const DynaGrid = ({
           total: 1000, }}
       />
       <div style={{display: 'flex'}}>
-          <SignBtn 
-            onClick={ ()=>console.log(selectedRowKeys) } 
-          />
-          <CancelBtn />
+          {
+            Array.isArray(tableAttachedTabs) && activTabIndex===0 ?
+            <SignBtn
+              onClick={() => console.log(selectedRowKeys)}
+            />
+            :null
+          }
+          {
+            Array.isArray(tableAttachedTabs) && activTabIndex === 0  ?
+              <CancelBtn />
+              :null
+          }
+          
       </div>
     </div>);
   }
