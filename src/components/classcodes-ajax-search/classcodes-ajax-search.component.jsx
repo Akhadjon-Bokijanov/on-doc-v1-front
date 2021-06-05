@@ -46,7 +46,7 @@ const ClasscodeAjaxSearch = ({ user })=>{
                 class_code: selected
             }
         }).then(data=>{
-            console.log(data)
+            
         }).catch(ex=>{
             console.log(ex)
         })

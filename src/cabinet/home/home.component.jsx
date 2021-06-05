@@ -17,7 +17,6 @@ import signed_icon from "../../images/signed-icon.svg";
 import cancelled_icon from "../../images/cancelled-icon.svg";
 import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
 import HomeNewsCard from '../../components/home-news-card/HomeNewsCard';
-import FirebaseSmsAuth from '../../components/firebase-sms-auth/FirebaseSmsAuth';
 
 const CabinetHome = ({ cabinetData }) => {
 

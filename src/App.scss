@@ -18,7 +18,8 @@ body {
     border-right: none!important;
 }
 .side_text{
-    font-weight: 500;
+    font-weight: 400 !important;
+    letter-spacing: 0.2px;
     font-size: 16px;
     line-height: 20px;
 }
@@ -374,3 +375,8 @@ div.custom-section-wrapper{
                 }
             }
         }
+
+.data-grid-container .data-grid .cell{
+ vertical-align: middle !important;
+
+}
