@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import AdminCard from '../../components/admin-card/admin-card.component';
 import DynaGrid from '../../components/dyna-grid/dyna-grid.component';
-import { selectCabinetData } from '../../redux/user/user.selector';
+import {selectCabinetData, selectCurrentUser} from '../../redux/user/user.selector';
 import './home.component.scss';
 import {useTranslation} from "react-i18next";
 import clock_icon from "../../images/clock-icon.svg";
@@ -18,12 +18,15 @@ import cancelled_icon from "../../images/cancelled-icon.svg";
 import HomeTabCard from '../../components/home-tab-card/HomeTabCard';
 import HomeNewsCard from '../../components/home-news-card/HomeNewsCard';
 import FirebaseSmsAuth from '../../components/firebase-sms-auth/FirebaseSmsAuth';
+import {get_home_config} from "../../utils/home.config.provider";
 
-const CabinetHome = ({ cabinetData }) => {
+const CabinetHome = ({ cabinetData,user }) => {
+    const [newUrl,setNewUrl] = useState('');
+    let { title, createTitle, createUrl, gridSourceUrl, gridConfig } = get_home_config();
 
     const {t} = useTranslation()
 
-    const [activeTab, setActiveTab] = useState(0)
+    const [activeTab, setActiveTab] = useState(0);
     const { income, outcome, rejected, saved } = cabinetData ?? {};
     const TabList= {
         0: t("Kiruvchi hujjatlar"),
@@ -67,6 +70,10 @@ const CabinetHome = ({ cabinetData }) => {
         },
     
     ]
+
+    const configHandler = () =>{
+
+    }
 
     const dyna_config = {
         dataSourcePath: `/api/v1/cabinet/${activeTab}?hi`,
@@ -121,7 +128,6 @@ const CabinetHome = ({ cabinetData }) => {
                 dataIndex: "sellerTin",
                 isSearchable: true,
             },
-            
             {
                 title: t('Yaratilgan sana'),
                 dataIndex: "created_at",
@@ -147,12 +153,13 @@ const CabinetHome = ({ cabinetData }) => {
                 </Row>
 
                 <HomeNewsCard />
-
+                    home
                 <DynaGrid
                     tableAttachedTabs={[
                         {
                             title: t("Bacha hujjatlar"),
-                            color: ""
+                            color: "",
+                            url: "all/index"
                         },
                         {
                             title: t("Faktura"),
@@ -171,16 +178,20 @@ const CabinetHome = ({ cabinetData }) => {
                         },
                         {
                             title: t("TTY"),
-                            color: "yellow"
+                            color: "yellow",
+                            url: "tty/index"
                         },
                         {
                             title: t("Akt"),
-                            color: "purple"
+                            color: "purple",
+                            url:'act/index'
                         }
                     ]}
                     hideFilter
                     title={TabList[activeTab]}
-                    config={dyna_config}
+                    // config={dyna_config}
+                    config={{...gridConfig, dataSourcePath: `${newUrl}?tin=${user.tin}`}}
+                    setNewUrl={setNewUrl}
                 />
             </div>
         </div>
@@ -189,7 +200,8 @@ const CabinetHome = ({ cabinetData }) => {
 
 
 const mapStateToProps = createStructuredSelector({
-    cabinetData: selectCabinetData
+    cabinetData: selectCabinetData,
+    user: selectCurrentUser
 })
 
 export default connect(mapStateToProps)(CabinetHome)

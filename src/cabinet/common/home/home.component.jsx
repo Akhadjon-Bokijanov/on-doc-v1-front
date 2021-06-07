@@ -78,8 +78,8 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                 // </div>
                 }
                 
-                
-                <div>
+
+                <div>dddd
                     <DynaGrid   
                         tableAttachedTabs={[
                             {
@@ -94,9 +94,8 @@ const HomePage = ({ doc, hideTabs, addParams, customButton })=> {
                                 title: t("Bekor qilingan"),
                                 color: "#FE346E"
                             }
-                            
                         ]}
-                        config={{ ...gridConfig, dataSourcePath: `${gridSourceUrl}?${tabs[activeTab].map(text=>'AllDocumentsSearch[write_type]='+text+'&')}${addParams ? addParams.map(p=>`${p.name}=${p.value}`): ""}`}}
+                        config={{...gridConfig, dataSourcePath: `${gridSourceUrl}?${addParams ? addParams.map(p=>`${p.name}=${p.value}`): ""}`}}
                     />
                 </div>
             </div>

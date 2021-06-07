@@ -29,12 +29,15 @@ import eye_icon from "../../images/eye.svg";
 import PaginationRenderer from './PaginationRenderer';
 import SignBtn from '../Btns/SignBtn';
 import CancelBtn from "../Btns/CancelBtn";
+import {bringdata} from "../../sevices/bringdata";
 
 const { Option } = Select;
 
 
 
 const DynaGrid = ({
+    user,
+                    setNewUrl,
   showCancelDoc, 
   showSignDoc,
   tableAttachedTabs,      //Attached tabs to the table       
@@ -53,6 +56,7 @@ const DynaGrid = ({
     primaryKeyName,
     primaryKeyValue,
     dataSourcePath,       //data source path for the table should be pagination
+    newDataSourcePath,       //data source path for the table should be pagination
     addElementViewPath,     //add element to the core
     deleteRequestPath,    //delete request path for API server 
     replaceInViewPath,
@@ -101,6 +105,7 @@ const DynaGrid = ({
   const [reRenderer, setRerenderer]=useState(reload??1);
   const [selectedRowKeys, setSelectedRowKeys] = useState();
   const [filterQuery, setFilterQuery]=useState("");
+  const [dataurl,setDataurl]=useState('');
   const [st,setSt]=useState(0);
 
   let searchInput = null;
@@ -109,7 +114,8 @@ const DynaGrid = ({
 
   const loadDataAjax = (url)=>{
     axios({
-      url: url,///url.replace(/[ ]+/g, ""),
+      url:url,
+      // url: `${dataurl}?tin=${user.tin}&page=1&limit=10`  ,///url.replace(/[ ]+/g, ""),
       method: "GET"
     }).then(res => {
 
@@ -127,14 +133,13 @@ const DynaGrid = ({
       setLoadingResource(false)
     })
   }
-  
-  
-  useEffect(()=>{
 
+  
+  useEffect(()=> {
     let url = `${dataSourcePath}&page=${pagination.current}&limit=${pagination.pageSize}${searchText ? `&${modelName}[${searchedColumn}]=${searchText}` : ''}${filterQuery}`
-
-    setLoadingResource(true)
-    loadDataAjax(url)
+    console.log("newurl",newDataSourcePath)
+    setLoadingResource(true);
+    loadDataAjax(url);
     
   }, [pagination, dataSourcePath, searchText, searchedColumn, reRenderer, modelName, filterQuery])
   //#endregion PAGINATION PART
@@ -470,8 +475,11 @@ const DynaGrid = ({
   }
 
   const [activTabIndex, setActiveTabIndex] = useState(0);
-  const handleAttachedTabClick = index=>{
+  const handleAttachedTabClick = async (index,url)=>{
     setActiveTabIndex(index);
+    await setNewUrl(url);
+    await setDataurl(url);
+    console.log('url',url);
   }
     return (
     <div className={`dyna-grid-main-container ${isFulliew ? 'akhadjon-dyna-grid-full-view' : null}`} >
@@ -480,7 +488,6 @@ const DynaGrid = ({
           {
             hideFilter ? null
             :
-          
           <div className="sub-filter-area">
             <div style={{display: 'flex', alignItems: 'center', marginBottom: 15, justifyContent: 'space-between'}}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
@@ -622,7 +629,7 @@ const DynaGrid = ({
             >
               {tableAttachedTabs.map((item, index) =>{
                 return <div 
-                  onClick={()=>handleAttachedTabClick(index)} 
+                  onClick={()=>handleAttachedTabClick(index,item.url)}
                   className={`table-attached-tab ${index===0?' first-item ':''} ${index===tableAttachedTabs.length-1?' last-item ':''} ${activTabIndex===index? 'att-active':''}`}>
                     <Badge color={item.color} />  {item.title}
                 </div>
@@ -669,6 +676,7 @@ const DynaGrid = ({
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  user:selectCurrentUser
 })
 
 const dispatchMapStateToPros = (dispatch)=>({
